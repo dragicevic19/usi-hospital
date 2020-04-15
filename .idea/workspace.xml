@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6b7b8328-1ee0-48e9-b128-d339fa2bf073" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aaB38HkawABJGlT4ndYL0OLXCQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/model1" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dragicevic\OneDrive\Documents\usi\bolnicaProjekat\model1" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.lekar">
+    <configuration name="lekar" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="bolnicaProjekat" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/lekar.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="upravnik" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="bolnicaProjekat" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/upravnik.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.lekar" />
+        <item itemvalue="Python.upravnik" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b7b8328-1ee0-48e9-b128-d339fa2bf073" name="Default Changelist" comment="" />
+      <created>1586963622093</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586963622093</updated>
+      <workItem from="1586963624276" duration="8735000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="255" y="90" width="1283" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586970581277">
+      <screen x="0" y="0" width="1603" height="873" />
+    </state>
+    <state x="255" y="90" width="1283" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1603.873@0.0.1603.873" timestamp="1586970581277" />
+    <state width="1558" height="145" key="GridCell.Tab.0.bottom" timestamp="1586971429242">
+      <screen x="0" y="0" width="1603" height="873" />
+    </state>
+    <state width="1558" height="145" key="GridCell.Tab.0.bottom/0.0.1603.873@0.0.1603.873" timestamp="1586971429242" />
+    <state width="1558" height="145" key="GridCell.Tab.0.center" timestamp="1586971429242">
+      <screen x="0" y="0" width="1603" height="873" />
+    </state>
+    <state width="1558" height="145" key="GridCell.Tab.0.center/0.0.1603.873@0.0.1603.873" timestamp="1586971429242" />
+    <state width="1558" height="145" key="GridCell.Tab.0.left" timestamp="1586971429241">
+      <screen x="0" y="0" width="1603" height="873" />
+    </state>
+    <state width="1558" height="145" key="GridCell.Tab.0.left/0.0.1603.873@0.0.1603.873" timestamp="1586971429241" />
+    <state width="1558" height="145" key="GridCell.Tab.0.right" timestamp="1586971429242">
+      <screen x="0" y="0" width="1603" height="873" />
+    </state>
+    <state width="1558" height="145" key="GridCell.Tab.0.right/0.0.1603.873@0.0.1603.873" timestamp="1586971429242" />
+    <state x="464" y="182" key="search.everywhere.popup" timestamp="1586965040920">
+      <screen x="0" y="0" width="1603" height="873" />
+    </state>
+    <state x="464" y="182" key="search.everywhere.popup/0.0.1603.873@0.0.1603.873" timestamp="1586965040920" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/bolnicaProjekat$lekar.coverage" NAME="lekar Coverage Results" MODIFIED="1586971429215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/bolnicaProjekat$upravnik.coverage" NAME="upravnik Coverage Results" MODIFIED="1586965873505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+  </component>
+</project>
