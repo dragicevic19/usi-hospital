@@ -28,4 +28,5 @@ class Lekar(Korisnik):
     def set_radno_vreme(self, radno_vreme):
         self._radno_vreme = radno_vreme
 
-
+    def __str__(self):
+        return self._ime + " " + self._prezime
