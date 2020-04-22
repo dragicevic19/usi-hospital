@@ -1,4 +1,4 @@
-class Korisnik:
+class Korisnik(object):
 
     def __init__(self, korisnicko_ime=None, lozinka=None, ime=None, prezime=None):
         self._ime = ime
