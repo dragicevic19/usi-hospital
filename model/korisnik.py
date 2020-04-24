@@ -1,10 +1,11 @@
 class Korisnik(object):
 
-    def __init__(self, korisnicko_ime=None, lozinka=None, ime=None, prezime=None):
+    def __init__(self, korisnicko_ime, lozinka, ime, prezime, uloga):
         self._ime = ime
         self._prezime = prezime
         self._korisnicko_ime = korisnicko_ime
         self._lozinka = lozinka
+        self._uloga = uloga
 
     def __str__(self):
         return "Korisnicko ime: " + self._korisnicko_ime + "\n"
@@ -21,6 +22,9 @@ class Korisnik(object):
     def get_prezime(self):
         return self._prezime
 
+    def get_uloga(self):
+        return self._uloga
+
     def set_korisnicko_ime(self, korisnicko_ime):
         self._korisnicko_ime = korisnicko_ime
 
@@ -32,3 +36,6 @@ class Korisnik(object):
 
     def set_prezime(self, prezime):
         self._prezime = prezime
+
+    def set_uloga(self, uloga):
+        self._uloga = uloga
