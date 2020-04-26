@@ -37,6 +37,14 @@ class KreiranjeObjekataEntiteta:
 
             for red in reader:
                 lista_ucitanih_korisnika.append(red)
+                # KreiranjeObjekataEntiteta.ova_bira_korisnika(red[INDEX_ULOGE_KORISNIKA])
+
+    # @staticmethod
+    # def ova_bira_korisnika(self, uloga):
+    #     if uloga == "upravnik bolnice":
+    #         KreiranjeObjekataEntiteta.kreiranje_upravnika_bolnice()
+    #     elif uloga == "administrator":
+    #
 
     @staticmethod
     def kreiranje_upravnika_bolnice():
@@ -160,6 +168,27 @@ class KreiranjeObjekataEntiteta:
             pojedinacna_oprema = prost[2].split("|")
             prostorija = Prostorija(prost[0], prost[1], pojedinacna_oprema, prost[3])
             zavrsna_lista_prostorija.append(prostorija)
+
+    @staticmethod
+    def postoji_prostorija(sprat, broj_sobe):
+        for prostorija in zavrsna_lista_prostorija:
+            if prostorija.get_sprat() == sprat and prostorija.get_broj_prostorije() == broj_sobe:
+                return True
+        return False
+
+    @staticmethod
+    def postoji_korisnik(korisniko_ime):
+        for korisnik in zavrsna_lista_korisnika:
+            if korisnik.get_korisnicko_ime() == korisniko_ime:
+                return True
+        return False
+
+    @staticmethod
+    def postoji_oprema(naziv_opreme):
+        for oprema in zavrsna_lista_bolnicke_opreme:
+            if oprema.get_naziv_opreme == naziv_opreme:
+                return True
+        return False
 
 
 KreiranjeObjekataEntiteta.ucitavanje_korisnika()

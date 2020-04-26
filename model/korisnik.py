@@ -39,3 +39,5 @@ class Korisnik(object):
 
     def set_uloga(self, uloga):
         self._uloga = uloga
+
+
