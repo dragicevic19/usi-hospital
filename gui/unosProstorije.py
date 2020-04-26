@@ -7,7 +7,7 @@ from model.kreiranje_objekata_entiteta import KreiranjeObjekataEntiteta as Kreir
 
 class NovaProstorija:
     spratovi = ('1', '2', '3', '4')
-    moguce_namene_prostorija = ('Operaciona sala', 'Sala za preglede', 'Soba za lezanje')
+    moguce_namene_prostorija = ('operaciona sala', 'sala za preglede', 'soba za lezanje')
 
     def __init__(self, root):
         self._root = root
@@ -42,9 +42,10 @@ class NovaProstorija:
     def sacuvaj_prostoriju(self):
         if not self._prostorija.get() or not self._namena_prostorije.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-        elif KreiranjeObjekata.postoji_prostorija(self._prostorija.get(), self._namena_prostorije.get()):
+        elif KreiranjeObjekata.postoji_prostorija(self._sprat.get(), self._prostorija.get()):
             messagebox.showerror("GRESKA", "Soba vec postoji")
         else:
+
             messagebox.showinfo("USPESNO", "Uspesno ste dodali prostoriju")
 
 
