@@ -24,3 +24,6 @@ class Pacijent(Korisnik):
 
     def set_anamneza(self, anamneza):
         self._anamneza = anamneza
+
+    def __str__(self):
+        return self._ime + " " + self._prezime
