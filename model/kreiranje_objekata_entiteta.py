@@ -8,6 +8,7 @@ from model.bolnickaOprema import BolnickaOprema
 from model.unosAnamneze import UnosAnamneze
 from model.anamneza import Anamneza
 from model.prostorija import Prostorija
+from pathlib import Path
 
 
 lista_ucitanih_korisnika = []
@@ -23,8 +24,8 @@ class KreiranjeObjekataEntiteta:
 
     @staticmethod
     def ucitavanje_korisnika():
-
-        with open("..\\data\\korisnici.csv", newline='') as file:
+        path = Path('..\\data\\korisnici.csv')
+        with path.open('r') as file:
             reader = csv.reader(file)
 
             for red in reader:
@@ -75,7 +76,8 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_bolnicke_opreme():
 
-        with open("..\\data\\bolnicka_oprema.csv", newline='') as file:
+        path = Path('..\\data\\bolnicka_oprema.csv')
+        with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
                 bolnicka_oprema = BolnickaOprema(red[0], red[1], red[2])
@@ -85,7 +87,8 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_unosa_anamneze():
 
-        with open("..\\data\\unos_anamneze.csv", newline='') as file:
+        path = Path('..\\data\\unos_anamneze.csv')
+        with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
                 unos_anamneze = UnosAnamneze(red[0], red[1], red[2], red[3])
@@ -94,7 +97,8 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_anamneze():
 
-        with open("..\\data\\anamneza.csv", newline='') as file:
+        path = Path('..\\data\\anamneza.csv')
+        with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
                 pojedinacni_unos_anamneze = red[1].split("|")
@@ -104,7 +108,8 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_prostorije():
 
-        with open("..\\data\\prostorije.csv", newline='') as file:
+        path = Path('..\\data\\prostorije.csv')
+        with path.open('r') as file:
             reader = csv.reader(file)
 
             for red in reader:
