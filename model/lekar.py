@@ -5,7 +5,7 @@ class Lekar(Korisnik):
 
     def __init__(self, korisnicko_ime=None, lozinka=None, ime=None, prezime=None,
                  radno_vreme=None, spisak_pacijenata=[], spisak_specijalizacija=[]):
-        super().__init__(korisnicko_ime, lozinka, ime, prezime)
+        super().__init__(korisnicko_ime, lozinka, ime, prezime, "lekar")
         self._spisak_specijalizacija = spisak_specijalizacija
         self._spisak_pacijenata = spisak_pacijenata
         self._radno_vreme = radno_vreme
