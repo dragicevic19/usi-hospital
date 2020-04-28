@@ -1,13 +1,13 @@
-import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import KreiranjeObjekataEntiteta as KreiranjeObjekata
+from model.kreiranje_objekata_entiteta import lista_ucitanih_prostorija, KreiranjeObjekataEntiteta as KreiranjeObjekata
+from model.prostorija import Prostorija
 
 
 class NovaProstorija:
     spratovi = ('1', '2', '3', '4')
-    moguce_namene_prostorija = ('operaciona sala', 'sala za preglede', 'soba za lezanje')
+    moguce_namene_prostorija = ('speraciona sala', 'sala za preglede', 'soba za lezanje')
 
     def __init__(self, root):
         self._root = root
@@ -45,26 +45,12 @@ class NovaProstorija:
         elif KreiranjeObjekata.postoji_prostorija(self._sprat.get(), self._prostorija.get()):
             messagebox.showerror("GRESKA", "Soba vec postoji")
         else:
-
+            prostorija = Prostorija(self._sprat.get(), self._prostorija.get(), [], self._namena_prostorije.get())
+            lista_ucitanih_prostorija.append(prostorija)
             messagebox.showinfo("USPESNO", "Uspesno ste dodali prostoriju")
-
 
 if __name__ == '__main__':
     root = Tk()
     root.geometry('425x425')
     application = NovaProstorija(root)
     root.mainloop()
-
-    # e = Entry(root, width=50, borderwidth=5)
-    #
-    #
-    # def onClick():
-    #     hello = "Hello " + e.get()
-    #     myLabel = Label(root, text=hello).pack()
-    #
-    #
-    # # e.pack()
-    #
-    # dugme = Button(root, text="Ime:", command=onClick, bg="black", fg="red").pack()
-    #
-    # button_quit = Button(root, text="Exit Program", command=root.quit).pack()
