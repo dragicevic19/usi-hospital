@@ -24,7 +24,7 @@ class KreiranjeObjekataEntiteta:
 
     @staticmethod
     def ucitavanje_korisnika():
-        path = Path('..\\data\\korisnici.csv')
+        path = Path('../data/korisnici.csv')
         with path.open('r') as file:
             reader = csv.reader(file)
 
@@ -76,7 +76,7 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_bolnicke_opreme():
 
-        path = Path('..\\data\\bolnicka_oprema.csv')
+        path = Path('../data/bolnicka_oprema.csv')
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -87,7 +87,7 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_unosa_anamneze():
 
-        path = Path('..\\data\\unos_anamneze.csv')
+        path = Path('../data/unos_anamneze.csv')
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -97,7 +97,7 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_anamneze():
 
-        path = Path('..\\data\\anamneza.csv')
+        path = Path('../data/anamneza.csv')
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -108,7 +108,7 @@ class KreiranjeObjekataEntiteta:
     @staticmethod
     def ucitavanje_prostorije():
 
-        path = Path('..\\data\\prostorije.csv')
+        path = Path('../data/prostorije.csv')
         with path.open('r') as file:
             reader = csv.reader(file)
 
