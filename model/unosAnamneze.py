@@ -11,6 +11,9 @@ class UnosAnamneze(Anamneza):
         self._opis = opis
         self._datum_i_vreme = datum_i_vreme
 
+    def get_id(self):
+        return self._id
+
     def get_lekar(self):
         return self._lekar
 

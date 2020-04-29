@@ -62,7 +62,8 @@ class KreiranjeObjekata:
     @staticmethod
     def __kreiranje_lekara(red):
         spisak_specijalizacija = red[7].split(';')
-        lekar = Lekar(red[0], red[1], red[3], red[4], red[5], red[6], spisak_specijalizacija)
+        spisak_pacijenata = red[6].split(';')
+        lekar = Lekar(red[0], red[1], red[3], red[4], red[5], spisak_pacijenata, spisak_specijalizacija)
 
         lista_ucitanih_korisnika.append(lekar)
 
@@ -115,37 +116,95 @@ class KreiranjeObjekata:
                 prostorija = Prostorija(red[0], red[1], pojedinacna_oprema, red[3])
                 lista_ucitanih_prostorija.append(prostorija)
 
+    ############################################################################################################
+    # ovo mozda u drugi fajl da stavimo? cuvanjeEntiteta.py?
     @staticmethod
-    def sacuvaj_korisnika():
-        path = Path('../data/korisniciProba.csv')
+    def __sacuvaj_korisnika():
+        path = Path('../data/korisnici.csv')
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
+
             for korisnik in lista_ucitanih_korisnika:
                 uloga = korisnik.get_uloga()
-                if uloga == 'upravnik bolnice' or uloga == 'administrator' or uloga == 'sekretar':
-                    writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
-                                     korisnik.get_ime(), korisnik.get_prezime()])
-                elif uloga == 'lekar':  #u spisak_specijalizacija nam bukvalno stoji neurohirurg;kardiohirurg???
-                    spisak_spec = KreiranjeObjekata.__spisak_u_string(korisnik.get_spisak_specijalizacija)
-                    spisak_pacijenata = KreiranjeObjekata.__spisak_u_string(korisnik.get_spisak_specijalizacija)
-
-                    writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
-                                     korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_radno_vreme(),
-                                     spisak_pacijenata, spisak_spec])
-                # elif uloga == 'pacijent':
-                #
-                #     writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
-                #                      korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_br_zdravstvene(),
-                #                      korisnik.get_pol(), korisnik.get_anamneza()])
+                KreiranjeObjekata.sacuvaj_po_ulozi(korisnik, uloga, writer)
 
     @staticmethod
-    def __spisak_u_string(spisak):
-        rec = ''
-        for polje in spisak:
-            rec += polje
-            rec += ';'
-        rec = rec[:-1]
-        return rec
+    def sacuvaj_po_ulozi(korisnik, uloga, writer):
+
+        if uloga == 'upravnik bolnice' or uloga == 'administrator' or uloga == 'sekretar':
+            writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga, korisnik.get_ime(),
+                             korisnik.get_prezime()])
+        # ako nam bude pravilo problem to sto nemaju svi redovi isto kolona, dodacemo ,,,
+        elif uloga == 'lekar':
+            KreiranjeObjekata.__sacuvaj_lekara(korisnik, uloga, writer)
+
+        elif uloga == 'pacijent':
+            KreiranjeObjekata.__sacuvaj_pacijenta(korisnik, uloga, writer)
+
+    @staticmethod
+    def __sacuvaj_lekara(korisnik, uloga, writer):
+        spisak_spec = ';'.join(korisnik.get_spisak_specijalizacija())
+        spisak_pacijenata = ';'.join(korisnik.get_spisak_pacijenata())
+        writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
+                         korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_radno_vreme(),
+                         spisak_pacijenata, spisak_spec])
+
+    @staticmethod
+    def __sacuvaj_pacijenta(korisnik, uloga, writer):
+        writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
+                         korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_br_zdravstvene(),
+                         korisnik.get_pol(), korisnik.get_anamneza()])
+
+    ####################################################################################################
+
+    @staticmethod
+    def __sacuvaj_anamnezu():
+        path = Path('../data/anamneza.csv')
+        with path.open('w', newline='') as file:
+            writer = csv.writer(file, delimiter=',')
+
+            for anamneza in lista_ucitanih_anamneza:
+                unosi_anamneza = '|'.join(anamneza.get_spisak_pojedinacnih_unosa())  # spisak u string
+                writer.writerow([anamneza.get_pacijent(), unosi_anamneza])
+
+    @staticmethod
+    def __sacuvaj_bolnicku_opremu():
+        path = Path('../data/bolnicka_oprema.csv')
+        with path.open('w', newline='') as file:
+            writer = csv.writer(file, delimiter=',')
+
+            for oprema in lista_ucitane_bolnicke_opreme:
+                writer.writerow([oprema.get_naziv_opreme(), oprema.get_ukupan_broj_opreme(),
+                                 oprema.get_slobodna_oprema()])
+
+    @staticmethod
+    def __sacuvaj_prostorije():
+        path = Path('../data/prostorije.csv')
+        with path.open('w', newline='') as file:
+            writer = csv.writer(file, delimiter=',')
+
+            for prostorija in lista_ucitanih_prostorija:
+                spisak_opreme = '|'.join(prostorija.get_spisak_opreme())
+                writer.writerow([prostorija.get_sprat(), prostorija.get_broj_prostorije(), spisak_opreme,
+                                prostorija.get_namena_prostorije()])
+
+    @staticmethod
+    def __sacuvaj_unos_anamneze():
+        path = Path('../data/unos_anamneze.csv')
+        with path.open('w', newline='') as file:
+            writer = csv.writer(file, delimiter=',')
+
+            for unos in lista_ucitanih_unosa_anamneza:
+                writer.writerow([unos.get_id(), unos.get_lekar(), unos.get_opis(), unos.get_datum_i_vreme()])
+################################################################################################################
+
+    @staticmethod
+    def sacuvaj_entitete():
+        KreiranjeObjekata.__sacuvaj_korisnika()
+        KreiranjeObjekata.__sacuvaj_anamnezu()
+        KreiranjeObjekata.__sacuvaj_bolnicku_opremu()
+        KreiranjeObjekata.__sacuvaj_prostorije()
+        KreiranjeObjekata.__sacuvaj_unos_anamneze()
 
     @staticmethod
     def postoji_prostorija(sprat, broj_sobe):
@@ -174,7 +233,6 @@ KreiranjeObjekata.ucitavanje_bolnicke_opreme()
 KreiranjeObjekata.ucitavanje_unosa_anamneze()
 KreiranjeObjekata.ucitavanje_anamneze()
 KreiranjeObjekata.ucitavanje_prostorije()
-KreiranjeObjekata.sacuvaj_korisnika()
 
 
 # NAPOMENA!!!!
