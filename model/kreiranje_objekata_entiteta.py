@@ -126,8 +126,7 @@ class KreiranjeObjekata:
                     writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
                                      korisnik.get_ime(), korisnik.get_prezime()])
                 elif uloga == 'lekar':  #u spisak_specijalizacija nam bukvalno stoji neurohirurg;kardiohirurg???
-                    spisak_specijalizacija = korisnik.get_spisak_specijalizacija
-                    spisak_spec = KreiranjeObjekata.__spisak_u_string(spisak_specijalizacija)
+                    spisak_spec = KreiranjeObjekata.__spisak_u_string(korisnik.get_spisak_specijalizacija)
                     spisak_pacijenata = KreiranjeObjekata.__spisak_u_string(korisnik.get_spisak_specijalizacija)
 
                     writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
@@ -138,6 +137,7 @@ class KreiranjeObjekata:
                 #     writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
                 #                      korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_br_zdravstvene(),
                 #                      korisnik.get_pol(), korisnik.get_anamneza()])
+
     @staticmethod
     def __spisak_u_string(spisak):
         rec = ''
@@ -146,16 +146,6 @@ class KreiranjeObjekata:
             rec += ';'
         rec = rec[:-1]
         return rec
-
-    @staticmethod
-    def csv_writer():
-        import csv
-        with open('eggs.csv', 'w', newline='') as csvfile:
-            spamwriter = csv.writer(csvfile, delimiter=',', quotechar='|')
-
-            spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
-            spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
-
 
     @staticmethod
     def postoji_prostorija(sprat, broj_sobe):
@@ -184,8 +174,9 @@ KreiranjeObjekata.ucitavanje_bolnicke_opreme()
 KreiranjeObjekata.ucitavanje_unosa_anamneze()
 KreiranjeObjekata.ucitavanje_anamneze()
 KreiranjeObjekata.ucitavanje_prostorije()
-# KreiranjeObjekata.sacuvaj_korisnika()
-print(lista_ucitanih_korisnika[11].get_spisak_specijalizacija())
+KreiranjeObjekata.sacuvaj_korisnika()
+
+
 # NAPOMENA!!!!
 # 1) IMPORTUJ LISTU ODGORAJUCEG ENTITETA
 # 2) PRISTUPI METODAMA KREIRANOG OBJEKTA
