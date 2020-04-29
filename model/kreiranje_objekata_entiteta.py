@@ -10,7 +10,6 @@ from model.anamneza import Anamneza
 from model.prostorija import Prostorija
 from pathlib import Path
 
-
 lista_ucitanih_korisnika = []
 lista_ucitane_bolnicke_opreme = []
 lista_ucitanih_unosa_anamneza = []
@@ -20,7 +19,7 @@ lista_ucitanih_prostorija = []
 INDEX_ULOGE_KORISNIKA = 2
 
 
-class KreiranjeObjekataEntiteta:
+class KreiranjeObjekata:
 
     @staticmethod
     def ucitavanje_korisnika():
@@ -29,21 +28,21 @@ class KreiranjeObjekataEntiteta:
             reader = csv.reader(file)
 
             for red in reader:
-                KreiranjeObjekataEntiteta.__kreiraj_po_ulozi(red)
+                KreiranjeObjekata.__kreiraj_po_ulozi(red)
 
     @staticmethod
     def __kreiraj_po_ulozi(red):
         uloga = red[INDEX_ULOGE_KORISNIKA]
         if uloga == "upravnik bolnice":
-            KreiranjeObjekataEntiteta.__kreiranje_upravnika_bolnice(red)
+            KreiranjeObjekata.__kreiranje_upravnika_bolnice(red)
         elif uloga == "administrator":
-            KreiranjeObjekataEntiteta.__kreiranje_administratora(red)
+            KreiranjeObjekata.__kreiranje_administratora(red)
         elif uloga == "sekretar":
-            KreiranjeObjekataEntiteta.__kreiranje_sekretara(red)
+            KreiranjeObjekata.__kreiranje_sekretara(red)
         elif uloga == "lekar":
-            KreiranjeObjekataEntiteta.__kreiranje_lekara(red)
+            KreiranjeObjekata.__kreiranje_lekara(red)
         elif uloga == "pacijent":
-            KreiranjeObjekataEntiteta.__kreiranje_pacijenta(red)
+            KreiranjeObjekata.__kreiranje_pacijenta(red)
 
     @staticmethod
     def __kreiranje_upravnika_bolnice(red):
@@ -62,7 +61,8 @@ class KreiranjeObjekataEntiteta:
 
     @staticmethod
     def __kreiranje_lekara(red):
-        lekar = Lekar(red[0], red[1], red[3], red[4], red[5], red[6], red[7])
+        spisak_specijalizacija = red[7].split(';')
+        lekar = Lekar(red[0], red[1], red[3], red[4], red[5], red[6], spisak_specijalizacija)
 
         lista_ucitanih_korisnika.append(lekar)
 
@@ -82,7 +82,6 @@ class KreiranjeObjekataEntiteta:
             for red in reader:
                 bolnicka_oprema = BolnickaOprema(red[0], red[1], red[2])
                 lista_ucitane_bolnicke_opreme.append(bolnicka_oprema)
-                # lista_ucitane_bolnicke_opreme.append(red)
 
     @staticmethod
     def ucitavanje_unosa_anamneze():
@@ -107,7 +106,6 @@ class KreiranjeObjekataEntiteta:
 
     @staticmethod
     def ucitavanje_prostorije():
-
         path = Path('../data/prostorije.csv')
         with path.open('r') as file:
             reader = csv.reader(file)
@@ -116,6 +114,48 @@ class KreiranjeObjekataEntiteta:
                 pojedinacna_oprema = red[2].split("|")
                 prostorija = Prostorija(red[0], red[1], pojedinacna_oprema, red[3])
                 lista_ucitanih_prostorija.append(prostorija)
+
+    @staticmethod
+    def sacuvaj_korisnika():
+        path = Path('../data/korisniciProba.csv')
+        with path.open('w', newline='') as file:
+            writer = csv.writer(file, delimiter=',')
+            for korisnik in lista_ucitanih_korisnika:
+                uloga = korisnik.get_uloga()
+                if uloga == 'upravnik bolnice' or uloga == 'administrator' or uloga == 'sekretar':
+                    writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
+                                     korisnik.get_ime(), korisnik.get_prezime()])
+                elif uloga == 'lekar':  #u spisak_specijalizacija nam bukvalno stoji neurohirurg;kardiohirurg???
+                    spisak_specijalizacija = korisnik.get_spisak_specijalizacija
+                    spisak_spec = KreiranjeObjekata.__spisak_u_string(spisak_specijalizacija)
+                    spisak_pacijenata = KreiranjeObjekata.__spisak_u_string(korisnik.get_spisak_specijalizacija)
+
+                    writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
+                                     korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_radno_vreme(),
+                                     spisak_pacijenata, spisak_spec])
+                # elif uloga == 'pacijent':
+                #
+                #     writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
+                #                      korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_br_zdravstvene(),
+                #                      korisnik.get_pol(), korisnik.get_anamneza()])
+    @staticmethod
+    def __spisak_u_string(spisak):
+        rec = ''
+        for polje in spisak:
+            rec += polje
+            rec += ';'
+        rec = rec[:-1]
+        return rec
+
+    @staticmethod
+    def csv_writer():
+        import csv
+        with open('eggs.csv', 'w', newline='') as csvfile:
+            spamwriter = csv.writer(csvfile, delimiter=',', quotechar='|')
+
+            spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
+            spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
+
 
     @staticmethod
     def postoji_prostorija(sprat, broj_sobe):
@@ -139,14 +179,14 @@ class KreiranjeObjekataEntiteta:
         return False
 
 
-KreiranjeObjekataEntiteta.ucitavanje_korisnika()
-KreiranjeObjekataEntiteta.ucitavanje_bolnicke_opreme()
-KreiranjeObjekataEntiteta.ucitavanje_unosa_anamneze()
-KreiranjeObjekataEntiteta.ucitavanje_anamneze()
-KreiranjeObjekataEntiteta.ucitavanje_prostorije()
-
+KreiranjeObjekata.ucitavanje_korisnika()
+KreiranjeObjekata.ucitavanje_bolnicke_opreme()
+KreiranjeObjekata.ucitavanje_unosa_anamneze()
+KreiranjeObjekata.ucitavanje_anamneze()
+KreiranjeObjekata.ucitavanje_prostorije()
+# KreiranjeObjekata.sacuvaj_korisnika()
+print(lista_ucitanih_korisnika[11].get_spisak_specijalizacija())
 # NAPOMENA!!!!
 # 1) IMPORTUJ LISTU ODGORAJUCEG ENTITETA
 # 2) PRISTUPI METODAMA KREIRANOG OBJEKTA
 # 3) UZIVAJ!
-
