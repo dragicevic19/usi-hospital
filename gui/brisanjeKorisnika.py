@@ -60,3 +60,5 @@ def poziv_forme_brisanje_korisnika():
     application = BrisanjeKorisnika(root)
     root.mainloop()
 
+if __name__ == '__main__':
+    poziv_forme_brisanje_korisnika()

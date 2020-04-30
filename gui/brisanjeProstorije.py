@@ -56,6 +56,7 @@ class BrisanjeProstorije:
             prostorija = self.__selektovana_prostorija()
             prostorija.set_obrisana('True')
             messagebox.showinfo("USPESNO", "Uspesno ste obrisali prostoriju!")
+            KreiranjeObjekata.sacuvaj_entitete()
             self._root.destroy()
         except IndexError:
             messagebox.showerror("GRESKA", "Niste odabrali prostoriju!")
@@ -72,3 +73,6 @@ def poziv_forme_brisanje_prostorije():
     root = Tk()
     application = BrisanjeProstorije(root)
     root.mainloop()
+
+if __name__ == '__main__':
+    poziv_forme_brisanje_prostorije()
