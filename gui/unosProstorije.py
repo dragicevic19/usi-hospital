@@ -50,6 +50,7 @@ class NovaProstorija:
     def __sacuvaj_prostoriju(self):
         prostorija = Prostorija(self._sprat.get(), self._broj_prostorije.get(), [], self._namena_prostorije.get())
         lista_ucitanih_prostorija.append(prostorija)
+        KreiranjeObjekata.sacuvaj_entitete()
         messagebox.showinfo("USPESNO", "Uspesno ste dodali prostoriju")
         self._root.destroy()
 
@@ -59,3 +60,6 @@ def poziv_forme_unos_prostorije():
     root.geometry('425x200')
     application = NovaProstorija(root)
     root.mainloop()
+
+if __name__ == '__main__':
+    poziv_forme_unos_prostorije()

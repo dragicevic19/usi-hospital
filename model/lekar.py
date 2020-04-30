@@ -4,7 +4,7 @@ from model.korisnik import Korisnik
 class Lekar(Korisnik):
 
     def __init__(self, korisnicko_ime=None, lozinka=None, ime=None, prezime=None,
-                 radno_vreme=None, spisak_pacijenata=[], spisak_specijalizacija=[], obrisan=False):
+                 radno_vreme=None, spisak_pacijenata=[], spisak_specijalizacija=[], obrisan='False'):
         super().__init__(korisnicko_ime, lozinka, ime, prezime, obrisan, "lekar")
         self._spisak_specijalizacija = spisak_specijalizacija
         self._spisak_pacijenata = spisak_pacijenata

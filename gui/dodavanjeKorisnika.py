@@ -5,10 +5,11 @@ from tkinter import messagebox
 from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika
 from model.korisnik import Korisnik
+from model.lekar import Lekar
 
 
 class NoviKorisnik:
-    uloge = ('Lekar', 'Upravnik', 'Sekretar')
+    uloge = ('lekar', 'upravnik bolnice', 'sekretar')
 
     def __init__(self, root):
         self._root = root
@@ -30,7 +31,7 @@ class NoviKorisnik:
 
     def izaberi_ulogu(self):
         Label(self._root, text="Uloga:", font="Times 14").grid(row=1, column=1, pady=10)
-        default = 'Lekar'
+        default = 'lekar'
         ttk.OptionMenu(self._root, self._uloga, default, *self.uloge).grid(row=1, column=2)
 
     def unesi_korisnicko_ime(self):
@@ -59,10 +60,16 @@ class NoviKorisnik:
         elif KreiranjeObjekata.postoji_korisnik(self._korisnicko_ime.get()):
             messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
         else:
-            korisnik = Korisnik(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(), self._prezime.get(),
-                                self._uloga.get(), 'False')
+            if self._uloga.get() == 'lekar':
+                korisnik = Lekar(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
+                                 self._prezime.get())
+            else:
+                korisnik = Korisnik(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
+                                    self._prezime.get(), 'False', self._uloga.get())
+
             lista_ucitanih_korisnika.append(korisnik)
             messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
+            KreiranjeObjekata.sacuvaj_entitete()
 
 
 def poziv_forme_unos_korisnika():
