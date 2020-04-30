@@ -2,9 +2,10 @@ import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import KreiranjeObjekataEntiteta as KreiranjeObjekata
+from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika
 from model.korisnik import Korisnik
+
 
 class NoviKorisnik:
     uloge = ('Lekar', 'Upravnik', 'Sekretar')
@@ -58,8 +59,8 @@ class NoviKorisnik:
         elif KreiranjeObjekata.postoji_korisnik(self._korisnicko_ime.get()):
             messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
         else:
-            korisnik = Korisnik(self._korisnicko_ime.get(),self._lozinka.get(), self._ime.get(),self._prezime.get(),
-                                self._uloga.get())
+            korisnik = Korisnik(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(), self._prezime.get(),
+                                self._uloga.get(), 'False')
             lista_ucitanih_korisnika.append(korisnik)
             messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
 
@@ -69,8 +70,7 @@ def poziv_forme_unos_korisnika():
     root.geometry('425x425')
     application = NoviKorisnik(root)
     root.mainloop()
-    imena = [i.get_korisnicko_ime() for i in lista_ucitanih_korisnika]
-    print(imena)
+
 
 if __name__ == '__main__':
     poziv_forme_unos_korisnika()

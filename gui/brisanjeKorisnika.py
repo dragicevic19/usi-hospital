@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika
+from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika, KreiranjeObjekata
 
 
 class BrisanjeKorisnika:
@@ -19,7 +19,7 @@ class BrisanjeKorisnika:
 
     def izlistaj_korisnike(self):
         self.napravi_treeview()
-        potvrdi_dugme = ttk.Button(root, text="OBRISI", command=self.obrisi_korisnika)
+        potvrdi_dugme = ttk.Button(self._root, text="OBRISI", command=self.obrisi_korisnika)
         potvrdi_dugme.pack(fill='x')
 
     def napravi_treeview(self):
@@ -36,10 +36,9 @@ class BrisanjeKorisnika:
     def __popuni_treeview(self):
         index = iid = 0
         for korisnik in lista_ucitanih_korisnika:
-            if korisnik.get_obrisan() == 'False':
-                k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
-                self.treeview.insert("", index, iid, values=k)
-                index = iid = index + 1
+            k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
+            self.treeview.insert("", index, iid, values=k)
+            index = iid = index + 1
 
     def obrisi_korisnika(self):
         try:
@@ -47,17 +46,17 @@ class BrisanjeKorisnika:
             odabrani_korisnik = self.treeview.item(odabrani)['values']
             korisnicko_ime_odabranog = odabrani_korisnik[0]
 
-            for korisnik in lista_ucitanih_korisnika:
-                if korisnik.get_korisnicko_ime() == korisnicko_ime_odabranog:
-                    korisnik.set_obrisan('True')
-            messagebox.showinfo("USPESNO", "Uspesno ste podneli zahtev\nza brisanje korisnika.\n\nCeka se potvrda sekretara.")
+            korisnik = KreiranjeObjekata.postoji_korisnik(korisnicko_ime_odabranog)
+            korisnik.set_obrisan('True')
+            messagebox.showinfo("USPESNO", "Uspesno ste obrisali korisnika!")
+            KreiranjeObjekata.sacuvaj_entitete()
             self._root.destroy()
         except IndexError:
-            messagebox.showerror("GRESKA", "Niste odabrali korisnika")
+            messagebox.showerror("GRESKA", "Niste odabrali korisnika!")
 
 
-
-if __name__ == '__main__':
+def poziv_forme_brisanje_korisnika():
     root = Tk()
     application = BrisanjeKorisnika(root)
     root.mainloop()
+

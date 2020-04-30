@@ -38,7 +38,7 @@ class NovaProstorija:
                                                                                                           column=2)
 
     def proveri_validnost(self):
-        if not self._broj_prostorije.get() or not self._namena_prostorije.get() or not self._broj_prostorije.get().isnumeric():
+        if not self._broj_prostorije.get() or not self._namena_prostorije.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
 
         elif KreiranjeObjekata.postoji_prostorija(self._sprat.get(), self._broj_prostorije.get()):
