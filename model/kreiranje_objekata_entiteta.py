@@ -46,30 +46,30 @@ class KreiranjeObjekata:
 
     @staticmethod
     def __kreiranje_upravnika_bolnice(red):
-        upravnik = Upravnik(red[0], red[1], red[3], red[4])
+        upravnik = Upravnik(red[0], red[1], red[3], red[4], red[5])
         lista_ucitanih_korisnika.append(upravnik)
 
     @staticmethod
     def __kreiranje_administratora(red):
-        administrator = Administrator(red[0], red[1], red[3], red[4])
+        administrator = Administrator(red[0], red[1], red[3], red[4], red[5])
         lista_ucitanih_korisnika.append(administrator)
 
     @staticmethod
     def __kreiranje_sekretara(red):
-        sekretar = Sekretar(red[0], red[1], red[3], red[4])
+        sekretar = Sekretar(red[0], red[1], red[3], red[4], red[5])
         lista_ucitanih_korisnika.append(sekretar)
 
     @staticmethod
     def __kreiranje_lekara(red):
         spisak_specijalizacija = red[7].split(';')
         spisak_pacijenata = red[6].split(';')
-        lekar = Lekar(red[0], red[1], red[3], red[4], red[5], spisak_pacijenata, spisak_specijalizacija)
+        lekar = Lekar(red[0], red[1], red[3], red[4], red[5], spisak_pacijenata, spisak_specijalizacija, red[8])
 
         lista_ucitanih_korisnika.append(lekar)
 
     @staticmethod
     def __kreiranje_pacijenta(red):
-        pacijent = Pacijent(red[0], red[1], red[3], red[4], red[5], red[6], red[7])
+        pacijent = Pacijent(red[0], red[1], red[3], red[4], red[5], red[6], red[7], red[8])
 
         lista_ucitanih_korisnika.append(pacijent)
 
@@ -133,7 +133,7 @@ class KreiranjeObjekata:
 
         if uloga == 'upravnik bolnice' or uloga == 'administrator' or uloga == 'sekretar':
             writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga, korisnik.get_ime(),
-                             korisnik.get_prezime()])
+                             korisnik.get_prezime(), korisnik.get_obrisan()])
         # ako nam bude pravilo problem to sto nemaju svi redovi isto kolona, dodacemo ,,,
         elif uloga == 'lekar':
             KreiranjeObjekata.__sacuvaj_lekara(korisnik, uloga, writer)
@@ -147,13 +147,13 @@ class KreiranjeObjekata:
         spisak_pacijenata = ';'.join(korisnik.get_spisak_pacijenata())
         writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
                          korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_radno_vreme(),
-                         spisak_pacijenata, spisak_spec])
+                         spisak_pacijenata, spisak_spec,korisnik.get_obrisan()])
 
     @staticmethod
     def __sacuvaj_pacijenta(korisnik, uloga, writer):
         writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
                          korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_br_zdravstvene(),
-                         korisnik.get_pol(), korisnik.get_anamneza()])
+                         korisnik.get_pol(), korisnik.get_anamneza(), korisnik.get_obrisan()])
 
     ####################################################################################################
 
@@ -233,7 +233,7 @@ KreiranjeObjekata.ucitavanje_bolnicke_opreme()
 KreiranjeObjekata.ucitavanje_unosa_anamneze()
 KreiranjeObjekata.ucitavanje_anamneze()
 KreiranjeObjekata.ucitavanje_prostorije()
-
+KreiranjeObjekata.sacuvaj_entitete()
 
 # NAPOMENA!!!!
 # 1) IMPORTUJ LISTU ODGORAJUCEG ENTITETA
