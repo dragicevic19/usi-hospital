@@ -15,7 +15,7 @@ class NovaProstorija:
         self._broj_prostorije = None
         self._namena_prostorije = StringVar(self._root)
 
-        self._root.title("Kreiranje nove prostorije")
+        #self._root.title("Kreiranje nove prostorije")
         self.izaberi_sprat()
         self.izaberi_prostoriju()
         self.izaberi_namenu_prostorije()
@@ -28,7 +28,7 @@ class NovaProstorija:
 
     def izaberi_prostoriju(self):
         Label(self._root, justify=LEFT, text="Broj prostorije:", font="Times 15").grid(row=2, column=1, pady=10)
-        self._broj_prostorije = ttk.Entry()
+        self._broj_prostorije = ttk.Entry(self._root)
         self._broj_prostorije.grid(row=2, column=2, columnspan=10)
 
     def izaberi_namenu_prostorije(self):
@@ -55,9 +55,9 @@ class NovaProstorija:
         self._root.destroy()
 
 
-def poziv_forme_unos_prostorije():
-    root = Tk()
-    root.geometry('425x200')
+def poziv_forme_unos_prostorije(root):
+    #root = Tk()
+    #root.geometry('425x200')
     application = NovaProstorija(root)
     root.mainloop()
 

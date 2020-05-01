@@ -113,6 +113,9 @@ class AzuriraniKorisnik:
 
                 messagebox.showinfo("USPESNO", "Uspesno ste azurirali korisnika")
                 self._root2.destroy()
+                global root1
+                root1.destroy()
+
 
 
 def double_click(event):
@@ -124,14 +127,14 @@ def double_click(event):
     pokretanje_unosa_podataka(selektovan_korisnik)
 
 
-def pokretanje_tabele():
+def pokretanje_tabele(root1):
 
-    root1 = Tk()
-    root1.title("Azuriranje korisnika")
-    root1.resizable(False, False)
-    tabela = ttk.Treeview(columns=(1, 2, 3, 4), show="headings", height=15)
+    #root1 = Tk()
+    #root1.title("Azuriranje korisnika")
+
+    tabela = ttk.Treeview(root1,columns=(1, 2, 3, 4), show="headings", height=15)
     tabela["columns"] = ("korisnicko ime", "uloga", "ime", "prezime")
-    return tabela, root1
+    return tabela
 
 
 def kreiranje_kolona(tabela):
@@ -164,18 +167,21 @@ def popunjavanje_tabele(root1, tabela):
 def pokretanje_unosa_podataka(selektovan_korisnik):
 
     root2 = Tk()
-    root2.geometry('300x250')
+    root2.geometry('330x250')
     application = AzuriraniKorisnik(root2, selektovan_korisnik)
     root2.mainloop()
-    print([i.get_korisnicko_ime() for i in lista_ucitanih_korisnika])
 
 
-def poziv_forme_azuriranje_korisnika():
-    tabela, root1 = pokretanje_tabele()
+global root1
+def poziv_forme_azuriranje_korisnika(root2):
+    global root1
+    root1 = root2
+    tabela = pokretanje_tabele(root1)
     kreiranje_kolona(tabela)
     kreiranje_headinga(tabela)
     popunjavanje_tabele(root1, tabela)
 
 
 if __name__ == '__main__':
-    poziv_forme_azuriranje_korisnika()
+    root1 = Tk()
+    poziv_forme_azuriranje_korisnika(root1)

@@ -20,7 +20,7 @@ class NoviKorisnik:
         self._ime = None
         self._prezime = None
 
-        self._root.title("Dodavanje novog korisnika")
+       # self._root.title("Dodavanje novog korisnika")
         self.izaberi_ulogu()
         self.unesi_korisnicko_ime()
         self.unesi_lozinku()
@@ -36,22 +36,22 @@ class NoviKorisnik:
 
     def unesi_korisnicko_ime(self):
         Label(self._root, justify=LEFT, text="Korisnicko ime:", font="Times 15").grid(row=2, column=1, pady=10)
-        self._korisnicko_ime = ttk.Entry()
+        self._korisnicko_ime = ttk.Entry(self._root)
         self._korisnicko_ime.grid(row=2, column=2, columnspan=10)
 
     def unesi_lozinku(self):
         Label(self._root, justify=LEFT, text="Lozinka:", font="Times 15").grid(row=3, column=1, pady=10)
-        self._lozinka = ttk.Entry(show='*')
+        self._lozinka = ttk.Entry(self._root,show='*')
         self._lozinka.grid(row=3, column=2, columnspan=10)
 
     def unesi_ime(self):
         Label(self._root, justify=LEFT, text="Ime:", font="Times 15").grid(row=4, column=1, pady=10)
-        self._ime = ttk.Entry()
+        self._ime = ttk.Entry(self._root)
         self._ime.grid(row=4, column=2, columnspan=10)
 
     def unesi_prezime(self):
         Label(self._root, justify=LEFT, text="Prezime:", font="Times 15").grid(row=5, column=1, pady=10)
-        self._prezime = ttk.Entry()
+        self._prezime = ttk.Entry(self._root)
         self._prezime.grid(row=5, column=2, columnspan=10)
 
     def sacuvaj_korisnika(self):
@@ -70,11 +70,11 @@ class NoviKorisnik:
             lista_ucitanih_korisnika.append(korisnik)
             messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
             KreiranjeObjekata.sacuvaj_entitete()
+            self._root.destroy()
 
-
-def poziv_forme_unos_korisnika():
-    root = Tk()
-    root.geometry('425x425')
+def poziv_forme_unos_korisnika(root):
+    #root = Tk()
+    #root.geometry('425x425')
     application = NoviKorisnik(root)
     root.mainloop()
 
