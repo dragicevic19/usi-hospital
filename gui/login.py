@@ -7,8 +7,7 @@ from gui.pacijent import poziv_forme_pacijent
 from gui.administrator import poziv_forme_administrator
 from gui.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
-from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika as lista_korisnika
-
+from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika as lista_korisnika, KreiranjeObjekata
 
 
 class LogIn:
@@ -75,15 +74,13 @@ class LogIn:
             poziv_forme_administrator(korisnik)
 
 
-
-
-
 def kreni_login():
+
+    KreiranjeObjekata.ucitaj_entitete()
     root = Tk()
     root.geometry('370x150')
     application = LogIn(root)
     root.mainloop()
-
 
 if __name__ == '__main__':
     kreni_login()
