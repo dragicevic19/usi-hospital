@@ -2,21 +2,20 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from model.kreiranje_objekata_entiteta import KreiranjeObjekata, lista_ucitanih_prostorija
+from services.prostorijeService import ProstorijeService
 
 
 class BrisanjeProstorije:
 
     def __init__(self, root):
         self._root = root
-        self._root.title('Brisanje prostorije')
-
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
         self.scroll.pack(side='right', fill='y')
         self.treeview.configure(yscrollcommand=self.scroll.set)
 
         self.napravi_treeview()
-        potvrdi_dugme = ttk.Button(root, text="OBRISI", command=self.obrisi_prostoriju)
+        potvrdi_dugme = ttk.Button(self._root, text="OBRISI", command=self.obrisi_prostoriju)
         potvrdi_dugme.pack(fill='x')
 
     def napravi_treeview(self):
@@ -37,11 +36,12 @@ class BrisanjeProstorije:
     def __popuni_treeview(self):
         index = iid = 0
         for prostorija in lista_ucitanih_prostorija:
-            k = (prostorija.get_sprat(), prostorija.get_broj_prostorije(),
-                 prostorija.get_spisak_opreme()[0] + ' Dvoklik za vise...',
-                 prostorija.get_namena_prostorije())
-            self.treeview.insert("", index, iid, values=k)
-            index = iid = index + 1
+            if not prostorija.get_obrisana():
+                k = (prostorija.get_sprat(), prostorija.get_broj_prostorije(),
+                     prostorija.get_spisak_opreme()[0] + ' Dvoklik za vise...',
+                     prostorija.get_namena_prostorije())
+                self.treeview.insert("", index, iid, values=k)
+                index = iid = index + 1
         self.treeview.bind('<Double-1>', self.__prikazi_spisak_opreme)
 
     def __prikazi_spisak_opreme(self, event):
@@ -53,10 +53,8 @@ class BrisanjeProstorije:
 
     def obrisi_prostoriju(self):
         try:
-            prostorija = self.__selektovana_prostorija()
-            prostorija.set_obrisana('True')
+            ProstorijeService.brisanje_prostorije(self.__selektovana_prostorija())
             messagebox.showinfo("USPESNO", "Uspesno ste obrisali prostoriju!")
-            KreiranjeObjekata.sacuvaj_entitete()
             self._root.destroy()
         except IndexError:
             messagebox.showerror("GRESKA", "Niste odabrali prostoriju!")
@@ -69,10 +67,11 @@ class BrisanjeProstorije:
         return prostorija
 
 
-def poziv_forme_brisanje_prostorije():
-    root = Tk()
+def poziv_forme_brisanje_prostorije(root):
     application = BrisanjeProstorije(root)
     root.mainloop()
 
+
 if __name__ == '__main__':
-    poziv_forme_brisanje_prostorije()
+    root = Tk()
+    poziv_forme_brisanje_prostorije(root)

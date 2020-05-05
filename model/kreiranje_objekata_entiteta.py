@@ -1,4 +1,5 @@
 import csv
+from data.konstante import *
 from model.lekar import Lekar
 from model.pacijent import Pacijent
 from model.upravnik import Upravnik
@@ -24,13 +25,29 @@ INDEX_ULOGE_KORISNIKA = 2
 class KreiranjeObjekata:
 
     @staticmethod
+    def sacuvaj_entitete():
+        KreiranjeObjekata.__sacuvaj_korisnika()
+        KreiranjeObjekata.__sacuvaj_anamnezu()
+        KreiranjeObjekata.__sacuvaj_bolnicku_opremu()
+        KreiranjeObjekata.__sacuvaj_prostorije()
+        KreiranjeObjekata.__sacuvaj_unos_anamneze()
+
+    @staticmethod
+    def ucitaj_entitete():
+        KreiranjeObjekata.ucitavanje_korisnika()
+        KreiranjeObjekata.ucitavanje_bolnicke_opreme()
+        KreiranjeObjekata.ucitavanje_unosa_anamneze()
+        KreiranjeObjekata.ucitavanje_anamneze()
+        KreiranjeObjekata.ucitavanje_prostorije()
+
+    @staticmethod
     def ucitavanje_korisnika():
-        path = Path('../data/korisnici.csv')
+        path = Path(PATH_TO_KORISNICI)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
-                obrisan = red[5]
-                if obrisan == 'False':
+                obrisan = bool(red[5])
+                if not obrisan:
                     KreiranjeObjekata.__kreiraj_po_ulozi(red, lista_ucitanih_korisnika)
                 else:
                     KreiranjeObjekata.__kreiraj_po_ulozi(red, lista_obrisanih_korisnika)
@@ -79,7 +96,7 @@ class KreiranjeObjekata:
     ########################################################################
     @staticmethod
     def ucitavanje_bolnicke_opreme():
-        path = Path('../data/bolnicka_oprema.csv')
+        path = Path(PATH_TO_BOLNICKA_OPREMA)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -88,7 +105,7 @@ class KreiranjeObjekata:
 
     @staticmethod
     def ucitavanje_unosa_anamneze():
-        path = Path('../data/unos_anamneze.csv')
+        path = Path(PATH_TO_UNOS_ANAMNEZE)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -97,7 +114,7 @@ class KreiranjeObjekata:
 
     @staticmethod
     def ucitavanje_anamneze():
-        path = Path('../data/anamneza.csv')
+        path = Path(PATH_TO_ANAMNEZA)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -107,12 +124,12 @@ class KreiranjeObjekata:
 
     @staticmethod
     def ucitavanje_prostorije():
-        path = Path('../data/prostorije.csv')
+        path = Path(PATH_TO_PROSTORIJE)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
-                obrisana = red[4]
-                if obrisana == 'False':
+                obrisana = bool(red[4])
+                if not obrisana:
                     KreiranjeObjekata.__ucitaj_prostoriju(red, lista_ucitanih_prostorija)
                 else:
                     KreiranjeObjekata.__ucitaj_prostoriju(red, lista_obrisanih_prostorija)
@@ -126,7 +143,7 @@ class KreiranjeObjekata:
     ############################################################################################################
     @staticmethod
     def __sacuvaj_korisnika():
-        path = Path('../data/korisnici.csv')
+        path = Path(PATH_TO_KORISNICI)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             KreiranjeObjekata.__upisi_korisnike_csv(writer, lista_ucitanih_korisnika)
@@ -136,6 +153,10 @@ class KreiranjeObjekata:
     def __upisi_korisnike_csv(writer, lista):
         for korisnik in lista:
             uloga = korisnik.get_uloga()
+            # if not korisnik.get_obrisan():
+            #     obrisan = ''
+            # else:
+            #     obrisan = True
             KreiranjeObjekata.sacuvaj_po_ulozi(korisnik, uloga, writer)
 
     @staticmethod
@@ -156,8 +177,8 @@ class KreiranjeObjekata:
         spisak_spec = ';'.join(korisnik.get_spisak_specijalizacija())
         spisak_pacijenata = ';'.join(korisnik.get_spisak_pacijenata())
         writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
-                         korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_obrisan(),
-                         korisnik.get_radno_vreme(), spisak_pacijenata, spisak_spec])
+                         korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_obrisan(), korisnik.get_radno_vreme(),
+                         spisak_pacijenata, spisak_spec])
 
     @staticmethod
     def __sacuvaj_pacijenta(korisnik, uloga, writer):
@@ -169,7 +190,7 @@ class KreiranjeObjekata:
 
     @staticmethod
     def __sacuvaj_anamnezu():
-        path = Path('../data/anamneza.csv')
+        path = Path(PATH_TO_ANAMNEZA)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             for anamneza in lista_ucitanih_anamneza:
@@ -178,7 +199,7 @@ class KreiranjeObjekata:
 
     @staticmethod
     def __sacuvaj_bolnicku_opremu():
-        path = Path('../data/bolnicka_oprema.csv')
+        path = Path(PATH_TO_BOLNICKA_OPREMA)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             for oprema in lista_ucitane_bolnicke_opreme:
@@ -187,7 +208,7 @@ class KreiranjeObjekata:
 
     @staticmethod
     def __sacuvaj_prostorije():
-        path = Path('../data/prostorije.csv')
+        path = Path(PATH_TO_PROSTORIJE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             KreiranjeObjekata.__upisi_prostorije_csv(writer, lista_ucitanih_prostorija)
@@ -202,7 +223,7 @@ class KreiranjeObjekata:
 
     @staticmethod
     def __sacuvaj_unos_anamneze():
-        path = Path('../data/unos_anamneze.csv')
+        path = Path(PATH_TO_UNOS_ANAMNEZE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
 
@@ -210,14 +231,6 @@ class KreiranjeObjekata:
                 writer.writerow([unos.get_id(), unos.get_lekar(), unos.get_opis(), unos.get_datum_i_vreme()])
 
     ################################################################################################################
-
-    @staticmethod
-    def sacuvaj_entitete():
-        KreiranjeObjekata.__sacuvaj_korisnika()
-        KreiranjeObjekata.__sacuvaj_anamnezu()
-        KreiranjeObjekata.__sacuvaj_bolnicku_opremu()
-        KreiranjeObjekata.__sacuvaj_prostorije()
-        KreiranjeObjekata.__sacuvaj_unos_anamneze()
 
     @staticmethod
     def postoji_prostorija(sprat, broj_sobe):
@@ -241,8 +254,5 @@ class KreiranjeObjekata:
         return False
 
 
-KreiranjeObjekata.ucitavanje_korisnika()
-KreiranjeObjekata.ucitavanje_bolnicke_opreme()
-KreiranjeObjekata.ucitavanje_unosa_anamneze()
-KreiranjeObjekata.ucitavanje_anamneze()
-KreiranjeObjekata.ucitavanje_prostorije()
+# zbog testiranja, ovo posle treba obrisati jer se poziva u login.py
+KreiranjeObjekata.ucitaj_entitete()
