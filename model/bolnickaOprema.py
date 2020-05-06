@@ -1,6 +1,6 @@
 class BolnickaOprema(object):
 
-    def __init__(self, naziv_opreme, ukupan_broj_opreme, slobodna_oprema=None):
+    def __init__(self, naziv_opreme, ukupan_broj_opreme, slobodna_oprema=0):
         self._naziv_opreme = naziv_opreme
         self._ukupan_broj_opreme = ukupan_broj_opreme
         self._slobodna_oprema = slobodna_oprema
