@@ -1,18 +1,22 @@
-petars77,eer22g,upravnik bolnice,Petar,Stojanovski,False
-mirko22,grga3424,upravnik bolnice,Mirko,Mirkovic,False
-milica31,geraz534,upravnik bolnice,Milica,Sapoznicenko,False
-jovan21,hrazgh432,administrator,Jovan,Petrovic,False
-milan32,hgrah542,administrator,Milan,Jovic,False
-jelena88,ghneuia5423,administrator,Jelena,Dafinic,False
-dejan21,geag4523,sekretar,Dejan,Tot,False
-jovana31,tewqt424,sekretar,Jovana,Malagurski,False
-mihajlo29,geazhgreq52,sekretar,Mihajlo,Jovicevic,False
-goran431,hrnheio5423,lekar,Goran,Mikic,False,08:00-14:00,Petar Misic;Ivica Stankovic,neurolog
-sebastijan3412,heahgae452,lekar,Sebastijan,Mihajlovic,False,07:00-13:00,Ivica Stankovic;Tijana Babic,lop
-horacije442,guiage54,lekar,Horacije,Kljajic,False,07:00-14:00,Tijana Babic,neurohirurg;kardiohirurg
-predrag31,gangi42,pacijent,Predrag,Mitrovic,False,1301143,muski,Povisena temperatura. Malaksalost. Kasalj.
-milana231,ggaejtes53,pacijent,Milana,Milojevic,False,31330657,zenski,Bol u grlu. Suv kasalj.
-zeljko12,gbaoinoi42,pacijent,Zeljko,Spajic,False,90634235,muski,Malaksalost. Bol u grudima. Vrtoglavica.
-lekarproradi,lekar123,lekar,pera,peric,False,,,
-upravnikpera123,pera123,upravnik bolnice,pera,peric,False
-sekretarmica,mica123,sekretar,mica,micic,False
+milica31,geraz534,upravnik bolnice,Milica,Sapoznicenko,
+jelena88,ghneuia5423,administrator,Jelena,Dafinic,
+dejan21,geag4523,sekretar,Dejan,Tot,
+upravnikpera123,pera123,upravnik bolnice,pera,peric,
+mihajlo29,geazhgreq52,sekretar,Mihajlo,Jovicevic,
+horacije442,guiage54,lekar,Horacije,Kljajic,,07:00-14:00,Tijana Babic,neurohirurg;kardiohirurg
+sebastijan3412,heahgae452,lekar,Sebastijan,Mihajlovic,,07:00-13:00,Ivica Stankovic;Tijana Babic,lop
+jovana31,tewqt424,sekretar,Jovana,Malagurski,
+predrag,gangi,pacijent,Predrag,Mitrovic,,1301143,muski,Povisena temperatura. Malaksalost. Kasalj.
+jovan21,hrazgh432,administrator,Jovan,Petrovic,
+zile2,gej123,upravnik bolnice,zika,radic,
+goran431,hrnheio5423,lekar,Goran,Mikic,,08:00-14:00,Petar Misic;Ivica Stankovic,neurolog
+milana,maja,pacijent,Milana,Milojevic,,31330657,zenski,Bol u grlu. Suv kasalj.
+micic123,mica12333,sekretar,Mica,Micic,
+miki123,123,lekar,milojko,maric,,,,
+zeljko12,gbaoinoi42,pacijent,Zeljko,Spijic,,90634235,muski,Malaksalost. Bol u grudima. Vrtoglavica.
+milan,maric,administrator,Milan,Jovic,
+micaSekretar,mica123,sekretar,Mica,Micic,
+petar,maras,upravnik bolnice,Petar,Stojanovski,True
+mirko22,grga3424,upravnik bolnice,Mirko,Mirkovic,True
+micalekar23,Mica123,lekar,Mica,Micovic,True,,,
+markomarkovic123,marko123,lekar,Marko,Markovic,True,,,

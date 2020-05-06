@@ -3,7 +3,7 @@ from model.bolnickaOprema import BolnickaOprema
 
 class Prostorija(object):
 
-    def __init__(self, sprat, broj_prostorije, spisak_opreme=[], namena_prostorije=None, obrisana='False'):
+    def __init__(self, sprat, broj_prostorije, spisak_opreme=[], namena_prostorije=None, obrisana=''):
         self._sprat = sprat
         self._broj_prostorije = broj_prostorije
         self._spisak_opreme = spisak_opreme

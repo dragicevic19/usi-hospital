@@ -1,14 +1,14 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika, KreiranjeObjekata
+from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika, KreiranjeObjekata, lista_obrisanih_korisnika
+from services.userService import UserService
 
 
 class BrisanjeKorisnika:
 
     def __init__(self, root):
         self._root = root
-        self._root.title('Brisanje korisnika')
 
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
@@ -45,20 +45,18 @@ class BrisanjeKorisnika:
             odabrani = self.treeview.focus()
             odabrani_korisnik = self.treeview.item(odabrani)['values']
             korisnicko_ime_odabranog = odabrani_korisnik[0]
-
-            korisnik = KreiranjeObjekata.postoji_korisnik(korisnicko_ime_odabranog)
-            korisnik.set_obrisan('True')
+            UserService.obrisi_korisnika(korisnicko_ime_odabranog)
             messagebox.showinfo("USPESNO", "Uspesno ste obrisali korisnika!")
-            KreiranjeObjekata.sacuvaj_entitete()
             self._root.destroy()
         except IndexError:
             messagebox.showerror("GRESKA", "Niste odabrali korisnika!")
 
 
-def poziv_forme_brisanje_korisnika():
-    root = Tk()
+def poziv_forme_brisanje_korisnika(root):
+    #root = Tk()
     application = BrisanjeKorisnika(root)
     root.mainloop()
 
 if __name__ == '__main__':
-    poziv_forme_brisanje_korisnika()
+    root = Tk()
+    poziv_forme_brisanje_korisnika(root)
