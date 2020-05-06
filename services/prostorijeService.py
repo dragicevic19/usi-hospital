@@ -12,3 +12,7 @@ class ProstorijeService(object):
     def brisanje_prostorije(prostorija):
         prostorija._obrisana = True
         KreiranjeObjekata.sacuvaj_entitete()
+
+    @staticmethod
+    def pretraga_prostorije():
+        pass
