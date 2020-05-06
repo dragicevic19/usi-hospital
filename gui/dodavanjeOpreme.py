@@ -6,7 +6,6 @@ from model.kreiranje_objekata_entiteta import KreiranjeObjekata, lista_ucitane_b
 from services.opremaService import OpremaService
 
 
-
 class NovaOprema:
 
     def __init__(self, root):
@@ -50,8 +49,8 @@ class NovaOprema:
             self._root.destroy()
         else:
             OpremaService.dodaj_opremu(self._naziv.get(), self._opis.get(), self._kolicina.get())
+            messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
-
 
 
 def poziv_forme_unos_opreme(root):
@@ -63,5 +62,3 @@ if __name__ == '__main__':
     root = Tk()
     root.geometry('325x225')
     poziv_forme_unos_opreme(root)
-
-
