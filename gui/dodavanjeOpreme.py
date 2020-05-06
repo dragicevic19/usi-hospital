@@ -36,7 +36,6 @@ class NovaOprema:
         self._kolicina = ttk.Entry(self._root)
         self._kolicina.grid(row=4, column=2, columnspan=10)
 
-    # koristi se za detekciju opreme koja vec postoji u sistemu, kako bi se novododata oprema sabrala sa postojecom
     def sacuvaj_opremu(self):
 
         pronadjena_oprema = KreiranjeObjekata.postoji_oprema(self._naziv.get())
@@ -48,7 +47,7 @@ class NovaOprema:
             messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
         else:
-            OpremaService.dodaj_opremu(self._naziv.get(), self._opis.get(), self._kolicina.get())
+            OpremaService.dodaj_opremu_nova(self._naziv.get(), self._opis.get(), self._kolicina.get())
             messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
 

@@ -11,7 +11,7 @@ class OpremaService(object):
         KreiranjeObjekata.sacuvaj_entitete()
 
     @staticmethod
-    def dodaj_opremu(naziv, opis, kolicina):
+    def dodaj_opremu_nova(naziv, opis, kolicina):
         oprema = BolnickaOprema(naziv, int(kolicina))
         lista_ucitane_bolnicke_opreme.append(oprema)
         KreiranjeObjekata.sacuvaj_entitete()
