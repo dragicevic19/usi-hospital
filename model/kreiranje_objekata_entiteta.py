@@ -249,7 +249,7 @@ class KreiranjeObjekata:
     @staticmethod
     def postoji_oprema(naziv_opreme):
         for oprema in lista_ucitane_bolnicke_opreme:
-            if oprema.get_naziv_opreme == naziv_opreme:
+            if oprema.get_naziv_opreme() == naziv_opreme:
                 return oprema
         return False
 
