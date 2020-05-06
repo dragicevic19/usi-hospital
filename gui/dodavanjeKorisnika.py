@@ -4,8 +4,6 @@ from tkinter import ttk
 from tkinter import messagebox
 from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 
-
-
 class NoviKorisnik:
     uloge = ('lekar', 'upravnik bolnice', 'sekretar')
 
