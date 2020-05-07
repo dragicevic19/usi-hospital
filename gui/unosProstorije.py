@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import lista_ucitanih_prostorija, KreiranjeObjekata
+from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 from model.prostorija import Prostorija
 from services.prostorijeService import ProstorijeService
 

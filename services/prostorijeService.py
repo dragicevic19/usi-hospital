@@ -16,3 +16,7 @@ class ProstorijeService(object):
     @staticmethod
     def pretraga_prostorije():
         pass
+
+    @staticmethod
+    def renoviranje_prostorije(prostorija):
+        pass

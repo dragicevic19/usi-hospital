@@ -2,17 +2,39 @@ import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+
+from gui.prikazKorisnika import PrikazKorisnika
 from model.kreiranje_objekata_entiteta import KreiranjeObjekata
-from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika
-from model.korisnik import Korisnik
 from services.userService import UserService
 
 
-class AzuriraniKorisnik:
-    korisnicka_imena = [i.get_korisnicko_ime() for i in lista_ucitanih_korisnika]
+class IzborKorisnika(PrikazKorisnika):
 
-    def __init__(self, root2, selektovan_korisnik):
+    def __init__(self, root):
+        super().__init__(root)
+        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ KORISNIKA", command=self.double_click)
+        potvrdi_dugme.pack(fill='x')
 
+    def double_click(self):
+        try:
+            odabrani = self.treeview.focus()
+            odabrani_korisnik = self.treeview.item(odabrani)['values']
+            korisnicko_ime_odabranog = odabrani_korisnik[0]
+            self.pokretanje_unosa_podataka(korisnicko_ime_odabranog)
+        except IndexError:
+            messagebox.showerror("GRESKA", "Niste odabrali korisnika!")
+
+    def pokretanje_unosa_podataka(self, selektovan_korisnik):
+        root2 = Tk()
+        root2.geometry('330x260')
+        application = UnosPodataka(root2, selektovan_korisnik, self._root)
+        root2.mainloop()
+
+
+class UnosPodataka(IzborKorisnika):
+
+    def __init__(self, root2, selektovan_korisnik, root):
+        self._stari_root = root
         self._root2 = root2
         self._selektovano_korisnicko_ime = selektovan_korisnik
         self._korisnicko_ime = None
@@ -86,70 +108,14 @@ class AzuriraniKorisnik:
                                        self._lozinka.get(), self._ime.get(), self._prezime.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali korisnika")
         self._root2.destroy()
-        global root1
-        root1.destroy()
+        self._stari_root.destroy()
 
 
-def double_click(event):
-    item_id = event.widget.focus()
-    item = event.widget.item(item_id)
-    values = item['values']
-    selektovan_korisnik = values[0]
-    pokretanje_unosa_podataka(selektovan_korisnik)
-
-
-def pokretanje_tabele(root1):
-    # root1 = Tk()
-    # root1.title("Azuriranje korisnika")
-
-    tabela = ttk.Treeview(root1, columns=(1, 2, 3, 4), show="headings", height=15)
-    tabela["columns"] = ("korisnicko ime", "uloga", "ime", "prezime")
-    return tabela
-
-
-def kreiranje_kolona(tabela):
-    tabela.column("korisnicko ime", width=200)
-    tabela.column("uloga", width=200)
-    tabela.column("ime", width=200)
-    tabela.column("prezime", width=200)
-
-
-def kreiranje_headinga(tabela):
-    tabela.heading("korisnicko ime", text="Korisnicko ime")
-    tabela.heading("uloga", text="Uloga")
-    tabela.heading("ime", text="Ime")
-    tabela.heading("prezime", text="Prezime")
-    selektovan_korisnik = tabela.bind("<Double-Button-1>", double_click)
-    return selektovan_korisnik
-
-
-def popunjavanje_tabele(root1, tabela):
-    for korisnik in lista_ucitanih_korisnika:
-        tabela.insert("", "end", text="Korisnik", values=(korisnik.get_korisnicko_ime(), korisnik.get_uloga(),
-                                                          korisnik.get_ime(), korisnik.get_prezime()))
-    tabela.grid()
-    root1.mainloop()
-
-
-def pokretanje_unosa_podataka(selektovan_korisnik):
-    root2 = Tk()
-    root2.geometry('330x260')
-    application = AzuriraniKorisnik(root2, selektovan_korisnik)
-    root2.mainloop()
-
-
-global root1
-
-
-def poziv_forme_azuriranje_korisnika(root2):
-    global root1
-    root1 = root2
-    tabela = pokretanje_tabele(root1)
-    kreiranje_kolona(tabela)
-    kreiranje_headinga(tabela)
-    popunjavanje_tabele(root1, tabela)
+def poziv_forme_azuriranje_korisnika(root):
+    a = IzborKorisnika(root)
+    root.mainloop()
 
 
 if __name__ == '__main__':
-    root1 = Tk()
-    poziv_forme_azuriranje_korisnika(root1)
+    root = Tk()
+    poziv_forme_azuriranje_korisnika(root)
