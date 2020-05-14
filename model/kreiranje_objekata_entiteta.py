@@ -100,7 +100,7 @@ class KreiranjeObjekata:
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
-                bolnicka_oprema = BolnickaOprema(red[0], int(red[1]), int(red[2]))
+                bolnicka_oprema = BolnickaOprema(red[0], int(red[1]), int(red[2]), red[3])
                 lista_ucitane_bolnicke_opreme.append(bolnicka_oprema)
 
     @staticmethod
@@ -137,8 +137,13 @@ class KreiranjeObjekata:
     @staticmethod
     def __ucitaj_prostoriju(red, lista):
         pojedinacna_oprema = red[2].split("|")
-        prostorija = Prostorija(red[0], red[1], pojedinacna_oprema, red[3], red[4])
+        oprema = {}
+        for rec in pojedinacna_oprema:
+            i = rec.split(";")
+            oprema[i[0]] = i[1]
+        prostorija = Prostorija(red[0], red[1], oprema, red[3], red[4])
         lista.append(prostorija)
+
 
     ############################################################################################################
     @staticmethod
@@ -204,7 +209,7 @@ class KreiranjeObjekata:
             writer = csv.writer(file, delimiter=',')
             for oprema in lista_ucitane_bolnicke_opreme:
                 writer.writerow([oprema.get_naziv_opreme(), oprema.get_ukupan_broj_opreme(),
-                                 oprema.get_slobodna_oprema()])
+                                 oprema.get_slobodna_oprema(), oprema.get_opis()])
 
     @staticmethod
     def __sacuvaj_prostorije():
@@ -216,8 +221,18 @@ class KreiranjeObjekata:
 
     @staticmethod
     def __upisi_prostorije_csv(writer, lista):
+        # for prostorija in lista:
+        #     spisak_opreme = '|'.join(prostorija.get_spisak_opreme())
+        #     writer.writerow([prostorija.get_sprat(), prostorija.get_broj_prostorije(), spisak_opreme,
+        #                      prostorija.get_namena_prostorije(), prostorija.get_obrisana()])
+
+        lista_opreme = []
+        spisak_opreme = None
         for prostorija in lista:
-            spisak_opreme = '|'.join(prostorija.get_spisak_opreme())
+            for i in prostorija.get_spisak_opreme():
+                lista_opreme.append(i + ";" + prostorija.get_spisak_opreme()[i])
+                spisak_opreme = '|'.join(lista_opreme)
+            lista_opreme.clear()
             writer.writerow([prostorija.get_sprat(), prostorija.get_broj_prostorije(), spisak_opreme,
                              prostorija.get_namena_prostorije(), prostorija.get_obrisana()])
 
@@ -253,6 +268,8 @@ class KreiranjeObjekata:
                 return oprema
         return False
 
-
 # zbog testiranja, ovo posle treba obrisati jer se poziva u login.py
 KreiranjeObjekata.ucitaj_entitete()
+
+
+
