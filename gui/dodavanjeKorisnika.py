@@ -1,8 +1,12 @@
-from services.userService import UserService
+import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from model.kreiranje_objekata_entiteta import KreiranjeObjekata
+from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika
+from model.korisnik import Korisnik
+from model.lekar import Lekar
+
 
 class NoviKorisnik:
     uloge = ('lekar', 'upravnik bolnice', 'sekretar')
@@ -16,6 +20,7 @@ class NoviKorisnik:
         self._ime = None
         self._prezime = None
 
+       # self._root.title("Dodavanje novog korisnika")
         self.izaberi_ulogu()
         self.unesi_korisnicko_ime()
         self.unesi_lozinku()
@@ -36,7 +41,7 @@ class NoviKorisnik:
 
     def unesi_lozinku(self):
         Label(self._root, justify=LEFT, text="Lozinka:", font="Times 15").grid(row=3, column=1, pady=10)
-        self._lozinka = ttk.Entry(self._root, show='*')
+        self._lozinka = ttk.Entry(self._root,show='*')
         self._lozinka.grid(row=3, column=2, columnspan=10)
 
     def unesi_ime(self):
@@ -55,19 +60,24 @@ class NoviKorisnik:
         elif KreiranjeObjekata.postoji_korisnik(self._korisnicko_ime.get()):
             messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
         else:
-            UserService.dodaj_korisnika(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
-                                        self._prezime.get(), self._uloga.get())
+            if self._uloga.get() == 'lekar':
+                korisnik = Lekar(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
+                                 self._prezime.get())
+            else:
+                korisnik = Korisnik(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
+                                    self._prezime.get(), 'False', self._uloga.get())
 
+            lista_ucitanih_korisnika.append(korisnik)
             messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
+            KreiranjeObjekata.sacuvaj_entitete()
             self._root.destroy()
 
-
 def poziv_forme_unos_korisnika(root):
+    #root = Tk()
+    #root.geometry('425x425')
     application = NoviKorisnik(root)
     root.mainloop()
 
 
 if __name__ == '__main__':
-    root = Tk()
-    root.geometry('425x425')
-    poziv_forme_unos_korisnika(root)
+    poziv_forme_unos_korisnika()

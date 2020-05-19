@@ -3,7 +3,6 @@ from tkinter import ttk
 from tkinter import messagebox
 from model.kreiranje_objekata_entiteta import lista_ucitanih_prostorija, KreiranjeObjekata
 from model.prostorija import Prostorija
-from services.prostorijeService import ProstorijeService
 
 
 class NovaProstorija:
@@ -16,6 +15,7 @@ class NovaProstorija:
         self._broj_prostorije = None
         self._namena_prostorije = StringVar(self._root)
 
+        #self._root.title("Kreiranje nove prostorije")
         self.izaberi_sprat()
         self.izaberi_prostoriju()
         self.izaberi_namenu_prostorije()
@@ -40,24 +40,26 @@ class NovaProstorija:
     def proveri_validnost(self):
         if not self._broj_prostorije.get() or not self._namena_prostorije.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
+
         elif KreiranjeObjekata.postoji_prostorija(self._sprat.get(), self._broj_prostorije.get()):
             messagebox.showerror("GRESKA", "Soba vec postoji")
+
         else:
             self.__sacuvaj_prostoriju()
 
     def __sacuvaj_prostoriju(self):
         prostorija = Prostorija(self._sprat.get(), self._broj_prostorije.get(), [], self._namena_prostorije.get())
-        ProstorijeService.dodavanje_prostorije(prostorija)
+        lista_ucitanih_prostorija.append(prostorija)
+        KreiranjeObjekata.sacuvaj_entitete()
         messagebox.showinfo("USPESNO", "Uspesno ste dodali prostoriju")
         self._root.destroy()
 
 
 def poziv_forme_unos_prostorije(root):
+    #root = Tk()
+    #root.geometry('425x200')
     application = NovaProstorija(root)
     root.mainloop()
 
-
 if __name__ == '__main__':
-    root = Tk()
-    root.geometry('425x200')
-    poziv_forme_unos_prostorije(root)
+    poziv_forme_unos_prostorije()
