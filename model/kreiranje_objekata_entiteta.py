@@ -137,13 +137,14 @@ class KreiranjeObjekata:
     @staticmethod
     def __ucitaj_prostoriju(red, lista):
         pojedinacna_oprema = red[2].split("|")
-        oprema = {}
-        for rec in pojedinacna_oprema:
-            i = rec.split(";")
-            oprema[i[0]] = i[1]
-        prostorija = Prostorija(red[0], red[1], oprema, red[3], red[4])
+        lista_oprema = []
+        for stavka in pojedinacna_oprema:
+            oprema = {}
+            naziv, kolicina = stavka.split(";")
+            oprema[naziv] = kolicina
+            lista_oprema.append(oprema)
+        prostorija = Prostorija(red[0], red[1], lista_oprema, red[3], red[4])
         lista.append(prostorija)
-
 
     ############################################################################################################
     @staticmethod
@@ -220,18 +221,15 @@ class KreiranjeObjekata:
             KreiranjeObjekata.__upisi_prostorije_csv(writer, lista_obrisanih_prostorija)
 
     @staticmethod
-    def __upisi_prostorije_csv(writer, lista):
-        # for prostorija in lista:
-        #     spisak_opreme = '|'.join(prostorija.get_spisak_opreme())
-        #     writer.writerow([prostorija.get_sprat(), prostorija.get_broj_prostorije(), spisak_opreme,
-        #                      prostorija.get_namena_prostorije(), prostorija.get_obrisana()])
+    def __upisi_prostorije_csv(writer, lista_prostorija):
 
         lista_opreme = []
-        spisak_opreme = None
-        for prostorija in lista:
-            for i in prostorija.get_spisak_opreme():
-                lista_opreme.append(i + ";" + prostorija.get_spisak_opreme()[i])
-                spisak_opreme = '|'.join(lista_opreme)
+        for prostorija in lista_prostorija:
+            for oprema in prostorija.get_spisak_opreme():
+                for k, v in oprema.items():
+                    lista_opreme.append(k + ";" + v)
+
+            spisak_opreme = '|'.join(lista_opreme)
             lista_opreme.clear()
             writer.writerow([prostorija.get_sprat(), prostorija.get_broj_prostorije(), spisak_opreme,
                              prostorija.get_namena_prostorije(), prostorija.get_obrisana()])
@@ -268,8 +266,6 @@ class KreiranjeObjekata:
                 return oprema
         return False
 
-# zbog testiranja, ovo posle treba obrisati jer se poziva u login.py
+
+# zbog testiranja se ovde poziva, posle treba obrisati jer se poziva u login.py
 KreiranjeObjekata.ucitaj_entitete()
-
-
-

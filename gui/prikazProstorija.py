@@ -20,7 +20,7 @@ class PrikazProstorija(object):
         self.treeview.column('sprat', width=50)
         self.treeview.heading("br_prostorije", text="Broj prostorije")
         self.treeview.column('br_prostorije', width=100)
-        self.treeview.heading("spisak_opreme", text="Spisak opreme (kolicina)")
+        self.treeview.heading("spisak_opreme", text="Spisak opreme : kolicina")
         self.treeview.column('spisak_opreme', width=250)
         self.treeview.heading("namena_prostorije", text="Namena prostorije")
         self.treeview.column('namena_prostorije', width=120)
@@ -33,8 +33,9 @@ class PrikazProstorija(object):
         for prostorija in lista_ucitanih_prostorija:
             if not prostorija.get_obrisana():
                 k = (prostorija.get_sprat(), prostorija.get_broj_prostorije(),
-                     prostorija.get_spisak_opreme()[0] + ' Dvoklik za vise...',
-                     prostorija.get_namena_prostorije())
+                     str(prostorija.get_spisak_opreme()[0]) + ' Dvoklik za vise...', prostorija.get_namena_prostorije())
+
+
                 self.treeview.insert("", index, iid, values=k)
                 index = iid = index + 1
         self.treeview.bind('<Double-1>', self.__prikazi_spisak_opreme)
