@@ -32,8 +32,12 @@ class PrikazProstorija(object):
         index = iid = 0
         for prostorija in lista_ucitanih_prostorija:
             if not prostorija.get_obrisana():
+                if prostorija.get_spisak_opreme():
+                    spisak_opreme = str(prostorija.get_spisak_opreme()[0])
+                else:
+                    spisak_opreme = ''
                 k = (prostorija.get_sprat(), prostorija.get_broj_prostorije(),
-                     str(prostorija.get_spisak_opreme()[0]) + ' Dvoklik za vise...', prostorija.get_namena_prostorije())
+                     spisak_opreme + ' Dvoklik za vise...', prostorija.get_namena_prostorije())
 
 
                 self.treeview.insert("", index, iid, values=k)

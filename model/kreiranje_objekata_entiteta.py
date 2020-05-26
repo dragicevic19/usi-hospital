@@ -136,13 +136,14 @@ class KreiranjeObjekata:
 
     @staticmethod
     def __ucitaj_prostoriju(red, lista):
-        pojedinacna_oprema = red[2].split("|")
         lista_oprema = []
-        for stavka in pojedinacna_oprema:
-            oprema = {}
-            naziv, kolicina = stavka.split(";")
-            oprema[naziv] = kolicina
-            lista_oprema.append(oprema)
+        if red[2]:
+            pojedinacna_oprema = red[2].split("|")
+            for stavka in pojedinacna_oprema:
+                oprema = {}
+                naziv, kolicina = stavka.split(";")
+                oprema[naziv] = kolicina
+                lista_oprema.append(oprema)
         prostorija = Prostorija(red[0], red[1], lista_oprema, red[3], red[4])
         lista.append(prostorija)
 

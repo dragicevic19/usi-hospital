@@ -43,7 +43,7 @@ class NovaOprema:
         if not self._naziv.get() or not self._opis.get() or not self._kolicina.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
         elif pronadjena_oprema:
-            OpremaService.dodaj_postojecu_opremu(pronadjena_oprema, self._kolicina.get())
+            OpremaService.dodaj_postojecu_opremu(pronadjena_oprema, self._kolicina.get(), self._opis.get())
             messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
         else:

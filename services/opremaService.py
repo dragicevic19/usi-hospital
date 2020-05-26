@@ -9,7 +9,7 @@ class OpremaService(object):
     def dodaj_postojecu_opremu(oprema, kolicina, opis):
         oprema._ukupan_broj_opreme += int(kolicina)
         oprema._slobodna_oprema += int(kolicina)
-        oprema._opis += opis
+        oprema._opis += ' ' + opis
         KreiranjeObjekata.sacuvaj_entitete()
 
     @staticmethod
@@ -41,6 +41,3 @@ class OpremaService(object):
             if naziv_opreme in prostorija.get_spisak_opreme():
                 prostorija.get_spisak_opreme().pop(naziv_opreme)
                 KreiranjeObjekata.sacuvaj_entitete()
-
-
-

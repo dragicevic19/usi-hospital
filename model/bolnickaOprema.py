@@ -34,14 +34,13 @@ class BolnickaOprema(object):
         if self._slobodna_oprema + kolicina <= self._ukupan_broj_opreme:
             self._slobodna_oprema += kolicina
         else:
-            print("Stack overflow! Dok Vajo i Cezare piju belo vino, vrebaju ih Maras, Car i Kapucino. "
-                  "Dok Vajo tu casu desnom rukom trese, Marasa ce opet kalas da zanese.")
+            print("Stack overflow!")
 
     def smanji_slobodnu_opremu(self, kolicina):
         if self._slobodna_oprema - kolicina >= 0:
             self._slobodna_oprema -= kolicina
         else:
-            print("Stack overflow! Dok Vajo i Cezare piju belo vino, vrebaju ih Maaras, Car i Kapucino.")
+            print("Stack overflow!")
 
 
 
