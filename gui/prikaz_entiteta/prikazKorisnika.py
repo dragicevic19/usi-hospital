@@ -1,6 +1,5 @@
 from tkinter import ttk
-
-from repository.korisnik.korisnikRepository import lista_ucitanih_korisnika
+from repository.korisnik.korisnikRepo1 import lista_ucitanih_korisnika
 
 
 class PrikazKorisnika(object):
@@ -28,7 +27,6 @@ class PrikazKorisnika(object):
     def __popuni_treeview(self):
         index = iid = 0
         for korisnik in lista_ucitanih_korisnika:
-            # if self._uloga == 'lekar' and korisnik.get_uloga() == 'lekar':
             k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
             self.treeview.insert("", index, iid, values=k)
             index = iid = index + 1

@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import ttk
-from model.kreiranje_objekata_entiteta import *
+# from model.kreiranje_objekata_entiteta import *
 from model.korisnik import Korisnik
+from repository.korisnik.korisnikRepo1 import KorisnikRepository
 
 SIRINA_BIO = 550
 VISINA_ZA_DUGMICE = 120
@@ -67,7 +68,8 @@ class ModelPocetne:
         log_out.place(x=self.sirina - SIRINA_BIO - 170, y=20, height=80, width=150)
 
     def __akcija_log_out(self):
-        KreiranjeObjekata.sacuvaj_entitete()
+        KorisnikRepository.sacuvaj_korisnike()
+        # KreiranjeObjekata.sacuvaj_entitete()
         self._root.destroy()
 
     def __postava_bio(self):

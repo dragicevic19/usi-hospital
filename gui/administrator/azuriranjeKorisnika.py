@@ -1,12 +1,10 @@
-import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-from gui.prikazKorisnika import PrikazKorisnika
-# from model.kreiranje_objekata_entiteta import KreiranjeObjekata
+from gui.prikaz_entiteta.prikazKorisnika import PrikazKorisnika
 from services.userService import UserService
-from repository.korisnik.korisnikRepository import KorisnikRepository
+from repository.korisnik.korisnikRepo1 import KorisnikRepository
 
 
 class IzborKorisnika(PrikazKorisnika):

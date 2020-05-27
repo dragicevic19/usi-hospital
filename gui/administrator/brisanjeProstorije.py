@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from gui.prikazProstorija import PrikazProstorija
+from gui.prikaz_entiteta.prikazProstorija import PrikazProstorija
 from services.prostorijeService import ProstorijeService
 
 

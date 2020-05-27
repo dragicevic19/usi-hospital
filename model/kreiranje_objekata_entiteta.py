@@ -13,6 +13,7 @@ from model.anamneza import Anamneza
 from model.prostorija import Prostorija
 from pathlib import Path
 
+
 lista_ucitanih_korisnika = []
 lista_ucitane_bolnicke_opreme = []
 lista_ucitanih_unosa_anamneza = []
@@ -28,7 +29,7 @@ class KreiranjeObjekata:
 
     @staticmethod
     def sacuvaj_entitete():
-        KreiranjeObjekata.__sacuvaj_korisnika()
+        # KreiranjeObjekata.__sacuvaj_korisnika()
         KreiranjeObjekata.__sacuvaj_anamnezu()
         KreiranjeObjekata.__sacuvaj_bolnicku_opremu()
         KreiranjeObjekata.__sacuvaj_prostorije()

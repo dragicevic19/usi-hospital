@@ -1,9 +1,8 @@
-import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-from gui.prikazOpreme import PrikazOpreme
+from gui.prikaz_entiteta.prikazOpreme import PrikazOpreme
 from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 from services.opremaService import OpremaService
 

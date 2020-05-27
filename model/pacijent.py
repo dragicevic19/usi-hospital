@@ -4,9 +4,9 @@ from model.korisnik import Korisnik
 
 class Pacijent(Korisnik):
 
-    def __init__(self, korisnicko_ime=None, lozinka=None, broj_uloge=None, ime=None, prezime=None, obrisan='',
+    def __init__(self, korisnicko_ime=None, lozinka=None, uloga=None, ime=None, prezime=None, obrisan='',
                  br_zdravstvene=None, pol=None, anamneza=None):
-        super().__init__(korisnicko_ime, lozinka, ime, prezime, obrisan, broj_uloge)
+        super().__init__(korisnicko_ime, lozinka, ime, prezime, obrisan, uloga)
         self._br_zdravstvene = br_zdravstvene
         self._pol = pol
         self._anamneza = anamneza

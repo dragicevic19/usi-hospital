@@ -1,12 +1,14 @@
-# from model.kreiranje_objekata_entiteta import KreiranjeObjekata, lista_ucitanih_korisnika, lista_obrisanih_korisnika
-from repository.korisnik.korisnikRepository import KorisnikRepository
+from repository.korisnik.korisnikRepo1 import KorisnikRepository
 
 
 class UserService(object):
 
     @staticmethod
     def dodaj_korisnika(korisnik):
+        if KorisnikRepository.nadji_po_korisnickom_imenu(korisnik):
+            return False
         KorisnikRepository.dodaj_korisnika(korisnik)
+        return True
 
     @staticmethod
     def obrisi_korisnika(korisnicko_ime):
