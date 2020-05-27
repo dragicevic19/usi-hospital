@@ -84,4 +84,4 @@ class KorisnikRepository:
     def __sacuvaj_pacijenta(korisnik, uloga, writer):
         writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
                          korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_obrisan(),
-                         korisnik.get_br_zdravstvene(), korisnik.get_pol(), korisnik.get_anamneza()])
+                         korisnik.get_br_zdravstvene(), korisnik.get_pol(), '|'.join(korisnik.get_anamneza())])
