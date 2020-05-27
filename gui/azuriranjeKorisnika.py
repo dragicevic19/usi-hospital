@@ -4,8 +4,9 @@ from tkinter import ttk
 from tkinter import messagebox
 
 from gui.prikazKorisnika import PrikazKorisnika
-from model.kreiranje_objekata_entiteta import KreiranjeObjekata
+# from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 from services.userService import UserService
+from repository.korisnik.korisnikRepository import KorisnikRepository
 
 
 class IzborKorisnika(PrikazKorisnika):
@@ -53,7 +54,7 @@ class UnosPodataka(IzborKorisnika):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        korisnik = KreiranjeObjekata.postoji_korisnik(self._selektovano_korisnicko_ime)
+        korisnik = KorisnikRepository.nadji_po_korisnickom_imenu(self._selektovano_korisnicko_ime)
         self._podrazumevano_k_ime = korisnik.get_korisnicko_ime()
         self._podrazumevana_lozinka = korisnik.get_lozinka()
         self._podrazumevano_ime = korisnik.get_ime()
@@ -93,7 +94,7 @@ class UnosPodataka(IzborKorisnika):
             messagebox.showerror("GRESKA", "Neispravan unos.")
             self._root2.destroy()
 
-        elif KreiranjeObjekata.postoji_korisnik(self._korisnicko_ime.get()):
+        elif KorisnikRepository.nadji_po_korisnickom_imenu(self._korisnicko_ime.get()):
             if self._selektovano_korisnicko_ime != self._korisnicko_ime.get():
                 messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
                 self._root2.destroy()

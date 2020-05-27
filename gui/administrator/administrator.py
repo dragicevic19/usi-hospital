@@ -1,14 +1,12 @@
 from tkinter import *
 from tkinter import ttk
-from gui.unosProstorije import poziv_forme_unos_prostorije
-from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika, KreiranjeObjekata
-from gui.brisanjeKorisnika import poziv_forme_brisanje_korisnika
-from gui.dodavanjeKorisnika import poziv_forme_unos_korisnika
+from repository.korisnik.korisnikRepository import lista_ucitanih_korisnika
+from gui.administrator.brisanjeKorisnika import poziv_forme_brisanje_korisnika
+from gui.administrator.dodavanjeKorisnika import poziv_forme_unos_korisnika
 from gui.azuriranjeKorisnika import poziv_forme_azuriranje_korisnika
 from gui.unosProstorije import poziv_forme_unos_prostorije
 from gui.brisanjeProstorije import poziv_forme_brisanje_prostorije
 from gui.ModelPocetne import ModelPocetne
-
 
 class PocetnaFormaAdministrator(ModelPocetne):
 

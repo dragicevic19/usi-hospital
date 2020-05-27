@@ -1,11 +1,19 @@
+from model.enum.uloga import Uloga
+from model.korisnik import Korisnik
+from model.lekar import Lekar
+from model.sekretar import Sekretar
+from model.upravnik import Upravnik
 from services.userService import UserService
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import KreiranjeObjekata
+from repository.korisnik.korisnikRepo1 import KorisnikRepository
+
 
 class NoviKorisnik:
-    uloge = ('lekar', 'upravnik bolnice', 'sekretar')
+    uloge = ('LEKAR', 'UPRAVNIK', 'SEKRETAR')
+    recnik = {'UPRAVNIK': Uloga.UPRAVNIK.value, 'SEKRETAR': Uloga.SEKRETAR.value, 'LEKAR': Uloga.LEKAR.value}
+    recKonstruktora = {'UPRAVNIK': Upravnik, 'SEKRETAR': Sekretar, 'LEKAR': Lekar}
 
     def __init__(self, root):
         self._root = root
@@ -26,7 +34,7 @@ class NoviKorisnik:
 
     def izaberi_ulogu(self):
         Label(self._root, text="Uloga:", font="Times 14").grid(row=1, column=1, pady=10)
-        default = 'lekar'
+        default = 'LEKAR'
         ttk.OptionMenu(self._root, self._uloga, default, *self.uloge).grid(row=1, column=2)
 
     def unesi_korisnicko_ime(self):
@@ -52,11 +60,25 @@ class NoviKorisnik:
     def sacuvaj_korisnika(self):
         if not self._korisnicko_ime.get() or not self._lozinka.get() or not self._ime.get() or not self._prezime.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-        elif KreiranjeObjekata.postoji_korisnik(self._korisnicko_ime.get()):
+
+        elif KorisnikRepository.nadji_po_korisnickom_imenu(self._korisnicko_ime.get()):  # serivs
             messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
+
         else:
-            UserService.dodaj_korisnika(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
-                                        self._prezime.get(), self._uloga.get())
+            uloga = self._uloga.get()
+            korisnik = self.recKonstruktora[uloga](self._korisnicko_ime.get(), self._lozinka.get(), self.recnik[uloga],
+                                                   self._ime.get(), self._prezime.get())
+
+            #
+            # if self._uloga.get() == 'LEKAR':
+            #     korisnik = Lekar(self._korisnicko_ime.get(), self._lozinka.get(), self.recnik[uloga], self._ime.get(),
+            #                      self._prezime.get())
+            #
+            # else:
+            #     korisnik = Korisnik(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
+            #                         self._prezime.get(), '', self.recnik[uloga])
+
+            UserService.dodaj_korisnika(korisnik)
 
             messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
             self._root.destroy()

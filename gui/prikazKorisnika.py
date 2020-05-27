@@ -1,6 +1,6 @@
 from tkinter import ttk
 
-from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika
+from repository.korisnik.korisnikRepository import lista_ucitanih_korisnika
 
 
 class PrikazKorisnika(object):

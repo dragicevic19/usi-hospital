@@ -1,12 +1,15 @@
+from model.enum.uloga import Uloga
+
+
 class Korisnik(object):
 
-    def __init__(self, korisnicko_ime, lozinka, ime, prezime, obrisan, uloga):
+    def __init__(self, korisnicko_ime, lozinka, ime, prezime, obrisan, broj_uloge):
         self._ime = ime
         self._prezime = prezime
         self._korisnicko_ime = korisnicko_ime
         self._lozinka = lozinka
         self._obrisan = obrisan
-        self._uloga = uloga
+        self._uloga = Uloga(int(broj_uloge)).name
 
     def __str__(self):
         return 'Korisnicko ime: ' + self._korisnicko_ime + '\n'
@@ -46,5 +49,3 @@ class Korisnik(object):
 
     def set_uloga(self, uloga):
         self._uloga = uloga
-
-

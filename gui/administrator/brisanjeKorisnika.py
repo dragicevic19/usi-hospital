@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-
 from gui.prikazKorisnika import PrikazKorisnika
 from services.userService import UserService
 

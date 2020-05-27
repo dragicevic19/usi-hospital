@@ -1,7 +1,8 @@
+from model.enum.uloga import Uloga
 from model.korisnik import Korisnik
 
 
 class Administrator(Korisnik):
 
-    def __init__(self, korisnicko_ime=None, lozinka=None, ime=None, prezime=None, obrisan=''):
-        super().__init__(korisnicko_ime, lozinka, ime, prezime, obrisan, "administrator")
+    def __init__(self, korisnicko_ime=None, lozinka=None, broj_uloge=None, ime=None, prezime=None, obrisan=''):
+        super().__init__(korisnicko_ime, lozinka, ime, prezime, obrisan, broj_uloge)

@@ -1,28 +1,29 @@
-milica399,geraz534,upravnik bolnice,Milica,Sapoznicenko,
-jelena99,ghneuia5423,administrator,Jelena,Dafinic,
-dejan21,geag4523,sekretar,Dejan,Tot,
-upravnikpera123,pera123,upravnik bolnice,pera,peric,
-mihajlo29,geazhgreq52,sekretar,Mihajlo,Jovicevic,
-horacije442,guiage54,lekar,Horacije,Kljajic,,07:00-14:00,Tijana Babic,neurohirurg;kardiohirurg
-sebastijan3412,heahgae452,lekar,Sebastijan,Mihajlovic,,07:00-13:00,Ivica Stankovic;Tijana Babic,lop
-jovana31,tewqt424,sekretar,Jovana,Malagurski,
-predrag,gangi,pacijent,Predrag,Mitrovic,,1301143,muski,Povisena temperatura. Malaksalost. Kasalj.
-jovan21,hrazgh432,administrator,Jovan,Petrovic,
-zile2,gej123,upravnik bolnice,zika,radic,
-goran431,hrnheio5423,lekar,Goran,Mikic,,08:00-14:00,Petar Misic;Ivica Stankovic,neurolog
-milana,maja,pacijent,Milana,Milojevic,,31330657,zenski,Bol u grlu. Suv kasalj.
-micic123,mica12333,sekretar,Mica,Micic,
-miki123,123,lekar,milojko,maric,,,,
-zeljko12,gbaoinoi42,pacijent,Zeljko,Spijic,,90634235,muski,Malaksalost. Bol u grudima. Vrtoglavica.
-nikolaMicic,nikaa12312,lekar,Nikola,Nikolic,,,,
-milosmaric,milos123,upravnik bolnice,milos,mijic,
-lekarMica,mica123,lekar,Mica,Micic,,,,
-lekar12,lekar,lekar,lekar,lekar,,,,
-proba123,proba123,sekretar,Milena,proba,
-petar,maras,upravnik bolnice,Petar,Stojanovski,True
-mirko22,grga3424,upravnik bolnice,Mirko,Mirkovic,True
-micalekar23,Mica123,lekar,Mica,Micovic,True,,,
-micaSekretar,mica123,sekretar,Mica,Micic,True
-milan,maric,administrator,Milan,Jovic,True
-lekarproba123,proba123,lekar,lekar,lekar,True,,,
-lekar,lekar123,lekar,lekar,lekar,True,,,
+MILICASDA,geraz534,1,Milica,Sapoznicenko,
+jelena99,ghneuia5423,2,Jelena,Dafinic,
+dejan21,geag4523,3,Dejan,Tot,
+upravnikpera123,pera123,1,pera,peric,
+mihajlo29,geazhgreq52,3,Mihajlo,Jovicevic,
+horacije442,guiage54,4,Horacije,Kljajic,,07:00-14:00,Tijana Babic,neurohirurg;kardiohirurg
+sebastijan3412,heahgae452,4,Sebastijan,Mihajlovic,,07:00-13:00,Ivica Stankovic;Tijana Babic,lop
+jovana31,tewqt424,3,Jovana,Malagurski,
+predrag,gangi,5,Predrag,Mitrovic,,1301143,muski,Povisena temperatura. Malaksalost. Kasalj.
+jovan21,hrazgh432,2,Jovan,Petrovic,
+zile2,gej123,1,zika,radic,
+goran431,hrnheio5423,4,Goran,Mikic,,08:00-14:00,Petar Misic;Ivica Stankovic,neurolog
+milana,maja,5,Milana,Milojevic,,31330657,zenski,Bol u grlu. Suv kasalj.
+micic123,mica12333,3,Mica,Micic,
+miki123,123,4,milojko,maric,,,,
+zeljko12,gbaoinoi42,5,Zeljko,Spijic,,90634235,muski,Malaksalost. Bol u grudima. Vrtoglavica.
+nikolaMicic,nikaa12312,4,Nikola,Nikolic,,,,
+milosmaric,milos123,1,milos,mijic,
+LEKARMica,mica123,4,Mica,Micic,,,,
+proba123,proba123,3,Milena,proba,
+noviUpravnik,upravnik123,1,uprav,uasdal,
+petar,maras,1,Petar,Stojanovski,True
+mirko22,grga3424,1,Mirko,Mirkovic,True
+micaLEKAR23,Mica123,4,Mica,Micovic,True,,,
+micaSEKRETAR,mica123,3,Mica,Micic,True
+milan,maric,2,Milan,Jovic,True
+LEKARproba123,proba123,4,LEKAR,LEKAR,True,,,
+sdhashdajk,salkjdak,4,skladjlk,saljdlk,True,,,
+dsa,sad,3,asd,asd,True

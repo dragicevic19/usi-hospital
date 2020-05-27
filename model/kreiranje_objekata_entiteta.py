@@ -1,5 +1,7 @@
 import csv
-from data.konstante import *
+
+from model.enum.uloga import Uloga
+from model.konstante.konstante import *
 from model.lekar import Lekar
 from model.pacijent import Pacijent
 from model.upravnik import Upravnik
@@ -55,7 +57,7 @@ class KreiranjeObjekata:
     @staticmethod
     def __kreiraj_po_ulozi(red, lista):
         uloga = red[INDEX_ULOGE_KORISNIKA]
-        if uloga == "upravnik bolnice":
+        if uloga == Uloga.UPRAVNIK:
             KreiranjeObjekata.__kreiranje_upravnika_bolnice(red, lista)
         elif uloga == "administrator":
             KreiranjeObjekata.__kreiranje_administratora(red, lista)

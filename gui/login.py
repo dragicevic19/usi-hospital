@@ -4,7 +4,7 @@ from tkinter import messagebox
 from gui.lekar import poziv_forme_lekar
 from gui.sektretar import poziv_forme_sekretar
 from gui.pacijent import poziv_forme_pacijent
-from gui.administrator import poziv_forme_administrator
+from gui.administrator.administrator import poziv_forme_administrator
 from gui.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
 from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika as lista_korisnika
