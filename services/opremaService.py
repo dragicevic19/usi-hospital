@@ -1,6 +1,7 @@
-from model.kreiranje_objekata_entiteta import lista_ucitane_bolnicke_opreme, KreiranjeObjekata
+from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 from model.bolnickaOprema import BolnickaOprema
 from model.kreiranje_objekata_entiteta import lista_ucitanih_prostorija
+from repository.oprema.oprema_repository import OpremaRepository, lista_ucitane_bolnicke_opreme
 
 
 class OpremaService(object):
@@ -20,7 +21,7 @@ class OpremaService(object):
 
     @staticmethod
     def azuriraj_opremu(selektovan_naziv, naziv, opis, kolicina):
-        oprema = KreiranjeObjekata.postoji_oprema(selektovan_naziv)
+        oprema = OpremaRepository.postoji_oprema(selektovan_naziv)
         oprema._naziv_opreme = naziv
         oprema._opis = opis
         zauzeta_oprema = oprema._ukupan_broj_opreme - oprema._slobodna_oprema
@@ -30,7 +31,7 @@ class OpremaService(object):
 
     @staticmethod
     def obrisi_opremu(naziv_opreme):
-        oprema = KreiranjeObjekata.postoji_oprema(naziv_opreme)
+        oprema = OpremaRepository.postoji_oprema(naziv_opreme)
         oprema._obrisan = True
         lista_ucitane_bolnicke_opreme.remove(oprema)
         KreiranjeObjekata.sacuvaj_entitete()

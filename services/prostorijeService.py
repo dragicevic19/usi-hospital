@@ -1,4 +1,5 @@
-from model.kreiranje_objekata_entiteta import lista_ucitanih_prostorija, KreiranjeObjekata
+from model.kreiranje_objekata_entiteta import KreiranjeObjekata
+from repository.prostorije.prostorije_repository import lista_ucitanih_prostorija
 
 
 class ProstorijeService(object):

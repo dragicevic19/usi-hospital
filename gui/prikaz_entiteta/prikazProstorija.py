@@ -1,6 +1,7 @@
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import KreiranjeObjekata, lista_ucitanih_prostorija
+from model.kreiranje_objekata_entiteta import KreiranjeObjekata
+from repository.prostorije.prostorije_repository import ProstorijeRepository, lista_ucitanih_prostorija
 
 
 class PrikazProstorija(object):
@@ -55,6 +56,6 @@ class PrikazProstorija(object):
         odabrana = self.treeview.focus()
         odabrana_prostorija = self.treeview.item(odabrana)['values']
         sprat_odabrane, br_prostorije_odabrane = str(odabrana_prostorija[0]), str(odabrana_prostorija[1])
-        prostorija = KreiranjeObjekata.postoji_prostorija(sprat_odabrane, br_prostorije_odabrane)
+        prostorija = ProstorijeRepository.postoji_prostorija(sprat_odabrane, br_prostorije_odabrane)
         return prostorija
 

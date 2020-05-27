@@ -1,8 +1,7 @@
-from services.opremaService import OpremaService
+from repository.oprema.oprema_repository import OpremaRepository
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import KreiranjeObjekata, lista_ucitane_bolnicke_opreme
 from services.opremaService import OpremaService
 
 
@@ -38,7 +37,7 @@ class NovaOprema:
 
     def sacuvaj_opremu(self):
 
-        pronadjena_oprema = KreiranjeObjekata.postoji_oprema(self._naziv.get())
+        pronadjena_oprema = OpremaRepository.postoji_oprema(self._naziv.get())
 
         if not self._naziv.get() or not self._opis.get() or not self._kolicina.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")

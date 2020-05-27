@@ -4,6 +4,7 @@ from tkinter import messagebox
 
 from gui.prikaz_entiteta.prikazOpreme import PrikazOpreme
 from model.kreiranje_objekata_entiteta import KreiranjeObjekata
+from repository.oprema.oprema_repository import OpremaRepository
 from services.opremaService import OpremaService
 
 
@@ -50,7 +51,7 @@ class UnosPodataka(IzborOpreme):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        oprema = KreiranjeObjekata.postoji_oprema(self._selektovan_naziv_opreme)
+        oprema = OpremaRepository.postoji_oprema(self._selektovan_naziv_opreme)
         self._podrazumevan_naziv = oprema.get_naziv_opreme()
         self._podrazumevani_opis = oprema.get_opis()
         self._podrazumevana_kolicina = oprema.get_slobodna_oprema()
@@ -86,7 +87,7 @@ class UnosPodataka(IzborOpreme):
             messagebox.showerror("GRESKA", "Neispravan unos za kolicinu. Dozvoljeni su samo pozitivni celi brojevi!")
             self._root2.destroy()
 
-        elif KreiranjeObjekata.postoji_oprema(self._naziv_opreme.get()):
+        elif OpremaRepository.postoji_oprema(self._naziv_opreme.get()):
             if self._selektovan_naziv_opreme != self._naziv_opreme.get():
                 messagebox.showerror("GRESKA", "Oprema sa unetim nazivom opreme vec postoji")
                 self._root2.destroy()

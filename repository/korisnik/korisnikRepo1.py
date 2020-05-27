@@ -13,7 +13,7 @@ INDEX_ULOGE_KORISNIKA = 2
 class KorisnikRepository:
 
     @staticmethod
-    def citaj():
+    def ucitavanje_korisnika():
         path = Path(PATH_TO_KORISNICI)
         with path.open('r') as file:
             reader = csv.reader(file)
@@ -42,7 +42,6 @@ class KorisnikRepository:
     def dodaj_korisnika(korisnik):
         lista_ucitanih_korisnika.append(korisnik)
         KorisnikRepository.sacuvaj_korisnike()
-################################################
 
     @staticmethod
     def sacuvaj_korisnike():
@@ -57,11 +56,6 @@ class KorisnikRepository:
     def __upisi_korisnike_csv(writer, lista):
         for korisnik in lista:
             uloga = korisnik.get_uloga()
-
-            # if not korisnik.get_obrisan():
-            #     obrisan = ''
-            # else:
-            #     obrisan = True
             KorisnikRepository.sacuvaj_po_ulozi(korisnik, uloga, writer)
 
     @staticmethod
@@ -91,7 +85,3 @@ class KorisnikRepository:
         writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
                          korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_obrisan(),
                          korisnik.get_br_zdravstvene(), korisnik.get_pol(), korisnik.get_anamneza()])
-
-
-KorisnikRepository.citaj()
-

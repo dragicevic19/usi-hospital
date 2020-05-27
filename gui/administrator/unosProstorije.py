@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import KreiranjeObjekata
 
 from model.prostorija import Prostorija
+from repository.prostorije.prostorije_repository import ProstorijeRepository
 from services.prostorijeService import ProstorijeService
 
 
@@ -41,7 +41,7 @@ class NovaProstorija:
     def proveri_validnost(self):
         if not self._broj_prostorije.get() or not self._namena_prostorije.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-        elif KreiranjeObjekata.postoji_prostorija(self._sprat.get(), self._broj_prostorije.get()):
+        elif ProstorijeRepository.postoji_prostorija(self._sprat.get(), self._broj_prostorije.get()):
             messagebox.showerror("GRESKA", "Soba vec postoji")
         else:
             self.__sacuvaj_prostoriju()

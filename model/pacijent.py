@@ -5,11 +5,11 @@ from model.korisnik import Korisnik
 class Pacijent(Korisnik):
 
     def __init__(self, korisnicko_ime=None, lozinka=None, uloga=None, ime=None, prezime=None, obrisan='',
-                 br_zdravstvene=None, pol=None, anamneza=None):
+                 br_zdravstvene=None, pol=None, anamneza=''):
         super().__init__(korisnicko_ime, lozinka, ime, prezime, obrisan, uloga)
         self._br_zdravstvene = br_zdravstvene
         self._pol = pol
-        self._anamneza = anamneza
+        self._anamneza = anamneza.split('|')
 
     def get_br_zdravstvene(self):
         return self._br_zdravstvene
