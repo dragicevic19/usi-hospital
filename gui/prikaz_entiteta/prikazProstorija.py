@@ -1,7 +1,6 @@
 from tkinter import ttk
 from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import KreiranjeObjekata
-from repository.prostorije.prostorije_repository import ProstorijeRepository, lista_ucitanih_prostorija
+from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository, lista_ucitanih_prostorija
 
 
 class PrikazProstorija(object):

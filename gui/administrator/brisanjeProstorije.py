@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikazProstorija import PrikazProstorija
-from services.prostorijeService import ProstorijeService
+from services.prostorije.prostorije_servis import ProstorijeService
 
 
 class BrisanjeProstorije(PrikazProstorija):

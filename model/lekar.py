@@ -36,3 +36,8 @@ class Lekar(Korisnik):
 
     def __str__(self):
         return self._ime + " " + self._prezime
+
+    def vrati_za_upis_u_fajl(self):
+        return self._korisnicko_ime, self._lozinka,self._uloga,self._ime,self._prezime,self._obrisan,self._radno_vreme,";".join(self._spisak_pacijenata),";".join(self._spisak_specijalizacija)
+
+

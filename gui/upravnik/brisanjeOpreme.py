@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from services.opremaService import OpremaService
+from services.oprema.oprema_servis import OpremaService
 from gui.prikaz_entiteta.prikazOpreme import PrikazOpreme
 
 

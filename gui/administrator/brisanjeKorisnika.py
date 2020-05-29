@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikazKorisnika import PrikazKorisnika
-from services.userService import UserService
+from services.korisnik.korisnik_servis import UserService
 
 
 class BrisanjeKorisnika(PrikazKorisnika):

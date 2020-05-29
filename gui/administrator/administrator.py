@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from repository.korisnik.korisnikRepo1 import lista_ucitanih_korisnika
+from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from gui.administrator.brisanjeKorisnika import poziv_forme_brisanje_korisnika
 from gui.administrator.dodavanjeKorisnika import poziv_forme_unos_korisnika
 from gui.administrator.azuriranjeKorisnika import poziv_forme_azuriranje_korisnika

@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 # from model.kreiranje_objekata_entiteta import *
 from model.korisnik import Korisnik
-from repository.korisnik.korisnikRepo1 import KorisnikRepository
+from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
 
 SIRINA_BIO = 550
 VISINA_ZA_DUGMICE = 120

@@ -1,10 +1,9 @@
 
 from model.enum.recnici import *
-from services.userService import UserService
+from services.korisnik.korisnik_servis import UserService
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from repository.korisnik.korisnikRepo1 import KorisnikRepository
 
 
 class NoviKorisnik:

@@ -1,4 +1,4 @@
-from repository.korisnik.korisnikRepo1 import KorisnikRepository
+from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
 
 
 class UserService(object):

@@ -7,7 +7,7 @@ from gui.pacijent.pacijent import poziv_forme_pacijent
 from gui.administrator.administrator import poziv_forme_administrator
 from gui.upravnik.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
-from repository.korisnik.korisnikRepo1 import lista_ucitanih_korisnika as lista_korisnika
+from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika as lista_korisnika
 
 
 class LogIn:

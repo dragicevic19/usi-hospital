@@ -28,3 +28,6 @@ class Pacijent(Korisnik):
 
     def __str__(self):
         return self._ime + " " + self._prezime
+
+    def vrati_za_upis_u_fajl(self):
+        return self._korisnicko_ime, self._lozinka,self._uloga,self._ime,self._prezime, self._obrisan,self._br_zdravstvene,self._pol,"|".join(self._anamneza)

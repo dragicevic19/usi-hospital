@@ -3,8 +3,8 @@ from tkinter import ttk
 from tkinter import messagebox
 
 from gui.prikaz_entiteta.prikazKorisnika import PrikazKorisnika
-from services.userService import UserService
-from repository.korisnik.korisnikRepo1 import KorisnikRepository
+from services.korisnik.korisnik_servis import UserService
+from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
 
 
 class IzborKorisnika(PrikazKorisnika):

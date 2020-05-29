@@ -1,5 +1,5 @@
 from tkinter import ttk
-from repository.korisnik.korisnikRepo1 import lista_ucitanih_korisnika
+from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 
 
 class PrikazKorisnika(object):

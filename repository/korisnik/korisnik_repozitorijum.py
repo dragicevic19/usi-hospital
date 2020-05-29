@@ -1,6 +1,5 @@
 import csv
 
-from model.enum.uloga import Uloga
 from model.enum.recnici import *
 from model.konstante.konstante import *
 from pathlib import Path
@@ -55,33 +54,8 @@ class KorisnikRepository:
     @staticmethod
     def __upisi_korisnike_csv(writer, lista):
         for korisnik in lista:
-            uloga = korisnik.get_uloga()
-            KorisnikRepository.sacuvaj_po_ulozi(korisnik, uloga, writer)
+           writer.writerow(korisnik.vrati_za_upis_u_fajl())
 
-    @staticmethod
-    def sacuvaj_po_ulozi(korisnik, uloga, writer):
-
-        if uloga == 'UPRAVNIK' or uloga == 'ADMINISTRATOR' or uloga == 'SEKRETAR':
-            writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga, korisnik.get_ime(),
-                             korisnik.get_prezime(), korisnik.get_obrisan()])
-
-        elif uloga == 'LEKAR':
-            KorisnikRepository.__sacuvaj_lekara(korisnik, uloga, writer)
-
-        elif uloga == 'PACIJENT':
-            KorisnikRepository.__sacuvaj_pacijenta(korisnik, uloga, writer)
-
-    @staticmethod
-    def __sacuvaj_lekara(korisnik, uloga, writer):
-        spisak_spec = ';'.join(korisnik.get_spisak_specijalizacija())
-        spisak_pacijenata = ';'.join(korisnik.get_spisak_pacijenata())
-
-        writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
-                         korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_obrisan(), korisnik.get_radno_vreme(),
-                         spisak_pacijenata, spisak_spec])
-
-    @staticmethod
-    def __sacuvaj_pacijenta(korisnik, uloga, writer):
-        writer.writerow([korisnik.get_korisnicko_ime(), korisnik.get_lozinka(), uloga,
-                         korisnik.get_ime(), korisnik.get_prezime(), korisnik.get_obrisan(),
-                         korisnik.get_br_zdravstvene(), korisnik.get_pol(), '|'.join(korisnik.get_anamneza())])
+# samo za probe pre konacnog
+# KorisnikRepository.ucitavanje_korisnika()
+# KorisnikRepository.sacuvaj_korisnike()

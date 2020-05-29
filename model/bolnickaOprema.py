@@ -42,5 +42,7 @@ class BolnickaOprema(object):
         else:
             print("Stack overflow!")
 
+    def vrati_za_upis_u_file(self):
+        return self._naziv_opreme,self._ukupan_broj_opreme,self._slobodna_oprema,self._opis
 
 

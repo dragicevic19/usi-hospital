@@ -1,7 +1,5 @@
-from tkinter import *
 from tkinter import ttk
-from tkinter import messagebox
-from model.kreiranje_objekata_entiteta import lista_ucitane_bolnicke_opreme, KreiranjeObjekata
+from repository.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
 
 
 class PrikazOpreme:
@@ -34,3 +32,4 @@ class PrikazOpreme:
                  oprema.get_opis())
             self.treeview.insert("", index, iid, values=o)
             index = iid = index + 1
+

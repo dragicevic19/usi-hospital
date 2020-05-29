@@ -3,8 +3,8 @@ from tkinter import ttk
 from tkinter import messagebox
 
 from model.prostorija import Prostorija
-from repository.prostorije.prostorije_repository import ProstorijeRepository
-from services.prostorijeService import ProstorijeService
+from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository
+from services.prostorije.prostorije_servis import ProstorijeService
 
 
 class NovaProstorija:

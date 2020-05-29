@@ -49,3 +49,6 @@ class Korisnik(object):
 
     def set_uloga(self, uloga):
         self._uloga = uloga
+
+    def vrati_za_upis_u_fajl(self):
+        return self._korisnicko_ime, self._lozinka,self._uloga,self._ime,self._prezime,self._obrisan
