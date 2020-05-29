@@ -3,7 +3,7 @@ from tkinter import ttk
 from gui.ModelPocetne import ModelPocetne
 
 
-class PocetnaFormaSekretar(ModelPocetne):
+class PocetnaFormaPacijent(ModelPocetne):
 
     def __init__(self, root, korisnik):
         super().__init__(root, korisnik)
@@ -11,10 +11,12 @@ class PocetnaFormaSekretar(ModelPocetne):
 
 
 
-def poziv_forme_sekretar(korisnik):
+
+def poziv_forme_pacijent(korisnik):
     root = Tk()
-    kreni = PocetnaFormaSekretar(root, korisnik)
+    kreni = PocetnaFormaPacijent(root,korisnik)
     root.mainloop()
 
 if __name__ == '__main__':
-    poziv_forme_sekretar()
+
+    poziv_forme_pacijent()

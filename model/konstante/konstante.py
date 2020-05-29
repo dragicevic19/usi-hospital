@@ -1,0 +1,5 @@
+PATH_TO_KORISNICI = '../../data/korisnici.csv'
+PATH_TO_BOLNICKA_OPREMA = '../../data/bolnicka_oprema.csv'
+PATH_TO_UNOS_ANAMNEZE = '../../data/unos_anamneze.csv'
+PATH_TO_ANAMNEZA = '../../data/anamneza.csv'
+PATH_TO_PROSTORIJE = '../../data/prostorije.csv'

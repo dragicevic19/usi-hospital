@@ -1,23 +1,37 @@
-milica399,geraz534,upravnik bolnice,Milica,Sapoznicenko,
-jelena99,ghneuia5423,administrator,Jelena,Dafinic,
-dejan21,geag4523,sekretar,Dejan,Tot,
-upravnikpera123,pera123,upravnik bolnice,pera,peric,
-mihajlo29,geazhgreq52,sekretar,Mihajlo,Jovicevic,
-horacije442,guiage54,lekar,Horacije,Kljajic,,07:00-14:00,Tijana Babic,neurohirurg;kardiohirurg
-sebastijan3412,heahgae452,lekar,Sebastijan,Mihajlovic,,07:00-13:00,Ivica Stankovic;Tijana Babic,lop
-jovana31,tewqt424,sekretar,Jovana,Malagurski,
-predrag,gangi,pacijent,Predrag,Mitrovic,,1301143,muski,Povisena temperatura. Malaksalost. Kasalj.
-jovan21,hrazgh432,administrator,Jovan,Petrovic,
-zile2,gej123,upravnik bolnice,zika,radic,
-goran431,hrnheio5423,lekar,Goran,Mikic,,08:00-14:00,Petar Misic;Ivica Stankovic,neurolog
-milana,maja,pacijent,Milana,Milojevic,,31330657,zenski,Bol u grlu. Suv kasalj.
-micic123,mica12333,sekretar,Mica,Micic,
-miki123,123,lekar,milojko,maric,,,,
-zeljko12,gbaoinoi42,pacijent,Zeljko,Spijic,,90634235,muski,Malaksalost. Bol u grudima. Vrtoglavica.
-nikolaMicic,nikaa12312,lekar,Nikola,Nikolic,,,,
-milosmaric,milos123,upravnik bolnice,milos,mijic,
-petar,maras,upravnik bolnice,Petar,Stojanovski,True
-mirko22,grga3424,upravnik bolnice,Mirko,Mirkovic,True
-micalekar23,Mica123,lekar,Mica,Micovic,True,,,
-micaSekretar,mica123,sekretar,Mica,Micic,True
-milan,maric,administrator,Milan,Jovic,True
+MILICASDA,geraz534,UPRAVNIK,Milica,Sapoznicenko,
+pera,pera,ADMINISTRATOR,Jelena,Dafinic,
+dejan21,geag4523,SEKRETAR,Dejan,Tot,
+upravnikpera123,pera123,UPRAVNIK,pera,peric,
+mihajlo29,geazhgreq52,SEKRETAR,Mihajlo,Jovicevic,
+horacije442,guiage54,LEKAR,Horacijefffff,Kljajic,,07:00-14:00,Tijana Babic,neurohirurg;kardiohirurg
+sebastijan3412,heahgae452,LEKAR,Sebastijan,Mihajlovic,,07:00-13:00,Ivica Stankovic;Tijana Babic,lop
+jovana31,tewqt424,SEKRETAR,Jovana,Malagurski,
+predrag,gangi,PACIJENT,Predrag,Mitrovic,,1301143,muski,1|2
+jovan21,hrazgh432,ADMINISTRATOR,Jovan,Petrovic,
+zile2,123,UPRAVNIK,zika,radic,
+goran431,hrnheio5423,LEKAR,Goran,Mikic,,08:00-14:00,Petar Misic;Ivica Stankovic,neurolog
+milana,maja,PACIJENT,Milana,Milojevic,,31330657,zenski,4
+micic123,mica12333,SEKRETAR,Mica,Micic,
+miki123,123,LEKAR,milojko,maric,,,,
+zeljko12,gbaoinoi42,PACIJENT,Zeljko,Spijic,,90634235,muski,3|5
+nikolaMicic,nikaa12312,LEKAR,Nikola,Nikolic,,,,
+milosmaric,milos123,UPRAVNIK,milos,mijic,
+LEKARMica,mica123,LEKAR,Mica,Micic,,,,
+proba123,proba123,SEKRETAR,Milena,proba,
+noviUpravnik,upravnik123,UPRAVNIK,uprav,uasdal,
+leks,asd,LEKAR,asd,asd,,,,
+lekardodat,asd,LEKAR,asd,asd,,,,
+lekardodatsad,sa,LEKAR,ads,adsa,,,,
+petar,maras,UPRAVNIK,Petar,Stojanovski,True
+mirko22,grga3424,UPRAVNIK,Mirko,Mirkovic,True
+micaLEKAR23,Mica123,LEKAR,Mica,Micovic,True,,,
+micaSEKRETAR,mica123,SEKRETAR,Mica,Micic,True
+milan,maric,ADMINISTRATOR,Milan,Jovic,True
+LEKARproba123,proba123,LEKAR,LEKAR,LEKAR,True,,,
+sdhashdajk,salkjdak,LEKAR,skladjlk,saljdlk,True,,,
+dsa,sad,SEKRETAR,asd,asd,True
+lekarMilan123,asd,LEKAR,asd,asd,True,,,
+skretarNikol123,sd123,SEKRETAR,asd12,asd2,True
+dodatlekar123asd,sa,LEKAR,asd,asd,True,,,
+mica12,mica12,LEKAR,mica12,mica12,True,,,
+marko11111111,asd,LEKAR,marko,marko,True,,,

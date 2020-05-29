@@ -1,14 +1,23 @@
 3,301,krevet;20|stalak za infuziju;20|rendgen aparat;10,operaciona sala,
-1,43,krevet;30,operaciona sala,
 4,434,krevet;20|elektrokardiograf;10,sala za preglede,
 1,107,krevet;5|respirator;3|stalak za infuziju;5,soba za lezanje,
 3,304,krevet;10|stalak za infuziju;10|rendgen aparat;2,operaciona sala,
 1,109,krevet;10|elektrokardiograf;2,sala za preglede,
-2,206,krevet;20|stalak za infuziju;20|respirator;5,sala za preglede,True
-1,12s,krevet;40|stalak za infuziju;40,soba za lezanje,True
-1,soba1,krevet;15,operaciona sala,True
-4,soba4,krevet;10,soba za lezanje,True
-1,soba12312312312,krevet;15,sala za preglede,True
-1,123a,krevet;10,operaciona sala,True
-1,a1,krevet;10,operaciona sala,True
-2,212,krevet;20,sala za preglede,True
+1,43,krevet;30,operaciona sala,
+2,206,krevet;20|stalak za infuziju;20|respirator;5,sala za preglede,
+1,12s,krevet;40|stalak za infuziju;40,soba za lezanje,
+1,soba1,krevet;15,operaciona sala,
+4,soba4,krevet;10,soba za lezanje,
+1,soba12312312312,krevet;15,sala za preglede,
+1,123a,krevet;10,operaciona sala,
+1,a1,krevet;10,operaciona sala,
+2,212,krevet;20,sala za preglede,
+1,sobaproba,,soba za lezanje,
+1,123,,operaciona sala,
+1,soba123,,operaciona sala,
+4,234444,,operaciona sala,True
+2,222,,sala za preglede,True
+3,sobaproba12,,soba za lezanje,True
+1,soba1opercaiona,,operaciona sala,True
+1,1a,,operaciona sala,True
+1,sobi1231,,operaciona sala,True

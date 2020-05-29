@@ -1,19 +1,18 @@
 from tkinter import *
 from tkinter import ttk
-from gui.probna_forma import poziv_probe
-from gui.unosProstorije import poziv_forme_unos_prostorije
-from model.kreiranje_objekata_entiteta import lista_ucitanih_korisnika,KreiranjeObjekata
-from gui.brisanjeKorisnika import poziv_forme_brisanje_korisnika
-from gui.dodavanjeKorisnika import poziv_forme_unos_korisnika
-from gui.azuriranjeKorisnika import poziv_forme_azuriranje_korisnika
-from gui.unosProstorije import poziv_forme_unos_prostorije
-from gui.brisanjeProstorije import poziv_forme_brisanje_prostorije
+from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from gui.administrator.brisanjeKorisnika import poziv_forme_brisanje_korisnika
+from gui.administrator.dodavanjeKorisnika import poziv_forme_unos_korisnika
+from gui.administrator.azuriranjeKorisnika import poziv_forme_azuriranje_korisnika
+from gui.administrator.unosProstorije import poziv_forme_unos_prostorije
+from gui.administrator.brisanjeProstorije import poziv_forme_brisanje_prostorije
 from gui.ModelPocetne import ModelPocetne
+
 
 class PocetnaFormaAdministrator(ModelPocetne):
 
-    def __init__(self,root,korisnik):
-        super().__init__(root,korisnik)
+    def __init__(self, root, korisnik):
+        super().__init__(root, korisnik)
         self.postavljanje_dugmica()
 
     def postavljanje_dugmica(self):
@@ -60,10 +59,10 @@ class PocetnaFormaAdministrator(ModelPocetne):
 
 def poziv_forme_administrator(korisnik):
     root = Tk()
-    #root.geometry('400x190')
-    nes= PocetnaFormaAdministrator(root,korisnik)
+    # root.geometry('400x190')
+    nes = PocetnaFormaAdministrator(root, korisnik)
     root.mainloop()
+
 
 if __name__ == '__main__':
     poziv_forme_administrator(lista_ucitanih_korisnika[0])
-
