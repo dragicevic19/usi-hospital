@@ -61,4 +61,3 @@ class ProstorijeRepository:
             if prostorija.get_sprat() == sprat and prostorija.get_broj_prostorije() == broj_sobe:
                 return prostorija
         return False
-
