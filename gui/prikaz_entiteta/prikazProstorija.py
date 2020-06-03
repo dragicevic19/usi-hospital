@@ -39,7 +39,6 @@ class PrikazProstorija(object):
                 k = (prostorija.get_sprat(), prostorija.get_broj_prostorije(),
                      spisak_opreme + ' Dvoklik za vise...', prostorija.get_namena_prostorije())
 
-
                 self.treeview.insert("", index, iid, values=k)
                 index = iid = index + 1
         self.treeview.bind('<Double-1>', self.__prikazi_spisak_opreme)
@@ -55,6 +54,19 @@ class PrikazProstorija(object):
         odabrana = self.treeview.focus()
         odabrana_prostorija = self.treeview.item(odabrana)['values']
         sprat_odabrane, br_prostorije_odabrane = str(odabrana_prostorija[0]), str(odabrana_prostorija[1])
-        prostorija = ProstorijeRepository.postoji_prostorija(sprat_odabrane, br_prostorije_odabrane)
+        prostorija = ProstorijeRepository.vrati_prostoriju_po_broju_i_spratu(sprat_odabrane, br_prostorije_odabrane)
         return prostorija
+
+    def selektuj_vise_prostorija(self):
+        odabrane = self.treeview.selection()
+        if len(odabrane) == 2:
+            odabrana_prostorija1 = self.treeview.item(odabrane[0])['values']
+            odabrana_prostorija2 = self.treeview.item(odabrane[1])['values']
+            prva_prostorija = ProstorijeRepository.vrati_prostoriju_po_broju_i_spratu(str(odabrana_prostorija1[0]),
+                                                                                      str(odabrana_prostorija1[1]))
+            druga_prostorija = ProstorijeRepository.vrati_prostoriju_po_broju_i_spratu(str(odabrana_prostorija2[0]),
+                                                                                       str(odabrana_prostorija2[1]))
+            return prva_prostorija, druga_prostorija
+
+        return False
 

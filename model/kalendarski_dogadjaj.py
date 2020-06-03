@@ -11,7 +11,7 @@ class KalendarskiDogadjaj:
         self._spisak_pacijenata = spisak_pacijenata.split('|')
         d, m, g = datum.split("/")
         sat, min = vreme.split(":")
-        self._datum_vreme = datetime.datetime(int(g),int(m), int(d), int(sat), int(min))
+        self._datum_vreme = datetime.datetime(int(g), int(m), int(d), int(sat), int(min))
 
     # dodati setter
     @property

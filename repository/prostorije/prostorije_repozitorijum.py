@@ -56,7 +56,7 @@ class ProstorijeRepository:
                              prostorija.get_namena_prostorije(), prostorija.get_obrisana()])
 
     @staticmethod
-    def postoji_prostorija(sprat, broj_sobe):
+    def vrati_prostoriju_po_broju_i_spratu(sprat, broj_sobe):
         for prostorija in lista_ucitanih_prostorija:
             if prostorija.get_sprat() == sprat and prostorija.get_broj_prostorije() == broj_sobe:
                 return prostorija
