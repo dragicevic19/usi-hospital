@@ -5,90 +5,42 @@ from tkcalendar import Calendar
 selected_date = None
 
 
-def print_sel(cal):
-    global selected_date
-    selected_date = (cal.get_date())
-    print(selected_date)
+class PrikazKalendara:
 
+    def __init__(self,root):
+        self.root = root
+        self._datum = None
+        self.napravi_kalendar()
 
-def pick_date_dialog(ROOT):
-    top = tk.Toplevel(ROOT)
+    def napravi_kalendar(self):
 
-    # defaults to today's date
-    cal = Calendar(top,
-                   font="Arial 10", background='darkblue',
-                   foreground='white', selectmode='day')
+        #self.root.withdraw()  # hide naff extra window
+        #self.root.title('Izaberite datum')
+        self.pick_date_dialog()
+        self.root.mainloop()
 
-    cal.grid()
-    ttk.Button(top, text="OK", command=lambda: print_sel(cal)).grid()
-    return selected_date
+    def get_datum(self):
+        return self._datum
 
+    def pick_date_dialog(self):
+        #self.top = tk.Toplevel(self.root)
 
-def poziv():
-    ROOT = tk.Tk()
-    ROOT.withdraw()  # hide naff extra window
-    ROOT.title('Please choose a date')
-    pick_date_dialog(ROOT)
-    ROOT.mainloop()
+        self.cal = Calendar(self.root,
+                            font="Arial 10", background='darkblue',
+                            foreground='white', selectmode='day')
+
+        self.cal.grid()
+        ttk.Button(self.root, text="OK", command=self.print_sel).grid()
+
+    def print_sel(self):
+        self._datum = self.cal.get_date()
+      # self.top.destroy()
+        # self.root.destroy()
+
 
 
 if __name__ == '__main__':
-    poziv()
-#
-# class PrikazKalendara:
-#
-#     def __init__(self):
-#         self._datum = None
-#         self.napiravi_kalendar()
-#         self.pick_date_dialog()
-#
-#     def napiravi_kalendar(self):
-#         self.root = tk.Tk()
-#         self.root.withdraw()  # hide naff extra window
-#         self.root.title('Izaberite datum')
-#         self.root.mainloop()
-#
-#     def get_datum(self):
-#         return self._datum
-#
-#     def pick_date_dialog(self):
-#         top = tk.Toplevel(self.root)
-#
-#         self.cal = Calendar(top,
-#                             font="Arial 10", background='darkblue',
-#                             foreground='white', selectmode='day')
-#
-#         self.cal.grid()
-#         ttk.Button(top, text="OK", command=lambda: self.print_sel(self.cal)).grid()
-#
-#     def print_sel(self, cal):
-#         self._datum = (cal.get_date())
-
-
-a = PrikazKalendara()
-print(a.get_datum())
-#
-# class PrikazKalendara:
-#
-#     @staticmethod
-#     def print_sel(cal):
-#         selected_date = (cal.get_date())
-#         print(selected_date)
-#
-#     @staticmethod
-#     def pick_date_dialog():
-#         top = tk.Toplevel(ROOT)
-#
-#         cal = Calendar(top,
-#                        font="Arial 10", background='darkblue',
-#                        foreground='white', selectmode='day')
-#
-#         cal.grid()
-#         cal.bind('<Double-1>', print_sel(cal))
-#
-#         ttk.Button(top, text="OK", command=lambda: print_sel(cal)).grid()
-#
-#
-# pick_date_dialog()
-#
-# ROOT.mainloop()
+    forma = tk.Tk()
+    a = PrikazKalendara(forma)
+    print(a._datum)
+    forma.mainloop()
