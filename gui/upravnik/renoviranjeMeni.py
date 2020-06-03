@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from gui.upravnik.renoviranjeProstorije import poziv_forme_odabir_prostorije
+from gui.upravnik.renoviranje.renoviranjeProstorije import poziv_forme_odabir_prostorije
 from model.enum.renoviranje import TipRenoviranja
 
 """ 

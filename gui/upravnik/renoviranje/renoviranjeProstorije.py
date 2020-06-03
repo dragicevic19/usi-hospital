@@ -4,15 +4,18 @@ from tkinter import messagebox
 from services.prostorije.prostorije_servis import ProstorijeService
 from gui.prikaz_entiteta.prikazProstorija import PrikazProstorija
 from model.enum.renoviranje import TipRenoviranja
+from gui.upravnik.renoviranje.izmena_namene import izmena_namene
+from gui.upravnik.renoviranje.premestanje_opreme import premestanje_opreme
+from gui.upravnik.renoviranje.spajanje_prostorije import spajanje_prostorije
+from gui.upravnik.renoviranje.deljenje_prostorije import deljenje_prostorije
+from gui.upravnik.renoviranje.ostale_renovacije import ostale_renovacije
 
-"""
-metode_renovacija = {TipRenoviranja.IZMENA_NAMENE : izmena_namene,
-                     TipRenoviranja.PREMESTANJE_OPREME : premestanje_opreme,
-                     TipRenoviranja.SPAJANJE_PROSTORIJA : spajanje_prostorije,
-                     TipRenoviranja.DELJENJE_PROSTORIJE : deljenje_prostorije,
-                     TipRenoviranja.OSTALE_RENOVACIJE : ostale_renovacije}
+metode_renovacija = {TipRenoviranja.IZMENA_NAMENE: izmena_namene,
+                     TipRenoviranja.PREMESTANJE_OPREME: premestanje_opreme,
+                     TipRenoviranja.SPAJANJE_PROSTORIJA: spajanje_prostorije,
+                     TipRenoviranja.DELJENJE_PROSTORIJE: deljenje_prostorije,
+                     TipRenoviranja.OSTALE_RENOVACIJE: ostale_renovacije}
 
-"""
 
 class RenoviranjeProstorije(PrikazProstorija):
     def __init__(self, root, tip_renoviranja):
@@ -20,7 +23,7 @@ class RenoviranjeProstorije(PrikazProstorija):
         self._tip_renoviranja = tip_renoviranja
         potvrdi_dugme = ttk.Button(self._root, text="ZAKAZI RENOVIRANJE PROSTORIJE", command=self.renoviraj_prostoriju)
         potvrdi_dugme.pack(fill='x')
-        
+
     def renoviraj_prostoriju(self):
         if self._tip_renoviranja == TipRenoviranja.SPAJANJE_PROSTORIJA:
             selektovane_prostorije = self.selektuj_vise_prostorija()
@@ -33,13 +36,9 @@ class RenoviranjeProstorije(PrikazProstorija):
             try:
                 metode_renovacija[self._tip_renoviranja](self.selektovana_prostorija())
             except:
-
+                messagebox.showerror("GRESKA", "Izaberite jednu prostoriju")
 
         self._root.destroy()
-
-
-def spajanje_prostorije(prostorija1, prostorija2):
-    pass
 
 
 def poziv_forme_odabir_prostorije(tip_renoviranja):
