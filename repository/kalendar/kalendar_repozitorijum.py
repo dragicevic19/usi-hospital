@@ -6,6 +6,8 @@ from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from model.konstante.konstante import PATH_TO_DOGADJAJI
 
 lista_dogadjaja = []
+lista_proslih_dogadjaja = []
+
 vremenski_slotovi = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00',
                      '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
                      '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00',
@@ -22,7 +24,12 @@ class KalendarRepository:
             reader = csv.reader(file)
             for red in reader:
                 dogadjaj = KalendarskiDogadjaj(*red)
-                lista_dogadjaja.append(dogadjaj)
+                if dogadjaj.datum_vreme >= datetime.datetime.now():
+                    lista_dogadjaja.append(dogadjaj)
+                elif dogadjaj.datum_vreme_zavrsetka < datetime.datetime.now():
+                    lista_proslih_dogadjaja.append(dogadjaj)
+                else:
+                    lista_dogadjaja.append(dogadjaj)
 
     @staticmethod
     def sacuvaj_dogadjaj():
@@ -31,6 +38,9 @@ class KalendarRepository:
             writer = csv.writer(file, delimiter=',')
             for dogadjaj in lista_dogadjaja:
                 writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
+            for dogadjaj in lista_proslih_dogadjaja:
+                writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
+
 
     @staticmethod
     def vrati_zauzeca_za_datum_i_sobu(datum, sprat, broj_prostorije):
@@ -38,17 +48,13 @@ class KalendarRepository:
         dan, mes, god = datum.split("/")
         for dogadjaj in lista_dogadjaja:
             if dogadjaj.sprat == sprat and dogadjaj.broj_prostorije == broj_prostorije:
-                datum_vreme_zavrsetka = dogadjaj.datum_vreme + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
                 for i in range(len(vremenski_slotovi) - 2):
                     sat, min = vremenski_slotovi[i].split(":")
                     datum_za_proveru = datetime.datetime(int(god), int(mes), int(dan), int(sat), int(min))
-                    if datum_vreme_zavrsetka > datum_za_proveru >= dogadjaj.datum_vreme:
+                    if dogadjaj.datum_vreme_zavrsetka > datum_za_proveru >= dogadjaj.datum_vreme:
                         lista_zauzeca.append(vremenski_slotovi[i])
         return lista_zauzeca
 
 
 KalendarRepository.ucitaj_dogadjaje()
-
-if __name__ == '__main__':
-    print(lista_dogadjaja[0].vrati_za_upis_u_fajl())
-    KalendarRepository.sacuvaj_dogadjaj()
+KalendarRepository.sacuvaj_dogadjaj()

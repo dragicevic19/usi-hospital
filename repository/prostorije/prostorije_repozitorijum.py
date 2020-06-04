@@ -35,6 +35,11 @@ class ProstorijeRepository:
         lista.append(prostorija)
 
     @staticmethod
+    def dodaj_prostoriju(prostorija):
+        lista_ucitanih_prostorija.append(prostorija)
+        ProstorijeRepository.sacuvaj_prostorije()
+
+    @staticmethod
     def sacuvaj_prostorije():
         path = Path(PATH_TO_PROSTORIJE)
         with path.open('w', newline='') as file:

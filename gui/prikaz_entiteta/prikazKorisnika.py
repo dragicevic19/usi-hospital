@@ -27,6 +27,13 @@ class PrikazKorisnika(object):
     def __popuni_treeview(self):
         index = iid = 0
         for korisnik in lista_ucitanih_korisnika:
-            k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
-            self.treeview.insert("", index, iid, values=k)
-            index = iid = index + 1
+            if self._uloga:
+                if self._uloga == korisnik.get_uloga():
+                    k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
+                    self.treeview.insert("", index, iid, values=k)
+                    index = iid = index + 1
+            else:
+                k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
+                self.treeview.insert("", index, iid, values=k)
+                index = iid = index + 1
+

@@ -29,6 +29,6 @@ class Tabela_vremenskih_slotova():
 
 if __name__ == '__main__':
     root = Tk()
-    lista = KalendarServis.vrati_zauzeca_datum_soba("6/1/2020", "3", "301")
+    lista = KalendarServis.vrati_zauzeca_datum_soba("4/6/2020", "1", "109")
     Tabela_vremenskih_slotova(root, lista)
 

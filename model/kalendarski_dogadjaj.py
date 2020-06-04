@@ -12,11 +12,17 @@ class KalendarskiDogadjaj:
         d, m, g = datum.split("/")
         sat, min = vreme.split(":")
         self._datum_vreme = datetime.datetime(int(g), int(m), int(d), int(sat), int(min))
+        self._datum = datum
+        self._vreme = vreme
 
     # dodati setter
     @property
     def datum_vreme(self):
         return self._datum_vreme
+
+    @property
+    def datum_vreme_zavrsetka(self):
+        return self._datum_vreme + datetime.timedelta(minutes=30 * self._broj_termina)
 
     @property
     def sprat(self):
