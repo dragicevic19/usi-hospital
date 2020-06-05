@@ -4,7 +4,7 @@ import datetime
 
 class KalendarskiDogadjaj:
 
-    def __init__(self, datum, vreme, prostorija, broj_termina=1, spisak_doktora='', spisak_pacijenata=''):
+    def __init__(self, datum, vreme, prostorija, broj_termina=1, spisak_doktora='', spisak_pacijenata='', zahvat = ''):
         self._sprat, self._broj_prostorije = prostorija.split('|')
         self._broj_termina = int(broj_termina)
         self._spisak_doktora = spisak_doktora.split('|')
@@ -14,11 +14,20 @@ class KalendarskiDogadjaj:
         self._datum_vreme = datetime.datetime(int(g), int(m), int(d), int(sat), int(min))
         self._datum = datum
         self._vreme = vreme
+        self._zahvat = zahvat
 
     # dodati setter
     @property
     def datum_vreme(self):
         return self._datum_vreme
+
+    @property
+    def datum(self):
+        return self._datum
+
+    @property
+    def vreme(self):
+        return self._vreme
 
     @property
     def datum_vreme_zavrsetka(self):
@@ -39,6 +48,10 @@ class KalendarskiDogadjaj:
     @property
     def spisak_doktora(self):
         return self._spisak_doktora
+
+    @property
+    def zahvat(self):
+        return self._zahvat
 
     @property
     def spisak_pacijenata(self):
@@ -66,4 +79,4 @@ class KalendarskiDogadjaj:
 
     def vrati_za_upis_u_fajl(self):
         return self._datum, self._vreme, self._sprat + "|" + self._broj_prostorije, \
-               self._broj_termina, "|".join(self._spisak_doktora), "|".join(self._spisak_pacijenata)
+               self._broj_termina, "|".join(self._spisak_doktora), "|".join(self._spisak_pacijenata), self._zahvat

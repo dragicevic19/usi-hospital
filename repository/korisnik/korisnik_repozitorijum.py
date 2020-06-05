@@ -54,8 +54,10 @@ class KorisnikRepository:
     @staticmethod
     def __upisi_korisnike_csv(writer, lista):
         for korisnik in lista:
-           writer.writerow(korisnik.vrati_za_upis_u_fajl())
+            writer.writerow(korisnik.vrati_za_upis_u_fajl())
+
 
 # samo za probe pre konacnog
 KorisnikRepository.ucitavanje_korisnika()
-# KorisnikRepository.sacuvaj_korisnike()
+KorisnikRepository.sacuvaj_korisnike()
+

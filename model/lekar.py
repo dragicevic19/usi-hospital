@@ -16,6 +16,9 @@ class Lekar(Korisnik):
     def get_spisak_specijalizacija(self):
         return self._spisak_specijalizacija
 
+    def set_spisak_specijalizacija_string(self, spisak_specijalizacija_string):
+        self._spisak_specijalizacija = spisak_specijalizacija_string.split(" ")
+
     def spisak_u_string(self):
         pass
 

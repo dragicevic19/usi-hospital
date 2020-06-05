@@ -1,6 +1,6 @@
 
 from model.enum.recnici import *
-from services.korisnik.korisnik_servis import UserService
+from services.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -55,12 +55,11 @@ class NoviKorisnik:
 
         if not self._korisnicko_ime.get() or not self._lozinka.get() or not self._ime.get() or not self._prezime.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-
         else:
             uloga = self._uloga.get()
             korisnik = konstruktor_po_ulozi[uloga](self._korisnicko_ime.get(), self._lozinka.get(), uloga,
                                                    self._ime.get(), self._prezime.get())
-            if UserService.dodaj_korisnika(korisnik):
+            if KorisnikServis.dodaj_korisnika(korisnik):
                 messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
                 self._root.destroy()
             else:

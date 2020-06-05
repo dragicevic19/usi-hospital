@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 
 from gui.prikaz_entiteta.prikazKorisnika import PrikazKorisnika
-from services.korisnik.korisnik_servis import UserService
+from services.korisnik.korisnik_servis import KorisnikServis
 from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
 
 
@@ -103,8 +103,8 @@ class UnosPodataka(IzborKorisnika):
             self.azuriraj_korisnika()
 
     def azuriraj_korisnika(self):
-        UserService.azuriraj_korisnika(self._selektovano_korisnicko_ime, self._korisnicko_ime.get(),
-                                       self._lozinka.get(), self._ime.get(), self._prezime.get())
+        KorisnikServis.azuriraj_korisnika(self._selektovano_korisnicko_ime, self._korisnicko_ime.get(),
+                                          self._lozinka.get(), self._ime.get(), self._prezime.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali korisnika")
         self._root2.destroy()
         self._stari_root.destroy()

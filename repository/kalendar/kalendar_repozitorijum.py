@@ -57,4 +57,5 @@ class KalendarRepository:
 
 
 KalendarRepository.ucitaj_dogadjaje()
+print(lista_proslih_dogadjaja[0])
 KalendarRepository.sacuvaj_dogadjaj()
