@@ -57,5 +57,5 @@ class KorisnikRepository:
            writer.writerow(korisnik.vrati_za_upis_u_fajl())
 
 # samo za probe pre konacnog
-# KorisnikRepository.ucitavanje_korisnika()
+KorisnikRepository.ucitavanje_korisnika()
 # KorisnikRepository.sacuvaj_korisnike()

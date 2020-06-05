@@ -33,9 +33,9 @@ class ModelPocetne:
         self.__postava_slike()
         self.__postava_bio()
 
-        self.__oboj_frejmove_sareno(True)
+        self.__oboj_frejmove_sareno(False)
 
-    def __oboj_frejmove_sareno(self, jednobojno=False):
+    def __oboj_frejmove_sareno(self, jednobojno=True):
         if jednobojno == False:
             self._root.configure(bg="blue")
             self._frejm_bio.configure(bg="purple")

@@ -8,6 +8,7 @@ from gui.administrator.administrator import poziv_forme_administrator
 from gui.upravnik.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
 from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika as lista_korisnika
+from services.forme.login import LoginService
 
 
 class LogIn:
@@ -44,18 +45,13 @@ class LogIn:
         if self._obelezeno.get() == True:
             poziv_forme_neregistrovan()
         else:
-            korisnik = self.__provera_unosa()
+
+            korisnik = LoginService.provera_unosa(self._korisnicko_ime.get(),self._lozinka.get())
             if (korisnik != None):
                 self.__poziv_forme_za(korisnik)
             else:
                 messagebox.showerror("GRESKA", "Neispravan unos.")
 
-    def __provera_unosa(self):
-        for korisnik in lista_korisnika:
-            if (
-                    korisnik.get_korisnicko_ime() == self._korisnicko_ime.get() and korisnik.get_lozinka() == self._lozinka.get()):
-                return korisnik  # sledecoj formi moraju se proslediti informacije
-        return None
 
     def __poziv_forme_za(self, korisnik):
         # self._korisnicko_ime.delete(0,"end")

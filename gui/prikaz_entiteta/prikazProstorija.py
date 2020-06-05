@@ -1,12 +1,14 @@
 from tkinter import ttk
 from tkinter import messagebox
 from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository, lista_ucitanih_prostorija
+from tkinter import Tk
 
 
 class PrikazProstorija(object):
 
-    def __init__(self, root):
+    def __init__(self, root,lista = lista_ucitanih_prostorija):
         self._root = root
+        self._lista = lista
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
         self.scroll.pack(side='right', fill='y')
@@ -30,7 +32,7 @@ class PrikazProstorija(object):
 
     def __popuni_treeview(self):
         index = iid = 0
-        for prostorija in lista_ucitanih_prostorija:
+        for prostorija in self._lista:
             if not prostorija.get_obrisana():
                 if prostorija.get_spisak_opreme():
                     spisak_opreme = str(prostorija.get_spisak_opreme()[0])
@@ -70,3 +72,10 @@ class PrikazProstorija(object):
 
         return False
 
+
+if __name__ == '__main__':
+    root = Tk()
+    ProstorijeRepository.ucitavanje_prostorije()
+    print(lista_ucitanih_prostorija)
+    PrikazProstorija(root)
+    root.mainloop()
