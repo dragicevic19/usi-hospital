@@ -1,3 +1,4 @@
+from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from services.file.file_servis import FileService
 from repository.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija, ProstorijeRepository
 
@@ -22,8 +23,17 @@ class ProstorijeService(object):
         pass
 
     @staticmethod
-    def izmeni_namenu(prostorija, namena):
-        prostorija._namena_prostorije = namena
-        ProstorijeRepository.sacuvaj_prostorije()
+    def izmeni_namenu(prostorijaDTO):
+        prostorija = prostorijaDTO.objekat_prostorije
+        prostorija._namena_prostorije = prostorijaDTO.nova_namena
+        dogadjaj = KalendarskiDogadjaj(prostorijaDTO.datum_pocetka_radova, prostorijaDTO.vreme, prostorijaDTO.prostorija,
+                                       prostorijaDTO.broj_termina)
+        ProstorijeRepository.dodaj_dogadjaj_za_prostoriju(dogadjaj)
+        # ProstorijeRepository.sacuvaj_prostorije()
 
+    @staticmethod
+    def ostale_renovacije(prostorijaDTO):
+        dogadjaj = KalendarskiDogadjaj(prostorijaDTO.datum_pocetka_radova, prostorijaDTO.vreme, prostorijaDTO.prostorija,
+                                       prostorijaDTO.broj_termina)
+        ProstorijeRepository.dodaj_dogadjaj_za_prostoriju(dogadjaj)
 

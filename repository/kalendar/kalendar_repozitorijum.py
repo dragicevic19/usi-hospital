@@ -24,12 +24,16 @@ class KalendarRepository:
             reader = csv.reader(file)
             for red in reader:
                 dogadjaj = KalendarskiDogadjaj(*red)
-                if dogadjaj.datum_vreme >= datetime.datetime.now():
-                    lista_dogadjaja.append(dogadjaj)
-                elif dogadjaj.datum_vreme_zavrsetka < datetime.datetime.now():
-                    lista_proslih_dogadjaja.append(dogadjaj)
-                else:
-                    lista_dogadjaja.append(dogadjaj)
+                KalendarRepository.rasporedi_dogadjaj_po_listama(dogadjaj)
+
+    @staticmethod
+    def rasporedi_dogadjaj_po_listama(dogadjaj):
+        if dogadjaj.datum_vreme >= datetime.datetime.now():
+            lista_dogadjaja.append(dogadjaj)
+        elif dogadjaj.datum_vreme_zavrsetka < datetime.datetime.now():
+            lista_proslih_dogadjaja.append(dogadjaj)
+        else:
+            lista_dogadjaja.append(dogadjaj)
 
     @staticmethod
     def sacuvaj_dogadjaj():
@@ -40,7 +44,6 @@ class KalendarRepository:
                 writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
             for dogadjaj in lista_proslih_dogadjaja:
                 writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
-
 
     @staticmethod
     def vrati_zauzeca_za_datum_i_sobu(datum, sprat, broj_prostorije):
@@ -54,6 +57,11 @@ class KalendarRepository:
                     if dogadjaj.datum_vreme_zavrsetka > datum_za_proveru >= dogadjaj.datum_vreme:
                         lista_zauzeca.append(vremenski_slotovi[i])
         return lista_zauzeca
+
+    @staticmethod
+    def dodaj_dogadjaj(dogadjaj):
+        lista_dogadjaja.append(dogadjaj)
+        KalendarRepository.sacuvaj_dogadjaj()
 
 
 KalendarRepository.ucitaj_dogadjaje()

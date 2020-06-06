@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 from model.konstante.konstante import *
 from model.prostorija import Prostorija
+from repository.kalendar.kalendar_repozitorijum import KalendarRepository
 
 lista_ucitanih_prostorija = []
 lista_obrisanih_prostorija = []
@@ -66,3 +67,8 @@ class ProstorijeRepository:
             if prostorija.get_sprat() == sprat and prostorija.get_broj_prostorije() == broj_sobe:
                 return prostorija
         return False
+
+    @staticmethod
+    def dodaj_dogadjaj_za_prostoriju(dogadjaj):
+        ProstorijeRepository.sacuvaj_prostorije()
+        KalendarRepository.dodaj_dogadjaj(dogadjaj)

@@ -34,11 +34,13 @@ class RenoviranjeProstorije(PrikazProstorija):
                 messagebox.showerror("GRESKA", "Morate da izaberete dve prostorije!")
         else:
             try:
-                metode_renovacija[self._tip_renoviranja](self.selektovana_prostorija())
+                prostorija = self.selektovana_prostorija()
+                self._root.destroy()
+                metode_renovacija[self._tip_renoviranja](prostorija)
+
             except:
                 messagebox.showerror("GRESKA", "Izaberite jednu prostoriju")
 
-        self._root.destroy()
 
 
 def poziv_forme_odabir_prostorije(tip_renoviranja):

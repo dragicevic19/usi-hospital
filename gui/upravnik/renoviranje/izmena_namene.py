@@ -1,5 +1,7 @@
 import datetime
 from tkinter import *
+
+from model.DTO.renoviranjeDogadjajDTO import RenoviranjeDTO
 from model.prostorija import Prostorija
 from tkinter import ttk, messagebox
 
@@ -22,6 +24,9 @@ class IzmenaNamene:
         self.izaberi_datum()
         self.izaberi_namenu()
 
+        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ PROSTORIJU", command=self.provera_unosa)
+        potvrdi_dugme.grid(row=4, column=1, columnspan=10)
+
     def izaberi_datum(self):
         Label(self._root, justify=LEFT, text="Datum pocetka radova (dd/mm/gggg):", font="Times 15").grid(row=1,
                                                                                                          column=1,
@@ -34,43 +39,46 @@ class IzmenaNamene:
         self._datum_zavrsetka_radova = ttk.Entry(self._root)
         self._datum_zavrsetka_radova.grid(row=2, column=2, columnspan=10)
 
-        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ PROSTORIJU", command=self.promeni_namenu)
-        potvrdi_dugme.grid(row=4, column=1, columnspan=10)
-
     def izaberi_namenu(self):
         Label(self._root, text="Izaberite novu namenu", font="Times 15").grid(row=3, column=1, pady=10)
         default = self._prostorija.get_namena_prostorije()
         ttk.OptionMenu(self._root, self._namena, default, *self.namene_prostorija).grid(row=3, column=2)
 
-    def promeni_namenu(self):
-        if self.provera_unosa():
-            ProstorijeService.izmeni_namenu(self._prostorija, self._namena.get())
-
     def provera_unosa(self):
         if self._prostorija.get_namena_prostorije() == self._namena.get():
             messagebox.showerror("GRESKA", "Niste promenili namenu prostorije")
-            return False
+        elif not self.provera_datuma():
+            messagebox.showerror("GRESKA", "Niste uneli validan datum (DD/MM/GGGG)")
+        else:
+            messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
+            self._root.destroy()
+            prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka,
+                                           self._prostorija, self._namena.get())
+            ProstorijeService.izmeni_namenu(prostorijaDTO)
+
+    def provera_datuma(self):
         try:
             d, m, g = self._datum_pocetka_radova.get().split("/")
-            datum_pocetka = datetime.date(int(g), int(m), int(d))
+            self._datum_pocetka = datetime.date(int(g), int(m), int(d))
             d, m, g = self._datum_zavrsetka_radova.get().split("/")
-            datum_zavrsetka = datetime.date(int(g), int(m), int(d))
-        except:
-            messagebox.showerror("GRESKA", "Niste uneli validan format datuma (DD/MM/GGGG)")
+            self._datum_zavrsetka = datetime.date(int(g), int(m), int(d))
+            if self._datum_pocetka < datetime.date.today() or self._datum_zavrsetka < self._datum_pocetka:
+                return False
+        except ValueError:
             return False
         return True
 
 
 def izmena_namene(selektovana_prostorija):
     root = Tk()
-    root.geometry('425x425')
-    application = IzmenaNamene(root)
+    root.geometry('550x200')
+    application = IzmenaNamene(root, selektovana_prostorija)
     root.mainloop()
 
 
 if __name__ == '__main__':
     root = Tk()
-    root.geometry('500x200')
+    root.geometry('550x200')
     prostorija = lista_ucitanih_prostorija[0]
     application = IzmenaNamene(root, prostorija)
     root.mainloop()
