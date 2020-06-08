@@ -4,7 +4,7 @@ from model.konstante.konstante import *
 
 class RenoviranjeDTO:
 
-    def __init__(self, datum_pocetka_radova, datum_zavrsetka_radova, prostorija, namena=''):
+    def __init__(self, datum_pocetka_radova, datum_zavrsetka_radova, prostorija, oprema='', namena=''):
         self._datum_pocetka_radova = datum_pocetka_radova.strftime("%d/%m/%Y")
         self._vreme = '00:00'
         sprat = prostorija.get_sprat()
@@ -14,6 +14,7 @@ class RenoviranjeDTO:
         razlika_datuma = datum_zavrsetka_radova - datum_pocetka_radova
         self._broj_termina = razlika_datuma.days * MINUTA_U_DANU / VREMENSKI_SLOT
         self._objekat_prostorije = prostorija
+        self._oprema = oprema
 
     @property
     def datum_pocetka_radova(self):

@@ -5,13 +5,13 @@ from services.prostorije.prostorije_servis import ProstorijeService
 from gui.prikaz_entiteta.prikazProstorija import PrikazProstorija
 from model.enum.renoviranje import TipRenoviranja
 from gui.upravnik.renoviranje.izmena_namene import izmena_namene
-from gui.upravnik.renoviranje.premestanje_opreme import premestanje_opreme
+from gui.upravnik.renoviranje.premestanje_opreme import premestanje_opreme_meni
 from gui.upravnik.renoviranje.spajanje_prostorije import spajanje_prostorije
 from gui.upravnik.renoviranje.deljenje_prostorije import deljenje_prostorije
 from gui.upravnik.renoviranje.ostale_renovacije import ostale_renovacije
 
 metode_renovacija = {TipRenoviranja.IZMENA_NAMENE: izmena_namene,
-                     TipRenoviranja.PREMESTANJE_OPREME: premestanje_opreme,
+                     TipRenoviranja.PREMESTANJE_OPREME: premestanje_opreme_meni,
                      TipRenoviranja.SPAJANJE_PROSTORIJA: spajanje_prostorije,
                      TipRenoviranja.DELJENJE_PROSTORIJE: deljenje_prostorije,
                      TipRenoviranja.OSTALE_RENOVACIJE: ostale_renovacije}

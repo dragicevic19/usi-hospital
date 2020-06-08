@@ -37,3 +37,7 @@ class ProstorijeService(object):
                                        prostorijaDTO.broj_termina)
         ProstorijeRepository.dodaj_dogadjaj_za_prostoriju(dogadjaj)
 
+    @staticmethod
+    def dodavanje_slobodne_opreme_u_prostoriju():
+        pass
+

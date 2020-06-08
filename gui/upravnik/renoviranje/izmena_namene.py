@@ -34,7 +34,7 @@ class IzmenaNamene:
         self._datum_pocetka_radova = ttk.Entry(self._root)
         self._datum_pocetka_radova.grid(row=1, column=2, columnspan=10)
 
-        Label(self._root, justify=LEFT, text="Datum pocetka radova (dd/mm/gggg)", font="Times 15").grid(row=2, column=1,
+        Label(self._root, justify=LEFT, text="Datum zavrsetka radova (dd/mm/gggg)", font="Times 15").grid(row=2, column=1,
                                                                                                         pady=10)
         self._datum_zavrsetka_radova = ttk.Entry(self._root)
         self._datum_zavrsetka_radova.grid(row=2, column=2, columnspan=10)
