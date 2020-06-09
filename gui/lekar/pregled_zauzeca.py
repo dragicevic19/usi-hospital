@@ -48,7 +48,7 @@ class PrikazPodataka(PregledZauzeca):
         Label(self._root2, justify=LEFT, text="Ime:", font="Times 15").grid(row=2, column=1, pady=10)
         Label(self._root2, justify=LEFT, text=self._pacijent._ime, font="Times 15").grid(row=2, column=2, pady=10, padx=20)
         Label(self._root2, justify=LEFT, text="Prezime:", font="Times 15").grid(row=3, column=1, pady=10)
-        Label(self._root2, justify=LEFT, text=self._pacijent._prezime, font="Times 15").grid(row=3, column=2, pady=10,padx=20)
+        Label(self._root2, justify=LEFT, text=self._pacijent._prezime, font="Times 15").grid(row=3, column=2, pady=10, padx=20)
         Label(self._root2, justify=LEFT, text="Pol:", font="Times 15").grid(row=4, column=1, pady=10)
         Label(self._root2, justify=LEFT, text=self._pacijent._pol, font="Times 15").grid(row=4, column=2, pady=10, padx=20)
         Label(self._root2, justify=LEFT, text="Broj zdravstvene:", font="Times 15").grid(row=5, column=1, pady=10)
