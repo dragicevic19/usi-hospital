@@ -5,7 +5,6 @@ from repository.kalendar.kalendar_repozitorijum import KalendarRepository, lista
 from services.korisnik.korisnik_servis import KorisnikServis
 
 
-
 class PrikazPregleda:
 
     def __init__(self, root, ulogovan_pacijent):
@@ -19,9 +18,11 @@ class PrikazPregleda:
         self.postava_dugmica()
 
     def postava_dugmica(self):
-        prikaz_prosli = ttk.Button(self._root, text="PRIKAZI PROSLE PREGLEDE", command=lambda: self.__popuni_treeview(True))
+        prikaz_prosli = ttk.Button(self._root, text="PRIKAZI PROSLE PREGLEDE",
+                                   command=lambda: self.__popuni_treeview(True))
         prikaz_prosli.pack(fill='x')
-        prikaz_buduci = ttk.Button(self._root, text="PRIKAZI BUDUCE PREGLEDE", command=lambda: self.__popuni_treeview(False))
+        prikaz_buduci = ttk.Button(self._root, text="PRIKAZI BUDUCE PREGLEDE",
+                                   command=lambda: self.__popuni_treeview(False))
         prikaz_buduci.pack(fill='x')
 
     def napravi_treeview(self):
@@ -49,13 +50,12 @@ class PrikazPregleda:
         self.treeview.bind('<Double-1>', self.__prikazi_detalje_lekara)
 
     def __prikazi_detalje_lekara(self, event):
-       odabrana = self.treeview.focus()
-       odabrani_doktor = self.treeview.item(odabrana)["values"]
-       ispis = KorisnikServis.vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
-       messagebox.showinfo("Imena lekara:", ispis)
+        odabrana = self.treeview.focus()
+        odabrani_doktor = self.treeview.item(odabrana)["values"]
+        ispis = KorisnikServis.vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
+        messagebox.showinfo("Imena lekara:", ispis)
 
 
-if __name__ == '__main__':
-    root = Tk()
-    PrikazPregleda(root, "zeljko12")
+def poziv_prikaza_pregleda(root,ulogovani_pacijent): # korisnicko ime ulogovanog
+    PrikazPregleda(root, ulogovani_pacijent)
     root.mainloop()
