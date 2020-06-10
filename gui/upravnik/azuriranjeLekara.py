@@ -5,7 +5,7 @@ import re
 
 from gui.prikaz_entiteta.prikazKorisnika import PrikazKorisnika
 from model.enum.uloga import Uloga
-from model.konstante.konstante import REGEX_VREME
+from model.konstante.konstante import REGEX_VREME_VREME
 from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
 from services.korisnik.korisnik_servis import KorisnikServis
 
@@ -74,7 +74,7 @@ class UnosPodataka(IzborLekara):
         if not self._radno_vreme.get() or not self._spisak_specijalizacija.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
             self._root2.destroy()
-        elif not REGEX_VREME.match(self._radno_vreme.get()):
+        elif not REGEX_VREME_VREME.match(self._radno_vreme.get()):
             messagebox.showerror("GRESKA", "Neispravan unos radnog vremena.")
         else:
             self.azuriraj_lekara()
