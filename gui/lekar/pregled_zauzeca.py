@@ -63,3 +63,4 @@ def poziv_forme_detaljni_prikaz_pacijenta(root):
 if __name__ == '__main__':
     root = Tk()
     poziv_forme_detaljni_prikaz_pacijenta(root)
+

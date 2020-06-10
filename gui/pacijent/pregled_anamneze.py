@@ -1,5 +1,3 @@
-from model.DTO.pregled_anamneze import PregledAnamnezeDTO
-from repository.unos_anamneze.unos_anamneze_repozitorijum import UnosAnamnezeRepository
 from gui.prikaz_entiteta.prikaz_anamneze import PrikazAnamneze
 from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from tkinter import *

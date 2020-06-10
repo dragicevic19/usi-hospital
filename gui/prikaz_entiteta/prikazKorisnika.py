@@ -1,5 +1,4 @@
 from tkinter import ttk
-
 from model.enum.uloga import Uloga
 from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 
@@ -16,7 +15,6 @@ class PrikazKorisnika(object):
         self.napravi_treeview()
 
     def napravi_treeview(self):
-
         #REFAKTORIZACIJA
         if self._uloga == Uloga.LEKAR.name:
             self.treeview["columns"] = ["korisnicko_ime", "uloga", "ime", "prezime", "radno_vreme",

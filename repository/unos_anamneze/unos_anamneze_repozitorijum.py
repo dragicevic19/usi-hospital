@@ -45,6 +45,7 @@ class UnosAnamnezeRepository:
         return lista_anamneza_po_pacijentu
 
 
+
 UnosAnamnezeRepository.ucitavanje_unosa_anamneze()
 UnosAnamnezeRepository.sacuvaj_unos_anamneze()
 
