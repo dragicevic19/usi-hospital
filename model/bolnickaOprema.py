@@ -45,4 +45,6 @@ class BolnickaOprema(object):
     def vrati_za_upis_u_file(self):
         return self._naziv_opreme,self._ukupan_broj_opreme,self._slobodna_oprema,self._opis
 
+    def __str__(self):
+        return str(self._naziv_opreme)
 

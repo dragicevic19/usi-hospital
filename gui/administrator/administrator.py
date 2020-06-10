@@ -31,29 +31,28 @@ class PocetnaFormaAdministrator(ModelPocetne):
         b5 = ttk.Button(self._frejm_dugmici, text="Brisanje prostorije", command=self.akcija4)
         b5.place(x=850, y=10, height=60, width=150)
 
-    def akcija(self):
+    def priprema_akcije(self):
         self._frejm_izvrsavanja.destroy()
         super().kreiranje_frejma_za_izvrsavanje()
+
+    def akcija(self):
+        self.priprema_akcije()
         poziv_forme_unos_korisnika(self._frejm_izvrsavanja)
 
     def akcija1(self):
-        self._frejm_izvrsavanja.destroy()
-        super().kreiranje_frejma_za_izvrsavanje()
+        self.priprema_akcije()
         poziv_forme_azuriranje_korisnika(self._frejm_izvrsavanja)
 
     def akcija2(self):
-        self._frejm_izvrsavanja.destroy()
-        super().kreiranje_frejma_za_izvrsavanje()
+        self.priprema_akcije()
         poziv_forme_brisanje_korisnika(self._frejm_izvrsavanja)
 
     def akcija3(self):
-        self._frejm_izvrsavanja.destroy()
-        super().kreiranje_frejma_za_izvrsavanje()
+        self.priprema_akcije()
         poziv_forme_unos_prostorije(self._frejm_izvrsavanja)
 
     def akcija4(self):
-        self._frejm_izvrsavanja.destroy()
-        self.kreiranje_frejma_za_izvrsavanje()
+        self.priprema_akcije()
         poziv_forme_brisanje_prostorije(self._frejm_izvrsavanja)
 
 

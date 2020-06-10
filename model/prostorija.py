@@ -39,3 +39,9 @@ class Prostorija(object):
 
     def set_obrisana(self, obrisana):
         self._obrisana = obrisana
+
+    def sadrzi_opremu(self,spisak_zahtevane_oprem):
+        for i in spisak_zahtevane_oprem:
+            if i not in self._spisak_opreme:
+                return False
+        return True

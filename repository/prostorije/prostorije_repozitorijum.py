@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 from model.konstante.konstante import *
 from model.prostorija import Prostorija
+from repository.kalendar.kalendar_repozitorijum import KalendarRepository
 
 lista_ucitanih_prostorija = []
 lista_obrisanih_prostorija = []
@@ -35,6 +36,11 @@ class ProstorijeRepository:
         lista.append(prostorija)
 
     @staticmethod
+    def dodaj_prostoriju(prostorija):
+        lista_ucitanih_prostorija.append(prostorija)
+        ProstorijeRepository.sacuvaj_prostorije()
+
+    @staticmethod
     def sacuvaj_prostorije():
         path = Path(PATH_TO_PROSTORIJE)
         with path.open('w', newline='') as file:
@@ -56,9 +62,13 @@ class ProstorijeRepository:
                              prostorija.get_namena_prostorije(), prostorija.get_obrisana()])
 
     @staticmethod
-    def postoji_prostorija(sprat, broj_sobe):
+    def vrati_prostoriju_po_broju_i_spratu(sprat, broj_sobe):
         for prostorija in lista_ucitanih_prostorija:
             if prostorija.get_sprat() == sprat and prostorija.get_broj_prostorije() == broj_sobe:
                 return prostorija
         return False
 
+    @staticmethod
+    def dodaj_dogadjaj_za_prostoriju(dogadjaj):
+        ProstorijeRepository.sacuvaj_prostorije()
+        KalendarRepository.dodaj_dogadjaj(dogadjaj)

@@ -1,6 +1,7 @@
 import csv
 
 from model.enum.recnici import *
+from model.enum.uloga import Uloga
 from model.konstante.konstante import *
 from pathlib import Path
 
@@ -52,10 +53,18 @@ class KorisnikRepository:
             KorisnikRepository.__upisi_korisnike_csv(writer, lista_obrisanih_korisnika)
 
     @staticmethod
+    def vrati_spisak_pacijenata_po_lekaru(ulogovan_lekar):
+        for korisnik in lista_ucitanih_korisnika:
+            if korisnik.get_korisnicko_ime() == ulogovan_lekar:
+                return korisnik.get_spisak_pacijenata()
+
+    @staticmethod
     def __upisi_korisnike_csv(writer, lista):
         for korisnik in lista:
-           writer.writerow(korisnik.vrati_za_upis_u_fajl())
+            writer.writerow(korisnik.vrati_za_upis_u_fajl())
+
 
 # samo za probe pre konacnog
-# KorisnikRepository.ucitavanje_korisnika()
-# KorisnikRepository.sacuvaj_korisnike()
+KorisnikRepository.ucitavanje_korisnika()
+KorisnikRepository.sacuvaj_korisnike()
+# print(KorisnikRepository.vrati_spisak_pacijenata_po_lekaru("sebastijan3412"))

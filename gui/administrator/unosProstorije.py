@@ -41,7 +41,7 @@ class NovaProstorija:
     def proveri_validnost(self):
         if not self._broj_prostorije.get() or not self._namena_prostorije.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-        elif ProstorijeRepository.postoji_prostorija(self._sprat.get(), self._broj_prostorije.get()):
+        elif ProstorijeRepository.vrati_prostoriju_po_broju_i_spratu(self._sprat.get(), self._broj_prostorije.get()):
             messagebox.showerror("GRESKA", "Soba vec postoji")
         else:
             self.__sacuvaj_prostoriju()
