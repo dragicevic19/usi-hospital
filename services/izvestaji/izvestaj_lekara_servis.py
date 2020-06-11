@@ -3,70 +3,50 @@ from repository.kalendar.kalendar_repozitorijum import lista_dogadjaja, lista_pr
 from datetime import datetime
 
 from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
+from services.izvestaji.izvestaji import IzvestajServis
 
 
-class IzvestajLekaraServis:
-    lista_dogadjaja_spojeno = lista_proslih_dogadjaja + lista_dogadjaja
-    mapa_lekara = {}
-    broj_dana_za_izvestaj = 0
-    ukupan_broj_sati_zauzeca_svih = 0
+class IzvestajLekaraServis(IzvestajServis):
+    def __init__(self, pocetni_datum, krajnji_datum):
 
-    @staticmethod
-    def generisanje(prvi_datum, drugi_datum):
-        dan, mes, god = prvi_datum.split("/")
-        d, m, g = drugi_datum.split("/")
-        datum_od = datetime(int(god), int(mes), int(dan))
-        datum_do = datetime(int(g), int(m), int(d))
+        super().__init__("lekare", pocetni_datum, krajnji_datum)
 
-        string_za_pdf = "IZVESTAJ ZA SVE LEKARE OD " + prvi_datum + " DO " + drugi_datum + "\n\n"
+    def pocni(self):
+        self._string_za_pdf = self.generisanje(self._tip_izvestaja)
 
-        IzvestajLekaraServis.broj_dana_za_izvestaj = (datum_do - datum_od).days
-        IzvestajLekaraServis.ukupno_termina_po_lekaru(datum_od, datum_do)
-        string_za_pdf += IzvestajLekaraServis.ukupan_broj_sati_po_lekaru()
-        string_za_pdf += IzvestajLekaraServis.prosecan_broj_sati_po_lekaru()
-        string_za_pdf += IzvestajLekaraServis.prosecno_i_ukupno_sati_svi_lekari()
+        self._string_za_pdf += self.ukupan_broj_sati_po_lekaru()
+        self._string_za_pdf += self.prosecan_broj_sati_po_lekaru()
+        self._string_za_pdf += self.prosecno_i_ukupno_sati_svi_lekari()
 
-        IzvestajRepozitorijum.generisi_izvestaj(string_za_pdf, False)
+        IzvestajRepozitorijum.generisi_izvestaj(self._string_za_pdf, False)
 
-    @staticmethod
-    def ukupno_termina_po_lekaru(datum_od, datum_do):
-        for dogadjaj in IzvestajLekaraServis.lista_dogadjaja_spojeno:
-            if datum_od <= dogadjaj.datum_vreme <= datum_do:
-                for lekar in dogadjaj.spisak_doktora:
-                    if lekar in IzvestajLekaraServis.mapa_lekara:
-                        IzvestajLekaraServis.mapa_lekara[lekar] += dogadjaj.broj_termina
-                    else:
-                        IzvestajLekaraServis.mapa_lekara[lekar] = dogadjaj.broj_termina
-                    IzvestajLekaraServis.ukupan_broj_sati_zauzeca_svih += dogadjaj.broj_termina
-        IzvestajLekaraServis.ukupan_broj_sati_zauzeca_svih /= 2
 
-    @staticmethod
-    def ukupan_broj_sati_po_lekaru():
+    def ukupan_broj_sati_po_lekaru(self):
         ispis = ""
-        for lekar in IzvestajLekaraServis.mapa_lekara:
+        for lekar in self._mapa:
             pronadjeni_lekar = KorisnikRepository.nadji_po_korisnickom_imenu(lekar)
             # ime, prezime = pronadjeni_lekar.get_ime(), pronadjeni_lekar.get_prezime()
             ime, prezime = "Pera", "Peric"
             ispis += "Ukupno zauzece lekara " + lekar + "pod imenom " + ime + " " + prezime + " je: " + str(
-                int(IzvestajLekaraServis.mapa_lekara[lekar]) * 30) \
+                int(self._mapa[lekar]) * 30) \
                      + " minuta \n "
         return ispis
 
 
-    @staticmethod
-    def prosecan_broj_sati_po_lekaru():
+
+    def prosecan_broj_sati_po_lekaru(self):
         ispis = ""
-        for lekar in IzvestajLekaraServis.mapa_lekara:
+        for lekar in self._mapa:
             ispis += "Prosecno zauzece lekara " + lekar + " po danu je: " \
                      + str(
-                int(IzvestajLekaraServis.mapa_lekara[lekar]) * 30 / IzvestajLekaraServis.broj_dana_za_izvestaj) \
+                int(self._mapa[lekar]) * 30 / self._broj_dana_za_izvestaj) \
                      + " minuta \n "
         return ispis
 
-    @staticmethod
-    def prosecno_i_ukupno_sati_svi_lekari():
+
+    def prosecno_i_ukupno_sati_svi_lekari(self):
         return ("Ukupan broj sati svih lekara je: "
-                + str(IzvestajLekaraServis.ukupan_broj_sati_zauzeca_svih) + " sati, a prosecan broj sati zauzeca je: " +
-                str(IzvestajLekaraServis.ukupan_broj_sati_zauzeca_svih / IzvestajLekaraServis.broj_dana_za_izvestaj) +
+                + str(self._ukupan_broj_sati_zauzeca_svih) + " sati, a prosecan broj sati zauzeca je: " +
+                str(self._ukupan_broj_sati_zauzeca_svih / self._broj_dana_za_izvestaj) +
                 " sati po danu.")
 

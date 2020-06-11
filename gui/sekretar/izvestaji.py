@@ -44,7 +44,7 @@ class FormaZaIzvestaje:
         if self._radio_parametar.get() == 1:
             IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pocni()
         else:
-            IzvestajLekaraServis.generisanje(self._datum_od.get(), self._datum_do.get())
+            IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pocni()
 
 
 if __name__ == '__main__':

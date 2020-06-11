@@ -8,17 +8,17 @@ from services.izvestaji.izvestaji import IzvestajServis
 class IzvestajProstorijeServis(IzvestajServis):
 
     def __init__(self, pocetni_datum, krajnji_datum):
-        self._string_za_pdf = " "
+
         super().__init__("prostorije", pocetni_datum, krajnji_datum)
 
     def pocni(self):
-        self.generisanje(self._tip_izvestaja)
-        print(self._mapa)
+        self._string_za_pdf = self.generisanje(self._tip_izvestaja)
+
         self._string_za_pdf += self.ukupan_broj_sati_po_prostoriji()
         self._string_za_pdf += self.prosecan_broj_sati_po_prostoriji()
         self._string_za_pdf += self.prosecno_i_ukupno_sati_sve_prostorije()
 
-        IzvestajRepozitorijum.generisi_izvestaj(self._string_za_pdf, False)
+        IzvestajRepozitorijum.generisi_izvestaj(self._string_za_pdf, True)
 
     def ukupan_broj_sati_po_prostoriji(self):
         ispis = ""

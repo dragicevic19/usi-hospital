@@ -11,6 +11,7 @@ class IzvestajServis:
         self._krajnji_datum_string = krajnji_datum
         self._lista_dogadjaja_spojeno = lista_proslih_dogadjaja + lista_dogadjaja
         self._mapa = {}
+        self._string_za_pdf = " "
         self._broj_dana_za_izvestaj = 0
         self._ukupan_broj_sati_zauzeca_svih = 0
         self._tip_izvestaja = tip_izvestaja
@@ -18,19 +19,20 @@ class IzvestajServis:
         d, m, g = krajnji_datum.split("/")
         self._datum_od = datetime(int(god), int(mes), int(dan))
         self._datum_do = datetime(int(g), int(m), int(d))
+        self.ukupno_termina_po_objektu(self._datum_od,self._datum_do)
+
+
+
 
     def generisanje(self, vrsta_izvestaja):
         # vrsta izvestaja -> prostorija, lekar
-        string_za_pdf = "IZVESTAJ ZA SVE" + vrsta_izvestaja + " OD " + self._pocetni_datum_string + " DO " \
+        string_za_pdf = "IZVESTAJ ZA SVE " + vrsta_izvestaja.upper() + " OD " + self._pocetni_datum_string + " DO " \
                         + self._krajnji_datum_string + "\n\n"
-        self._broj_dana_za_izvestaj = (self._datum_do - self._datum_od).days
-        self.ukupno_termina_po_objektu(self._datum_do, self._datum_od)
-        return string_za_pdf
-        # string_za_pdf += self.ukupan_broj_sati_po_objektu()
-        # string_za_pdf += self.prosecan_broj_sati_po_objektu()
-        # string_za_pdf += self.prosecno_i_ukupno_sati_svih_objekata()
 
-        # IzvestajRepozitorijum.generisi_izvestaj(string_za_pdf, False)
+        self._broj_dana_za_izvestaj = (self._datum_do - self._datum_od).days
+
+        return string_za_pdf
+
 
     def ukupno_termina_po_objektu(self, datum_od, datum_do):
         for dogadjaj in self._lista_dogadjaja_spojeno:
@@ -54,38 +56,3 @@ class IzvestajServis:
         else:
             self._mapa[kljuc] = broj_termina
 
-    def ukupan_broj_sati_po_objektu(self):
-        pass
-
-    def prosecan_broj_sati_po_objektu(self):
-        pass
-
-    def prosecno_i_ukupno_sati_svih_objekata(self):
-        pass
-    # def ukupan_broj_sati_po_lekaru(self):
-    #     ispis = ""
-    #     for kljuc in self._mapa:
-    #         pronadjeni_lekar = KorisnikRepository.nadji_po_korisnickom_imenu(lekar)
-    #         # ime, prezime = pronadjeni_lekar.get_ime(), pronadjeni_lekar.get_prezime()
-    #         ime, prezime = "Pera", "Peric"
-    #         ispis += "Ukupno zauzece lekara " + lekar + "pod imenom " + ime + " " + prezime + " je: " + str(
-    #             int(Izvestaj.mapa_lekara[lekar]) * 30) \
-    #                  + " minuta \n "
-    #     return ispis
-    #
-    # @staticmethod
-    # def prosecan_broj_sati_po_lekaru():
-    #     ispis = ""
-    #     for lekar in Izvestaj.mapa_lekara:
-    #         ispis += "Prosecno zauzece lekara " + lekar + " po danu je: " \
-    #                  + str(
-    #             int(Izvestaj.mapa_lekara[lekar]) * 30 / Izvestaj.broj_dana_za_izvestaj) \
-    #                  + " minuta \n "
-    #     return ispis
-    #
-    # @staticmethod
-    # def prosecno_i_ukupno_sati_svi_lekari():
-    #     return ("Ukupan broj sati svih lekara je: "
-    #             + str(Izvestaj.ukupan_broj_sati_zauzeca_svih) + " sati, a prosecan broj sati zauzeca je: " +
-    #             str(Izvestaj.ukupan_broj_sati_zauzeca_svih / Izvestaj.broj_dana_za_izvestaj) +
-    #             " sati po danu.")
