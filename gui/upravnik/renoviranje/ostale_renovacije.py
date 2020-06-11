@@ -34,8 +34,15 @@ class OstaleRenovacije:
         else:
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
-            prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija)
-            ProstorijeService.ostale_renovacije(prostorijaDTO)
+            renoviranjeDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija)
+            self.provera_zauzeca(renoviranjeDTO)
+
+    def provera_zauzeca(self, renoviranjeDTO):
+        if ProstorijeService.izmeni_namenu(renoviranjeDTO):
+            messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
+            self._root.destroy()
+        else:
+            messagebox.showerror("GRESKA", "Za prostoriju je vec zakazno renoviranje ili operacija u tom periodu")
 
     def provera_datuma(self):
         try:

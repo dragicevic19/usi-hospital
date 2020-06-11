@@ -9,21 +9,20 @@ class KalendarServis:
         return KalendarRepository.vrati_zauzeca_za_datum_i_sobu(datum, sprat, broj_sobe)
 
     @staticmethod
-    def dodaj_dogadjaj_ako_je_slobodna(prostorijaDTO):
-        if KalendarServis.slobodna_prostorija_za_period(prostorijaDTO.datum_pocetkaDate,
-                                                        prostorijaDTO.datum_zavrsetkaDate):
+    def dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
+        if KalendarServis.slobodna_prostorija_za_period(renoviranjeDTO):
 
-            dogadjaj = KalendarskiDogadjaj(prostorijaDTO.datum_pocetka_radova, prostorijaDTO.vreme,
-                                           prostorijaDTO.prostorija,
-                                           prostorijaDTO.broj_termina)
+            dogadjaj = KalendarskiDogadjaj(renoviranjeDTO.datum_pocetka_radova, renoviranjeDTO.vreme,
+                                           renoviranjeDTO.prostorija,
+                                           renoviranjeDTO.broj_termina)
             KalendarRepository.dodaj_dogadjaj(dogadjaj)
             return True
         else:
             return False
 
     @staticmethod
-    def slobodna_prostorija_za_period(datum_pocetka, datum_zavrsetka):
-        if KalendarRepository.slobodna_prostorija_za_period(datum_pocetka, datum_zavrsetka):
+    def slobodna_prostorija_za_period(renoviranjeDTO):
+        if KalendarRepository.slobodna_prostorija_za_period(renoviranjeDTO):
             return True
         else:
             return False

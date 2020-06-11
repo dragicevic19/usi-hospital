@@ -99,7 +99,7 @@ class PremestanjeOpreme:
 
     def provera_zauzeca(self, lista_opreme):
         if not funkcija_za_premestanje[self._tip_premestanja](lista_opreme):
-            messagebox.showerror("GRESKA", "Za prostoriju je vec zakazno renoviranje u tom periodu")
+            messagebox.showerror("GRESKA", "Za prostoriju je vec zakazno renoviranje ili operacija u tom periodu")
         else:
             messagebox.showinfo("USPESNO", "Podneli ste zahtev za renoviranje prostorije")
             self._root.destroy()

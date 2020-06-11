@@ -5,6 +5,7 @@ import datetime
 class KalendarskiDogadjaj:
 
     def __init__(self, datum, vreme, prostorija, broj_termina=1, spisak_doktora='', spisak_pacijenata='', zahvat=''):
+        self._prostorija = prostorija
         self._sprat, self._broj_prostorije = prostorija.split('|')
         self._broj_termina = int(broj_termina)
         self._spisak_doktora = spisak_doktora.split('|')
@@ -17,7 +18,10 @@ class KalendarskiDogadjaj:
         self._vreme = vreme
         self._zahvat = zahvat
 
-    # dodati setter
+    @property
+    def prostorija(self):
+        return self._prostorija
+
     @property
     def datum_vreme(self):
         return self._datum_vreme

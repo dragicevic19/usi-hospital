@@ -23,29 +23,31 @@ class ProstorijeService(object):
         pass
 
     @staticmethod
-    def izmeni_namenu(prostorijaDTO):
-        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(prostorijaDTO):
-            prostorija = prostorijaDTO.objekat_prostorije
-            prostorija._namena_prostorije = prostorijaDTO.nova_namena
+    def izmeni_namenu(renoviranjeDTO):
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
+            prostorija = renoviranjeDTO.objekat_prostorije
+            prostorija._namena_prostorije = renoviranjeDTO.nova_namena
             ProstorijeRepository.sacuvaj_prostorije()
+            return True
         else:
             return False
 
     @staticmethod
-    def ostale_renovacije(prostorijaDTO):
-        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(prostorijaDTO):
+    def ostale_renovacije(renoviranjeDTO):
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
             ProstorijeRepository.sacuvaj_prostorije()
+            return True
         else:
             return False
 
     @staticmethod
-    def dodavanje_slobodne_opreme_u_prostoriju(lista_prostorijaDTO):
+    def dodavanje_slobodne_opreme_u_prostoriju(lista_renoviranjaDTO):
 
-        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(lista_prostorijaDTO[0]):
-            for prostorijaDTO in lista_prostorijaDTO:
-                prostorija_za_izmenu = prostorijaDTO.objekat_prostorije
-                ProstorijeService.__dodavanje_opreme(prostorijaDTO, prostorija_za_izmenu)
-                OpremaService.smanji_broj_slobodne_opreme(prostorijaDTO)
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(lista_renoviranjaDTO[0]):
+            for renoviranjeDTO in lista_renoviranjaDTO:
+                prostorija_za_izmenu = renoviranjeDTO.objekat_prostorije
+                ProstorijeService.__dodavanje_opreme(renoviranjeDTO, prostorija_za_izmenu)
+                OpremaService.smanji_broj_slobodne_opreme(renoviranjeDTO)
                 ProstorijeRepository.sacuvaj_prostorije()
             return True
         else:

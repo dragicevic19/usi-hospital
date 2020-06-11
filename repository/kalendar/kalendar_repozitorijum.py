@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 import datetime
 
+from model.enum.renoviranje import TipZahvata
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from model.konstante.konstante import PATH_TO_DOGADJAJI
 
@@ -64,16 +65,14 @@ class KalendarRepository:
         KalendarRepository.sacuvaj_dogadjaj()
 
     @staticmethod
-    def slobodna_prostorija_za_period(datum_pocetka, datum_zavrsetka):
-        for dogadjaj in lista_dogadjaja:    # todo: dodati da se proverava samo za renovacije, ne i ostale dogadjaje?
-            pocetak = dogadjaj.datum_vreme.date()
-            zavrsetak = pocetak + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
-            if pocetak <= datum_pocetka <= zavrsetak:
-                return False
-            if pocetak <= datum_zavrsetka <= zavrsetak:
-                return False
-            if datum_pocetka <= pocetak and datum_zavrsetka >= zavrsetak:
-                return False
+    def slobodna_prostorija_za_period(renoviranjeDTO):
+
+        for dogadjaj in lista_dogadjaja:
+            if dogadjaj.prostorija == renoviranjeDTO.prostorija:
+                if dogadjaj.zahvat == TipZahvata.OPERACIJA.name or not dogadjaj.zahvat:
+
+                    if not KalendarRepository.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
+                        return False
         return True
 
         # if datum_pocetka < pocetak and datum_zavrsetka > zavrsetak:
@@ -84,6 +83,21 @@ class KalendarRepository:
         #     return False
         # if pocetak < datum_pocetka < zavrsetak:
         #     return False
+
+    @staticmethod
+    def __proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
+        pocetak = dogadjaj.datum_vreme.date()
+        zavrsetak = pocetak + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
+        datum_pocetka = renoviranjeDTO.datum_pocetkaDate
+        datum_zavrsetka = renoviranjeDTO.datum_zavrsetkaDate
+
+        if pocetak <= datum_pocetka <= zavrsetak:
+            return False
+        if pocetak <= datum_zavrsetka <= zavrsetak:
+            return False
+        if datum_pocetka <= pocetak and datum_zavrsetka >= zavrsetak:
+            return False
+        return True
 
 
 KalendarRepository.ucitaj_dogadjaje()
