@@ -19,10 +19,7 @@ class IzvestajServis:
         d, m, g = krajnji_datum.split("/")
         self._datum_od = datetime(int(god), int(mes), int(dan))
         self._datum_do = datetime(int(g), int(m), int(d))
-        self.ukupno_termina_po_objektu(self._datum_od,self._datum_do)
-
-
-
+        self.ukupno_termina_po_objektu(self._datum_od, self._datum_do)
 
     def generisanje(self, vrsta_izvestaja):
         # vrsta izvestaja -> prostorija, lekar
@@ -32,7 +29,6 @@ class IzvestajServis:
         self._broj_dana_za_izvestaj = (self._datum_do - self._datum_od).days
 
         return string_za_pdf
-
 
     def ukupno_termina_po_objektu(self, datum_od, datum_do):
         for dogadjaj in self._lista_dogadjaja_spojeno:
@@ -55,4 +51,3 @@ class IzvestajServis:
             self._mapa[kljuc] += broj_termina
         else:
             self._mapa[kljuc] = broj_termina
-

@@ -7,7 +7,7 @@ from services.izvestaji.izvestaj_prostorije_servis import IzvestajProstorijeServ
 
 
 class FormaZaIzvestaje:
-    # 05/02/2020
+
     def __init__(self, root):
         self._root = root
         self._datum_od = None
