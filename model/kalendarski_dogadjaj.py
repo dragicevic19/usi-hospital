@@ -4,7 +4,7 @@ import datetime
 
 class KalendarskiDogadjaj:
 
-    def __init__(self, datum, vreme, prostorija, broj_termina=1, spisak_doktora='', spisak_pacijenata='', zahvat = ''):
+    def __init__(self, datum, vreme, prostorija, broj_termina=1, spisak_doktora='', spisak_pacijenata='', zahvat=''):
         self._sprat, self._broj_prostorije = prostorija.split('|')
         self._broj_termina = int(broj_termina)
         self._spisak_doktora = spisak_doktora.split('|')
@@ -12,6 +12,7 @@ class KalendarskiDogadjaj:
         d, m, g = datum.split("/")
         sat, min = vreme.split(":")
         self._datum_vreme = datetime.datetime(int(g), int(m), int(d), int(sat), int(min))
+        # zasto se u renoviranjeDogadjajDTO pretvara date u string pa onda ovde string u date?????
         self._datum = datum
         self._vreme = vreme
         self._zahvat = zahvat

@@ -2,7 +2,7 @@ from repository.prostorije.prostorije_repozitorijum import *
 from model.DTO.prenos_prostorija import PretragaProstorijaDTO
 from repository.kalendar.kalendar_repozitorijum import lista_dogadjaja
 
-ProstorijeRepository.ucitavanje_prostorije()
+# ProstorijeRepository.ucitavanje_prostorije()
 
 
 class ZauzecaProstorija:

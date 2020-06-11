@@ -7,3 +7,8 @@ class TipRenoviranja(Enum):
     DELJENJE_PROSTORIJE = 3
     SPAJANJE_PROSTORIJA = 4
     OSTALE_RENOVACIJE = 5
+
+
+class TipPremestanjaOpreme(Enum):
+    DODAVANJE_OPREME = 1
+    IZBACIVANJE_OPREME = 2

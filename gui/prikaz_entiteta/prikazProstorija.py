@@ -34,21 +34,25 @@ class PrikazProstorija(object):
         index = iid = 0
         for prostorija in self._lista:
             if not prostorija.get_obrisana():
-                if prostorija.get_spisak_opreme():
-                    spisak_opreme = str(prostorija.get_spisak_opreme()[0])
-                else:
-                    spisak_opreme = ''
-                k = (prostorija.get_sprat(), prostorija.get_broj_prostorije(),
-                     spisak_opreme + ' Dvoklik za vise...', prostorija.get_namena_prostorije())
-
-                self.treeview.insert("", index, iid, values=k)
+                prostorija_za_ispis = self.__napravi_red(prostorija)
+                self.treeview.insert("", index, iid, values=prostorija_za_ispis)
                 index = iid = index + 1
         self.treeview.bind('<Double-1>', self.__prikazi_spisak_opreme)
+
+    def __napravi_red(self, prostorija):
+        if prostorija.get_spisak_opreme():
+            lista_spiska = ProstorijeRepository.recnik_u_string(prostorija.get_spisak_opreme()).split('|')
+            spisak_opreme = lista_spiska[0]
+        else:
+            spisak_opreme = ''
+        p = (prostorija.get_sprat(), prostorija.get_broj_prostorije(),
+             spisak_opreme + ' Dvoklik za vise...', prostorija.get_namena_prostorije())
+        return p
 
     def __prikazi_spisak_opreme(self, event):
         try:
             prostorija = self.selektovana_prostorija()
-            messagebox.showinfo('Prikaz opreme', str(prostorija.get_spisak_opreme()))
+            messagebox.showinfo('Prikaz opreme', ProstorijeRepository.recnik_u_string(prostorija.get_spisak_opreme()))
         except IndexError:
             pass
 
@@ -75,7 +79,7 @@ class PrikazProstorija(object):
 
 if __name__ == '__main__':
     root = Tk()
-    ProstorijeRepository.ucitavanje_prostorije()
+    # ProstorijeRepository.ucitavanje_prostorije()
     print(lista_ucitanih_prostorija)
     PrikazProstorija(root)
     root.mainloop()

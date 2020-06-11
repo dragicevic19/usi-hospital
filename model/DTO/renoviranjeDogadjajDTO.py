@@ -4,21 +4,34 @@ from model.konstante.konstante import *
 
 class RenoviranjeDTO:
 
-    def __init__(self, datum_pocetka_radova, datum_zavrsetka_radova, prostorija, oprema='', namena=''):
-        self._datum_pocetka_radova = datum_pocetka_radova.strftime("%d/%m/%Y")
+    def __init__(self, datum_pocetka, datum_zavrsetka, prostorija, naziv_opreme='', broj_opreme=0, namena=''):
+
+        self._datum_pocetka_radova = datum_pocetka.strftime("%d/%m/%Y")
+        self._datum_pocetkaDate = datum_pocetka
+        self._datum_zavrsetkaDate = datum_zavrsetka
+        razlika_datuma = datum_zavrsetka - datum_pocetka
+        self._broj_termina = razlika_datuma.days * MINUTA_U_DANU / VREMENSKI_SLOT
         self._vreme = '00:00'
-        sprat = prostorija.get_sprat()
-        broj_prostorije = prostorija.get_broj_prostorije()
+
+        sprat, broj_prostorije = prostorija.get_sprat(), prostorija.get_broj_prostorije()
         self._prostorija = '|'.join([sprat, broj_prostorije])
         self._nova_namena = namena
-        razlika_datuma = datum_zavrsetka_radova - datum_pocetka_radova
-        self._broj_termina = razlika_datuma.days * MINUTA_U_DANU / VREMENSKI_SLOT
+
         self._objekat_prostorije = prostorija
-        self._oprema = oprema
+        self._naziv_opreme = naziv_opreme
+        self._broj_opreme = int(broj_opreme)
 
     @property
     def datum_pocetka_radova(self):
         return self._datum_pocetka_radova
+    
+    @property
+    def datum_pocetkaDate(self):
+        return self._datum_pocetkaDate
+
+    @property
+    def datum_zavrsetkaDate(self):
+        return self._datum_zavrsetkaDate
 
     @property
     def vreme(self):
@@ -39,6 +52,14 @@ class RenoviranjeDTO:
     @property
     def objekat_prostorije(self):
         return self._objekat_prostorije
+
+    @property
+    def naziv_opreme(self):
+        return self._naziv_opreme
+
+    @property
+    def broj_opreme(self):
+        return self._broj_opreme
 
 
 if __name__ == '__main__':

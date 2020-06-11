@@ -7,9 +7,9 @@ from gui.upravnik.azuriranjeOpreme import poziv_forme_azuriranje_opreme
 from gui.upravnik.brisanjeOpreme import poziv_forme_brisanje_opreme
 from gui.upravnik.renoviranjeMeni import poziv_forme_za_renovaciju_prostorije
 
-
 SIRINA_DUGMETA = 40
 DUZINA_DUGMETA = 150
+
 
 class PocetnaFormaUpravnik(ModelPocetne):
 
@@ -45,7 +45,6 @@ class PocetnaFormaUpravnik(ModelPocetne):
         self._frejm_izvrsavanja.destroy()
         super().kreiranje_frejma_za_izvrsavanje()
 
-
     def akcija1(self):
         self.visa_akcija()
         poziv_forme_za_renovaciju_prostorije(self._frejm_izvrsavanja)
@@ -60,8 +59,6 @@ class PocetnaFormaUpravnik(ModelPocetne):
     def akcija4(self):
         self.visa_akcija()
         poziv_forme_azuriranje_opreme(self._frejm_izvrsavanja)
-
-
 
     def akcija5(self):
         self.visa_akcija()

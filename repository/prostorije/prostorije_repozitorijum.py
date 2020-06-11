@@ -24,15 +24,16 @@ class ProstorijeRepository:
 
     @staticmethod
     def __ucitaj_prostoriju(red, lista):
-        lista_oprema = []
+        # lista_oprema = []
+        oprema = {}
+
         if red[2]:
             pojedinacna_oprema = red[2].split("|")
             for stavka in pojedinacna_oprema:
-                oprema = {}
                 naziv, kolicina = stavka.split(";")
-                oprema[naziv] = kolicina
-                lista_oprema.append(oprema)
-        prostorija = Prostorija(red[0], red[1], lista_oprema, red[3], red[4])
+                oprema[naziv] = int(kolicina)
+                # lista_oprema.append(oprema)
+        prostorija = Prostorija(red[0], red[1], oprema, red[3], red[4])
         lista.append(prostorija)
 
     @staticmethod
@@ -50,16 +51,20 @@ class ProstorijeRepository:
 
     @staticmethod
     def __upisi_prostorije_csv(writer, lista_prostorija):
-        lista_opreme = []
+        # lista_opreme = []
         for prostorija in lista_prostorija:
-            for oprema in prostorija.get_spisak_opreme():
-                for k, v in oprema.items():
-                    lista_opreme.append(k + ";" + v)
+            spisak_opreme = ProstorijeRepository.recnik_u_string(prostorija.get_spisak_opreme())
 
-            spisak_opreme = '|'.join(lista_opreme)
-            lista_opreme.clear()
             writer.writerow([prostorija.get_sprat(), prostorija.get_broj_prostorije(), spisak_opreme,
                              prostorija.get_namena_prostorije(), prostorija.get_obrisana()])
+
+    @staticmethod
+    def recnik_u_string(spisak_opreme):
+        spisak_stirng = ''
+        for k, v in spisak_opreme.items():
+            spisak_stirng += k + ';' + str(v) + '|'
+
+        return spisak_stirng[:-1]
 
     @staticmethod
     def vrati_prostoriju_po_broju_i_spratu(sprat, broj_sobe):
@@ -67,8 +72,3 @@ class ProstorijeRepository:
             if prostorija.get_sprat() == sprat and prostorija.get_broj_prostorije() == broj_sobe:
                 return prostorija
         return False
-
-    @staticmethod
-    def dodaj_dogadjaj_za_prostoriju(dogadjaj):
-        ProstorijeRepository.sacuvaj_prostorije()
-        KalendarRepository.dodaj_dogadjaj(dogadjaj)

@@ -1,11 +1,14 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+
+from repository.oprema.oprema_repozitorijum import OpremaRepository
+from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository
 from services.prostorije.prostorije_servis import ProstorijeService
 from gui.prikaz_entiteta.prikazProstorija import PrikazProstorija
 from model.enum.renoviranje import TipRenoviranja
 from gui.upravnik.renoviranje.izmena_namene import izmena_namene
-from gui.upravnik.renoviranje.premestanje_opreme import premestanje_opreme_meni
+from gui.upravnik.renoviranje.premestanje_opreme_meni import premestanje_opreme_meni
 from gui.upravnik.renoviranje.spajanje_prostorije import spajanje_prostorije
 from gui.upravnik.renoviranje.deljenje_prostorije import deljenje_prostorije
 from gui.upravnik.renoviranje.ostale_renovacije import ostale_renovacije
@@ -45,6 +48,8 @@ class RenoviranjeProstorije(PrikazProstorija):
 
 def poziv_forme_odabir_prostorije(tip_renoviranja):
     root = Tk()
+
+
     application = RenoviranjeProstorije(root, tip_renoviranja)
     root.mainloop()
 

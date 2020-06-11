@@ -2,8 +2,8 @@ class BolnickaOprema(object):
 
     def __init__(self, naziv_opreme, ukupan_broj_opreme, slobodna_oprema=0, opis=""):
         self._naziv_opreme = naziv_opreme
-        self._ukupan_broj_opreme = ukupan_broj_opreme
-        self._slobodna_oprema = slobodna_oprema
+        self._ukupan_broj_opreme = int(ukupan_broj_opreme)
+        self._slobodna_oprema = int(slobodna_oprema)
         self._opis = opis
 
     def get_naziv_opreme(self):

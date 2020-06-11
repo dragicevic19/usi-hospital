@@ -64,5 +64,5 @@ class OpremaRepository:
 
 
 #  samo za testiranje
-OpremaRepository.ucitavanje_bolnicke_opreme()
+# OpremaRepository.ucitavanje_bolnicke_opreme()
 # OpremaRepository.sacuvaj_bolnicku_opremu()

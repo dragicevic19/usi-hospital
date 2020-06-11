@@ -63,7 +63,28 @@ class KalendarRepository:
         lista_dogadjaja.append(dogadjaj)
         KalendarRepository.sacuvaj_dogadjaj()
 
+    @staticmethod
+    def slobodna_prostorija_za_period(datum_pocetka, datum_zavrsetka):
+        for dogadjaj in lista_dogadjaja:    # todo: dodati da se proverava samo za renovacije, ne i ostale dogadjaje?
+            pocetak = dogadjaj.datum_vreme.date()
+            zavrsetak = pocetak + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
+            if pocetak <= datum_pocetka <= zavrsetak:
+                return False
+            if pocetak <= datum_zavrsetka <= zavrsetak:
+                return False
+            if datum_pocetka <= pocetak and datum_zavrsetka >= zavrsetak:
+                return False
+        return True
+
+        # if datum_pocetka < pocetak and datum_zavrsetka > zavrsetak:
+        #     return False
+        # if datum_pocetka > pocetak and datum_zavrsetka < zavrsetak:
+        #     return False
+        # if datum_pocetka < pocetak < datum_zavrsetka < zavrsetak:
+        #     return False
+        # if pocetak < datum_pocetka < zavrsetak:
+        #     return False
+
 
 KalendarRepository.ucitaj_dogadjaje()
-print(lista_proslih_dogadjaja[0])
-KalendarRepository.sacuvaj_dogadjaj()
+# KalendarRepository.sacuvaj_dogadjaj()

@@ -1,6 +1,6 @@
-from model.kalendarski_dogadjaj import KalendarskiDogadjaj
-from services.file.file_servis import FileService
-from repository.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija, ProstorijeRepository
+from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository
+from services.kalendar.kalendar_servis import KalendarServis
+from services.oprema.oprema_servis import OpremaService
 
 
 class ProstorijeService(object):
@@ -12,7 +12,7 @@ class ProstorijeService(object):
     @staticmethod
     def brisanje_prostorije(prostorija):
         prostorija._obrisana = True
-        FileService.sacuvaj_entitete()
+        ProstorijeRepository.sacuvaj_prostorije()
 
     @staticmethod
     def pretraga_prostorije():
@@ -24,20 +24,60 @@ class ProstorijeService(object):
 
     @staticmethod
     def izmeni_namenu(prostorijaDTO):
-        prostorija = prostorijaDTO.objekat_prostorije
-        prostorija._namena_prostorije = prostorijaDTO.nova_namena
-        dogadjaj = KalendarskiDogadjaj(prostorijaDTO.datum_pocetka_radova, prostorijaDTO.vreme, prostorijaDTO.prostorija,
-                                       prostorijaDTO.broj_termina)
-        ProstorijeRepository.dodaj_dogadjaj_za_prostoriju(dogadjaj)
-        # ProstorijeRepository.sacuvaj_prostorije()
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(prostorijaDTO):
+            prostorija = prostorijaDTO.objekat_prostorije
+            prostorija._namena_prostorije = prostorijaDTO.nova_namena
+            ProstorijeRepository.sacuvaj_prostorije()
+        else:
+            return False
 
     @staticmethod
     def ostale_renovacije(prostorijaDTO):
-        dogadjaj = KalendarskiDogadjaj(prostorijaDTO.datum_pocetka_radova, prostorijaDTO.vreme, prostorijaDTO.prostorija,
-                                       prostorijaDTO.broj_termina)
-        ProstorijeRepository.dodaj_dogadjaj_za_prostoriju(dogadjaj)
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(prostorijaDTO):
+            ProstorijeRepository.sacuvaj_prostorije()
+        else:
+            return False
 
     @staticmethod
-    def dodavanje_slobodne_opreme_u_prostoriju():
-        pass
+    def dodavanje_slobodne_opreme_u_prostoriju(lista_prostorijaDTO):
 
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(lista_prostorijaDTO[0]):
+            for prostorijaDTO in lista_prostorijaDTO:
+                prostorija_za_izmenu = prostorijaDTO.objekat_prostorije
+                ProstorijeService.__dodavanje_opreme(prostorijaDTO, prostorija_za_izmenu)
+                OpremaService.smanji_broj_slobodne_opreme(prostorijaDTO)
+                ProstorijeRepository.sacuvaj_prostorije()
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def __dodavanje_opreme(prostorijaDTO, prostorija_za_izmenu):
+        stara_oprema = False
+        for naziv, broj_opreme in prostorija_za_izmenu.get_spisak_opreme().items():
+            if naziv == prostorijaDTO.naziv_opreme:
+                stara_oprema = True
+                broj_opreme += prostorijaDTO.broj_opreme
+                prostorija_za_izmenu.promena_opreme(naziv, broj_opreme)
+
+        if not stara_oprema:
+            prostorija_za_izmenu.promena_opreme(prostorijaDTO.naziv_opreme, prostorijaDTO.broj_opreme)
+
+    @staticmethod
+    def izbacivanje_opreme_iz_prostorije(lista_prostorijaDTO):  # razlikuje se od dodavanje opreme samo u 2 linije,  da li refaktorisati?
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(lista_prostorijaDTO[0]):
+            for prostorijaDTO in lista_prostorijaDTO:
+                prostorija_za_izmenu = prostorijaDTO.objekat_prostorije
+                ProstorijeService.__izbacivanje_opreme(prostorijaDTO, prostorija_za_izmenu)  # 1
+                OpremaService.povecaj_broj_slobodne_opreme(prostorijaDTO)                    # 2
+                ProstorijeRepository.sacuvaj_prostorije()
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def __izbacivanje_opreme(prostorijaDTO, prostorija_za_izmenu):
+        for naziv, broj_opreme in prostorija_za_izmenu.get_spisak_opreme().items():
+            if naziv == prostorijaDTO.naziv_opreme:
+                broj_opreme -= prostorijaDTO.broj_opreme
+                prostorija_za_izmenu.promena_opreme(naziv, broj_opreme)
