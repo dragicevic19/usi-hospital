@@ -9,10 +9,9 @@ class PregledAnamneze(PrikazAnamneze):
 
     def __init__(self, root, ulogovan_pacijent):
         super().__init__(root, ulogovan_pacijent)
-        detaljniji_opis = ttk.Button(self._root, text="DETALJNIJI OPIS", command=self.on_click)
-        detaljniji_opis.pack(fill='x')
+        self.treeview.bind('<Double-1>', self._odabir_pacijenta)
 
-    def on_click(self):
+    def _odabir_pacijenta(self, event):
         try:
             odabrani = self.treeview.focus()
             odabrani_unos_anamneze = self.treeview.item(odabrani)['values']

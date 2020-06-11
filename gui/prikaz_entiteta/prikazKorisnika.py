@@ -64,5 +64,5 @@ class PrikazKorisnika(object):
 
 if __name__ == '__main__':
     root = Tk()
-    PrikazKorisnika(root)
+    PrikazKorisnika(root,"UPRAVNIK")
     root.mainloop()

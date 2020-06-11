@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 from pathlib import Path
 from model.konstante.konstante import *
 from model.unosAnamneze import UnosAnamneze
@@ -43,6 +44,15 @@ class UnosAnamnezeRepository:
             if unos.get_id() in ulogovan_pacijent.get_anamneza():
                 lista_anamneza_po_pacijentu.append(unos)
         return lista_anamneza_po_pacijentu
+
+    @staticmethod
+    def dodaj_anamnezu(lekar, opis_anamneze, pacijent):
+        UnosAnamnezeRepository.generisi_id_anamneze()
+        global id_sledece_anamneze
+        datum = datetime.now().strftime("%d-%m-%Y %H:%M")
+        anamneza = UnosAnamneze(id_sledece_anamneze, lekar, opis_anamneze, datum)
+        mapa_ucitanih_unosa_anamneza[str(id)] = anamneza
+        KorisnikRepository.dodaj_anamnezu(pacijent, id_sledece_anamneze)
 
 
 UnosAnamnezeRepository.ucitavanje_unosa_anamneze()
