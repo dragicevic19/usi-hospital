@@ -11,11 +11,15 @@ from services.prostorije.zauzeca_prostorija_servis import ZauzecaProstorija
  
 
 class PretragaProstorija:
-    lista_zahtevane_opreme = []
+
 
     def __init__(self,root):
         self._root = root
-
+        self.lista_zahtevane_opreme = []
+        self.vremeOd = None
+        self.vremeDo = None
+        self.datumOd = None
+        self.datumDo = None
         self.prvi_frejm = Frame(self._root)
         self.prvi_frejm.place(x= 0, y = 0, width = 450, height = 180)
         self.drugi_frejm = Frame(self._root)
@@ -24,15 +28,13 @@ class PretragaProstorija:
         self.treci_frejm.place(x= 200, y = 200, width = 200, height = 500)
         self.cetvrti_frejm = Frame(self._root)
         self.cetvrti_frejm.place(x=0, y=700, width=200, height=500)
+        self.postava()
         self.grupisi_vreme_od()
         self.grupisi_vreme_do()
-        self.postava()
 
 
-        self.vremeOd = 0
-        self.vremeDo = 0
-        self.datumOd = 0
-        self.datumDo = 0
+
+
 
 
 
