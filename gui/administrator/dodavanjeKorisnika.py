@@ -1,4 +1,3 @@
-
 from model.enum.recnici import *
 from services.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
