@@ -42,7 +42,7 @@ class OstaleRenovacije:
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:
-            messagebox.showerror("GRESKA", "Za prostoriju je vec zakazno renoviranje ili operacija u tom periodu")
+            messagebox.showerror("GRESKA", "Prostorija je zauzeta u tom periodu")
 
     def provera_datuma(self):
         try:

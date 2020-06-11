@@ -4,7 +4,7 @@ import datetime
 
 class KalendarskiDogadjaj:
 
-    def __init__(self, datum, vreme, prostorija, broj_termina=1, spisak_doktora='', spisak_pacijenata='', zahvat=''):
+    def __init__(self, datum, vreme, prostorija, broj_termina=1, spisak_doktora='', spisak_pacijenata='', zahvat=''):   # valjda samo jedan pacijent??
         self._prostorija = prostorija
         self._sprat, self._broj_prostorije = prostorija.split('|')
         self._broj_termina = int(broj_termina)
