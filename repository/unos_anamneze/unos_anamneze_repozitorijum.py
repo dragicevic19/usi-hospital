@@ -25,3 +25,6 @@ class UnosAnamnezeRepository:
 
             for unos in lista_ucitanih_unosa_anamneza:
                 writer.writerow([unos.get_id(), unos.get_lekar(), unos.get_opis(), unos.get_datum_i_vreme()])
+
+
+UnosAnamnezeRepository.ucitavanje_unosa_anamneze()

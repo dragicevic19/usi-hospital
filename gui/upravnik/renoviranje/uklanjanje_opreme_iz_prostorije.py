@@ -10,6 +10,7 @@ from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository,
 class UklanjenjeOpremeIzProstorije(PremestanjeOpreme):
 
     def __init__(self, root, selektovana_prostorija):
+        root.title('Uklanjanje opreme iz prostorije')
         self._prostorija = selektovana_prostorija
         self._oprema_za_izbacivanje = []
         self.pronadji_opremu_za_izbacivanje()
@@ -24,7 +25,7 @@ class UklanjenjeOpremeIzProstorije(PremestanjeOpreme):
 
 def uklanjanje_opreme_iz_prostorije(selektovana_prostorija):
     root = Tk()
-    root.geometry('800x600')
+    root.geometry('800x450')
     # OpremaRepository.ucitavanje_bolnicke_opreme()
     application = UklanjenjeOpremeIzProstorije(root, selektovana_prostorija)
     root.mainloop()

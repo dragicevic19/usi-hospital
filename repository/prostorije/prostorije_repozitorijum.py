@@ -24,15 +24,12 @@ class ProstorijeRepository:
 
     @staticmethod
     def __ucitaj_prostoriju(red, lista):
-        # lista_oprema = []
         oprema = {}
-
         if red[2]:
             pojedinacna_oprema = red[2].split("|")
             for stavka in pojedinacna_oprema:
                 naziv, kolicina = stavka.split(";")
                 oprema[naziv] = int(kolicina)
-                # lista_oprema.append(oprema)
         prostorija = Prostorija(red[0], red[1], oprema, red[3], red[4])
         lista.append(prostorija)
 
@@ -72,3 +69,11 @@ class ProstorijeRepository:
             if prostorija.get_sprat() == sprat and prostorija.get_broj_prostorije() == broj_sobe:
                 return prostorija
         return False
+
+    @staticmethod
+    def obrisi_sobe(prostorija1, prostorija2):
+        lista_ucitanih_prostorija.remove(prostorija1)
+        lista_ucitanih_prostorija.remove(prostorija2)
+
+
+ProstorijeRepository.ucitavanje_prostorije()

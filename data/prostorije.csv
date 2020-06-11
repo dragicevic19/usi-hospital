@@ -15,3 +15,6 @@
 1,sobaproba,krevet;0|respirator;0|stalak za infuziju;0|elektrokardiograf;1|rendgen aparat;2,operaciona sala,
 1,123,,operaciona sala,
 1,soba123,,operaciona sala,
+4,SOBA3,krevet;1|respirator;1|stalak za infuziju;1|elektrokardiograf;1|rendgen aparat;1,soba za lezanje,
+4,SOBA4,krevet;1|respirator;1|stalak za infuziju;1|elektrokardiograf;10|rendgen aparat;1,operaciona sala,
+4,SOBA12,krevet;20|respirator;20|stalak za infuziju;20|elektrokardiograf;10,operaciona sala,

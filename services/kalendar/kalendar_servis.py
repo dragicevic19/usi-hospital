@@ -13,7 +13,7 @@ class KalendarServis:
         if KalendarServis.slobodna_prostorija_za_period(renoviranjeDTO):
 
             dogadjaj = KalendarskiDogadjaj(renoviranjeDTO.datum_pocetka_radova, renoviranjeDTO.vreme,
-                                           renoviranjeDTO.prostorija,
+                                           renoviranjeDTO.sprat_broj_prostorije,
                                            renoviranjeDTO.broj_termina)
             KalendarRepository.dodaj_dogadjaj(dogadjaj)
             return True

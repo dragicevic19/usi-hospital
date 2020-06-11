@@ -9,6 +9,7 @@ from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository,
 class DodavanjeOpremeUProstoriju(PremestanjeOpreme):
 
     def __init__(self, root, selektovana_prostorija):
+        root.title('Dodavanje opreme u prostoriju')
         self._prostorija = selektovana_prostorija
         self._oprema_za_dodavanje = []
         self.pronadji_opremu_za_dodavanje()
@@ -24,7 +25,7 @@ class DodavanjeOpremeUProstoriju(PremestanjeOpreme):
 
 def dodavanje_opreme(selektovana_prostorija):
     root = Tk()
-    root.geometry('800x600')
+    root.geometry('800x450')
 
     application = DodavanjeOpremeUProstoriju(root, selektovana_prostorija)
     root.mainloop()
@@ -32,7 +33,7 @@ def dodavanje_opreme(selektovana_prostorija):
 
 if __name__ == '__main__':
     root = Tk()
-    root.geometry('800x500')
+    root.geometry('800x450')
     # OpremaRepository.ucitavanje_bolnicke_opreme()
     # ProstorijeRepository.ucitavanje_prostorije()
     prostorija = lista_ucitanih_prostorija[0]

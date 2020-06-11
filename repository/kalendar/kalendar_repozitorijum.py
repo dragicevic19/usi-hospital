@@ -68,7 +68,7 @@ class KalendarRepository:
     def slobodna_prostorija_za_period(renoviranjeDTO):
         danasnji_datum = datetime.date.today()
         for dogadjaj in lista_dogadjaja:
-            if dogadjaj.prostorija == renoviranjeDTO.prostorija:
+            if dogadjaj.prostorija == renoviranjeDTO.sprat_broj_prostorije:
                 dana_do_renoviranja = (renoviranjeDTO.datum_pocetkaDate - danasnji_datum).days
                 if dana_do_renoviranja < 10:    # proverava samo da li ima operacija ili pregleda za narednih 10ak dana
                                                 # koji upadaju u termin renoviranja, za ostale ima vremena da se prebaci npr operacija u drugu prostoriju

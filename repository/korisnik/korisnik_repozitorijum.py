@@ -59,5 +59,4 @@ class KorisnikRepository:
 
 # samo za probe pre konacnog
 KorisnikRepository.ucitavanje_korisnika()
-KorisnikRepository.sacuvaj_korisnike()
 

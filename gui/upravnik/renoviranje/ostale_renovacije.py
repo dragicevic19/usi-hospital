@@ -7,6 +7,7 @@ class OstaleRenovacije:
 
     def __init__(self, root, selektovana_prostorija):
         self._root = root
+        self._root.title('Ostale renovacije')
         self._prostorija = selektovana_prostorija
         self._datum_pocetka_radova = None
         self._datum_zavrsetka_radova = None

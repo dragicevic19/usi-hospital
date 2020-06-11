@@ -91,6 +91,6 @@ class RenoviranjeMeni:
 
 
 if __name__ == '__main__':
-    ProstorijeRepository.ucitavanje_prostorije()
-    OpremaRepository.ucitavanje_bolnicke_opreme()
+    # ProstorijeRepository.ucitavanje_prostorije()
+    # OpremaRepository.ucitavanje_bolnicke_opreme()
     vp_start_gui()
