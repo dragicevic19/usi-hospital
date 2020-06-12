@@ -63,6 +63,9 @@ class KorisnikRepository:
         for korisnik in lista:
             writer.writerow(korisnik.vrati_za_upis_u_fajl())
 
+    @staticmethod
+    def dodaj_id_anamneze_pacijentu(pacijent, id_anamneze):
+        pacijent.dodaj_anamnezu(id_anamneze)
 
 # samo za probe pre konacnog
 KorisnikRepository.ucitavanje_korisnika()
