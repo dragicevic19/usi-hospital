@@ -7,7 +7,9 @@ PATH_TO_ANAMNEZA = '../../data/anamneza.csv'
 PATH_TO_PROSTORIJE = '../../data/prostorije.csv'
 PATH_TO_DOGADJAJI = '../../data/dogadjaji.csv'
 PATH_TO_IZVESTAJ_PROSTORIJE = "../../data/izvestaj_prostorije.pdf"
+PATH_TO_IZVESTAJ_PROSTORIJE_CITANJE_WEB = r'..\..\data\izvestaj_prostorije.pdf'
 PATH_TO_IZVESTAJ_LEKARA = "../../data/izvestaj_lekar.pdf"
+PATH_TO_IZVESTAJ_LEKARA_CITANJE_WEB = r'..\..\data\izvestaj_lekar.pdf'
 
 
 REGEX_VREME = re.compile(r'^(([01]\d|2[0-3]):([0-5]\d)|24:00)-(([01]\d|2[0-3]):([0-5]\d)|24:00)$')

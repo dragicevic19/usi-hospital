@@ -1,6 +1,7 @@
 from fpdf import FPDF
 import webbrowser
-from model.konstante.konstante import PATH_TO_IZVESTAJ_PROSTORIJE, PATH_TO_IZVESTAJ_LEKARA
+from model.konstante.konstante import PATH_TO_IZVESTAJ_PROSTORIJE, PATH_TO_IZVESTAJ_LEKARA, \
+    PATH_TO_IZVESTAJ_PROSTORIJE_CITANJE_WEB, PATH_TO_IZVESTAJ_LEKARA_CITANJE_WEB
 
 
 class IzvestajRepozitorijum:
@@ -16,7 +17,7 @@ class IzvestajRepozitorijum:
             linija += 1
         if tip_izvestaja:
             pdf.output(PATH_TO_IZVESTAJ_PROSTORIJE)
-            webbrowser.open_new(r'..\..\data\izvestaj_prostorije.pdf')
+            webbrowser.open_new(PATH_TO_IZVESTAJ_PROSTORIJE_CITANJE_WEB)
         else:
             pdf.output(PATH_TO_IZVESTAJ_LEKARA)
-            webbrowser.open_new(r'..\..\data\izvestaj_lekar.pdf')
+            webbrowser.open_new(PATH_TO_IZVESTAJ_LEKARA_CITANJE_WEB)
