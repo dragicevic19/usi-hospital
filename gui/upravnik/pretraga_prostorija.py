@@ -27,11 +27,11 @@ class PretragaProstorija:
         self.treci_frejm = Frame(self._root)
         self.treci_frejm.place(x= 200, y = 200, width = 200, height = 500)
         self.cetvrti_frejm = Frame(self._root)
-        self.cetvrti_frejm.place(x=0, y=700, width=200, height=500)
-        self.postava()
+        self.cetvrti_frejm.place(x=100, y=350, width=200, height=500)
+
         self.grupisi_vreme_od()
         self.grupisi_vreme_do()
-
+        self.postava()
 
 
 
@@ -47,23 +47,27 @@ class PretragaProstorija:
         self.label = Label(self.treci_frejm, text ="Izabrana oprema \n za pretragu").grid(row = 0, column=0, padx = 20)
         self.prikaz = Listbox(self.treci_frejm)
 
-        dugme = Button(self.cetvrti_frejm, text="PRETRAZI", command=self.pretraga())
-        dugme.grid(row=1, column=2, padx=20, pady=20)
+        dugme = Button(self.cetvrti_frejm, text="PRETRAZI", command=self.pretraga)
+        dugme.grid(row=0, column=2, padx=20, pady=20)
 
 
     def grupisi_vreme_od(self):
         self.grupa1 = LabelFrame(self.prvi_frejm, text  ="Vreme od", padx = 10, pady = 20)
         self.grupa1.grid(row = 2, column = 1)
 
-        self.datumOd = Entry(self.grupa1).grid(row =  1,column = 1,padx = 20)
-        self.vremeOd = Entry(self.grupa1).grid( row = 1,column = 2, padx=20)
+        self.datumOd = Entry(self.grupa1)
+        self.datumOd.grid(row =  1,column = 1,padx = 20)
+        self.vremeOd = Entry(self.grupa1)
+        self.vremeOd.grid( row = 1,column = 2, padx=20)
 
     def grupisi_vreme_do(self):
         self.grupa2 = LabelFrame(self.prvi_frejm, text  ="Vreme do", padx = 10, pady = 20)
         self.grupa2.grid(row = 3, column = 1)
 
-        self.datumDo = Entry(self.grupa2).grid(row=1, column=1, padx=20)
-        self.vremeDo = Entry(self.grupa2).grid(row=1, column=2, padx=20)
+        self.datumDo = Entry(self.grupa2)
+        self.datumDo.grid(row=1, column=1, padx=20)
+        self.vremeDo = Entry(self.grupa2)
+        self.vremeDo.grid(row=1, column=2, padx=20)
 
 
 
