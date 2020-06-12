@@ -51,5 +51,5 @@ def poziv_forme_pregled_anamneze(root, ulogovan_pacijent):
 
 if __name__ == '__main__':
     root = Tk()
-    ulogovan_pacijent = lista_ucitanih_korisnika[14]
+    ulogovan_pacijent = lista_ucitanih_korisnika[23]
     poziv_forme_pregled_anamneze(root, ulogovan_pacijent)

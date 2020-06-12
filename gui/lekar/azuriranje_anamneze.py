@@ -18,14 +18,15 @@ from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
 
 class AzuriranjeAnamneze(PrikazKorisnika):
 
-    def __init__(self, root):
+    def __init__(self, root,lekar):
         super().__init__(root, "PACIJENT")
+        self._lekar = lekar
         self.treeview.bind('<Double-1>', self._selektuj_korisnika)
 
     def _selektuj_korisnika(self, event):
         try:
             pacijent = self.selektovani_pacijent()
-            DodavanjeAnamnezePacijentu(pacijent)
+            DodavanjeAnamnezePacijentu(pacijent,self._lekar)
         except IndexError:
             pass
 
@@ -37,7 +38,11 @@ class AzuriranjeAnamneze(PrikazKorisnika):
         return pacijent
 
 
+def poziv_forme_za_dodavanje_anamneze_nekom_od_pacijenata(root,ulogovani_lekar):
+    AzuriranjeAnamneze(root,ulogovani_lekar)
+    root.mainloop()
+
+
 if __name__ == '__main__':
     root = Tk()
-    AzuriranjeAnamneze(root)
-    root.mainloop()
+    poziv_forme_za_dodavanje_anamneze_nekom_od_pacijenata(root,"horacije442")

@@ -21,8 +21,6 @@ leks,asd,LEKAR,asd,asd,,,,
 lekardodat,asd,LEKAR,asd,asd,,23:00-00:30,,endokrinolog
 lekardodatsad,sa,LEKAR,ads,adsa,,,,
 pera_pacijent,1234,PACIJENT,pera,peric,,1234,muski,
-zile2,asd,PACIJENT,asd,asd,,123,muski,
+zile2,asd,PACIJENT,asd,asd,,123,muski,|8|9
 pera_pacijent,123,PACIJENT,asd,asd,,aaa,muski,
 nikolaNikolic,123,LEKAR,aasd,asd,,,,
-marija,marija,PACIJENT,marija,marijic,,1234,zenski,
-marko123,asad,PACIJENT,marko,marko,,123,muski,
