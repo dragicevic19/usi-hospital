@@ -2,6 +2,8 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from gui.upravnik.renoviranje.renoviranjeProstorije import poziv_forme_odabir_prostorije
 from model.enum.renoviranje import TipRenoviranja
+from repository.oprema.oprema_repozitorijum import OpremaRepository
+from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository
 
 """ 
 
@@ -24,7 +26,7 @@ def init(top, gui):
 
 
 def vp_start_gui():
-    '''Starting point when module is the main routine.'''
+    '''Kada se pokrece iz main a'''
     global val, w, root
     root = tk.Tk()
     top = RenoviranjeMeni(root)
@@ -36,8 +38,8 @@ w = None
 
 
 def poziv_forme_za_renovaciju_prostorije(rt):
-    '''Starting point when module is imported by another module.
-       Correct form of call: 'napravi_meni(root)'.'''
+    '''Startuje ovde kad se pokrece iz drugog modula
+      Poziv: 'poziv_forme_za_renovaciju_prostorije(root)'.'''
     global w, w_win, root
     # rt = root
     root = rt
@@ -89,4 +91,6 @@ class RenoviranjeMeni:
 
 
 if __name__ == '__main__':
+    # ProstorijeRepository.ucitavanje_prostorije()
+    # OpremaRepository.ucitavanje_bolnicke_opreme()
     vp_start_gui()

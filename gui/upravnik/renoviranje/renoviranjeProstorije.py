@@ -1,11 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from services.prostorije.prostorije_servis import ProstorijeService
+
 from gui.prikaz_entiteta.prikazProstorija import PrikazProstorija
 from model.enum.renoviranje import TipRenoviranja
 from gui.upravnik.renoviranje.izmena_namene import izmena_namene
-from gui.upravnik.renoviranje.premestanje_opreme import premestanje_opreme_meni
+from gui.upravnik.renoviranje.premestanje_opreme_meni import premestanje_opreme_meni
 from gui.upravnik.renoviranje.spajanje_prostorije import spajanje_prostorije
 from gui.upravnik.renoviranje.deljenje_prostorije import deljenje_prostorije
 from gui.upravnik.renoviranje.ostale_renovacije import ostale_renovacije
@@ -26,21 +26,25 @@ class RenoviranjeProstorije(PrikazProstorija):
 
     def renoviraj_prostoriju(self):
         if self._tip_renoviranja == TipRenoviranja.SPAJANJE_PROSTORIJA:
-            selektovane_prostorije = self.selektuj_vise_prostorija()
-            if selektovane_prostorije:
-                spajanje_prostorije(*selektovane_prostorije)
-                messagebox.showinfo("USPESNO", "Zakazali ste renoviranje prostorije!")
-            else:
-                messagebox.showerror("GRESKA", "Morate da izaberete dve prostorije!")
+            self.poziv_spajanje_prostorija()
         else:
-            try:
-                prostorija = self.selektovana_prostorija()
-                self._root.destroy()
-                metode_renovacija[self._tip_renoviranja](prostorija)
+            self.poziv_ostalih_tipova_renoviranja()
 
-            except:
-                messagebox.showerror("GRESKA", "Izaberite jednu prostoriju")
+    def poziv_ostalih_tipova_renoviranja(self):
+        try:
+            prostorija = self.selektovana_prostorija()
+            self._root.destroy()
+            metode_renovacija[self._tip_renoviranja](prostorija)
+        except:
+            messagebox.showerror("GRESKA", "Izaberite jednu prostoriju")
 
+    def poziv_spajanje_prostorija(self):
+        selektovane_prostorije = self.selektuj_vise_prostorija()
+        if selektovane_prostorije:
+            self._root.destroy()
+            spajanje_prostorije(*selektovane_prostorije)
+        else:
+            messagebox.showerror("GRESKA", "Morate da izaberete dve prostorije!")
 
 
 def poziv_forme_odabir_prostorije(tip_renoviranja):

@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 import datetime
 
+from model.enum.renoviranje import TipZahvata
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from model.konstante.konstante import PATH_TO_DOGADJAJI
 
@@ -62,6 +63,37 @@ class KalendarRepository:
     def dodaj_dogadjaj(dogadjaj):
         lista_dogadjaja.append(dogadjaj)
         KalendarRepository.sacuvaj_dogadjaj()
+
+    @staticmethod
+    def slobodna_prostorija_za_period(renoviranjeDTO):
+        danasnji_datum = datetime.date.today()
+        for dogadjaj in lista_dogadjaja:
+            if dogadjaj.prostorija == renoviranjeDTO.sprat_broj_prostorije:
+                dana_do_renoviranja = (renoviranjeDTO.datum_pocetkaDate - danasnji_datum).days
+                if dana_do_renoviranja < 10:    # proverava samo da li ima operacija ili pregleda za narednih 10ak dana
+                                                # koji upadaju u termin renoviranja, za ostale ima vremena da se prebaci npr operacija u drugu prostoriju
+                    if not KalendarRepository.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
+                        return False
+                else:
+                    if not KalendarRepository.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
+                        if not dogadjaj.zahvat:
+                            return False
+        return True
+
+    @staticmethod
+    def __proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
+        pocetak = dogadjaj.datum_vreme.date()
+        zavrsetak = pocetak + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
+        datum_pocetka = renoviranjeDTO.datum_pocetkaDate
+        datum_zavrsetka = renoviranjeDTO.datum_zavrsetkaDate
+
+        if pocetak <= datum_pocetka <= zavrsetak:
+            return False
+        if pocetak <= datum_zavrsetka <= zavrsetak:
+            return False
+        if datum_pocetka <= pocetak and datum_zavrsetka >= zavrsetak:
+            return False
+        return True
 
 
 KalendarRepository.ucitaj_dogadjaje()

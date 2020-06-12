@@ -47,7 +47,7 @@ class NovaProstorija:
             self.__sacuvaj_prostoriju()
 
     def __sacuvaj_prostoriju(self):
-        prostorija = Prostorija(self._sprat.get(), self._broj_prostorije.get(), [], self._namena_prostorije.get())
+        prostorija = Prostorija(self._sprat.get(), self._broj_prostorije.get(), {}, self._namena_prostorije.get())
         ProstorijeService.dodavanje_prostorije(prostorija)
         messagebox.showinfo("USPESNO", "Uspesno ste dodali prostoriju")
         self._root.destroy()

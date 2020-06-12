@@ -1,4 +1,4 @@
-from services.file.file_servis import FileService
+# from services.file.file_servis import FileService
 from model.bolnickaOprema import BolnickaOprema
 from repository.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 from repository.oprema.oprema_repozitorijum import OpremaRepository, lista_ucitane_bolnicke_opreme
@@ -35,4 +35,18 @@ class OpremaService(object):
 
     @staticmethod
     def obrisi_opremu_iz_prostorija(naziv_opreme):
-         OpremaRepository.brisanje_opreme_iz_prostorija(naziv_opreme)
+        OpremaRepository.brisanje_opreme_iz_prostorija(naziv_opreme)
+
+    @staticmethod
+    def smanji_broj_slobodne_opreme(prostorija_za_izmenu):
+        for oprema in lista_ucitane_bolnicke_opreme:
+            if oprema._naziv_opreme == prostorija_za_izmenu.naziv_opreme:
+                oprema._slobodna_oprema -= prostorija_za_izmenu.broj_opreme
+        OpremaRepository.sacuvaj_bolnicku_opremu()
+
+    @staticmethod
+    def povecaj_broj_slobodne_opreme(naziv, broj_opreme):
+        for oprema in lista_ucitane_bolnicke_opreme:
+            if oprema._naziv_opreme == naziv:
+                oprema._slobodna_oprema += broj_opreme
+        OpremaRepository.sacuvaj_bolnicku_opremu()

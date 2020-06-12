@@ -67,7 +67,6 @@ class KorisnikRepository:
     def dodaj_id_anamneze_pacijentu(pacijent, id_anamneze):
         pacijent.dodaj_anamnezu(id_anamneze)
 
-# samo za probe pre konacnog
 KorisnikRepository.ucitavanje_korisnika()
 KorisnikRepository.sacuvaj_korisnike()
 # print(KorisnikRepository.vrati_spisak_pacijenata_po_lekaru("sebastijan3412"))
