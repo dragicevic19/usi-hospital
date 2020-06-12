@@ -97,4 +97,4 @@ class KalendarRepository:
 
 
 KalendarRepository.ucitaj_dogadjaje()
-# KalendarRepository.sacuvaj_dogadjaj()
+KalendarRepository.sacuvaj_dogadjaj()
