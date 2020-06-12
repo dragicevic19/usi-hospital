@@ -11,7 +11,6 @@ class KalendarServis:
     @staticmethod
     def dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
         if KalendarServis.slobodna_prostorija_za_period(renoviranjeDTO):
-
             dogadjaj = KalendarskiDogadjaj(renoviranjeDTO.datum_pocetka_radova, renoviranjeDTO.vreme,
                                            renoviranjeDTO.sprat_broj_prostorije,
                                            renoviranjeDTO.broj_termina)

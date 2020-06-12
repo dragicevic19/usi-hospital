@@ -77,7 +77,8 @@ class SpajanjeProstorije(object):
         return True
 
     def provera_broja_prostorije(self):
-        if not ProstorijeService.slobodan_broj_prostorije(self._prostorija1, self._prostorija2, self._novi_broj.get()):
+        ProstorijeService.obrisi_sobe(self._prostorija1, self._prostorija2)
+        if not ProstorijeService.slobodan_broj_prostorije(self._prostorija1.get_sprat(), self._novi_broj.get()):
             return False
         return True
 

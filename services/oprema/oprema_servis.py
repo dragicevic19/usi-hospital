@@ -45,8 +45,8 @@ class OpremaService(object):
         OpremaRepository.sacuvaj_bolnicku_opremu()
 
     @staticmethod
-    def povecaj_broj_slobodne_opreme(prostorijaDTO):
+    def povecaj_broj_slobodne_opreme(naziv, broj_opreme):
         for oprema in lista_ucitane_bolnicke_opreme:
-            if oprema._naziv_opreme == prostorijaDTO.naziv_opreme:
-                oprema._slobodna_oprema += prostorijaDTO.broj_opreme
+            if oprema._naziv_opreme == naziv:
+                oprema._slobodna_oprema += broj_opreme
         OpremaRepository.sacuvaj_bolnicku_opremu()

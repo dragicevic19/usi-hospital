@@ -80,15 +80,6 @@ class KalendarRepository:
                             return False
         return True
 
-        # if datum_pocetka < pocetak and datum_zavrsetka > zavrsetak:
-        #     return False
-        # if datum_pocetka > pocetak and datum_zavrsetka < zavrsetak:
-        #     return False
-        # if datum_pocetka < pocetak < datum_zavrsetka < zavrsetak:
-        #     return False
-        # if pocetak < datum_pocetka < zavrsetak:
-        #     return False
-
     @staticmethod
     def __proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
         pocetak = dogadjaj.datum_vreme.date()

@@ -69,12 +69,11 @@ class ProstorijeService(object):
     @staticmethod
     def izbacivanje_opreme_iz_prostorije(lista_renoviranjaDTO):
         # razlikuje se od dodavanje opreme samo u 2 linije,  da li refaktorisati?
-
         if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(lista_renoviranjaDTO[0]):
             for renoviranjeDTO in lista_renoviranjaDTO:
                 prostorija_za_izmenu = renoviranjeDTO.prostorija
                 ProstorijeService.__izbacivanje_opreme(renoviranjeDTO, prostorija_za_izmenu)  # 1
-                OpremaService.povecaj_broj_slobodne_opreme(renoviranjeDTO)  # 2
+                OpremaService.povecaj_broj_slobodne_opreme(renoviranjeDTO.naziv_opreme, renoviranjeDTO.broj_opreme)  # 2
                 ProstorijeRepository.sacuvaj_prostorije()
             return True
         else:
@@ -88,9 +87,11 @@ class ProstorijeService(object):
                 prostorija_za_izmenu.promena_opreme(naziv, broj_opreme)
 
     @staticmethod
-    def slobodan_broj_prostorije(prostorija1, prostorija2, novi_broj):
-        ProstorijeRepository.obrisi_sobe(prostorija1, prostorija2)
-        sprat = prostorija1.get_sprat()
+    def obrisi_sobe(*args):
+        ProstorijeRepository.obrisi_sobe(*args)
+
+    @staticmethod
+    def slobodan_broj_prostorije(sprat, novi_broj):
         if ProstorijeRepository.vrati_prostoriju_po_broju_i_spratu(sprat, novi_broj):
             return False
         return True
@@ -99,7 +100,8 @@ class ProstorijeService(object):
     def spajanje_prostorija(prva_prostorijaDTO, druga_prostorijaDTO):
         prostorija1 = prva_prostorijaDTO.prostorija
         prostorija2 = druga_prostorijaDTO.prostorija
-        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(prva_prostorijaDTO):   # todo: da li da pravim dogadjaj za ove dve stare prostorije koje se brisu ili za novu?
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(
+                prva_prostorijaDTO):  # todo: da li da pravim dogadjaj za ove dve stare prostorije koje se brisu ili za novu?
             if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(druga_prostorijaDTO):
                 spisak_opreme = ProstorijeService.napravi_spisak_opreme(prostorija1, prostorija2)
                 nova = Prostorija(prostorija1.get_sprat(), prva_prostorijaDTO.novi_broj_prostorije,
@@ -121,3 +123,34 @@ class ProstorijeService(object):
             else:
                 novi_spisak[naziv] = broj_opreme
         return novi_spisak
+
+    @staticmethod
+    def deljenje_prostorije(lista_deljenjeDTO):
+        prostorija_za_deljenje = lista_deljenjeDTO[0]
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(prostorija_za_deljenje):
+            oprema_za_prvu, oprema_za_drugu = ProstorijeService.podeli_opremu_po_prostorijama(lista_deljenjeDTO)
+            ProstorijeService.napravi_prostorije(oprema_za_drugu, oprema_za_prvu, prostorija_za_deljenje)
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def napravi_prostorije(oprema_za_drugu, oprema_za_prvu, prostorija_za_deljenje):
+        sprat = prostorija_za_deljenje.stara_prostorija.get_sprat()
+        p1 = Prostorija(sprat, prostorija_za_deljenje.broj_prve_prostorije, oprema_za_prvu,
+                        prostorija_za_deljenje.namena_prve)
+        p2 = Prostorija(sprat, prostorija_za_deljenje.broj_druge_prostorije, oprema_za_drugu,
+                        prostorija_za_deljenje.namena_druge)
+        ProstorijeService.dodavanje_prostorije(p1)
+        ProstorijeService.dodavanje_prostorije(p2)
+
+    @staticmethod
+    def podeli_opremu_po_prostorijama(lista_deljenjeDTO):
+        oprema_za_prvu = {}
+        oprema_za_drugu = {}
+        for deljenjeDTO in lista_deljenjeDTO:
+            oprema_za_prvu[deljenjeDTO.naziv_opreme] = deljenjeDTO.broj_opreme_prva
+            oprema_za_drugu[deljenjeDTO.naziv_opreme] = deljenjeDTO.broj_opreme_druga
+            if deljenjeDTO.visak_opreme:
+                OpremaService.povecaj_broj_slobodne_opreme(deljenjeDTO.naziv_opreme, deljenjeDTO.visak_opreme)
+        return oprema_za_prvu, oprema_za_drugu

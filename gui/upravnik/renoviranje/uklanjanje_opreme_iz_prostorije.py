@@ -1,10 +1,8 @@
-import datetime
 from tkinter import *
 from gui.upravnik.renoviranje.premestanje_opreme import PremestanjeOpreme
 from model.DTO.broj_i_naziv_opremeDTO import BrojINazivOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
-from repository.oprema.oprema_repozitorijum import OpremaRepository
-from repository.prostorije.prostorije_repozitorijum import ProstorijeRepository, lista_ucitanih_prostorija
+from repository.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 
 
 class UklanjenjeOpremeIzProstorije(PremestanjeOpreme):
@@ -26,7 +24,6 @@ class UklanjenjeOpremeIzProstorije(PremestanjeOpreme):
 def uklanjanje_opreme_iz_prostorije(selektovana_prostorija):
     root = Tk()
     root.geometry('800x450')
-    # OpremaRepository.ucitavanje_bolnicke_opreme()
     application = UklanjenjeOpremeIzProstorije(root, selektovana_prostorija)
     root.mainloop()
 
@@ -34,7 +31,6 @@ def uklanjanje_opreme_iz_prostorije(selektovana_prostorija):
 if __name__ == '__main__':
     root = Tk()
     root.geometry('800x500')
-    # ProstorijeRepository.ucitavanje_prostorije()
     prostorija = lista_ucitanih_prostorija[0]
     application = UklanjenjeOpremeIzProstorije(root, prostorija)
     root.mainloop()

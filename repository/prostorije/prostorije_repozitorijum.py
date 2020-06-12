@@ -2,7 +2,6 @@ import csv
 from pathlib import Path
 from model.konstante.konstante import *
 from model.prostorija import Prostorija
-from repository.kalendar.kalendar_repozitorijum import KalendarRepository
 
 lista_ucitanih_prostorija = []
 lista_obrisanih_prostorija = []
@@ -71,9 +70,10 @@ class ProstorijeRepository:
         return False
 
     @staticmethod
-    def obrisi_sobe(prostorija1, prostorija2):
-        lista_ucitanih_prostorija.remove(prostorija1)
-        lista_ucitanih_prostorija.remove(prostorija2)
+    def obrisi_sobe(*prostorije_za_brisanje):
+        for prostorija in prostorije_za_brisanje:
+            if prostorija in lista_ucitanih_prostorija:
+                lista_ucitanih_prostorija.remove(prostorija)
 
 
 ProstorijeRepository.ucitavanje_prostorije()

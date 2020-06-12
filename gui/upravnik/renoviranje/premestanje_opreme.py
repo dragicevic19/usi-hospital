@@ -98,7 +98,9 @@ class PremestanjeOpreme:
             self.provera_zauzeca(lista_opreme)
 
     def provera_zauzeca(self, lista_opreme):
-        if not funkcija_za_premestanje[self._tip_premestanja](lista_opreme):
+        if not lista_opreme:
+            messagebox.showerror('GRESKA', 'Niste odabrali opremu za premestanje!')
+        elif not funkcija_za_premestanje[self._tip_premestanja](lista_opreme):
             messagebox.showerror("GRESKA", "Prostorija je zauzeta u tom periodu")
         else:
             messagebox.showinfo("USPESNO", "Podneli ste zahtev za renoviranje prostorije")
@@ -108,6 +110,11 @@ class PremestanjeOpreme:
         if not self.provera_datuma():
             messagebox.showerror("GRESKA", "Los format datuma!")
             return False
+        if not self.provera_unosa_opreme():
+            return False
+        return True
+
+    def provera_unosa_opreme(self):
         for naziv, broj_opreme in self._naziv_broj_odabrane_opreme.items():
             if not broj_opreme[0].get():
                 messagebox.showerror("GRESKA", "Popunite sva polja!")
