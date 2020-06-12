@@ -1,9 +1,9 @@
 from tkinter import *
 from model.DTO.prenos_prostorija import PretragaProstorijaDTO
-from repository.oprema.oprema_repozitorijum import *
+from repozitorijum.oprema.oprema_repozitorijum import *
 import datetime
 from tkinter.ttk import Combobox
-from repository.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
+from repozitorijum.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
 from tkinter import messagebox
 
  

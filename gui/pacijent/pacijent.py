@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from gui.ModelPocetne import ModelPocetne
+from gui.model_pocetne import ModelPocetne
 
 
 class PocetnaFormaPacijent(ModelPocetne):

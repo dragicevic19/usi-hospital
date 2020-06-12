@@ -2,9 +2,9 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 
-from model.DTO.renoviranjeDogadjajDTO import RenoviranjeDTO
-from repository.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
-from services.prostorije.prostorije_servis import ProstorijeService
+from model.DTO.renoviranje_dogadjaja_DTO import RenoviranjeDTO
+from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
+from servisi.prostorije.prostorije_servis import ProstorijeServis
 
 
 class IzmenaNamene:
@@ -55,7 +55,7 @@ class IzmenaNamene:
             self.provera_zauzeca(prostorijaDTO)
 
     def provera_zauzeca(self, prostorijaDTO):
-        if ProstorijeService.izmeni_namenu(prostorijaDTO):
+        if ProstorijeServis.izmeni_namenu(prostorijaDTO):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:

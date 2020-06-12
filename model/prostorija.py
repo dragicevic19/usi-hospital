@@ -1,4 +1,4 @@
-from model.bolnickaOprema import BolnickaOprema
+from model.bolnicka_oprema import BolnickaOprema
 
 
 class Prostorija(object):

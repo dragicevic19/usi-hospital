@@ -1,5 +1,5 @@
 from gui.prikaz_entiteta.prikaz_anamneze import PrikazAnamneze
-from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox

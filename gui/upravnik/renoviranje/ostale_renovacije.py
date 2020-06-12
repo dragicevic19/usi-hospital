@@ -39,7 +39,7 @@ class OstaleRenovacije:
             self.provera_zauzeca(renoviranjeDTO)
 
     def provera_zauzeca(self, renoviranjeDTO):
-        if ProstorijeService.izmeni_namenu(renoviranjeDTO):
+        if ProstorijeServis.izmeni_namenu(renoviranjeDTO):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:

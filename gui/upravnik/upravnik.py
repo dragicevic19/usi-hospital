@@ -1,11 +1,11 @@
 from tkinter import *
 from tkinter import ttk
-from gui.ModelPocetne import ModelPocetne
-from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
-from gui.upravnik.dodavanjeOpreme import poziv_forme_unos_opreme
-from gui.upravnik.azuriranjeOpreme import poziv_forme_azuriranje_opreme
-from gui.upravnik.brisanjeOpreme import poziv_forme_brisanje_opreme
-from gui.upravnik.renoviranjeMeni import poziv_forme_za_renovaciju_prostorije
+from gui.model_pocetne import ModelPocetne
+from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from gui.upravnik.dodavanje_opreme import poziv_forme_unos_opreme
+from gui.upravnik.azuriranje_opreme import poziv_forme_azuriranje_opreme
+from gui.upravnik.brisanje_opreme import poziv_forme_brisanje_opreme
+from gui.upravnik.renoviranje_meni import poziv_forme_za_renovaciju_prostorije
 
 SIRINA_DUGMETA = 40
 DUZINA_DUGMETA = 150

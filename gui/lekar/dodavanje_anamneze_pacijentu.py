@@ -3,9 +3,9 @@ from tkinter import messagebox
 from gui.pacijent.pregled_anamneze import PregledAnamneze
 from tkinter import *
 
-from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
-from repository.unos_anamneze.unos_anamneze_repozitorijum import UnosAnamnezeRepository
-from services.unos_anamneze.unos_anamneze_servis import UnosAnamnezeService
+from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from repozitorijum.unos_anamneze.unos_anamneze_repozitorijum import UnosAnamnezeRepozitorijum
+from servisi.unos_anamneze.unos_anamneze_servis import UnosAnamnezeService
 
 
 class DodavanjeAnamnezePacijentu(PregledAnamneze):
@@ -25,7 +25,7 @@ class DodavanjeAnamnezePacijentu(PregledAnamneze):
 
     def _unesi_anamnezu(self):
         UnosAnamnezeService.dodaj_anamnezu_svuda(self._lekar, self.textic.get(),self._pacijent)
-        UnosAnamnezeRepository.sacuvaj_unos_anamneze()
-        KorisnikRepository.sacuvaj_korisnike()
+        UnosAnamnezeRepozitorijum.sacuvaj_unos_anamneze()
+        KorisnikRepozitorijum.sacuvaj_korisnike()
         messagebox.showinfo("USPESNO","Uspesno ste dodali novu anamnezu.")
         self._root2.destroy()

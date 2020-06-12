@@ -1,8 +1,8 @@
 from tkinter import ttk, Tk, messagebox
 
 from model.konstante.konstante import INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA
-from repository.kalendar.kalendar_repozitorijum import KalendarRepository, lista_proslih_dogadjaja, lista_dogadjaja
-from services.korisnik.korisnik_servis import KorisnikServis
+from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijum, lista_proslih_dogadjaja, lista_dogadjaja
+from servisi.korisnik.korisnik_servis import KorisnikServis
 
 
 class PrikazPregleda:

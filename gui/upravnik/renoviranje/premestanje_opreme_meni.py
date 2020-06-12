@@ -3,7 +3,7 @@ from tkinter import ttk
 
 from gui.upravnik.renoviranje.dodavenje_opreme_u_prostoriju import dodavanje_opreme
 from gui.upravnik.renoviranje.uklanjanje_opreme_iz_prostorije import uklanjanje_opreme_iz_prostorije
-from repository.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija, ProstorijeRepository
+from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija, ProstorijeRepozitorijum
 
 tip_premestanja = {
     1: dodavanje_opreme,

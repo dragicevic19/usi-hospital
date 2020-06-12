@@ -1,8 +1,8 @@
 from tkinter import *
 from gui.upravnik.renoviranje.premestanje_opreme import PremestanjeOpreme
-from model.DTO.broj_i_naziv_opremeDTO import BrojINazivOpremeDTO
+from model.DTO.broj_i_naziv_opreme_DTO import BrojINazivOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
-from repository.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
+from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 
 
 class UklanjenjeOpremeIzProstorije(PremestanjeOpreme):

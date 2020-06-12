@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import Radiobutton, messagebox
 from model.konstante.konstante import REGEX_DATUM
-from services.izvestaji.izvestaj_lekara_servis import IzvestajLekaraServis
-from services.izvestaji.izvestaj_prostorije_servis import IzvestajProstorijeServis
+from servisi.izvestaji.izvestaj_lekara_servis import IzvestajLekaraServis
+from servisi.izvestaji.izvestaj_prostorije_servis import IzvestajProstorijeServis
 
 
 class FormaZaIzvestaje:

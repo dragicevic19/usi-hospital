@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkinter import *
-from repository.kalendar.kalendar_repozitorijum import lista_dogadjaja
+from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja
 
 
 class PrikazZauzeca(object):

@@ -1,8 +1,8 @@
 from tkinter import ttk, Tk, messagebox
 
 from gui.lekar.dodavanje_anamneze_pacijentu import DodavanjeAnamnezePacijentu
-from gui.prikaz_entiteta.prikazKorisnika import PrikazKorisnika
-from repository.korisnik.korisnik_repozitorijum import KorisnikRepository
+from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
+from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 
 """ 
  na dvoklik na pacijenta, izlazi nova forma
@@ -34,7 +34,7 @@ class AzuriranjeAnamneze(PrikazKorisnika):
         odabrana = self.treeview.focus()
         odabrani_pacijent = self.treeview.item(odabrana)['values']
         korisnicko_ime = str(odabrani_pacijent[0])
-        pacijent = KorisnikRepository.nadji_po_korisnickom_imenu(korisnicko_ime)
+        pacijent = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(korisnicko_ime)
         return pacijent
 
 

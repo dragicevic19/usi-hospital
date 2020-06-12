@@ -2,8 +2,8 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 
-from model.DTO.renoviranjeDogadjajDTO import RenoviranjeDTO
-from services.prostorije.prostorije_servis import ProstorijeService
+from model.DTO.renoviranje_dogadjaja_DTO import RenoviranjeDTO
+from servisi.prostorije.prostorije_servis import ProstorijeServis
 
 
 class SpajanjeProstorije(object):
@@ -58,7 +58,7 @@ class SpajanjeProstorije(object):
             self.provera_zauzeca(prostorijaDTO1, prostorijaDTO2)
 
     def provera_zauzeca(self, prostorijaDTO1, prostorijaDTO2):
-        if ProstorijeService.spajanje_prostorija(prostorijaDTO1, prostorijaDTO2):
+        if ProstorijeServis.spajanje_prostorija(prostorijaDTO1, prostorijaDTO2):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:
@@ -77,8 +77,8 @@ class SpajanjeProstorije(object):
         return True
 
     def provera_broja_prostorije(self):
-        ProstorijeService.obrisi_sobe(self._prostorija1, self._prostorija2)
-        if not ProstorijeService.slobodan_broj_prostorije(self._prostorija1.get_sprat(), self._novi_broj.get()):
+        ProstorijeServis.obrisi_sobe(self._prostorija1, self._prostorija2)
+        if not ProstorijeServis.slobodan_broj_prostorije(self._prostorija1.get_sprat(), self._novi_broj.get()):
             return False
         return True
 
