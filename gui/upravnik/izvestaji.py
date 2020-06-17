@@ -42,9 +42,9 @@ class FormaZaIzvestaje:
 
         # videti da se koriste dto klase za datume
         if self._radio_parametar.get() == 1:
-            IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pocni()
+            IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
         else:
-            IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pocni()
+            IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
 
 
 if __name__ == '__main__':

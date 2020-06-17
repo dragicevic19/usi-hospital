@@ -11,14 +11,13 @@ class IzvestajProstorijeServis(IzvestajServis):
 
         super().__init__("prostorije", pocetni_datum, krajnji_datum)
 
-    def pocni(self):
+    def pripremi_i_izgenerisi_izvestaj(self):
         self._string_za_pdf = self.generisanje(self._tip_izvestaja)
-
         self._string_za_pdf += self.ukupan_broj_sati_po_prostoriji()
         self._string_za_pdf += self.prosecan_broj_sati_po_prostoriji()
         self._string_za_pdf += self.prosecno_i_ukupno_sati_sve_prostorije()
 
-        IzvestajRepozitorijum.generisi_izvestaj(self._string_za_pdf, True)
+        IzvestajRepozitorijum.generisi_izvestaj_upravnik(self._string_za_pdf, True)
 
     def ukupan_broj_sati_po_prostoriji(self):
         ispis = ""
@@ -44,3 +43,5 @@ class IzvestajProstorijeServis(IzvestajServis):
                 str(
                     self._ukupan_broj_sati_zauzeca_svih / self._broj_dana_za_izvestaj) +
                 " sati po danu.")
+
+

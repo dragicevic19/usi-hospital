@@ -41,9 +41,9 @@ class KalendarRepozitorijum:
         path = Path(PATH_TO_DOGADJAJI)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
-            for dogadjaj in lista_dogadjaja:
-                writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
             for dogadjaj in lista_proslih_dogadjaja:
+                writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
+            for dogadjaj in lista_dogadjaja:
                 writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
 
     @staticmethod
@@ -70,8 +70,8 @@ class KalendarRepozitorijum:
         for dogadjaj in lista_dogadjaja:
             if dogadjaj.prostorija == renoviranjeDTO.sprat_broj_prostorije:
                 dana_do_renoviranja = (renoviranjeDTO.datum_pocetkaDate - danasnji_datum).days
-                if dana_do_renoviranja < 10:    # proverava samo da li ima operacija ili pregleda za narednih 10ak dana
-                                                # koji upadaju u termin renoviranja, za ostale ima vremena da se prebaci npr operacija u drugu prostoriju
+                if dana_do_renoviranja < 10:  # proverava samo da li ima operacija ili pregleda za narednih 10ak dana
+                    # koji upadaju u termin renoviranja, za ostale ima vremena da se prebaci npr operacija u drugu prostoriju
                     if not KalendarRepozitorijum.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
                         return False
                 else:
@@ -86,7 +86,6 @@ class KalendarRepozitorijum:
         zavrsetak = pocetak + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
         datum_pocetka = renoviranjeDTO.datum_pocetkaDate
         datum_zavrsetka = renoviranjeDTO.datum_zavrsetkaDate
-
         if pocetak <= datum_pocetka <= zavrsetak:
             return False
         if pocetak <= datum_zavrsetka <= zavrsetak:
@@ -95,6 +94,16 @@ class KalendarRepozitorijum:
             return False
         return True
 
+    @staticmethod
+    def kreiraj_listu_zauzeca_lekara(lekar, datum_od):
+        lista_zauzeca = []
+        for dogadjaj in lista_proslih_dogadjaja:
+            if dogadjaj.datum_vreme > datum_od and lekar in dogadjaj.spisak_doktora:
+                lista_zauzeca.append(dogadjaj)
+        return lista_zauzeca
+
 
 KalendarRepozitorijum.ucitaj_dogadjaje()
+lista_dogadjaja.sort(key=lambda d: d.datum_vreme)
+lista_proslih_dogadjaja.sort(key=lambda d: d.datum_vreme)
 KalendarRepozitorijum.sacuvaj_dogadjaj()
