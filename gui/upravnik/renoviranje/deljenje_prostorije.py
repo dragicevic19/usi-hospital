@@ -4,7 +4,7 @@ from tkinter import ttk, messagebox
 
 from gui.upravnik.renoviranje.premestanje_opreme import ScrollableFrame
 from model.DTO.broj_i_naziv_opreme_DTO import BrojINazivOpremeDTO
-from model.DTO.deljenje_prostorije_DTO import DeljenjeProstorijeDTO
+from model.DTO.dogadjajiDTO.deljenje_prostorije_DTO import DeljenjeProstorijeDTO
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 from servisi.prostorije.prostorije_servis import ProstorijeServis
 

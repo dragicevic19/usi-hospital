@@ -30,7 +30,7 @@ class PrikazZauzeca(object):
         index = iid = 0
         for dogadjaj in lista_dogadjaja:
             if self._korisnicko_ime_lekara in dogadjaj._spisak_doktora:
-                dog = (dogadjaj.datum, dogadjaj.vreme, str(dogadjaj.broj_termina * 30) + " minuta",
+                dog = (dogadjaj.datum, dogadjaj.vreme_pocetka_str, str(dogadjaj.broj_termina * 30) + " minuta",
                        "sprat: " + dogadjaj.sprat + " | soba: " + dogadjaj.broj_prostorije,
                        dogadjaj.spisak_pacijenata[0])
                 self.treeview.insert("", index, iid, values=dog)

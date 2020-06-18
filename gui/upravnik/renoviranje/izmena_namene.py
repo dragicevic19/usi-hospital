@@ -2,7 +2,7 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 
-from model.DTO.renoviranje_dogadjaja_DTO import RenoviranjeDTO
+from model.DTO.dogadjajiDTO.izmena_namene_prostorijeDTO import IzmenaNameneDTO
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 from servisi.prostorije.prostorije_servis import ProstorijeServis
 
@@ -50,8 +50,10 @@ class IzmenaNamene:
         elif not self.provera_datuma():
             messagebox.showerror("GRESKA", "Niste uneli validan datum (DD/MM/GGGG)")
         else:
-            prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka,
-                                           self._prostorija, namena=self._namena.get())
+            prostorijaDTO = IzmenaNameneDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija,
+                                            self._namena.get())
+            # prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka,
+            #                                self._prostorija, namena=self._namena.get())
             self.provera_zauzeca(prostorijaDTO)
 
     def provera_zauzeca(self, prostorijaDTO):

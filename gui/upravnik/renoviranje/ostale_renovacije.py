@@ -1,6 +1,5 @@
-from tkinter import *
-from tkinter import ttk
 from gui.upravnik.renoviranje.izmena_namene import *
+from model.DTO.dogadjajiDTO.dogadjajDTO import DogadjajDTO
 
 
 class OstaleRenovacije:
@@ -33,13 +32,11 @@ class OstaleRenovacije:
         if not self.provera_datuma():
             messagebox.showerror("GRESKA", "Niste uneli validan datum (DD/MM/GGGG)")
         else:
-            messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
-            self._root.destroy()
-            renoviranjeDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija)
+            renoviranjeDTO = DogadjajDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija)
             self.provera_zauzeca(renoviranjeDTO)
 
     def provera_zauzeca(self, renoviranjeDTO):
-        if ProstorijeServis.izmeni_namenu(renoviranjeDTO):
+        if ProstorijeServis.ostale_renovacije(renoviranjeDTO):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:

@@ -2,7 +2,7 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 
-from model.DTO.renoviranje_dogadjaja_DTO import RenoviranjeDTO
+from model.DTO.dogadjajiDTO.spajanje_prostorijeDTO import SpajanjeProstorijeDTO
 from servisi.prostorije.prostorije_servis import ProstorijeServis
 
 
@@ -50,11 +50,17 @@ class SpajanjeProstorije(object):
         elif not self.provera_broja_prostorije():
             messagebox.showerror("GRESKA", "Broj prostorije je zauzet!")
         else:
-            prostorijaDTO1 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija1,
-                                            namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
+            prostorijaDTO1 = SpajanjeProstorijeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija1,
+                                                   self._nova_namena.get(), self._novi_broj.get())
 
-            prostorijaDTO2 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija2,
-                                            namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
+            prostorijaDTO2 = SpajanjeProstorijeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija2,
+                                                   self._nova_namena.get(), self._novi_broj.get())
+            #
+            # prostorijaDTO1 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija1,
+            #                                 namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
+            #
+            # prostorijaDTO2 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija2,
+            #                                 namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
             self.provera_zauzeca(prostorijaDTO1, prostorijaDTO2)
 
     def provera_zauzeca(self, prostorijaDTO1, prostorijaDTO2):

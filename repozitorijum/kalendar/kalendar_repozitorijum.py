@@ -2,7 +2,6 @@ import csv
 from pathlib import Path
 import datetime
 
-from model.enum.renoviranje import TipZahvata
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from model.konstante.konstante import PATH_TO_DOGADJAJI
 
@@ -17,7 +16,6 @@ vremenski_slotovi = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:0
 
 
 class KalendarRepozitorijum:
-
     @staticmethod
     def ucitaj_dogadjaje():
         path = Path(PATH_TO_DOGADJAJI)
@@ -37,7 +35,7 @@ class KalendarRepozitorijum:
             lista_dogadjaja.append(dogadjaj)
 
     @staticmethod
-    def sacuvaj_dogadjaj():
+    def sacuvaj_dogadjaje():
         path = Path(PATH_TO_DOGADJAJI)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
@@ -62,39 +60,35 @@ class KalendarRepozitorijum:
     @staticmethod
     def dodaj_dogadjaj(dogadjaj):
         lista_dogadjaja.append(dogadjaj)
-        KalendarRepozitorijum.sacuvaj_dogadjaj()
+        KalendarRepozitorijum.sacuvaj_dogadjaje()
 
     @staticmethod
-    def slobodna_prostorija_za_period(renoviranjeDTO):
-        danasnji_datum = datetime.date.today()
+    def slobodna_prostorija_za_period(novi_dogadjajDTO):
+        danasnji_datum = datetime.datetime.now()
         for dogadjaj in lista_dogadjaja:
-            if dogadjaj.prostorija == renoviranjeDTO.sprat_broj_prostorije:
-                dana_do_renoviranja = (renoviranjeDTO.datum_pocetkaDate - danasnji_datum).days
-                if dana_do_renoviranja < 10:    # proverava samo da li ima operacija ili pregleda za narednih 10ak dana
-                                                # koji upadaju u termin renoviranja, za ostale ima vremena da se prebaci npr operacija u drugu prostoriju
-                    if not KalendarRepozitorijum.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
+            if dogadjaj.prostorija == novi_dogadjajDTO.sprat_broj_prostorije:
+                dana_do_dogadjaja = (novi_dogadjajDTO.pocetak_vreme_datum - danasnji_datum).days
+                if not KalendarRepozitorijum.__proveri_dostupnost_prostorije(dogadjaj, novi_dogadjajDTO):
+                    if dana_do_dogadjaja < 10 or not dogadjaj.zahvat or novi_dogadjajDTO.zahvat:
                         return False
-                else:
-                    if not KalendarRepozitorijum.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
-                        if not dogadjaj.zahvat:
-                            return False
         return True
 
     @staticmethod
-    def __proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
-        pocetak = dogadjaj.datum_vreme.date()
+    def __proveri_dostupnost_prostorije(dogadjaj, novi_dogadjajDTO):
+        # pocetak = dogadjaj.datum_vreme.date()
+        pocetak = dogadjaj.datum_vreme
         zavrsetak = pocetak + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
-        datum_pocetka = renoviranjeDTO.datum_pocetkaDate
-        datum_zavrsetka = renoviranjeDTO.datum_zavrsetkaDate
+        pocetak_novog = novi_dogadjajDTO.pocetak_vreme_datum
+        zavrsetak_novog = novi_dogadjajDTO.zavrsetak_vreme_datum
 
-        if pocetak <= datum_pocetka <= zavrsetak:
+        if pocetak <= pocetak_novog <= zavrsetak:
             return False
-        if pocetak <= datum_zavrsetka <= zavrsetak:
+        if pocetak <= zavrsetak_novog <= zavrsetak:
             return False
-        if datum_pocetka <= pocetak and datum_zavrsetka >= zavrsetak:
+        if pocetak_novog <= pocetak and zavrsetak_novog >= zavrsetak:
             return False
         return True
 
 
 KalendarRepozitorijum.ucitaj_dogadjaje()
-KalendarRepozitorijum.sacuvaj_dogadjaj()
+KalendarRepozitorijum.sacuvaj_dogadjaje()

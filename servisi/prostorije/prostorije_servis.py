@@ -24,10 +24,10 @@ class ProstorijeServis(object):
         pass
 
     @staticmethod
-    def izmeni_namenu(renoviranjeDTO):
-        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
-            prostorija = renoviranjeDTO.prostorija
-            prostorija._namena_prostorije = renoviranjeDTO.nova_namena
+    def izmeni_namenu(izmena_nameneDTO):
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(izmena_nameneDTO):
+            prostorija = izmena_nameneDTO.prostorija
+            prostorija._namena_prostorije = izmena_nameneDTO.nova_namena
             ProstorijeRepozitorijum.sacuvaj_prostorije()
             return True
         else:
@@ -136,7 +136,7 @@ class ProstorijeServis(object):
 
     @staticmethod
     def napravi_prostorije(oprema_za_drugu, oprema_za_prvu, prostorija_za_deljenje):
-        sprat = prostorija_za_deljenje.stara_prostorija.get_sprat()
+        sprat = prostorija_za_deljenje.prostorija.get_sprat()
         p1 = Prostorija(sprat, prostorija_za_deljenje.broj_prve_prostorije, oprema_za_prvu,
                         prostorija_za_deljenje.namena_prve)
         p2 = Prostorija(sprat, prostorija_za_deljenje.broj_druge_prostorije, oprema_za_drugu,
@@ -154,3 +154,18 @@ class ProstorijeServis(object):
             if deljenjeDTO.visak_opreme:
                 OpremaServis.povecaj_broj_slobodne_opreme(deljenjeDTO.naziv_opreme, deljenjeDTO.visak_opreme)
         return oprema_za_prvu, oprema_za_drugu
+
+    @staticmethod
+    def pronadji_prostorije_po_nameni(namena_prostorije):
+        return ProstorijeRepozitorijum.pronadji_prostorije_po_nameni(namena_prostorije)
+
+    @staticmethod
+    def zakazivanje_operacije(zakazivanje_operacijeDTO):
+        if zakazivanje_operacijeDTO.hitno:
+            pass
+            # KalendarServis.posalji_notifikaciju_sekretaru(zakazivanje_operacijeDTO)
+
+        if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(zakazivanje_operacijeDTO):
+            return True
+        else:
+            return False

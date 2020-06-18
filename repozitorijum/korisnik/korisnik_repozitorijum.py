@@ -1,7 +1,6 @@
 import csv
 
 from model.enum.recnici import *
-from model.enum.uloga import Uloga
 from model.konstante.konstante import *
 from pathlib import Path
 
@@ -18,7 +17,7 @@ class KorisnikRepozitorijum:
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
-                korisnik = konstruktor_po_ulozi[red[2]](*red)
+                korisnik = konstruktor_po_ulozi[red[2]](*red)   # INDEX_ULOGE_KORISNIKA?
                 if not korisnik.get_obrisan():
                     lista_ucitanih_korisnika.append(korisnik)
                 else:
@@ -66,6 +65,7 @@ class KorisnikRepozitorijum:
     @staticmethod
     def dodaj_id_anamneze_pacijentu(pacijent, id_anamneze):
         pacijent.dodaj_anamnezu(id_anamneze)
+
 
 KorisnikRepozitorijum.ucitavanje_korisnika()
 KorisnikRepozitorijum.sacuvaj_korisnike()

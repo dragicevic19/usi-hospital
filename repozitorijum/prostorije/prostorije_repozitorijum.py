@@ -75,5 +75,15 @@ class ProstorijeRepozitorijum:
             if prostorija in lista_ucitanih_prostorija:
                 lista_ucitanih_prostorija.remove(prostorija)
 
+    @staticmethod
+    def pronadji_prostorije_po_nameni(namena_prostorije):
+        pronadjene_prostorije = []
+        for prostorija in lista_ucitanih_prostorija:
+            if prostorija.get_namena_prostorije() == namena_prostorije:
+                sprat = prostorija.get_sprat()
+                broj_prostorije = prostorija.get_broj_prostorije()
+                pronadjene_prostorije.append(sprat + '|' + broj_prostorije)
+        return pronadjene_prostorije
+
 
 ProstorijeRepozitorijum.ucitavanje_prostorije()

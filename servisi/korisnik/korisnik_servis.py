@@ -28,9 +28,9 @@ class KorisnikServis(object):
     def dobavi_spisak_pacijenata_po_lekaru(ulogovani_lekar):
         lista_lekarovih_pacijenata = KorisnikRepozitorijum.vrati_spisak_pacijenata_po_lekaru(ulogovani_lekar)
         lista_objekata_pacijenata = []
-        for pacijent in range(len(lista_lekarovih_pacijenata)):
-            pac = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(lista_lekarovih_pacijenata[pacijent])
-            lista_objekata_pacijenata.append(pac)
+        for korisnicko_ime in lista_lekarovih_pacijenata:
+            pacijent = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(korisnicko_ime)
+            lista_objekata_pacijenata.append(pacijent)
         return lista_objekata_pacijenata
 
     @staticmethod
