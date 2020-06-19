@@ -1,23 +1,21 @@
-from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-import re
-
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from model.enum.uloga import Uloga
 from model.konstante.konstante import REGEX_VREME
 from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from servis.korisnik.korisnik_servis import KorisnikServis
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
 
 
 class IzborLekara(PrikazKorisnika):
 
     def __init__(self, root):
         super().__init__(root, Uloga.LEKAR.name)
-        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ LEKARA", command=self.on_click)
-        potvrdi_dugme.pack(fill='x')
+        azuriraj_dugme = ttk.Button(self._root, text="AZURIRAJ LEKARA", command=self.otvori_formu_za_azuriranje)
+        azuriraj_dugme.pack(fill='x')
 
-    def on_click(self):
+    def otvori_formu_za_azuriranje(self):
         try:
             odabrani = self.treeview.focus()
             odabrani_lekar = self.treeview.item(odabrani)['values']

@@ -1,9 +1,8 @@
-import csv
-
 from model.bolnicka_oprema import BolnickaOprema
 from pathlib import Path
 from model.konstante.konstante import *
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
+import csv
 
 lista_ucitane_bolnicke_opreme = []
 
@@ -12,7 +11,7 @@ class OpremaRepozitorijum:
 
     @staticmethod
     def ucitavanje_bolnicke_opreme():
-        path = Path(PATH_TO_BOLNICKA_OPREMA)
+        path = Path(PUTANJA_FAJL_BOLNICKA_OPREMA)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -21,7 +20,7 @@ class OpremaRepozitorijum:
 
     @staticmethod
     def sacuvaj_bolnicku_opremu():
-        path = Path(PATH_TO_BOLNICKA_OPREMA)
+        path = Path(PUTANJA_FAJL_BOLNICKA_OPREMA)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             for oprema in lista_ucitane_bolnicke_opreme:
@@ -34,17 +33,14 @@ class OpremaRepozitorijum:
                 return oprema
         return False
 
-
     @staticmethod
     def dodaj_opremu(oprema):
         lista_ucitane_bolnicke_opreme.append(oprema)
         OpremaRepozitorijum.sacuvaj_bolnicku_opremu()
 
-
     @staticmethod
     def azuriranje_opreme(oprema):
         pass
-
 
     @staticmethod
     def brisanje_opreme(oprema):
@@ -58,9 +54,6 @@ class OpremaRepozitorijum:
             if naziv_opreme in prostorija.get_spisak_opreme():
                 prostorija.get_spisak_opreme().pop(naziv_opreme)
                 OpremaRepozitorijum.sacuvaj_bolnicku_opremu()
-
-
-
 
 
 #  samo za testiranje

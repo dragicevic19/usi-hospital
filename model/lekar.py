@@ -1,6 +1,3 @@
-from enum import Enum
-
-from model.enum.uloga import Uloga
 from model.korisnik import Korisnik
 
 

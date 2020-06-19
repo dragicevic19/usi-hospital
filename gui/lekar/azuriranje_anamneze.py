@@ -1,8 +1,7 @@
-from tkinter import ttk, Tk, messagebox
-
 from gui.lekar.dodavanje_anamneze_pacijentu import DodavanjeAnamnezePacijentu
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from tkinter import Tk
 
 """ 
  na dvoklik na pacijenta, izlazi nova forma
@@ -26,23 +25,23 @@ class AzuriranjeAnamneze(PrikazKorisnika):
     def _selektuj_korisnika(self, event):
         try:
             pacijent = self.selektovani_pacijent()
-            DodavanjeAnamnezePacijentu(pacijent,self._lekar)
+            DodavanjeAnamnezePacijentu(pacijent, self._lekar)
         except IndexError:
             pass
 
     def selektovani_pacijent(self):
-        odabrana = self.treeview.focus()
-        odabrani_pacijent = self.treeview.item(odabrana)['values']
+        odabrani = self.treeview.focus()
+        odabrani_pacijent = self.treeview.item(odabrani)['values']
         korisnicko_ime = str(odabrani_pacijent[0])
         pacijent = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(korisnicko_ime)
         return pacijent
 
 
-def poziv_forme_za_dodavanje_anamneze_nekom_od_pacijenata(root,ulogovani_lekar):
-    AzuriranjeAnamneze(root,ulogovani_lekar)
+def poziv_forme_za_dodavanje_anamneze_odredjenom_pacijentu(root, ulogovani_lekar):
+    AzuriranjeAnamneze(root, ulogovani_lekar)
     root.mainloop()
 
 
 if __name__ == '__main__':
     root = Tk()
-    poziv_forme_za_dodavanje_anamneze_nekom_od_pacijenata(root,"horacije442")
+    poziv_forme_za_dodavanje_anamneze_odredjenom_pacijentu(root, "horacije442")

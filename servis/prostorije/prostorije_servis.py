@@ -1,7 +1,7 @@
 from model.prostorija import Prostorija
 from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijum
-from servisi.kalendar.kalendar_servis import KalendarServis
-from servisi.oprema.oprema_servis import OpremaServis
+from servis.kalendar.kalendar_servis import KalendarServis
+from servis.oprema.oprema_servis import OpremaServis
 
 
 class ProstorijeServis(object):

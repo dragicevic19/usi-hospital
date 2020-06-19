@@ -1,6 +1,6 @@
 from tkinter import *
 from gui.upravnik.renoviranje.premestanje_opreme import PremestanjeOpreme
-from model.DTO.broj_i_naziv_opreme_DTO import BrojINazivOpremeDTO
+from model.dto.broj_i_naziv_opreme_dto import BrojINazivOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 
@@ -17,8 +17,8 @@ class UklanjenjeOpremeIzProstorije(PremestanjeOpreme):
 
     def pronadji_opremu_za_izbacivanje(self):
         for naziv, broj_opreme in self._prostorija.get_spisak_opreme().items():
-            opremaDTO = BrojINazivOpremeDTO(naziv, int(broj_opreme))
-            self._oprema_za_izbacivanje.append(opremaDTO)
+            oprema_dto = BrojINazivOpremeDTO(naziv, int(broj_opreme))
+            self._oprema_za_izbacivanje.append(oprema_dto)
 
 
 def uklanjanje_opreme_iz_prostorije(selektovana_prostorija):

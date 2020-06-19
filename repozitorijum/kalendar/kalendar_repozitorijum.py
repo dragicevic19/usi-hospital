@@ -1,10 +1,10 @@
-import csv
+from model.kalendarski_dogadjaj import KalendarskiDogadjaj
+from model.konstante.konstante import PUTANJA_FAJL_DOGADJAJI
 from pathlib import Path
 import datetime
+import csv
 
-from model.enum.renoviranje import TipZahvata
-from model.kalendarski_dogadjaj import KalendarskiDogadjaj
-from model.konstante.konstante import PATH_TO_DOGADJAJI
+
 
 lista_dogadjaja = []
 lista_proslih_dogadjaja = []
@@ -20,7 +20,7 @@ class KalendarRepozitorijum:
 
     @staticmethod
     def ucitaj_dogadjaje():
-        path = Path(PATH_TO_DOGADJAJI)
+        path = Path(PUTANJA_FAJL_DOGADJAJI)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -38,7 +38,7 @@ class KalendarRepozitorijum:
 
     @staticmethod
     def sacuvaj_dogadjaj():
-        path = Path(PATH_TO_DOGADJAJI)
+        path = Path(PUTANJA_FAJL_DOGADJAJI)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             for dogadjaj in lista_proslih_dogadjaja:

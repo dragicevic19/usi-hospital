@@ -1,8 +1,8 @@
-from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-from servisi.oprema.oprema_servis import OpremaServis
 from gui.prikaz_entiteta.prikaz_opreme import PrikazOpreme
+from servis.oprema.oprema_servis import OpremaServis
+from tkinter import messagebox
+from tkinter import ttk
+from tkinter import *
 
 
 class BrisanjeOpreme(PrikazOpreme):
@@ -26,7 +26,7 @@ class BrisanjeOpreme(PrikazOpreme):
 
 
 def poziv_forme_brisanje_opreme(root):
-    #root = Tk()
+    # root = Tk()
     application = BrisanjeOpreme(root)
     root.mainloop()
 
@@ -34,5 +34,3 @@ def poziv_forme_brisanje_opreme(root):
 if __name__ == '__main__':
     root = Tk()
     poziv_forme_brisanje_opreme(root)
-
-

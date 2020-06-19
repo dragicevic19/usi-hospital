@@ -1,7 +1,7 @@
-from model.DTO.registracija_pacijenta_DTO import RegistracijaPacijentaDTO
-from model.konstante.konstante import LEN_BR_KNJIZICE
+from model.dto.registracija_pacijenta_dto import RegistracijaPacijentaDTO
+from model.konstante.konstante import DUZINA_BR_KNJIZICE
 from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -31,8 +31,8 @@ class RegistracijaPacijenta:
 
     def izaberi_pol(self):
         Label(self._root, text="Pol:", font="Times 14").grid(row=1, column=1, pady=10)
-        default = 'muski'
-        ttk.OptionMenu(self._root, self._pol, default, *self.pol).grid(row=1, column=2)
+        podrazumevana_vrednost = 'muski'
+        ttk.OptionMenu(self._root, self._pol, podrazumevana_vrednost, *self.pol).grid(row=1, column=2)
 
     def unesi_korisnicko_ime(self):
         Label(self._root, justify=LEFT, text="Korisnicko ime:", font="Times 15").grid(row=2, column=1, pady=10)
@@ -63,8 +63,8 @@ class RegistracijaPacijenta:
         if not self._korisnicko_ime.get() or not self._lozinka.get() or not self._ime.get() or not self._prezime.get() \
                 or not self._br_zdravstvene.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-        elif len(self._br_zdravstvene.get()) != LEN_BR_KNJIZICE or not str(self._br_zdravstvene.get()).isnumeric():
-            messagebox.showerror("GRESKA!", "Pogresan unos broja zdravstvene knjizice(8 brojeva)!")
+        elif len(self._br_zdravstvene.get()) != DUZINA_BR_KNJIZICE or not str(self._br_zdravstvene.get()).isnumeric():
+            messagebox.showerror("GRESKA!", "Pogresan unos broja zdravstvene knjizice (8 brojeva)!")
         else:
             if not KorisnikRepozitorijum.nadji_po_korisnickom_imenu(self._korisnicko_ime.get()):
                 pacijent = RegistracijaPacijentaDTO(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),

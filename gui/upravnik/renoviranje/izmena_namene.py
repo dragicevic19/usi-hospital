@@ -2,9 +2,9 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 
-from model.DTO.renoviranje_dogadjaja_DTO import RenoviranjeDTO
+from model.dto.renoviranje_dogadjaja_dto import RenoviranjeDTO
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class IzmenaNamene:

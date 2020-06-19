@@ -1,8 +1,8 @@
 from repozitorijum.oprema.oprema_repozitorijum import OpremaRepozitorijum
-from tkinter import *
-from tkinter import ttk
+from servis.oprema.oprema_servis import OpremaServis
 from tkinter import messagebox
-from servisi.oprema.oprema_servis import OpremaServis
+from tkinter import ttk
+from tkinter import *
 
 
 class NovaOprema:

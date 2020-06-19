@@ -8,7 +8,7 @@ class UnosAnamnezeService(object):
         return UnosAnamnezeRepozitorijum.pronadji_anamnezu_za_pacijenta(pacijent)
 
     @staticmethod
-    def dodaj_anamnezu_svuda(lekar, opis_anamneze, pacijent):
+    def dodaj_anamnezu_svuda(lekar, opis_anamneze, pacijent):  # PROMENITI NAZIV
         UnosAnamnezeRepozitorijum.dodaj_anamnezu_u_mapu_anamneza(lekar, opis_anamneze, pacijent)
 
 

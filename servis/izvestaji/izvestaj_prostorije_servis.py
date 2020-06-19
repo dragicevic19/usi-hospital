@@ -1,8 +1,5 @@
 from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijum
-from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja, lista_proslih_dogadjaja
-from datetime import datetime
-
-from servisi.izvestaji.izvestaji_servis import IzvestajServis
+from servis.izvestaji.izvestaji_servis import IzvestajServis
 
 
 class IzvestajProstorijeServis(IzvestajServis):

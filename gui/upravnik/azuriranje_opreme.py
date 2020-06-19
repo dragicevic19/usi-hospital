@@ -4,7 +4,7 @@ from tkinter import messagebox
 
 from gui.prikaz_entiteta.prikaz_opreme import PrikazOpreme
 from repozitorijum.oprema.oprema_repozitorijum import OpremaRepozitorijum
-from servisi.oprema.oprema_servis import OpremaServis
+from servis.oprema.oprema_servis import OpremaServis
 
 
 class IzborOpreme(PrikazOpreme):
@@ -105,7 +105,7 @@ class UnosPodataka(IzborOpreme):
 
 
 def poziv_forme_azuriranje_opreme(root):
-    a = IzborOpreme(root)
+    application = IzborOpreme(root)
     root.mainloop()
 
 

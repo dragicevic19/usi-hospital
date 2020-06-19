@@ -45,7 +45,7 @@ class DetaljnijiOpis(PregledAnamneze):
 
 def poziv_forme_pregled_anamneze(root, ulogovan_pacijent):
     # root = Tk()
-    application = PregledAnamneze(root, ulogovan_pacijent)
+    PregledAnamneze(root, ulogovan_pacijent)
     root.mainloop()
 
 

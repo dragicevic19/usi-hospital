@@ -1,8 +1,7 @@
 from datetime import *
-
 from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijum
 from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijum
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class SopstveniIzvestajLekaraServis:
@@ -15,7 +14,7 @@ class SopstveniIzvestajLekaraServis:
         self.pripremi_izvestaj()
 
     def glavni_naslov(self):
-        return "IZVESTAJ ZA LEKARA " + self._ulogovani_lekar + " I NJEGOVIH PACIJENATA U PRETHODNIH " +\
+        return "IZVESTAJ ZA LEKARA " + self._ulogovani_lekar + " I NJEGOVIH PACIJENATA U PRETHODNIH " + \
                str(self._broj_dana_za_izvestaj) + " DANA\n\n"
 
     @staticmethod
@@ -30,8 +29,8 @@ class SopstveniIzvestajLekaraServis:
             string_za_ispis += "Datum: " + str(dogadjaj.datum_vreme) + " - Zauzece: " + str(
                 vreme_zauzeca) + " minuta\n"
             ukupno_zauzece += vreme_zauzeca
-        string_za_ispis += "Ukupan broj sati u prethodnih mesec dana za lekara " + self._ulogovani_lekar + " iznosi: " + \
-                           str(ukupno_zauzece / 60) + "\n"
+        string_za_ispis += "Ukupan broj sati u prethodnih mesec dana za lekara " + self._ulogovani_lekar + " iznosi: " \
+                           + str(ukupno_zauzece / 60) + "\n"
         return string_za_ispis
 
     def pripremi_izvestaj(self):

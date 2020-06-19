@@ -81,6 +81,5 @@ class PrikazProstorija(object):
 if __name__ == '__main__':
     root = Tk()
     # ProstorijeRepository.ucitavanje_prostorije()
-    print(lista_ucitanih_prostorija)
     PrikazProstorija(root)
     root.mainloop()

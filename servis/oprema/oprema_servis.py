@@ -1,6 +1,5 @@
-# from servisi.file.file_servis import FileService
+# from servis.file.file_servis import FileService
 from model.bolnicka_oprema import BolnickaOprema
-from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 from repozitorijum.oprema.oprema_repozitorijum import OpremaRepozitorijum, lista_ucitane_bolnicke_opreme
 
 

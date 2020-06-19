@@ -7,12 +7,7 @@ from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozito
 
 """ 
 
-
-
 REFAKTORISATI NA KRAJU INIT I VP START GUI
-
-
-
 
 
 """

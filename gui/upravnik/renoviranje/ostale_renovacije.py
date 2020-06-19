@@ -1,6 +1,9 @@
-from tkinter import *
-from tkinter import ttk
 from gui.upravnik.renoviranje.izmena_namene import *
+
+"""
+    NE RADI NI JEDNA VRSTA RENOVACIJA -> No such file or directory: '..\..\data\prostorije.csv'
+
+"""
 
 
 class OstaleRenovacije:

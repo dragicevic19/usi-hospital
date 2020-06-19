@@ -1,6 +1,3 @@
-from model.pacijent import Pacijent
-
-
 class Anamneza(object):
 
     def __init__(self, pacijent=None, spisak_pojedinacnih_unosa=[]):

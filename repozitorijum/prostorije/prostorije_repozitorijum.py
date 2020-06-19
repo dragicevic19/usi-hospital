@@ -1,7 +1,8 @@
-import csv
 from pathlib import Path
 from model.konstante.konstante import *
 from model.prostorija import Prostorija
+import csv
+
 
 lista_ucitanih_prostorija = []
 lista_obrisanih_prostorija = []
@@ -11,7 +12,7 @@ class ProstorijeRepozitorijum:
 
     @staticmethod
     def ucitavanje_prostorije():
-        path = Path(PATH_TO_PROSTORIJE)
+        path = Path(PUTANJA_FAJL_PROSTORIJE)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -39,7 +40,7 @@ class ProstorijeRepozitorijum:
 
     @staticmethod
     def sacuvaj_prostorije():
-        path = Path(PATH_TO_PROSTORIJE)
+        path = Path(PUTANJA_FAJL_PROSTORIJE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             ProstorijeRepozitorijum.__upisi_prostorije_csv(writer, lista_ucitanih_prostorija)

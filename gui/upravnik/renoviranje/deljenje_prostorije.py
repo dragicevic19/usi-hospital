@@ -3,10 +3,10 @@ from tkinter import *
 from tkinter import ttk, messagebox
 
 from gui.upravnik.renoviranje.premestanje_opreme import ScrollableFrame
-from model.DTO.broj_i_naziv_opreme_DTO import BrojINazivOpremeDTO
-from model.DTO.deljenje_prostorije_DTO import DeljenjeProstorijeDTO
+from model.dto.broj_i_naziv_opreme_dto import BrojINazivOpremeDTO
+from model.dto.deljenje_prostorije_dto import DeljenjeProstorijeDTO
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class DeljenjeProstorije:
@@ -180,7 +180,7 @@ class DeljenjeProstorije:
 def deljenje_prostorije(selektovana_prostorija):
     root = Tk()
     root.geometry('750x650')
-    application = DeljenjeProstorije(root, selektovana_prostorija)
+    DeljenjeProstorije(root, selektovana_prostorija)
     root.mainloop()
 
 

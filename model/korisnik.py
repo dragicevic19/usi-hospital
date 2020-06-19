@@ -1,6 +1,3 @@
-from model.enum.uloga import Uloga
-
-
 class Korisnik(object):
 
     def __init__(self, korisnicko_ime, lozinka, ime, prezime, obrisan, uloga):

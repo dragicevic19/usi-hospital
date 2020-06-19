@@ -1,5 +1,4 @@
 from repozitorijum.prostorije.prostorije_repozitorijum import *
-from model.DTO.prenos_prostorija import PretragaProstorijaDTO
 from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja
 
 # ProstorijeRepository.ucitavanje_prostorije()
@@ -16,9 +15,9 @@ class ZauzecaProstorijaServis:
 
         return lista_prostorija_za_prikaz
 
-    def da_li_je_slobodna(self, prostorija, vremeod, vremedo):
+    def da_li_je_slobodna(self, prostorija, vreme_od, vreme_do):
         for dogadjaj in lista_dogadjaja:
             if dogadjaj.sprat == prostorija.get_sprat() and dogadjaj.broj_prostorije == prostorija.get_broj_prostorije():
-                if dogadjaj.datum_vreme > vremeod and dogadjaj.datum_vreme < vremedo:
+                if vreme_od < dogadjaj.datum_vreme < vreme_do:
                     return False
         return True

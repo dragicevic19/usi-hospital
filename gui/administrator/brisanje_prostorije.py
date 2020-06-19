@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikaz_prostorija import PrikazProstorija
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class BrisanjeProstorije(PrikazProstorija):
@@ -22,7 +22,7 @@ class BrisanjeProstorije(PrikazProstorija):
 
 
 def poziv_forme_brisanje_prostorije(root):
-    application = BrisanjeProstorije(root)
+    BrisanjeProstorije(root)
     root.mainloop()
 
 

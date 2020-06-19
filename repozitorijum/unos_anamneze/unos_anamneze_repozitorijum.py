@@ -1,9 +1,9 @@
-import csv
 from datetime import datetime
 from pathlib import Path
 from model.konstante.konstante import *
 from model.unos_anamneze import UnosAnamneze
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum, lista_ucitanih_korisnika
+from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+import csv
 
 mapa_ucitanih_unosa_anamneza = {}
 id_sledece_anamneze = 0
@@ -13,7 +13,7 @@ class UnosAnamnezeRepozitorijum:
 
     @staticmethod
     def ucitavanje_unosa_anamneze():
-        path = Path(PATH_TO_UNOS_ANAMNEZE)
+        path = Path(PUTANJA_FAJL_UNOS_ANAMNEZE)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -22,7 +22,7 @@ class UnosAnamnezeRepozitorijum:
 
     @staticmethod
     def sacuvaj_unos_anamneze():
-        path = Path(PATH_TO_UNOS_ANAMNEZE)
+        path = Path(PUTANJA_FAJL_UNOS_ANAMNEZE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             for kljuc in mapa_ucitanih_unosa_anamneza:
@@ -36,7 +36,6 @@ class UnosAnamnezeRepozitorijum:
             if int(kljuc) > id_sledece_anamneze:
                 id_sledece_anamneze = int(kljuc)
         id_sledece_anamneze += 1
-
 
     def pronadji_anamnezu_za_pacijenta(ulogovan_pacijent):
         lista_anamneza_po_pacijentu = []
@@ -57,4 +56,3 @@ class UnosAnamnezeRepozitorijum:
 
 
 UnosAnamnezeRepozitorijum.ucitavanje_unosa_anamneze()
-

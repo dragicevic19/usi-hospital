@@ -1,8 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-# from model.kreiranje_objekata_entiteta import *
 from model.korisnik import Korisnik
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum, lista_ucitanih_korisnika
 
 SIRINA_BIO = 550
 VISINA_ZA_DUGMICE = 120
@@ -10,7 +9,9 @@ ODVAJANJE_RADNOG = 100
 SLIKA_DIMENZIJE = 400
 BOJA = "green"
 
-
+"""
+  PROBLEM SA PUTANJAMA No such file or directory: '..\\..\\data\\korisnici.csv'
+"""
 class ModelPocetne:
 
     def __init__(self, root, korisnik):
@@ -40,12 +41,12 @@ class ModelPocetne:
             self._root.configure(bg="blue")
             self._frejm_bio.configure(bg="purple")
             self._frejm_dugmici.configure(bg="yellow")
-            self._frejm_izvrsavanja.configure(bg="green")
+            self._okvir_izvrsavanja.configure(bg="green")
         else:
             self._root.configure(bg=BOJA)
             self._frejm_bio.configure(bg=BOJA)
             self._frejm_dugmici.configure(bg=BOJA)
-            self._frejm_izvrsavanja.configure(bg=BOJA)
+            self._okvir_izvrsavanja.configure(bg=BOJA)
 
     def __kreiraj_frejm_za_bio(self):  # kreiraj skroz levi frejm za lizne podatke
         self._frejm_bio = Frame(self._root)
@@ -57,8 +58,8 @@ class ModelPocetne:
                                   height=VISINA_ZA_DUGMICE)
 
     def kreiranje_frejma_za_izvrsavanje(self):
-        self._frejm_izvrsavanja = Frame(self._root)
-        self._frejm_izvrsavanja.place(x=SIRINA_BIO + ODVAJANJE_RADNOG, y=ODVAJANJE_RADNOG,
+        self._okvir_izvrsavanja = Frame(self._root)
+        self._okvir_izvrsavanja.place(x=SIRINA_BIO + ODVAJANJE_RADNOG, y=ODVAJANJE_RADNOG,
                                       height=self.visina - (ODVAJANJE_RADNOG + VISINA_ZA_DUGMICE),
                                       width=self.sirina - (SIRINA_BIO + ODVAJANJE_RADNOG))
 

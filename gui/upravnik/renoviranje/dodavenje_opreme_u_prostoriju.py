@@ -1,6 +1,6 @@
 from tkinter import *
 from gui.upravnik.renoviranje.uklanjanje_opreme_iz_prostorije import PremestanjeOpreme
-from model.DTO.broj_i_naziv_opreme_DTO import BrojINazivOpremeDTO
+from model.dto.broj_i_naziv_opreme_dto import BrojINazivOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
 from repozitorijum.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
@@ -27,7 +27,7 @@ def dodavanje_opreme(selektovana_prostorija):
     root = Tk()
     root.geometry('800x450')
 
-    application = DodavanjeOpremeUProstoriju(root, selektovana_prostorija)
+    DodavanjeOpremeUProstoriju(root, selektovana_prostorija)
     root.mainloop()
 
 
