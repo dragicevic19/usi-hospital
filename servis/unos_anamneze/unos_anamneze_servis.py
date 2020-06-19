@@ -1,20 +1,17 @@
-from repozitorijum.unos_anamneze.unos_anamneze_repozitorijum import UnosAnamnezeRepozitorijum
+from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from repozitorijum.unos_anamneze.unos_anamneze_repozitorijum_impl import UnosAnamnezeRepozitorijumImpl
 
 
-class UnosAnamnezeService(object):
+class UnosAnamnezeServis(object):
 
-    @staticmethod
-    def dobavi_anamnezu_ulogovanog_pacijenta(pacijent):
-        return UnosAnamnezeRepozitorijum.pronadji_anamnezu_za_pacijenta(pacijent)
+    def __init__(self, repo_anamneza=UnosAnamnezeRepozitorijumImpl(), repo_korisnik=KorisnikRepozitorijum()):
+        self._repo_anamneza = repo_anamneza
+        self._repo_korisnik = repo_korisnik
 
-    @staticmethod
-    def dodaj_anamnezu_svuda(lekar, opis_anamneze, pacijent):  # PROMENITI NAZIV
-        UnosAnamnezeRepozitorijum.dodaj_anamnezu_u_mapu_anamneza(lekar, opis_anamneze, pacijent)
+    def dobavi_anamnezu_ulogovanog_pacijenta(self, pacijent):
+        return self._repo_anamneza.pronadji_anamnezu_za_pacijenta(pacijent)
 
-
-
-
-
-
-
-
+    def dodaj_anamnezu_svuda(self, unos_anamneze_dto):  # PROMENITI NAZIV
+        self._repo_anamneza.sacuvaj_anamnezu(unos_anamneze_dto)
+        self._repo_anamneza.sacuvaj_unos_anamneze()
+        self._repo_korisnik.sacuvaj_korisnike()

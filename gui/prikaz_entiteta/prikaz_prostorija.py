@@ -56,7 +56,7 @@ class PrikazProstorija(object):
             messagebox.showinfo('Prikaz opreme', ProstorijeRepozitorijum.recnik_u_string(prostorija.get_spisak_opreme()))
         except IndexError:
             pass
-
+`
     def selektovana_prostorija(self):
         odabrana = self.treeview.focus()
         odabrana_prostorija = self.treeview.item(odabrana)['values']

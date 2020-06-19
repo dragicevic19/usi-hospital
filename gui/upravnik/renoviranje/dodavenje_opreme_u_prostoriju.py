@@ -2,7 +2,7 @@ from tkinter import *
 from gui.upravnik.renoviranje.uklanjanje_opreme_iz_prostorije import PremestanjeOpreme
 from model.dto.broj_i_naziv_opreme_dto import BrojINazivOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
-from repozitorijum.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
+from repozitorijum.oprema.oprema_repozitorijum_impl import lista_ucitane_bolnicke_opreme
 from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
 
 

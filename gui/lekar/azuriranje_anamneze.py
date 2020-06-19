@@ -17,7 +17,7 @@ from tkinter import Tk
 
 class AzuriranjeAnamneze(PrikazKorisnika):
 
-    def __init__(self, root,lekar):
+    def __init__(self, root, lekar):
         super().__init__(root, "PACIJENT")
         self._lekar = lekar
         self.treeview.bind('<Double-1>', self._selektuj_korisnika)

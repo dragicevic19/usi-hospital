@@ -1,7 +1,7 @@
 from model.prostorija import Prostorija
+from repozitorijum.oprema.oprema_repozitorijum_impl import OpremaRepozitorijumImpl
 from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijum
 from servis.kalendar.kalendar_servis import KalendarServis
-from servis.oprema.oprema_servis import OpremaServis
 
 
 class ProstorijeServis(object):
@@ -48,7 +48,7 @@ class ProstorijeServis(object):
             for renoviranjeDTO in lista_renoviranjaDTO:
                 prostorija_za_izmenu = renoviranjeDTO.prostorija
                 ProstorijeServis.__dodavanje_opreme(renoviranjeDTO, prostorija_za_izmenu)
-                OpremaServis.smanji_broj_slobodne_opreme(renoviranjeDTO)
+                OpremaRepozitorijumImpl().smanji_broj_slobodne_opreme(renoviranjeDTO)
                 ProstorijeRepozitorijum.sacuvaj_prostorije()
             return True
         else:
@@ -73,7 +73,7 @@ class ProstorijeServis(object):
             for renoviranjeDTO in lista_renoviranjaDTO:
                 prostorija_za_izmenu = renoviranjeDTO.prostorija
                 ProstorijeServis.__izbacivanje_opreme(renoviranjeDTO, prostorija_za_izmenu)  # 1
-                OpremaServis.povecaj_broj_slobodne_opreme(renoviranjeDTO.naziv_opreme, renoviranjeDTO.broj_opreme)  # 2
+                OpremaRepozitorijumImpl().povecaj_broj_slobodne_opreme(renoviranjeDTO.naziv_opreme, renoviranjeDTO.broj_opreme)  # 2
                 ProstorijeRepozitorijum.sacuvaj_prostorije()
             return True
         else:
@@ -152,5 +152,8 @@ class ProstorijeServis(object):
             oprema_za_prvu[deljenjeDTO.naziv_opreme] = deljenjeDTO.broj_opreme_prva
             oprema_za_drugu[deljenjeDTO.naziv_opreme] = deljenjeDTO.broj_opreme_druga
             if deljenjeDTO.visak_opreme:
-                OpremaServis.povecaj_broj_slobodne_opreme(deljenjeDTO.naziv_opreme, deljenjeDTO.visak_opreme)
+                OpremaRepozitorijumImpl().povecaj_broj_slobodne_opreme(deljenjeDTO.naziv_opreme, deljenjeDTO.visak_opreme)
         return oprema_za_prvu, oprema_za_drugu
+
+    def obrisi_opremu_iz_prostorija(self, naziv_opreme_odabrane):
+        ProstorijeRepozitorijum.brisanje_opreme_iz_prostorija(naziv_opreme_odabrane)

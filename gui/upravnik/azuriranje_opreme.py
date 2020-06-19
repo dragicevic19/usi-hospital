@@ -1,9 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-
 from gui.prikaz_entiteta.prikaz_opreme import PrikazOpreme
-from repozitorijum.oprema.oprema_repozitorijum import OpremaRepozitorijum
 from servis.oprema.oprema_servis import OpremaServis
 
 
@@ -11,10 +9,10 @@ class IzborOpreme(PrikazOpreme):
 
     def __init__(self, root):
         super().__init__(root)
-        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ OPREMU", command=self.on_click)
+        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ OPREMU", command=self.odaberi_opremu)
         potvrdi_dugme.pack(fill='x')
 
-    def on_click(self):
+    def odaberi_opremu(self):
         try:
             odabrana = self.treeview.focus()
             odabrana_oprema = self.treeview.item(odabrana)['values']
@@ -50,7 +48,7 @@ class UnosPodataka(IzborOpreme):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        oprema = OpremaRepozitorijum.nadji_po_nazivu_opreme(self._selektovan_naziv_opreme)
+        oprema = OpremaServis().pronadji_opremu_po_nazivu(self._selektovan_naziv_opreme)
         self._podrazumevan_naziv = oprema.get_naziv_opreme()
         self._podrazumevani_opis = oprema.get_opis()
         self._podrazumevana_kolicina = oprema.get_slobodna_oprema()
@@ -86,7 +84,7 @@ class UnosPodataka(IzborOpreme):
             messagebox.showerror("GRESKA", "Neispravan unos za kolicinu. Dozvoljeni su samo pozitivni celi brojevi!")
             self._root2.destroy()
 
-        elif OpremaRepozitorijum.nadji_po_nazivu_opreme(self._naziv_opreme.get()):
+        elif OpremaServis().pronadji_opremu_po_nazivu(self._naziv_opreme.get()):
             if self._selektovan_naziv_opreme != self._naziv_opreme.get():
                 messagebox.showerror("GRESKA", "Oprema sa unetim nazivom opreme vec postoji")
                 self._root2.destroy()
@@ -97,7 +95,7 @@ class UnosPodataka(IzborOpreme):
             self.azuriraj_opremu()
 
     def azuriraj_opremu(self):
-        OpremaServis.azuriraj_opremu(self._selektovan_naziv_opreme, self._naziv_opreme.get(),
+        OpremaServis().azuriraj_opremu(self._selektovan_naziv_opreme, self._naziv_opreme.get(),
                                      self._opis.get(), self._kolicina.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali opremu")
         self._root2.destroy()

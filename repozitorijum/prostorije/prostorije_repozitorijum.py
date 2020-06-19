@@ -3,7 +3,6 @@ from model.konstante.konstante import *
 from model.prostorija import Prostorija
 import csv
 
-
 lista_ucitanih_prostorija = []
 lista_obrisanih_prostorija = []
 
@@ -48,7 +47,6 @@ class ProstorijeRepozitorijum:
 
     @staticmethod
     def __upisi_prostorije_csv(writer, lista_prostorija):
-        # lista_opreme = []
         for prostorija in lista_prostorija:
             spisak_opreme = ProstorijeRepozitorijum.recnik_u_string(prostorija.get_spisak_opreme())
 
@@ -75,6 +73,12 @@ class ProstorijeRepozitorijum:
         for prostorija in prostorije_za_brisanje:
             if prostorija in lista_ucitanih_prostorija:
                 lista_ucitanih_prostorija.remove(prostorija)
+
+    @staticmethod
+    def brisanje_opreme_iz_prostorija(naziv_opreme):
+        for prostorija in lista_ucitanih_prostorija:
+            if naziv_opreme in prostorija.get_spisak_opreme():
+                prostorija.get_spisak_opreme().pop(naziv_opreme)
 
 
 ProstorijeRepozitorijum.ucitavanje_prostorije()

@@ -1,4 +1,3 @@
-from repozitorijum.oprema.oprema_repozitorijum import OpremaRepozitorijum
 from servis.oprema.oprema_servis import OpremaServis
 from tkinter import messagebox
 from tkinter import ttk
@@ -37,16 +36,16 @@ class NovaOprema:
 
     def sacuvaj_opremu(self):
 
-        pronadjena_oprema = OpremaRepozitorijum.nadji_po_nazivu_opreme(self._naziv.get())
+        pronadjena_oprema = OpremaServis().pronadji_opremu_po_nazivu(self._naziv.get())
 
         if not self._naziv.get() or not self._opis.get() or not self._kolicina.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
         elif pronadjena_oprema:
-            OpremaServis.dodaj_postojecu_opremu(pronadjena_oprema, self._kolicina.get(), self._opis.get())
+            OpremaServis().dodaj_postojecu_opremu(pronadjena_oprema, self._kolicina.get(), self._opis.get())
             messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
         else:
-            OpremaServis.dodaj_opremu_nova(self._naziv.get(), self._opis.get(), self._kolicina.get())
+            OpremaServis().dodaj_opremu_nova(self._naziv.get(), self._opis.get(), self._kolicina.get())
             messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
 

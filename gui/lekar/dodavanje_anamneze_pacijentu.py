@@ -1,6 +1,5 @@
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
-from repozitorijum.unos_anamneze.unos_anamneze_repozitorijum import UnosAnamnezeRepozitorijum
-from servis.unos_anamneze.unos_anamneze_servis import UnosAnamnezeService
+from model.dto.unos_anamneze_dto import UnosAnamnezeDTO
+from servis.unos_anamneze.unos_anamneze_servis import UnosAnamnezeServis
 from gui.pacijent.pregled_anamneze import PregledAnamneze
 from tkinter import messagebox
 from tkinter import *
@@ -15,21 +14,14 @@ class DodavanjeAnamnezePacijentu(PregledAnamneze):
         self._pacijent = pacijent
         super().__init__(self._root2, pacijent)
         self.polje_za_unos_anamneze = None
-        naslov = Label(self._root2, text="DODAJ ANAMNEZU PACIJENTU", font="Arial 12 bold").pack(pady=5)
+        Label(self._root2, text="DODAJ ANAMNEZU PACIJENTU", font="Arial 12 bold").pack(pady=5)
         self.polje_za_unos_anamneze = Text(self._root2, height=8, width=50)
         self.polje_za_unos_anamneze.pack(padx=20, pady=20)
-        dugme_unos = Button(self._root2, text="UNESI", width=50, command=self._unesi_anamnezu).pack(pady=20)
-
-    """
-        izmeniti metodu dodaj anamnezu svuda / ne bismo trebali da koristimo ovde repozitorijum,
-        vec da sve odradimo u metodi servisa tj. da u metodi dodaj anamnezu svuda odradimo i cuvanje korisnika
-        
-        vazi za sva mesta gde se ponavlja slican kod kao ovaj
-    """
+        Button(self._root2, text="UNESI", width=50, command=self._unesi_anamnezu).pack(pady=20)
 
     def _unesi_anamnezu(self):
-        UnosAnamnezeService.dodaj_anamnezu_svuda(self._lekar, self.polje_za_unos_anamneze.get(), self._pacijent)
-        UnosAnamnezeRepozitorijum.sacuvaj_unos_anamneze()
-        KorisnikRepozitorijum.sacuvaj_korisnike()
+        unos_anamneze_dto = UnosAnamnezeDTO(self._lekar, self.polje_za_unos_anamneze.get("1.0", "end-1c")
+                                            .replace("\n", " "), self._pacijent)
+        UnosAnamnezeServis().dodaj_anamnezu_svuda(unos_anamneze_dto)
         messagebox.showinfo("USPESNO", "Uspesno ste dodali novu anamnezu.")
         self._root2.destroy()
