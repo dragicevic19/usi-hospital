@@ -32,8 +32,8 @@ class ScrollableFrame(ttk.Frame):
 
 
 funkcija_za_premestanje = {
-    TipPremestanjaOpreme.DODAVANJE_OPREME: ProstorijeServis.dodavanje_slobodne_opreme_u_prostoriju,
-    TipPremestanjaOpreme.IZBACIVANJE_OPREME: ProstorijeServis.izbacivanje_opreme_iz_prostorije
+    TipPremestanjaOpreme.DODAVANJE_OPREME: ProstorijeServis().dodavanje_slobodne_opreme_u_prostoriju,
+    TipPremestanjaOpreme.IZBACIVANJE_OPREME: ProstorijeServis().izbacivanje_opreme_iz_prostorije
 }
 
 

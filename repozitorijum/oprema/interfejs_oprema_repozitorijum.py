@@ -26,3 +26,7 @@ class InterfejsOpremaRepo(ABC):
     @abstractmethod
     def sacuvaj_bolnicku_opremu(self, oprema=None):
         pass
+
+    @abstractmethod
+    def vrati_nazive_bolnicke_opreme_u_sistemu(self):
+        pass

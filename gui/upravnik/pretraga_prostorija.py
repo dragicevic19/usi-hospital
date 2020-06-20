@@ -3,8 +3,10 @@ from model.dto.prenos_prostorija_dto import PretragaProstorijaDTO
 from repozitorijum.oprema.oprema_repozitorijum_impl import *
 import datetime
 from tkinter.ttk import Combobox
-from repozitorijum.oprema.oprema_repozitorijum_impl import lista_ucitane_bolnicke_opreme
+# from repozitorijum.oprema.oprema_repozitorijum_impl import lista_ucitane_bolnicke_opreme
 from tkinter import messagebox
+
+from servis.oprema.oprema_servis import OpremaServis
 
 
 class PretragaProstorija:
@@ -15,8 +17,8 @@ class PretragaProstorija:
         self.postava()
 
     def postava(self):
-        v = lista_ucitane_bolnicke_opreme
-        self.combo = Combobox(root, state='readonly', values=v, width=14)
+        lista_opreme = OpremaServis().vrati_svu_opremu_u_sistemu()
+        self.combo = Combobox(root, state='readonly', values=lista_opreme, width=14)
         self.combo.grid(row=1, column=1, padx=20, pady=20)
         dugme = Button(self._root, text="DODAJ OPREMU", command=self.print_vrednost_comba)
         dugme.grid(row=1, column=2, padx=20, pady=20)

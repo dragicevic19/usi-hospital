@@ -58,3 +58,9 @@ class OpremaRepozitorijumImpl(InterfejsOpremaRepo):
 
     def vrati_svu_opremu_u_sistemu(self):
         return self._lista_ucitane_bolnicke_opreme
+
+    def vrati_nazive_bolnicke_opreme_u_sistemu(self):
+        lista_imena_opreme = []
+        for oprema in self._lista_ucitane_bolnicke_opreme:
+            lista_imena_opreme.append(oprema._naziv_opreme)
+        return lista_imena_opreme
