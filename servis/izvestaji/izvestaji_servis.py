@@ -1,16 +1,13 @@
-from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijum
 from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja, lista_proslih_dogadjaja
 from datetime import datetime
-
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 
 
 class IzvestajServis:
     def __init__(self, tip_izvestaja, pocetni_datum, krajnji_datum):
         self._pocetni_datum_string = pocetni_datum
         self._krajnji_datum_string = krajnji_datum
-        self._lista_dogadjaja_spojeno = lista_proslih_dogadjaja + lista_dogadjaja
-        self._mapa = {}
+        self._prosli_i_buduci_dogadjaji = lista_proslih_dogadjaja + lista_dogadjaja
+        self._mapa = {}  # IZMENITI
         self._string_za_pdf = " "
         self._broj_dana_za_izvestaj = 0
         self._ukupan_broj_sati_zauzeca_svih = 0
@@ -21,8 +18,7 @@ class IzvestajServis:
         self._datum_do = datetime(int(g), int(m), int(d))
         self.ukupno_termina_po_objektu(self._datum_od, self._datum_do)
 
-    def generisanje(self, vrsta_izvestaja):
-        # vrsta izvestaja -> prostorija, lekar
+    def generisanje(self, vrsta_izvestaja): # vrsta izvestaja -> prostorija, lekar
         string_za_pdf = "IZVESTAJ ZA SVE " + vrsta_izvestaja.upper() + " OD " + self._pocetni_datum_string + " DO " \
                         + self._krajnji_datum_string + "\n\n"
 
@@ -31,7 +27,7 @@ class IzvestajServis:
         return string_za_pdf
 
     def ukupno_termina_po_objektu(self, datum_od, datum_do):
-        for dogadjaj in self._lista_dogadjaja_spojeno:
+        for dogadjaj in self._prosli_i_buduci_dogadjaji:
             if datum_od <= dogadjaj.datum_vreme <= datum_do:
                 self.__razvrstaj_izvestaj_po_tipu(dogadjaj)
         self._ukupan_broj_sati_zauzeca_svih /= 2
@@ -46,7 +42,7 @@ class IzvestajServis:
                 self.__odredi(lekar, dogadjaj.broj_termina)
                 self._ukupan_broj_sati_zauzeca_svih += dogadjaj.broj_termina
 
-    def __odredi(self, kljuc, broj_termina):
+    def __odredi(self, kljuc, broj_termina):  # PROMENITI NAZIV!
         if kljuc in self._mapa:
             self._mapa[kljuc] += broj_termina
         else:

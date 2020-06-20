@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 
 
@@ -11,19 +11,19 @@ class IzborKorisnika(PrikazKorisnika):
 
     def __init__(self, root):
         super().__init__(root)
-        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ KORISNIKA", command=self.double_click)
+        potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ KORISNIKA", command=self.odabir_korisnika)
         potvrdi_dugme.pack(fill='x')
 
-    def double_click(self):
+    def odabir_korisnika(self):
         try:
             odabrani = self.treeview.focus()
             odabrani_korisnik = self.treeview.item(odabrani)['values']
             korisnicko_ime_odabranog = odabrani_korisnik[0]
-            self.pokretanje_unosa_podataka(korisnicko_ime_odabranog)
+            self.pokretanje_forme_unos_podataka(korisnicko_ime_odabranog)
         except IndexError:
             messagebox.showerror("GRESKA", "Niste odabrali korisnika!")
 
-    def pokretanje_unosa_podataka(self, selektovan_korisnik):
+    def pokretanje_forme_unos_podataka(self, selektovan_korisnik):
         root2 = Tk()
         root2.geometry('330x260')
         application = UnosPodataka(root2, selektovan_korisnik, self._root)

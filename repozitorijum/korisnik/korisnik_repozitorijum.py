@@ -1,20 +1,18 @@
-import csv
-
 from model.enum.recnici import *
-from model.enum.uloga import Uloga
 from model.konstante.konstante import *
 from pathlib import Path
+import csv
+
 
 lista_ucitanih_korisnika = []
 lista_obrisanih_korisnika = []
-INDEX_ULOGE_KORISNIKA = 2
 
 
 class KorisnikRepozitorijum:
 
     @staticmethod
     def ucitavanje_korisnika():
-        path = Path(PATH_TO_KORISNICI)
+        path = Path(PUTANJA_FAJL_KORISNICI)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -45,7 +43,7 @@ class KorisnikRepozitorijum:
 
     @staticmethod
     def sacuvaj_korisnike():
-        path = Path(PATH_TO_KORISNICI)
+        path = Path(PUTANJA_FAJL_KORISNICI)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
 

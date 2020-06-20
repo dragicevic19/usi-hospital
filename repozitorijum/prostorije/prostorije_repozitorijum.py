@@ -1,7 +1,7 @@
-import csv
 from pathlib import Path
 from model.konstante.konstante import *
 from model.prostorija import Prostorija
+import csv
 
 lista_ucitanih_prostorija = []
 lista_obrisanih_prostorija = []
@@ -11,7 +11,7 @@ class ProstorijeRepozitorijum:
 
     @staticmethod
     def ucitavanje_prostorije():
-        path = Path(PATH_TO_PROSTORIJE)
+        path = Path(PUTANJA_FAJL_PROSTORIJE)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -39,7 +39,7 @@ class ProstorijeRepozitorijum:
 
     @staticmethod
     def sacuvaj_prostorije():
-        path = Path(PATH_TO_PROSTORIJE)
+        path = Path(PUTANJA_FAJL_PROSTORIJE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             ProstorijeRepozitorijum.__upisi_prostorije_csv(writer, lista_ucitanih_prostorija)
@@ -47,7 +47,6 @@ class ProstorijeRepozitorijum:
 
     @staticmethod
     def __upisi_prostorije_csv(writer, lista_prostorija):
-        # lista_opreme = []
         for prostorija in lista_prostorija:
             spisak_opreme = ProstorijeRepozitorijum.recnik_u_string(prostorija.get_spisak_opreme())
 
@@ -74,6 +73,12 @@ class ProstorijeRepozitorijum:
         for prostorija in prostorije_za_brisanje:
             if prostorija in lista_ucitanih_prostorija:
                 lista_ucitanih_prostorija.remove(prostorija)
+
+    @staticmethod
+    def brisanje_opreme_iz_prostorija(naziv_opreme):
+        for prostorija in lista_ucitanih_prostorija:
+            if naziv_opreme in prostorija.get_spisak_opreme():
+                prostorija.get_spisak_opreme().pop(naziv_opreme)
 
 
 ProstorijeRepozitorijum.ucitavanje_prostorije()

@@ -1,13 +1,14 @@
-from tkinter import *
+from tkinter import *  # UBACITI TRY CATCH ZA NESTANDARDNE BIBLIOTEKE!!!!!!!!!!!
 from tkinter import ttk
 from tkinter import messagebox
 from gui.lekar.lekar import poziv_forme_lekar
-from gui.sekretar.sektretar import poziv_forme_sekretar
-from gui.pacijent.pacijent import poziv_forme_pacijent
 from gui.administrator.administrator import poziv_forme_administrator
 from gui.upravnik.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
-from servisi.forme.login import LoginServis
+from servis.forme.login import LoginServis
+from gui.sekretar.sektretar import poziv_forme_sekretar
+from gui.pacijent.pacijent import poziv_forme_pacijent
+
 
 
 class LogIn:
@@ -51,7 +52,6 @@ class LogIn:
             else:
                 messagebox.showerror("GRESKA", "Neispravan unos.")
 
-
     def __poziv_forme_za(self, korisnik):
         self._root.destroy()
         uloga = korisnik.get_uloga()
@@ -59,7 +59,6 @@ class LogIn:
                            'LEKAR': poziv_forme_lekar, 'ADMINISTRATOR': poziv_forme_administrator,
                            'PACIJENT': poziv_forme_pacijent}
         recnik_funkcija[uloga](korisnik)
-
 
 
 def kreni_login():

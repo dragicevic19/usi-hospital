@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import Radiobutton, messagebox
 from model.konstante.konstante import REGEX_DATUM
-from servisi.izvestaji.izvestaj_lekara_servis import IzvestajLekaraServis
-from servisi.izvestaji.izvestaj_prostorije_servis import IzvestajProstorijeServis
+from servis.izvestaji.izvestaj_lekara_servis import IzvestajLekaraServis
+from servis.izvestaji.izvestaj_prostorije_servis import IzvestajProstorijeServis
 
 
 class FormaZaIzvestaje:
@@ -42,9 +42,9 @@ class FormaZaIzvestaje:
 
         # videti da se koriste dto klase za datume
         if self._radio_parametar.get() == 1:
-            IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pocni()
+            IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
         else:
-            IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pocni()
+            IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
 
 
 if __name__ == '__main__':

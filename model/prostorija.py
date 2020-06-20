@@ -1,5 +1,4 @@
 
-
 class Prostorija(object):
 
     def __init__(self, sprat, broj_prostorije, spisak_opreme={}, namena_prostorije=None, obrisana=''):

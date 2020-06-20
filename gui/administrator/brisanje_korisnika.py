@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class BrisanjeKorisnika(PrikazKorisnika):
@@ -25,7 +25,7 @@ class BrisanjeKorisnika(PrikazKorisnika):
 
 
 def poziv_forme_brisanje_korisnika(root):
-    application = BrisanjeKorisnika(root)
+    BrisanjeKorisnika(root)
     root.mainloop()
 
 

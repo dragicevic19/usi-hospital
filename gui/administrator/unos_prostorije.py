@@ -4,12 +4,12 @@ from tkinter import messagebox
 
 from model.prostorija import Prostorija
 from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijum
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class NovaProstorija:
-    spratovi = ('1', '2', '3', '4')
     moguce_namene_prostorija = ('operaciona sala', 'sala za preglede', 'soba za lezanje')
+    spratovi = ('1', '2', '3', '4')
 
     def __init__(self, root):
         self._root = root
@@ -24,8 +24,8 @@ class NovaProstorija:
 
     def izaberi_sprat(self):
         Label(self._root, text="Sprat:", font="Times 14").grid(row=1, column=1, pady=10)
-        default = '1'
-        ttk.OptionMenu(self._root, self._sprat, default, *self.spratovi).grid(row=1, column=2)
+        podrazumevana_vrednost = '1'
+        ttk.OptionMenu(self._root, self._sprat, podrazumevana_vrednost, *self.spratovi).grid(row=1, column=2)
 
     def izaberi_prostoriju(self):
         Label(self._root, justify=LEFT, text="Broj prostorije:", font="Times 15").grid(row=2, column=1, pady=10)
@@ -34,9 +34,9 @@ class NovaProstorija:
 
     def izaberi_namenu_prostorije(self):
         Label(self._root, text="Namena prostorije:", font="Times 15", justify=LEFT).grid(row=3, column=1, pady=10)
-        default = 'operaciona sala'
-        ttk.OptionMenu(self._root, self._namena_prostorije, default, *self.moguce_namene_prostorija).grid(row=3,
-                                                                                                          column=2)
+        podrazumevana_vrednost = 'operaciona sala'
+        ttk.OptionMenu(self._root, self._namena_prostorije, podrazumevana_vrednost, *self.moguce_namene_prostorija)\
+            .grid(row=3, column=2)
 
     def proveri_validnost(self):
         if not self._broj_prostorije.get() or not self._namena_prostorije.get():
