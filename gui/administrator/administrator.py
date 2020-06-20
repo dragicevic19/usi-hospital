@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from gui.administrator.brisanje_korisnika import poziv_forme_brisanje_korisnika
 from gui.administrator.dodavanje_korisnika import poziv_forme_unos_korisnika
 from gui.administrator.azuriranje_korisnika import poziv_forme_azuriranje_korisnika
@@ -65,5 +64,5 @@ def poziv_forme_administrator(korisnik):
     root.mainloop()
 
 
-if __name__ == '__main__':
-    poziv_forme_administrator(lista_ucitanih_korisnika[0])
+# if __name__ == '__main__':
+#     poziv_forme_administrator(lista_ucitanih_korisnika[0])

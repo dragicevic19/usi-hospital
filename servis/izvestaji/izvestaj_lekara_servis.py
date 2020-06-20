@@ -1,6 +1,6 @@
 from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijum
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 from servis.izvestaji.izvestaji_servis import IzvestajServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 """
         IZMESTITI PDF FAJLOVE U POSEBAN FOLDER
@@ -25,12 +25,12 @@ class IzvestajLekaraServis(IzvestajServis):
     def ukupan_broj_sati_po_lekaru(self):
         ispis = ""
         for lekar in self._mapa:
-            pronadjeni_lekar = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(lekar)
-            # ime, prezime = pronadjeni_lekar.get_ime(), pronadjeni_lekar.get_prezime()
-            ime, prezime = "Pera", "Peric"
-            ispis += "Ukupno zauzece lekara " + lekar + " pod imenom " + ime + " " + prezime + " je: " + str(
-                int(self._mapa[lekar]) * 30) \
-                     + " minuta \n"
+            if lekar:
+                pronadjeni_lekar = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(lekar)
+                ime, prezime = pronadjeni_lekar.get_ime(), pronadjeni_lekar.get_prezime()
+                ispis += "Ukupno zauzece lekara " + lekar + " pod imenom " + ime + " " + prezime + " je: " + str(
+                    int(self._mapa[lekar]) * 30) \
+                         + " minuta \n"
         return ispis
 
     def prosecan_broj_sati_po_lekaru(self):

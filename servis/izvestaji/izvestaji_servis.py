@@ -39,8 +39,9 @@ class IzvestajServis:
             self._ukupan_broj_sati_zauzeca_svih += dogadjaj.broj_termina
         elif self._tip_izvestaja == "lekare":
             for lekar in dogadjaj.spisak_doktora:
-                self.__odredi(lekar, dogadjaj.broj_termina)
-                self._ukupan_broj_sati_zauzeca_svih += dogadjaj.broj_termina
+                if len(dogadjaj.spisak_doktora) > 0:
+                    self.__odredi(lekar, dogadjaj.broj_termina)
+                    self._ukupan_broj_sati_zauzeca_svih += dogadjaj.broj_termina
 
     def __odredi(self, kljuc, broj_termina):  # PROMENITI NAZIV!
         if kljuc in self._mapa:

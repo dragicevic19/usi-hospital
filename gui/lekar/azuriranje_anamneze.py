@@ -1,7 +1,8 @@
 from gui.lekar.dodavanje_anamneze_pacijentu import DodavanjeAnamnezePacijentu
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 from tkinter import Tk
+
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 """ 
  na dvoklik na pacijenta, izlazi nova forma
@@ -33,7 +34,7 @@ class AzuriranjeAnamneze(PrikazKorisnika):
         odabrani = self.treeview.focus()
         odabrani_pacijent = self.treeview.item(odabrani)['values']
         korisnicko_ime = str(odabrani_pacijent[0])
-        pacijent = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(korisnicko_ime)
+        pacijent = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(korisnicko_ime)
         return pacijent
 
 

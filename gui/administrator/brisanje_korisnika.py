@@ -17,7 +17,7 @@ class BrisanjeKorisnika(PrikazKorisnika):
             odabrani = self.treeview.focus()
             odabrani_korisnik = self.treeview.item(odabrani)['values']
             korisnicko_ime_odabranog = odabrani_korisnik[0]
-            KorisnikServis.obrisi_korisnika(korisnicko_ime_odabranog)
+            KorisnikServis().obrisi_korisnika(korisnicko_ime_odabranog)
             messagebox.showinfo("USPESNO", "Uspesno ste obrisali korisnika!")
             self._root.destroy()
         except IndexError:

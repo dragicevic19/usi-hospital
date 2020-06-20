@@ -58,7 +58,7 @@ class NoviKorisnik:
             uloga = self._uloga.get()
             korisnik = konstruktor_po_ulozi[uloga](self._korisnicko_ime.get(), self._lozinka.get(), uloga,
                                                    self._ime.get(), self._prezime.get())
-            if KorisnikServis.dodaj_korisnika(korisnik):
+            if KorisnikServis().dodaj_korisnika(korisnik):
                 messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
                 self._root.destroy()
             else:

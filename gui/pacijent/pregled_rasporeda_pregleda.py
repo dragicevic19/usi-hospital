@@ -1,7 +1,8 @@
 from tkinter import ttk, Tk, messagebox
 
 from model.konstante.konstante import INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA
-from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijum, lista_proslih_dogadjaja, lista_dogadjaja
+from repozitorijum.kalendar.kalendar_repozitorijum import lista_proslih_dogadjaja, \
+    lista_dogadjaja
 from servis.korisnik.korisnik_servis import KorisnikServis
 
 
@@ -52,10 +53,15 @@ class PrikazPregleda:
     def __prikazi_detalje_lekara(self, event):
         odabrana = self.treeview.focus()
         odabrani_doktor = self.treeview.item(odabrana)["values"]
-        ispis = KorisnikServis.vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
+        ispis = KorisnikServis().vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
         messagebox.showinfo("Imena lekara:", ispis)
 
 
-def poziv_prikaza_pregleda(root,ulogovani_pacijent): # korisnicko ime ulogovanog
+def poziv_prikaza_pregleda(root, ulogovani_pacijent):  # korisnicko ime ulogovanog
     PrikazPregleda(root, ulogovani_pacijent)
     root.mainloop()
+
+
+if __name__ == '__main__':
+    root = Tk()
+    poziv_prikaza_pregleda(root, "predrag")

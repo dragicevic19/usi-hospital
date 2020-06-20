@@ -1,6 +1,5 @@
 from model.dto.registracija_pacijenta_dto import RegistracijaPacijentaDTO
 from model.konstante.konstante import DUZINA_BR_KNJIZICE
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
@@ -66,11 +65,11 @@ class RegistracijaPacijenta:
         elif len(self._br_zdravstvene.get()) != DUZINA_BR_KNJIZICE or not str(self._br_zdravstvene.get()).isnumeric():
             messagebox.showerror("GRESKA!", "Pogresan unos broja zdravstvene knjizice (8 brojeva)!")
         else:
-            if not KorisnikRepozitorijum.nadji_po_korisnickom_imenu(self._korisnicko_ime.get()):
+            if not KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime.get()):
                 pacijent = RegistracijaPacijentaDTO(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
                                                     self._prezime.get(), self._br_zdravstvene.get(),
                                                     self._pol.get())
-                KorisnikServis.registracija_pacijenta(pacijent)
+                KorisnikServis().registracija_pacijenta(pacijent)
                 messagebox.showinfo("USPESNO", "Uspesno ste registrovali pacijenta")
                 self._root.destroy()
             else:

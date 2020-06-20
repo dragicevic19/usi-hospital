@@ -1,7 +1,6 @@
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from model.enum.uloga import Uloga
 from model.konstante.konstante import REGEX_VREME
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
@@ -49,7 +48,7 @@ class UnosPodataka(IzborLekara):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        lekar = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(self._korisnicko_ime_lekara)
+        lekar = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime_lekara)
         self._podrazumevano_radno_vreme = lekar.get_radno_vreme()
         self._podrazumevani_spisak_specijalizacija = lekar.get_spisak_specijalizacija()
 
@@ -78,7 +77,7 @@ class UnosPodataka(IzborLekara):
             self.azuriraj_lekara()
 
     def azuriraj_lekara(self):
-        KorisnikServis.azuriraj_lekara(self._korisnicko_ime_lekara, self._radno_vreme.get(),
+        KorisnikServis().azuriraj_lekara(self._korisnicko_ime_lekara, self._radno_vreme.get(),
                                        self._spisak_specijalizacija.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali lekara")
         self._root2.destroy()

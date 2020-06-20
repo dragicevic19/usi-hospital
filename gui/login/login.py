@@ -45,7 +45,7 @@ class LogIn:
             poziv_forme_neregistrovan()
         else:
 
-            korisnik = LoginServis.provera_unosa(self._korisnicko_ime.get(), self._lozinka.get())
+            korisnik = LoginServis().provera_unosa(self._korisnicko_ime.get(), self._lozinka.get())
             if (korisnik != None):
                 self.__poziv_forme_za(korisnik)
             else:

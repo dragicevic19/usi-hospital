@@ -40,11 +40,11 @@ class SopstveniIzvestajLekaraServis:
 
     def formiraj_spisak_pacijenata(self):
         string_za_ispis = ""
-        for pacijent in KorisnikServis.dobavi_spisak_pacijenata_po_lekaru(self._ulogovani_lekar):
+        for pacijent in KorisnikServis().dobavi_spisak_pacijenata_po_lekaru(self._ulogovani_lekar):
             string_za_ispis += "Pacijent: " + pacijent.get_ime() + " " + pacijent.get_prezime() + \
                                " sa brojem zdravstvene knjizice:  " + pacijent.get_br_zdravstvene() + "\n"
         return string_za_ispis
 
 
 if __name__ == '__main__':
-    SopstveniIzvestajLekaraServis("horacije442", 120)
+    SopstveniIzvestajLekaraServis("horacije442", 350)

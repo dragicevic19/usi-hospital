@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikaz_zauzeca import PrikazZauzeca
 from model.konstante.konstante import INDEX_PACIJENTA_DOGADJAJ_TREEVIEW
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class PregledZauzeca(PrikazZauzeca):
@@ -18,7 +18,7 @@ class PregledZauzeca(PrikazZauzeca):
             odabrani = self.treeview.focus()
             odabrani_dogajaj = self.treeview.item(odabrani)['values']
             pacijent_iz_dogadjaja = odabrani_dogajaj[INDEX_PACIJENTA_DOGADJAJ_TREEVIEW]
-            self._pacijent = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(pacijent_iz_dogadjaja)
+            self._pacijent = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(pacijent_iz_dogadjaja)
             self.pokretanje_prikaza_podataka()
         except IndexError:
             messagebox.showerror("GRESKA", "Niste odabrali dogadjaj!")

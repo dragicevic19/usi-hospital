@@ -1,7 +1,5 @@
-from tkinter import ttk
-
-from servis.korisnik.korisnik_servis import KorisnikServis
 from servis.unos_anamneze.unos_anamneze_servis import UnosAnamnezeServis
+from tkinter import ttk
 
 
 class PrikazAnamneze:
