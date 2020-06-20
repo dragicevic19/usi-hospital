@@ -43,11 +43,7 @@ class Prostorija(object):
     def ima_svu_trazenu_opremu(self, spisak_zahtevane_opreme):
         if len(self._spisak_opreme) == 0:
             return False
-        brojac =0
         for i in spisak_zahtevane_opreme:
-            for oprema_u_prostoriji in self._spisak_opreme:
-                if i in oprema_u_prostoriji:
-                    brojac += 1
-        if brojac ==0:
-            return False
+            if i not in self._spisak_opreme:
+                return False
         return True

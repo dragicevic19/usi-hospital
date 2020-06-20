@@ -1,12 +1,9 @@
 from repozitorijum.prostorije.prostorije_repozitorijum import *
-from model.DTO.prenos_prostorija import PretragaProstorijaDTO
-<<<<<<< HEAD:services/prostorije/zauzeca_prostorija_servis.py
-from repository.kalendar.kalendar_repozitorijum import lista_dogadjaja,lista_proslih_dogadjaja
-=======
-from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja
->>>>>>> 47c86f94e7cf1642cfccf26133699b4eb127ff20:servisi/prostorije/zauzeca_prostorija_servis.py
 
-# ProstorijeRepository.ucitavanje_prostorije()
+from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja,lista_proslih_dogadjaja
+
+
+
 
 
 class ZauzecaProstorijaServis:
