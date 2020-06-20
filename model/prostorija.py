@@ -1,4 +1,3 @@
-from model.bolnickaOprema import BolnickaOprema
 
 
 class Prostorija(object):
@@ -40,8 +39,14 @@ class Prostorija(object):
     def set_obrisana(self, obrisana):
         self._obrisana = obrisana
 
-    def sadrzi_opremu(self,spisak_zahtevane_oprem):
-        for i in spisak_zahtevane_oprem:
-            if i not in self._spisak_opreme:
-                return False
+    def ima_svu_trazenu_opremu(self, spisak_zahtevane_opreme):
+        if len(self._spisak_opreme) == 0:
+            return False
+        brojac =0
+        for i in spisak_zahtevane_opreme:
+            for oprema_u_prostoriji in self._spisak_opreme:
+                if i in oprema_u_prostoriji:
+                    brojac += 1
+        if brojac ==0:
+            return False
         return True
