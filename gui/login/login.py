@@ -7,7 +7,7 @@ from gui.pacijent.pacijent import poziv_forme_pacijent
 from gui.administrator.administrator import poziv_forme_administrator
 from gui.upravnik.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
-from services.forme.login import LoginService
+from servisi.forme.login import LoginServis
 
 
 class LogIn:
@@ -45,7 +45,7 @@ class LogIn:
             poziv_forme_neregistrovan()
         else:
 
-            korisnik = LoginService.provera_unosa(self._korisnicko_ime.get(),self._lozinka.get())
+            korisnik = LoginServis.provera_unosa(self._korisnicko_ime.get(), self._lozinka.get())
             if (korisnik != None):
                 self.__poziv_forme_za(korisnik)
             else:

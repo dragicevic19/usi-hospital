@@ -7,6 +7,7 @@ class OstaleRenovacije:
 
     def __init__(self, root, selektovana_prostorija):
         self._root = root
+        self._root.title('Ostale renovacije')
         self._prostorija = selektovana_prostorija
         self._datum_pocetka_radova = None
         self._datum_zavrsetka_radova = None
@@ -34,8 +35,15 @@ class OstaleRenovacije:
         else:
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
-            prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija)
-            ProstorijeService.ostale_renovacije(prostorijaDTO)
+            renoviranjeDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija)
+            self.provera_zauzeca(renoviranjeDTO)
+
+    def provera_zauzeca(self, renoviranjeDTO):
+        if ProstorijeServis.izmeni_namenu(renoviranjeDTO):
+            messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
+            self._root.destroy()
+        else:
+            messagebox.showerror("GRESKA", "Prostorija je zauzeta u tom periodu")
 
     def provera_datuma(self):
         try:

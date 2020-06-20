@@ -1,5 +1,5 @@
 from gui.prikaz_entiteta.prikaz_anamneze import PrikazAnamneze
-from repository.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -9,10 +9,9 @@ class PregledAnamneze(PrikazAnamneze):
 
     def __init__(self, root, ulogovan_pacijent):
         super().__init__(root, ulogovan_pacijent)
-        detaljniji_opis = ttk.Button(self._root, text="DETALJNIJI OPIS", command=self.on_click)
-        detaljniji_opis.pack(fill='x')
+        self.treeview.bind('<Double-1>', self._odabir_pacijenta)
 
-    def on_click(self):
+    def _odabir_pacijenta(self, event):
         try:
             odabrani = self.treeview.focus()
             odabrani_unos_anamneze = self.treeview.item(odabrani)['values']
@@ -52,5 +51,5 @@ def poziv_forme_pregled_anamneze(root, ulogovan_pacijent):
 
 if __name__ == '__main__':
     root = Tk()
-    ulogovan_pacijent = lista_ucitanih_korisnika[14]
+    ulogovan_pacijent = lista_ucitanih_korisnika[23]
     poziv_forme_pregled_anamneze(root, ulogovan_pacijent)

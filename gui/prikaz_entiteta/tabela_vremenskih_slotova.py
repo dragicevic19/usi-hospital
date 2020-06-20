@@ -1,6 +1,6 @@
 from tkinter import *
-from repository.kalendar.kalendar_repozitorijum import vremenski_slotovi
-from services.kalendar.kalendar_servis import KalendarServis
+from repozitorijum.kalendar.kalendar_repozitorijum import vremenski_slotovi
+from servisi.kalendar.kalendar_servis import KalendarServis
 
 
 class Tabela_vremenskih_slotova():

@@ -2,11 +2,13 @@ from tkinter import *
 
 from gui.prikaz_entiteta.prikazProstorija import PrikazProstorija
 from model.DTO.prenos_prostorija import PretragaProstorijaDTO
+from repozitorijum.oprema.oprema_repozitorijum import *
+import datetime
 from tkinter.ttk import Combobox
-from repository.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
+from repozitorijum.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
 from tkinter import messagebox
 from model.konstante.konstante import REGEX_VREME,REGEX_DATUM
-from services.prostorije.zauzeca_prostorija_servis import ZauzecaProstorija
+from servisi.prostorije.zauzeca_prostorija_servis import ZauzecaProstorija
 
  
 

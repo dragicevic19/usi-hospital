@@ -2,7 +2,7 @@
 
 class Prostorija(object):
 
-    def __init__(self, sprat, broj_prostorije, spisak_opreme=[], namena_prostorije=None, obrisana=''):
+    def __init__(self, sprat, broj_prostorije, spisak_opreme={}, namena_prostorije=None, obrisana=''):
         self._sprat = sprat
         self._broj_prostorije = broj_prostorije
         self._spisak_opreme = spisak_opreme
@@ -30,14 +30,15 @@ class Prostorija(object):
     def set_broj_prostorije(self, broj_prostorije):
         self._broj_prostorije = broj_prostorije
 
-    def set_spisak_opreme(self, spisak_opreme):
-        self._spisak_opreme = spisak_opreme
+    def promena_opreme(self, naziv, broj_opreme):
+        self._spisak_opreme[naziv] = broj_opreme
 
     def set_namena_prostorije(self, namena_prostorije):
         self._namena_prostorije = namena_prostorije
 
     def set_obrisana(self, obrisana):
         self._obrisana = obrisana
+
 
     def ima_svu_trazenu_opremu(self, spisak_zahtevane_opreme):
         if len(self._spisak_opreme) == 0:

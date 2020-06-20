@@ -8,7 +8,6 @@ sebastijan3412,heahgae452,LEKAR,Sebastijan,Mihajlovic,,23:30-13:00,marija;milana
 jovana31,tewqt424,SEKRETAR,Jovana,Malagurski,
 predrag,gangi,PACIJENT,Predrag,Mitrovic,,1301143,muski,1|2
 jovan21,hrazgh432,ADMINISTRATOR,Jovan,Petrovic,
-zile2,123,UPRAVNIK,zika,radic,
 goran431,hrnheio5423,LEKAR,Goran,Mikic,,08:00-14:00,pera_pacijent;predrag,neurolog
 milana,maja,PACIJENT,Milana,Milojevic,,31330657,zenski,4
 micic123,mica12333,SEKRETAR,Mica,Micic,
@@ -22,8 +21,6 @@ leks,asd,LEKAR,asd,asd,,,,
 lekardodat,asd,LEKAR,asd,asd,,23:00-00:30,,endokrinolog
 lekardodatsad,sa,LEKAR,ads,adsa,,,,
 pera_pacijent,1234,PACIJENT,pera,peric,,1234,muski,
-zile2,asd,PACIJENT,asd,asd,,123,muski,
+zile2,asd,PACIJENT,asd,asd,,123,muski,|8|9
 pera_pacijent,123,PACIJENT,asd,asd,,aaa,muski,
 nikolaNikolic,123,LEKAR,aasd,asd,,,,
-marija,marija,PACIJENT,marija,marijic,,1234,zenski,
-marko123,asad,PACIJENT,marko,marko,,123,muski,
