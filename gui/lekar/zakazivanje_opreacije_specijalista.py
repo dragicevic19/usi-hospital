@@ -2,11 +2,13 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 
+from gui.prikaz_entiteta.tabela_vremenskih_slotova import poziv_tabele_vremenskih_slotova
 from model.DTO.dogadjajiDTO.zakazivanje_operacija_DTO import ZakazivanjeOperacijeDTO
 from model.enum.namena_prostorije import NamenaProstorije
 from model.enum.tip_zahvata import TipZahvata
 from model.konstante.konstante import REGEX_VREME
 from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from servisi.kalendar.kalendar_servis import KalendarServis
 from servisi.prostorije.prostorije_servis import ProstorijeServis
 
 
@@ -25,32 +27,45 @@ class ZakazivanjeOperacije:
 
         self._opearciona_sala = StringVar(self._root)
         self._opearciona_sala.set(self._lista_operacionih_sala[0])
-        self.izaberi_datum_i_vreme()
         self.izaberi_operacionu_salu()
+        self.izaberi_datum_i_vreme()
         self.hitna_operacija()
         ttk.Button(self._root, text="Potvrdi", command=self.provera_unosa).grid(row=5, column=0, sticky=E, padx=60,
                                                                                 pady=20)
 
-    def izaberi_datum_i_vreme(self):
-        pocetak_Label = Label(self._root, justify=LEFT, text="Datum operacije (dd/mm/gggg):", font="Times 15")
-        pocetak_Label.grid(row=0, sticky=W, column=0, pady=10)
-        self._datum_pocetka_operacije.grid(row=0, column=1, sticky=W, padx=10)
-
-        pocetak_vreme_Label = Label(self._root, justify=LEFT, text="Vreme pocetka operacije (hh:mm):", font="Times 15")
-        pocetak_vreme_Label.grid(row=1, sticky=W, column=0, pady=10)
-        self._vreme_pocetka.grid(row=1, column=1, sticky=W, padx=10)
-
-        kraj_vreme_Label = Label(self._root, justify=LEFT, text="Ocekivano vreme zavrsetka operacije (hh:mm):",
-                                 font="Times 15")
-        kraj_vreme_Label.grid(row=2, sticky=W, column=0, pady=10)
-        self._vreme_zavrsetka.grid(row=2, column=1, sticky=W, padx=10)
-
     def izaberi_operacionu_salu(self):
         op_sala_Label = Label(self._root, justify=LEFT, text="Operaciona sala:", font="Times 15")
-        op_sala_Label.grid(row=3, sticky=W, column=0, pady=10)
+        op_sala_Label.grid(row=0, sticky=W, column=0, pady=10)
         default = self._opearciona_sala.get()
         op_sala_OptionMenu = ttk.OptionMenu(self._root, self._opearciona_sala, default, *self._lista_operacionih_sala)
-        op_sala_OptionMenu.grid(row=3, column=1, pady=5, padx=10)
+        op_sala_OptionMenu.grid(row=0, column=1, pady=5, padx=10)
+
+    def izaberi_datum_i_vreme(self):
+        self.datum_vreme_pocetka()
+        self.datum_vreme_kraj()
+
+    def datum_vreme_pocetka(self):
+        pocetak_Label = Label(self._root, justify=LEFT, text="Datum operacije (dd/mm/gggg):", font="Times 15")
+        pocetak_Label.grid(row=1, sticky=W, column=0, pady=10)
+        self._datum_pocetka_operacije.grid(row=1, column=1, sticky=W, padx=10)
+        pocetak_vreme_Label = Label(self._root, justify=LEFT, text="Vreme pocetka operacije (hh:mm):",
+                                    font="Times 15")
+        pocetak_vreme_Label.grid(row=2, sticky=W, column=0, pady=10)
+        self._vreme_pocetka.grid(row=2, column=1, sticky=W, padx=10)
+
+    def datum_vreme_kraj(self):
+        kraj_vreme_Label = Label(self._root, justify=LEFT, text="Ocekivano vreme zavrsetka operacije (hh:mm):",
+                                 font="Times 15")
+        kraj_vreme_Label.grid(row=3, sticky=W, column=0, pady=10)
+        self._vreme_zavrsetka.grid(row=3, column=1, sticky=W, padx=10)
+        ttk.Button(self._root, text="Pregledaj\nzauzeca", command=self.tabela_vremenskih_zauzeca).grid(row=1, column=2,
+                                                                                                       sticky=W)
+
+    def tabela_vremenskih_zauzeca(self):
+        if not self.provera_datuma():
+            # greska
+            pass
+        poziv_tabele_vremenskih_slotova(self._datum_pocetka_operacije.get(), *(self._opearciona_sala.get().split('|')))
 
     def hitna_operacija(self):
         self._hitno_check = ttk.Checkbutton(self._root, text="HITNA OPERACIJA",
@@ -81,22 +96,30 @@ class ZakazivanjeOperacije:
                                                self._pacijent,
                                                self._opearciona_sala.get(), self._hitna_operacija.get(),
                                                TipZahvata.OPERACIJA.value)
-        print(self._hitna_operacija.get())
         if ProstorijeServis.zakazivanje_operacije(operacijaDTO):
             messagebox.showinfo('USPESNO', 'Uspesno ste zakazali operaciju')
             self._root.destroy()
+        else:
+            self._proveri_da_li_je_hitna_operacija(operacijaDTO)
+
+    def _proveri_da_li_je_hitna_operacija(self, operacijaDTO):
+        if operacijaDTO.hitno:
+            odgovor = messagebox.askyesno("Greska", "Prostorija je zauzeta u tom periodu.\nDa li zelite"
+                                                    "da se sekretaru posalje notifikacija o hitnoj operaciji?")
+            if odgovor:
+                KalendarServis.posalji_notifikaciju_sekretaru(operacijaDTO)
+                self._root.destroy()
         else:
             messagebox.showerror('GRESKA', 'Prostorija je zauzeta u tom periodu')
 
 
 def poziv_forme_zakazivanje_operacije(ulogovani_lekar, pacijent):
     root = Tk()
-    root.geometry('700x300')
+    root.geometry('750x300')
     application = ZakazivanjeOperacije(root, ulogovani_lekar, pacijent)
     root.mainloop()
 
 
 if __name__ == '__main__':
-    root = Tk()
     korisnik = lista_ucitanih_korisnika[0]
-    poziv_forme_zakazivanje_operacije(root, korisnik)
+    poziv_forme_zakazivanje_operacije(korisnik)

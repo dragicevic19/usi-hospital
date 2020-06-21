@@ -11,6 +11,7 @@ PATH_TO_IZVESTAJ_PROSTORIJE_CITANJE_WEB = r'..\..\data\izvestaj_prostorije.pdf'
 PATH_TO_IZVESTAJ_LEKARA = "../../data/izvestaj_lekar.pdf"
 PATH_TO_IZVESTAJ_LEKARA_CITANJE_WEB = r'..\..\data\izvestaj_lekar.pdf'
 PATH_TO_NOTIFIKACIJE = '../../data/notifikacije.csv'
+PATH_TO_ZAHTEVI_ZA_PREGLED = '../../data/zahtevi_za_pregled.csv'
 
 REGEX_VREME = re.compile(r'^(([01]\d|2[0-3]):([0-5]\d)|24:00)$')
 REGEX_VREME_OD_DO = re.compile(r'^(([01]\d|2[0-3]):([0-5]\d)|24:00)-(([01]\d|2[0-3]):([0-5]\d)|24:00)$')

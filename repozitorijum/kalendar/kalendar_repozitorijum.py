@@ -16,6 +16,7 @@ vremenski_slotovi = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:0
 
 
 class KalendarRepozitorijum:
+
     @staticmethod
     def ucitaj_dogadjaje():
         path = Path(PATH_TO_DOGADJAJI)
@@ -81,11 +82,11 @@ class KalendarRepozitorijum:
         pocetak_novog = novi_dogadjajDTO.pocetak_vreme_datum
         zavrsetak_novog = novi_dogadjajDTO.zavrsetak_vreme_datum
 
-        if pocetak <= pocetak_novog <= zavrsetak:
+        if pocetak < pocetak_novog < zavrsetak:
             return False
-        if pocetak <= zavrsetak_novog <= zavrsetak:
+        if pocetak < zavrsetak_novog < zavrsetak:
             return False
-        if pocetak_novog <= pocetak and zavrsetak_novog >= zavrsetak:
+        if pocetak_novog < pocetak and zavrsetak_novog > zavrsetak:
             return False
         return True
 

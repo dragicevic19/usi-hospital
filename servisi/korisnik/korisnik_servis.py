@@ -1,3 +1,4 @@
+from model.enum.tip_lekara import TipLekara
 from model.enum.uloga import Uloga
 from model.pacijent import Pacijent
 from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
@@ -60,3 +61,33 @@ class KorisnikServis(object):
                 ime_i_prezime_lekara = objekat_lekara.get_ime() + " " + objekat_lekara.get_prezime()
                 podaci_za_vracanje += ime_i_prezime_lekara + ", "
         return podaci_za_vracanje[:-2]  # brisemo posledji nalepljen zarez i space
+
+    @staticmethod
+    def vrati_sve_korisnike_po_ulozi(uloga):
+        return KorisnikRepozitorijum.vrati_sve_korisnike_po_ulozi(uloga)
+
+    @staticmethod
+    def vrati_korisnika_po_korisnickom_imenu(korisnicko_ime):
+        return KorisnikRepozitorijum.nadji_po_korisnickom_imenu(korisnicko_ime)
+
+    @staticmethod
+    def pronadji_pacijenta(korisnicko_ime):
+        lista_pronadjenih = []
+        lista_svih_pacijenata = KorisnikRepozitorijum.vrati_sve_korisnike_po_ulozi(Uloga.PACIJENT.name)
+        for pacijent in lista_svih_pacijenata:
+            if pacijent.get_korisnicko_ime() == korisnicko_ime:
+                lista_pronadjenih.append(pacijent)
+        return lista_pronadjenih
+
+    @staticmethod
+    def vrati_lekare_specijaliste_ili_lop(tip_lekara):
+        pronadjeni_lekari = []
+        svi_lekari = KorisnikRepozitorijum.vrati_sve_korisnike_po_ulozi(Uloga.LEKAR.name)
+        for lekar in svi_lekari:
+            if tip_lekara == TipLekara.SPECIJALISTA:
+                if lekar.get_uloga() != TipLekara.LOP.value:
+                    pronadjeni_lekari.append(lekar)
+            elif lekar.get_uloga() == TipLekara.LOP.value:
+                pronadjeni_lekari.append(lekar)
+
+        return pronadjeni_lekari

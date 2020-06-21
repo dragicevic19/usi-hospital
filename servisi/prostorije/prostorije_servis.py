@@ -161,10 +161,6 @@ class ProstorijeServis(object):
 
     @staticmethod
     def zakazivanje_operacije(zakazivanje_operacijeDTO):
-        if zakazivanje_operacijeDTO.hitno:
-            pass
-            # KalendarServis.posalji_notifikaciju_sekretaru(zakazivanje_operacijeDTO)
-
         if KalendarServis.dodaj_dogadjaj_ako_je_slobodna(zakazivanje_operacijeDTO):
             return True
         else:

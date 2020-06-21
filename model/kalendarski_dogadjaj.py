@@ -67,26 +67,6 @@ class KalendarskiDogadjaj:
     def hitno(self):
         return self._hitno
 
-    @sprat.setter
-    def sprat(self, sprat):
-        self._sprat = sprat
-
-    @broj_prostorije.setter
-    def broj_prostorije(self, broj_prostorije):
-        self._broj_prostorije = broj_prostorije
-
-    @broj_termina.setter
-    def broj_termina(self, broj_termina):
-        self._broj_termina = broj_termina
-
-    @spisak_doktora.setter
-    def spisak_doktora(self, spisak_doktora):
-        self._spisak_doktora = spisak_doktora
-
-    @spisak_pacijenata.setter
-    def spisak_pacijenata(self, spisak_pacijenata):
-        self._spisak_pacijenata = spisak_pacijenata
-
     def vrati_za_upis_u_fajl(self):
         return self._datum, self._vreme, self._sprat + "|" + self._broj_prostorije, \
                self._broj_termina, "|".join(self._spisak_doktora), "|".join(self._spisak_pacijenata), \
