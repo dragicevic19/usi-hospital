@@ -1,9 +1,14 @@
 import datetime
 import tkinter as tk
 from tkinter import ttk, messagebox, Label, LEFT, W, INSERT
-from model.DTO.renoviranje_dogadjaja_DTO import RenoviranjeDTO
+from model.dto.renoviranje_dogadjaja_dto import RenoviranjeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from servis.prostorije.prostorije_servis import ProstorijeServis
+
+"""
+    IZMENITI NAZIVE NA ENGLESKOM
+
+"""
 
 
 class ScrollableFrame(ttk.Frame):
@@ -27,8 +32,8 @@ class ScrollableFrame(ttk.Frame):
 
 
 funkcija_za_premestanje = {
-    TipPremestanjaOpreme.DODAVANJE_OPREME: ProstorijeServis.dodavanje_slobodne_opreme_u_prostoriju,
-    TipPremestanjaOpreme.IZBACIVANJE_OPREME: ProstorijeServis.izbacivanje_opreme_iz_prostorije
+    TipPremestanjaOpreme.DODAVANJE_OPREME: ProstorijeServis().dodavanje_slobodne_opreme_u_prostoriju,
+    TipPremestanjaOpreme.IZBACIVANJE_OPREME: ProstorijeServis().izbacivanje_opreme_iz_prostorije
 }
 
 

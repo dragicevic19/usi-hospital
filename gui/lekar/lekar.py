@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import ttk
 from gui.model_pocetne import ModelPocetne
 
 
@@ -11,7 +10,7 @@ class PocetnaFormaLekar(ModelPocetne):
 
 def poziv_forme_lekar(korisnik):
     root = Tk()
-    kreni = PocetnaFormaLekar(root, korisnik)
+    PocetnaFormaLekar(root, korisnik)
 
     root.mainloop()
 

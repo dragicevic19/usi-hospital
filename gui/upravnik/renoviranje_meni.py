@@ -2,17 +2,10 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from gui.upravnik.renoviranje.renoviranje_prostorije import poziv_forme_odabir_prostorije
 from model.enum.renoviranje import TipRenoviranja
-from repozitorijum.oprema.oprema_repozitorijum import OpremaRepozitorijum
-from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijum
 
 """ 
 
-
-
 REFAKTORISATI NA KRAJU INIT I VP START GUI
-
-
-
 
 
 """

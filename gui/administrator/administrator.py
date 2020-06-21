@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from gui.administrator.brisanje_korisnika import poziv_forme_brisanje_korisnika
 from gui.administrator.dodavanje_korisnika import poziv_forme_unos_korisnika
 from gui.administrator.azuriranje_korisnika import poziv_forme_azuriranje_korisnika
@@ -32,30 +31,32 @@ class PocetnaFormaAdministrator(ModelPocetne):
         b5.place(x=850, y=10, height=60, width=150)
 
     def priprema_akcije(self):
-        self._frejm_izvrsavanja.destroy()
+        self._okvir_izvrsavanja.destroy()
         super().kreiranje_frejma_za_izvrsavanje()
 
+    #  IZMENITI NAZIVE METODA AKCIJA
     def akcija(self):
         self.priprema_akcije()
-        poziv_forme_unos_korisnika(self._frejm_izvrsavanja)
+        poziv_forme_unos_korisnika(self._okvir_izvrsavanja)
 
     def akcija1(self):
         self.priprema_akcije()
-        poziv_forme_azuriranje_korisnika(self._frejm_izvrsavanja)
+        poziv_forme_azuriranje_korisnika(self._okvir_izvrsavanja)
 
     def akcija2(self):
         self.priprema_akcije()
-        poziv_forme_brisanje_korisnika(self._frejm_izvrsavanja)
+        poziv_forme_brisanje_korisnika(self._okvir_izvrsavanja)
 
     def akcija3(self):
         self.priprema_akcije()
-        poziv_forme_unos_prostorije(self._frejm_izvrsavanja)
+        poziv_forme_unos_prostorije(self._okvir_izvrsavanja)
 
     def akcija4(self):
         self.priprema_akcije()
-        poziv_forme_brisanje_prostorije(self._frejm_izvrsavanja)
+        poziv_forme_brisanje_prostorije(self._okvir_izvrsavanja)
 
 
+# PROMENITI NES
 def poziv_forme_administrator(korisnik):
     root = Tk()
     # root.geometry('400x190')
@@ -63,5 +64,5 @@ def poziv_forme_administrator(korisnik):
     root.mainloop()
 
 
-if __name__ == '__main__':
-    poziv_forme_administrator(lista_ucitanih_korisnika[0])
+# if __name__ == '__main__':
+#     poziv_forme_administrator(lista_ucitanih_korisnika[0])

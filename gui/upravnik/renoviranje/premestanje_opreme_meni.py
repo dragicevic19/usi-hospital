@@ -1,10 +1,12 @@
+from gui.upravnik.renoviranje.dodavenje_opreme_u_prostoriju import dodavanje_opreme
+from gui.upravnik.renoviranje.uklanjanje_opreme_iz_prostorije import uklanjanje_opreme_iz_prostorije
 from tkinter import *
 from tkinter import ttk
 
-from gui.upravnik.renoviranje.dodavenje_opreme_u_prostoriju import dodavanje_opreme
-from gui.upravnik.renoviranje.uklanjanje_opreme_iz_prostorije import uklanjanje_opreme_iz_prostorije
-from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija, ProstorijeRepozitorijum
 
+"""
+MOZDA ENUM?
+"""
 tip_premestanja = {
     1: dodavanje_opreme,
     2: uklanjanje_opreme_iz_prostorije
@@ -37,10 +39,10 @@ def premestanje_opreme_meni(selektovana_prostorija):
     root.mainloop()
 
 
-if __name__ == '__main__':
-    root = Tk()
-    root.geometry('300x100')
-    # ProstorijeRepository.ucitavanje_prostorije()
-    prostorija = lista_ucitanih_prostorija[0]
-    application = PremestanjeOpremeMeni(root, prostorija)
-    root.mainloop()
+# if __name__ == '__main__':
+#     root = Tk()
+#     root.geometry('300x100')
+#     # ProstorijeRepository.ucitavanje_prostorije()
+#     prostorija = lista_ucitanih_prostorija[0]
+#     application = PremestanjeOpremeMeni(root, prostorija)
+#     root.mainloop()

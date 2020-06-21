@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import Radiobutton, messagebox
 from model.konstante.konstante import REGEX_DATUM
-from servisi.izvestaji.izvestaj_lekara_servis import IzvestajLekaraServis
-from servisi.izvestaji.izvestaj_prostorije_servis import IzvestajProstorijeServis
+from servis.izvestaji.izvestaj_lekara_servis import IzvestajLekaraServis
+from servis.izvestaji.izvestaj_prostorije_servis import IzvestajProstorijeServis
 
 
 class FormaZaIzvestaje:
@@ -34,7 +34,7 @@ class FormaZaIzvestaje:
         izvestaj_sobe = Radiobutton(self._root, text="Izvestaj za sobe", variable=self._radio_parametar, value=1)
         izvestaj_sobe.grid(row=3, column=2, padx=10, pady=10)
 
-        ttk.Button(self._root, text="Izvestaj za sobe", command=self.generisi).grid(row=4, column=1, padx=10, pady=10)
+        ttk.Button(self._root, text="Izgenerisi izvestaj", command=self.generisi).grid(row=4, column=1, padx=10, pady=10)
 
     def generisi(self):
         if not REGEX_DATUM.match(self._datum_od.get()) or not REGEX_DATUM.match(self._datum_do.get()):
@@ -42,9 +42,9 @@ class FormaZaIzvestaje:
 
         # videti da se koriste dto klase za datume
         if self._radio_parametar.get() == 1:
-            IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pocni()
+            IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
         else:
-            IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pocni()
+            IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
 
 
 if __name__ == '__main__':

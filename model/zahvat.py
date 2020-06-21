@@ -1,5 +1,4 @@
 from model.pacijent import Pacijent
-from model.prostorija import Prostorija
 from model.lekar import Lekar
 
 

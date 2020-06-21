@@ -1,60 +1,54 @@
-import csv
-
+from repozitorijum.korisnik.interfejs_korisnik_repozitorijum import InterfejsKorisnikRepo
 from model.enum.recnici import *
-from model.enum.uloga import Uloga
 from model.konstante.konstante import *
 from pathlib import Path
-
-lista_ucitanih_korisnika = []
-lista_obrisanih_korisnika = []
-INDEX_ULOGE_KORISNIKA = 2
+import csv
 
 
-class KorisnikRepozitorijum:
+class KorisnikRepozitorijumImpl(InterfejsKorisnikRepo):
 
-    @staticmethod
-    def ucitavanje_korisnika():
-        path = Path(PATH_TO_KORISNICI)
+    def __init__(self):
+        self._lista_korisnika = []
+        self._lista_obrisanih_korisnika = []
+        self.ucitavanje_korisnika()
+
+    def ucitavanje_korisnika(self):
+        path = Path(PUTANJA_FAJL_KORISNICI)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
                 korisnik = konstruktor_po_ulozi[red[2]](*red)
                 if not korisnik.get_obrisan():
-                    lista_ucitanih_korisnika.append(korisnik)
+                    self._lista_korisnika.append(korisnik)
                 else:
-                    lista_obrisanih_korisnika.append(korisnik)
+                    self._lista_obrisanih_korisnika.append(korisnik)
 
-    @staticmethod
-    def nadji_po_korisnickom_imenu(korisniko_ime):
-        for korisnik in lista_ucitanih_korisnika:
-            if korisnik.get_korisnicko_ime() == korisniko_ime:
+    def nadji_po_korisnickom_imenu(self, korisnicko_ime):
+        for korisnik in self._lista_korisnika:
+            if korisnik.get_korisnicko_ime() == korisnicko_ime:
                 return korisnik
         return False
 
-    @staticmethod
-    def obrisi_korisnika(korisnik):
+    def obrisi_korisnika(self, korisnik):
         korisnik._obrisan = True
-        lista_ucitanih_korisnika.remove(korisnik)
-        lista_obrisanih_korisnika.append(korisnik)
-        KorisnikRepozitorijum.sacuvaj_korisnike()
+        self._lista_korisnika.remove(korisnik)
+        self._lista_obrisanih_korisnika.append(korisnik)
+        self.sacuvaj_korisnike()
 
-    @staticmethod
-    def dodaj_korisnika(korisnik):
-        lista_ucitanih_korisnika.append(korisnik)
-        KorisnikRepozitorijum.sacuvaj_korisnike()
+    def dodaj_korisnika(self, korisnik):
+        self._lista_korisnika.append(korisnik)
+        self.sacuvaj_korisnike()
 
-    @staticmethod
-    def sacuvaj_korisnike():
-        path = Path(PATH_TO_KORISNICI)
+    def sacuvaj_korisnike(self):
+        path = Path(PUTANJA_FAJL_KORISNICI)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
 
-            KorisnikRepozitorijum.__upisi_korisnike_csv(writer, lista_ucitanih_korisnika)
-            KorisnikRepozitorijum.__upisi_korisnike_csv(writer, lista_obrisanih_korisnika)
+            self.__upisi_korisnike_csv(writer, self._lista_korisnika)
+            self.__upisi_korisnike_csv(writer, self._lista_obrisanih_korisnika)
 
-    @staticmethod
-    def vrati_spisak_pacijenata_po_lekaru(ulogovan_lekar):
-        for korisnik in lista_ucitanih_korisnika:
+    def vrati_spisak_pacijenata_po_lekaru(self, ulogovan_lekar):
+        for korisnik in self._lista_korisnika:
             if korisnik.get_korisnicko_ime() == ulogovan_lekar:
                 return korisnik.get_spisak_pacijenata()
 
@@ -63,10 +57,9 @@ class KorisnikRepozitorijum:
         for korisnik in lista:
             writer.writerow(korisnik.vrati_za_upis_u_fajl())
 
-    @staticmethod
-    def dodaj_id_anamneze_pacijentu(pacijent, id_anamneze):
-        pacijent.dodaj_anamnezu(id_anamneze)
+    def dodaj_id_anamneze_pacijentu(self, pacijent, id_anamneze):
+        self.nadji_po_korisnickom_imenu(pacijent.get_korisnicko_ime()).dodaj_anamnezu(id_anamneze)
+        self.sacuvaj_korisnike()
 
-KorisnikRepozitorijum.ucitavanje_korisnika()
-KorisnikRepozitorijum.sacuvaj_korisnike()
-# print(KorisnikRepository.vrati_spisak_pacijenata_po_lekaru("sebastijan3412"))
+    def vrati_listu_korisnika(self):
+        return self._lista_korisnika

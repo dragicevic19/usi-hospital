@@ -1,7 +1,5 @@
 from gui.prikaz_entiteta.prikaz_anamneze import PrikazAnamneze
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from tkinter import *
-from tkinter import ttk
 from tkinter import messagebox
 
 
@@ -45,11 +43,11 @@ class DetaljnijiOpis(PregledAnamneze):
 
 def poziv_forme_pregled_anamneze(root, ulogovan_pacijent):
     # root = Tk()
-    application = PregledAnamneze(root, ulogovan_pacijent)
+    PregledAnamneze(root, ulogovan_pacijent)
     root.mainloop()
 
-
-if __name__ == '__main__':
-    root = Tk()
-    ulogovan_pacijent = lista_ucitanih_korisnika[23]
-    poziv_forme_pregled_anamneze(root, ulogovan_pacijent)
+#
+# if __name__ == '__main__':
+#     root = Tk()
+#     ulogovan_pacijent = lista_ucitanih_korisnika[23]
+#     poziv_forme_pregled_anamneze(root, ulogovan_pacijent)

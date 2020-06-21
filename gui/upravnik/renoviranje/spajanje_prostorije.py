@@ -2,19 +2,19 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 
-from model.DTO.renoviranje_dogadjaja_DTO import RenoviranjeDTO
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from model.dto.renoviranje_dogadjaja_dto import RenoviranjeDTO
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class SpajanjeProstorije(object):
     namene_prostorija = ('sala za preglede', 'operaciona sala', 'soba za lezanje')
 
-    def __init__(self, root, prostorija1, prostorija2):
+    def __init__(self, root, prostorija_1, prostorija_2):
 
         self._root = root
         self._root.title("Spajanje prostorija")
-        self._prostorija1 = prostorija1
-        self._prostorija2 = prostorija2
+        self._prostorija_1 = prostorija_1
+        self._prostorija_2 = prostorija_2
         self._datum_pocetka_radova = ttk.Entry(self._root)
         self._datum_zavrsetka_radova = ttk.Entry(self._root)
         self._novi_broj = ttk.Entry(self._root)
@@ -41,8 +41,8 @@ class SpajanjeProstorije(object):
         Label(self._root, justify=LEFT, text='Novi broj prostorije: ', font="Times 15").grid(row=4, column=1, pady=10)
         self._novi_broj.grid(row=4, column=2, columnspan=10)
         Label(self._root, justify=LEFT, text='Nova namena prostorije: ', font="Times 15").grid(row=5, column=1, pady=10)
-        default = self._nova_namena.get()
-        ttk.OptionMenu(self._root, self._nova_namena, default, *self.namene_prostorija).grid(row=5, column=2)
+        podrazumevana_vrednost = self._nova_namena.get()
+        ttk.OptionMenu(self._root, self._nova_namena, podrazumevana_vrednost, *self.namene_prostorija).grid(row=5, column=2)
 
     def provera_unosa(self):
         if not self.provera_datuma():
@@ -50,15 +50,15 @@ class SpajanjeProstorije(object):
         elif not self.provera_broja_prostorije():
             messagebox.showerror("GRESKA", "Broj prostorije je zauzet!")
         else:
-            prostorijaDTO1 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija1,
-                                            namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
+            prostorija_dto_1 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija_1,
+                                              namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
 
-            prostorijaDTO2 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija2,
-                                            namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
-            self.provera_zauzeca(prostorijaDTO1, prostorijaDTO2)
+            prostorija_dto_2 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija_2,
+                                              namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
+            self.provera_zauzeca(prostorija_dto_1, prostorija_dto_2)
 
-    def provera_zauzeca(self, prostorijaDTO1, prostorijaDTO2):
-        if ProstorijeServis.spajanje_prostorija(prostorijaDTO1, prostorijaDTO2):
+    def provera_zauzeca(self, prostorija_dto_1, prostorija_dto_2):
+        if ProstorijeServis().spajanje_prostorija(prostorija_dto_1, prostorija_dto_2):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:
@@ -77,14 +77,14 @@ class SpajanjeProstorije(object):
         return True
 
     def provera_broja_prostorije(self):
-        ProstorijeServis.obrisi_sobe(self._prostorija1, self._prostorija2)
-        if not ProstorijeServis.slobodan_broj_prostorije(self._prostorija1.get_sprat(), self._novi_broj.get()):
+        ProstorijeServis().obrisi_sobe(self._prostorija_1, self._prostorija_2)
+        if not ProstorijeServis().slobodan_broj_prostorije(self._prostorija_1.get_sprat(), self._novi_broj.get()):
             return False
         return True
 
 
-def spajanje_prostorije(prostorija1, prostorija2):
+def spajanje_prostorije(prostorija_1, prostorija_2):
     root = Tk()
     root.geometry('600x250')
-    application = SpajanjeProstorije(root, prostorija1, prostorija2)
+    application = SpajanjeProstorije(root, prostorija_1, prostorija_2)
     root.mainloop()

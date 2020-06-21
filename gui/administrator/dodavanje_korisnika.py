@@ -1,5 +1,5 @@
 from model.enum.recnici import *
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -27,8 +27,8 @@ class NoviKorisnik:
 
     def izaberi_ulogu(self):
         Label(self._root, text="Uloga:", font="Times 14").grid(row=1, column=1, pady=10)
-        default = 'LEKAR'
-        ttk.OptionMenu(self._root, self._uloga, default, *self.uloge).grid(row=1, column=2)
+        podrazumevana_vrednost = 'LEKAR'
+        ttk.OptionMenu(self._root, self._uloga, podrazumevana_vrednost, *self.uloge).grid(row=1, column=2)
 
     def unesi_korisnicko_ime(self):
         Label(self._root, justify=LEFT, text="Korisnicko ime:", font="Times 15").grid(row=2, column=1, pady=10)
@@ -58,7 +58,7 @@ class NoviKorisnik:
             uloga = self._uloga.get()
             korisnik = konstruktor_po_ulozi[uloga](self._korisnicko_ime.get(), self._lozinka.get(), uloga,
                                                    self._ime.get(), self._prezime.get())
-            if KorisnikServis.dodaj_korisnika(korisnik):
+            if KorisnikServis().dodaj_korisnika(korisnik):
                 messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
                 self._root.destroy()
             else:
@@ -66,6 +66,8 @@ class NoviKorisnik:
 
 
 def poziv_forme_unos_korisnika(root):
+    # da li je neophodno da ovo bude u promenljivoj s obzirom da se ne koristi nigde vise,
+    # jel ti treba za formu?
     application = NoviKorisnik(root)
     root.mainloop()
 

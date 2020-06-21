@@ -3,22 +3,22 @@ from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikaz_zauzeca import PrikazZauzeca
 from model.konstante.konstante import INDEX_PACIJENTA_DOGADJAJ_TREEVIEW
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class PregledZauzeca(PrikazZauzeca):
 
     def __init__(self, root, korisnicko_ime_lekara):
         super().__init__(root, korisnicko_ime_lekara)
-        detalji_dugme = ttk.Button(self._root, text="DETALJNIJE", command=self.detalji_click)
-        detalji_dugme.pack(fill='x')
+        dugme_za_detalje = ttk.Button(self._root, text="DETALJNIJE", command=self.prikazi_detalje_o_pacijentu)
+        dugme_za_detalje.pack(fill='x')
 
-    def detalji_click(self):
+    def prikazi_detalje_o_pacijentu(self):
         try:
             odabrani = self.treeview.focus()
             odabrani_dogajaj = self.treeview.item(odabrani)['values']
             pacijent_iz_dogadjaja = odabrani_dogajaj[INDEX_PACIJENTA_DOGADJAJ_TREEVIEW]
-            self._pacijent = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(pacijent_iz_dogadjaja)
+            self._pacijent = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(pacijent_iz_dogadjaja)
             self.pokretanje_prikaza_podataka()
         except IndexError:
             messagebox.showerror("GRESKA", "Niste odabrali dogadjaj!")
@@ -30,6 +30,7 @@ class PregledZauzeca(PrikazZauzeca):
         root2.mainloop()
 
 
+# IZDVOJITI U POSEBNU KLASU I RAZMISLITI O PROMENI IMENA PRIKAZ/PREGLED
 class PrikazPodataka(PregledZauzeca):
 
     def __init__(self, root2, selektovan_pacijent, root):
@@ -46,13 +47,17 @@ class PrikazPodataka(PregledZauzeca):
 
     def prikazi_detaljne_podatke(self):
         Label(self._root2, justify=LEFT, text="Ime:", font="Times 15").grid(row=2, column=1, pady=10)
-        Label(self._root2, justify=LEFT, text=self._pacijent._ime, font="Times 15").grid(row=2, column=2, pady=10, padx=20)
+        Label(self._root2, justify=LEFT, text=self._pacijent._ime, font="Times 15").grid(row=2, column=2, pady=10,
+                                                                                         padx=20)
         Label(self._root2, justify=LEFT, text="Prezime:", font="Times 15").grid(row=3, column=1, pady=10)
-        Label(self._root2, justify=LEFT, text=self._pacijent._prezime, font="Times 15").grid(row=3, column=2, pady=10, padx=20)
+        Label(self._root2, justify=LEFT, text=self._pacijent._prezime, font="Times 15").grid(row=3, column=2, pady=10,
+                                                                                             padx=20)
         Label(self._root2, justify=LEFT, text="Pol:", font="Times 15").grid(row=4, column=1, pady=10)
-        Label(self._root2, justify=LEFT, text=self._pacijent._pol, font="Times 15").grid(row=4, column=2, pady=10, padx=20)
+        Label(self._root2, justify=LEFT, text=self._pacijent._pol, font="Times 15").grid(row=4, column=2, pady=10,
+                                                                                         padx=20)
         Label(self._root2, justify=LEFT, text="Broj zdravstvene:", font="Times 15").grid(row=5, column=1, pady=10)
-        Label(self._root2, justify=LEFT, text=self._pacijent._br_zdravstvene, font="Times 15").grid(row=5, column=2, pady=10, padx=20)
+        Label(self._root2, justify=LEFT, text=self._pacijent._br_zdravstvene, font="Times 15").grid(row=5, column=2,
+                                                                                                    pady=10, padx=20)
 
 
 def poziv_forme_detaljni_prikaz_pacijenta(root):
@@ -63,4 +68,3 @@ def poziv_forme_detaljni_prikaz_pacijenta(root):
 if __name__ == '__main__':
     root = Tk()
     poziv_forme_detaljni_prikaz_pacijenta(root)
-
