@@ -1,5 +1,4 @@
 from tkinter import *
-from repozitorijum.kalendar.kalendar_repozitorijum import vremenski_slotovi
 from servis.kalendar.kalendar_servis import KalendarServis
 
 
@@ -11,12 +10,14 @@ class Tabela_vremenskih_slotova():
         self._root.title("Vremenski slotovi zauzeca")
         self.prikaz_slotova()
 
+
     def prikaz_slotova(self):
         VISINA = 7
         SIRINA = 7
         for i in range(VISINA):  # REDOVI
             for j in range(SIRINA):  # KOLONE
                 pozadina = "green"
+                vremenski_slotovi = KalendarServis().dobavi_vremenske_slotove()
                 trenutno_vreme = vremenski_slotovi[i * 7 + j]
                 if trenutno_vreme in self._lista_zauzeca:
                     pozadina = "red"
@@ -29,5 +30,5 @@ class Tabela_vremenskih_slotova():
 
 if __name__ == '__main__':
     root = Tk()
-    lista = KalendarServis.vrati_zauzeca_datum_soba("4/6/2020", "1", "109")
+    lista = KalendarServis().vrati_zauzeca_datum_soba("21/12/2020", "1", "109")
     Tabela_vremenskih_slotova(root, lista)

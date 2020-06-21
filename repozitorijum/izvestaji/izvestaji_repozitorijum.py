@@ -3,12 +3,16 @@ import webbrowser
 from model.konstante.konstante import PUTANJA_ZA_IZVESTAJ_PROSTORIJE, \
     PUTANJA_ZA_IZVESTAJ_PROSTORIJE_CITANJE, PUTANJA_ZA_IZVESTAJ_LEKARA_CITANJE, PUTANJA_ZA_IZVESTAJ_UPRAVNIK_LEKAR, \
     PUTANJA_ZA_IZVESTAJ_LEKAR_SOPSTVENI, PUTANJA_ZA_IZVESTAJ_LEKAR_SOPSTVENI_CITANJE
+from repozitorijum.izvestaji.interfejs_izvestaji_repozitorijum import InterfejsIzvestajRepozitorijum
 
 
-class IzvestajRepozitorijum:
+class IzvestajRepozitorijumImpl(InterfejsIzvestajRepozitorijum):
 
-    @staticmethod  # tip = False - lekar, True - prostorija
-    def generisi_izvestaj_upravnik(string_za_upis, tip_izvestaja):
+    def __init__(self):
+        pass
+
+    # tip = False - lekar, True - prostorija
+    def generisi_izvestaj_upravnik(self, string_za_upis, tip_izvestaja):
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Arial", size=10, )
@@ -23,8 +27,7 @@ class IzvestajRepozitorijum:
             pdf.output(PUTANJA_ZA_IZVESTAJ_UPRAVNIK_LEKAR)
             webbrowser.open_new(PUTANJA_ZA_IZVESTAJ_LEKARA_CITANJE)
 
-    @staticmethod
-    def generisi_izvestaj_lekar(string_za_upis):
+    def generisi_izvestaj_lekar(self, string_za_upis):
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Arial", size=10, )

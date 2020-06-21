@@ -34,7 +34,7 @@ class FormaZaIzvestaje:
         izvestaj_sobe = Radiobutton(self._root, text="Izvestaj za sobe", variable=self._radio_parametar, value=1)
         izvestaj_sobe.grid(row=3, column=2, padx=10, pady=10)
 
-        ttk.Button(self._root, text="Izvestaj za sobe", command=self.generisi).grid(row=4, column=1, padx=10, pady=10)
+        ttk.Button(self._root, text="Izgenerisi izvestaj", command=self.generisi).grid(row=4, column=1, padx=10, pady=10)
 
     def generisi(self):
         if not REGEX_DATUM.match(self._datum_od.get()) or not REGEX_DATUM.match(self._datum_do.get()):

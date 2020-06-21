@@ -1,9 +1,7 @@
-from tkinter import ttk, Tk, messagebox
-
 from model.konstante.konstante import INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA
-from repozitorijum.kalendar.kalendar_repozitorijum import lista_proslih_dogadjaja, \
-    lista_dogadjaja
+from servis.kalendar.kalendar_servis import KalendarServis
 from servis.korisnik.korisnik_servis import KorisnikServis
+from tkinter import ttk, Tk, messagebox
 
 
 class PrikazPregleda:
@@ -40,9 +38,9 @@ class PrikazPregleda:
         self.treeview.delete(*self.treeview.get_children())
         index = 0
         if prosli:
-            lista = lista_proslih_dogadjaja
+            lista = KalendarServis().dobavi_listu_proslih_dogadjaja()
         else:
-            lista = lista_dogadjaja
+            lista = KalendarServis().dobavi_listu_dogadjaja()
         for dogadjaj in lista:
             if self._ulogovan_pacijent in dogadjaj.spisak_pacijenata:
                 red = (str(dogadjaj.datum), str(dogadjaj.vreme), dogadjaj.zahvat, ",".join(dogadjaj.spisak_doktora))

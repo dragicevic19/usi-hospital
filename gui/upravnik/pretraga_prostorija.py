@@ -10,6 +10,7 @@ from servis.oprema.oprema_servis import OpremaServis
 
 
 class PretragaProstorija:
+
     lista_zahtevane_opreme = []
 
     def __init__(self, root):

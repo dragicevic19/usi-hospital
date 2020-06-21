@@ -1,31 +1,38 @@
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
-from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijum
+from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijumImpl
 
 
-class KalendarServis:
+class KalendarServis():
+    def __init__(self, repo_kalendar=KalendarRepozitorijumImpl()):
+        self._repo_kalendar = repo_kalendar
 
-    @staticmethod
-    def vrati_zauzeca_datum_soba(datum, sprat, broj_sobe):
-        return KalendarRepozitorijum.vrati_zauzeca_za_datum_i_sobu(datum, sprat, broj_sobe)
+    def vrati_zauzeca_datum_soba(self, datum, sprat, broj_sobe):
+        return self._repo_kalendar.vrati_zauzeca_za_datum_i_sobu(datum, sprat, broj_sobe)
 
-    @staticmethod
-    def dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
-        if KalendarServis.slobodna_prostorija_za_period(renoviranjeDTO):
+    def dodaj_dogadjaj_ako_je_slobodna(self, renoviranjeDTO):
+        if self.slobodna_prostorija_za_period(renoviranjeDTO):
             dogadjaj = KalendarskiDogadjaj(renoviranjeDTO.datum_pocetka_radova, renoviranjeDTO.vreme,
                                            renoviranjeDTO.sprat_broj_prostorije,
                                            renoviranjeDTO.broj_termina)
-            KalendarRepozitorijum.dodaj_dogadjaj(dogadjaj)
+            self._repo_kalendar.dodaj_dogadjaj(dogadjaj)
             return True
         else:
             return False
 
-    @staticmethod
-    def slobodna_prostorija_za_period(renoviranjeDTO):
-        if KalendarRepozitorijum.slobodna_prostorija_za_period(renoviranjeDTO):
+    def slobodna_prostorija_za_period(self, renoviranjeDTO):
+        if self._repo_kalendar.slobodna_prostorija_za_period(renoviranjeDTO):
             return True
         else:
             return False
 
+    def dobavi_vremenske_slotove(self):
+        return self._repo_kalendar.vrati_vremenske_slotove()
 
-if __name__ == '__main__':
-    lista = KalendarServis.vrati_zauzeca_datum_soba("6/1/2020", "3", "301")
+    def dobavi_listu_dogadjaja(self):
+        return self._repo_kalendar.vrati_listu_dogadjaja()
+
+    def dobavi_listu_proslih_dogadjaja(self):
+        return self._repo_kalendar.vrati_listu_proslih_dogadjaja()
+
+# if __name__ == '__main__':
+#     lista = KalendarServis().vrati_zauzeca_datum_soba("6/1/2020", "3", "301")

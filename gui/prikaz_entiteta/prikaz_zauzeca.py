@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkinter import *
-from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja
+from servis.kalendar.kalendar_servis import KalendarServis
 
 
 class PrikazZauzeca(object):
@@ -28,6 +28,7 @@ class PrikazZauzeca(object):
 
     def __popuni_treeview(self):
         index = iid = 0
+        lista_dogadjaja = KalendarServis().dobavi_listu_dogadjaja()
         for dogadjaj in lista_dogadjaja:
             if self._korisnicko_ime_lekara in dogadjaj._spisak_doktora:
                 dog = (dogadjaj.datum, dogadjaj.vreme, str(dogadjaj.broj_termina * 30) + " minuta",

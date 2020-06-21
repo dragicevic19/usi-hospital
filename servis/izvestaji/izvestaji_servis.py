@@ -1,4 +1,4 @@
-from repozitorijum.kalendar.kalendar_repozitorijum import lista_dogadjaja, lista_proslih_dogadjaja
+from servis.kalendar.kalendar_servis import KalendarServis
 from datetime import datetime
 
 
@@ -6,7 +6,8 @@ class IzvestajServis:
     def __init__(self, tip_izvestaja, pocetni_datum, krajnji_datum):
         self._pocetni_datum_string = pocetni_datum
         self._krajnji_datum_string = krajnji_datum
-        self._prosli_i_buduci_dogadjaji = lista_proslih_dogadjaja + lista_dogadjaja
+        self._prosli_i_buduci_dogadjaji = KalendarServis().dobavi_listu_proslih_dogadjaja() + \
+                                          KalendarServis().dobavi_listu_dogadjaja()
         self._mapa = {}  # IZMENITI
         self._string_za_pdf = " "
         self._broj_dana_za_izvestaj = 0
@@ -18,7 +19,7 @@ class IzvestajServis:
         self._datum_do = datetime(int(g), int(m), int(d))
         self.ukupno_termina_po_objektu(self._datum_od, self._datum_do)
 
-    def generisanje(self, vrsta_izvestaja): # vrsta izvestaja -> prostorija, lekar
+    def generisanje(self, vrsta_izvestaja):  # vrsta izvestaja -> prostorija, lekar
         string_za_pdf = "IZVESTAJ ZA SVE " + vrsta_izvestaja.upper() + " OD " + self._pocetni_datum_string + " DO " \
                         + self._krajnji_datum_string + "\n\n"
 

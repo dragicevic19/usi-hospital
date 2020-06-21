@@ -1,4 +1,4 @@
-from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijum
+from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijumImpl
 from servis.izvestaji.izvestaji_servis import IzvestajServis
 from servis.korisnik.korisnik_servis import KorisnikServis
 
@@ -9,9 +9,9 @@ from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class IzvestajLekaraServis(IzvestajServis):
-    def __init__(self, pocetni_datum, krajnji_datum):
-
+    def __init__(self, pocetni_datum, krajnji_datum, repo_izvestaj = IzvestajRepozitorijumImpl()):
         super().__init__("lekare", pocetni_datum, krajnji_datum)
+        self._repo_izvestaj = repo_izvestaj
 
     def pripremi_i_izgenerisi_izvestaj(self):
         self._string_za_pdf = self.generisanje(self._tip_izvestaja)
@@ -20,7 +20,7 @@ class IzvestajLekaraServis(IzvestajServis):
         self._string_za_pdf += self.prosecan_broj_sati_po_lekaru()
         self._string_za_pdf += self.prosecno_i_ukupno_sati_svi_lekari()
 
-        IzvestajRepozitorijum.generisi_izvestaj_upravnik(self._string_za_pdf, False)
+        self._repo_izvestaj.generisi_izvestaj_upravnik(self._string_za_pdf, False)
 
     def ukupan_broj_sati_po_lekaru(self):
         ispis = ""
