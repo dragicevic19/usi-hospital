@@ -1,5 +1,5 @@
 from tkinter import ttk
-from repozitorijum.oprema.oprema_repozitorijum import lista_ucitane_bolnicke_opreme
+from servis.oprema.oprema_servis import OpremaServis
 
 
 class PrikazOpreme:
@@ -27,6 +27,7 @@ class PrikazOpreme:
 
     def __popuni_treeview(self):
         index = iid = 0
+        lista_ucitane_bolnicke_opreme = OpremaServis().vrati_svu_opremu_u_sistemu()
         for oprema in lista_ucitane_bolnicke_opreme:
             o = (oprema.get_naziv_opreme(), oprema.get_ukupan_broj_opreme(), oprema.get_slobodna_oprema(),
                  oprema.get_opis())

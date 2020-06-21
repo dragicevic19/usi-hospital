@@ -1,10 +1,14 @@
 import datetime
 import tkinter as tk
 from tkinter import ttk, messagebox, Label, LEFT, W, INSERT
-
-from model.DTO.dogadjajiDTO.premestanje_opremeDTO import PremestanjeOpremeDTO
+from model.dto.dogadjajiDTO.premestanje_opremeDTO import PremestanjeOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from servis.prostorije.prostorije_servis import ProstorijeServis
+
+"""
+    IZMENITI NAZIVE NA ENGLESKOM
+
+"""
 
 
 class ScrollableFrame(ttk.Frame):
@@ -28,8 +32,8 @@ class ScrollableFrame(ttk.Frame):
 
 
 funkcija_za_premestanje = {
-    TipPremestanjaOpreme.DODAVANJE_OPREME: ProstorijeServis.dodavanje_slobodne_opreme_u_prostoriju,
-    TipPremestanjaOpreme.IZBACIVANJE_OPREME: ProstorijeServis.izbacivanje_opreme_iz_prostorije
+    TipPremestanjaOpreme.DODAVANJE_OPREME: ProstorijeServis().dodavanje_slobodne_opreme_u_prostoriju,
+    TipPremestanjaOpreme.IZBACIVANJE_OPREME: ProstorijeServis().izbacivanje_opreme_iz_prostorije
 }
 
 
@@ -96,8 +100,6 @@ class PremestanjeOpreme:
 
                 prostorijaDTO = PremestanjeOpremeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija,
                                                      naziv, broj_opreme[0].get())
-                # prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija,
-                #                                naziv_opreme=naziv, broj_opreme=broj_opreme[0].get())
                 lista_opreme.append(prostorijaDTO)
             self.provera_zauzeca(lista_opreme)
 

@@ -1,14 +1,10 @@
-import datetime
-
-from model.DTO.dogadjajiDTO.zakazivanje_operacija_DTO import ZakazivanjeOperacijeDTO
-from model.DTO.dogadjajiDTO.zakazivanje_pregleda_kod_specDTO import ZakazivanjePregledaKodSpecijalisteDTO
+from model.dto.dogadjajiDTO.zakazivanje_pregleda_kod_specDTO import ZakazivanjePregledaKodSpecijalisteDTO
+from servis.kalendar.kalendar_servis import KalendarServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 from model.enum.tip_lekara import TipLekara
-from tkinter import *
 from tkinter import ttk, messagebox
-
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
-from servisi.kalendar.kalendar_servis import KalendarServis
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from tkinter import *
+import datetime
 
 
 class ZahtevZaPregledKodSpecijaliste:
@@ -19,8 +15,9 @@ class ZahtevZaPregledKodSpecijaliste:
         self._pacijent = pacijent
 
         self._specijalista = StringVar(self._root)
-        self._lista_specijalista = KorisnikServis.vrati_lekare_specijaliste_ili_lop(TipLekara.SPECIJALISTA)
+        self._lista_specijalista = KorisnikServis().vrati_lekare_specijaliste_ili_lop(TipLekara.SPECIJALISTA)
         self._specijalista.set(self._lista_specijalista[0])
+        print(self._specijalista.get())
         self._pocetni_datum = ttk.Entry(self._root)
         self._krajnji_datum = ttk.Entry(self._root)
 
@@ -69,7 +66,7 @@ class ZahtevZaPregledKodSpecijaliste:
     def salji_notifikaciju_sekretaru(self):
         zakazivanjeDTO = ZakazivanjePregledaKodSpecijalisteDTO(self._datum_pocetka, self._datum_zavrsetka,
                                                                self._specijalista.get(), self._pacijent)
-        KalendarServis.posalji_zahtev_za_pregled_kod_specijaliste(zakazivanjeDTO)
+        KalendarServis().posalji_zahtev_za_pregled_kod_specijaliste(zakazivanjeDTO)
         messagebox.showinfo('USPESNO', 'Uspesno ste zakazali operaciju')
         self._root.destroy()
 
@@ -79,7 +76,3 @@ def poziv_forme_zahtev_za_pregled_lop(korisnicko_ime_pacijenta):
     root.geometry('550x240')
     application = ZahtevZaPregledKodSpecijaliste(root, korisnicko_ime_pacijenta)
     root.mainloop()
-
-
-if __name__ == '__main__':
-    poziv_forme_zahtev_za_pregled_lop(lista_ucitanih_korisnika[8].get_korisnicko_ime())

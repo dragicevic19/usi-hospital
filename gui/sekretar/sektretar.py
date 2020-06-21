@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import ttk
 from gui.model_pocetne import ModelPocetne
 
 
@@ -11,7 +10,7 @@ class PocetnaFormaSekretar(ModelPocetne):
 
 def poziv_forme_sekretar(korisnik):
     root = Tk()
-    kreni = PocetnaFormaSekretar(root, korisnik)
+    PocetnaFormaSekretar(root, korisnik)
     root.mainloop()
 
 

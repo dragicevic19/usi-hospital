@@ -1,8 +1,13 @@
+import datetime
+
+
 class ZahtevZaPregled(object):
 
     def __init__(self, pocetni_datum, krajnji_datum, specijalista, pacijent, resen=''):
-        self._pocetni_datum = pocetni_datum
-        self._krajnji_datum = krajnji_datum
+        d, m, g = pocetni_datum.split('/')
+        self._pocetni_datum = datetime.datetime(int(g), int(m), int(d))
+        d, m, g = krajnji_datum.split('/')
+        self._krajnji_datum = datetime.datetime(int(g), int(m), int(d))
         self._specijalista = specijalista
         self._pacijent = pacijent
         self._resen = resen

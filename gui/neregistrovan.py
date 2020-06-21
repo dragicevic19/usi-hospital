@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+
 
 def poziv_forme_neregistrovan():
     root = Tk()
@@ -7,12 +7,6 @@ def poziv_forme_neregistrovan():
     root.title("NEREGISTROVAN")
     root.mainloop()
 
+
 if __name__ == '__main__':
     poziv_forme_neregistrovan()
-
-
-
-
-
-
-

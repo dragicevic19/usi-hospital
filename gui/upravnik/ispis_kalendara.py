@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar
 
-selected_date = None
+odabrani_datum = None
 
 
 class PrikazKalendara:
@@ -15,24 +15,24 @@ class PrikazKalendara:
     def napravi_kalendar(self):
         # self.root.withdraw()  # hide naff extra window
         # self.root.title('Izaberite datum')
-        self.pick_date_dialog()
+        self.odaberi_datum()
         self.root.mainloop()
 
     def get_datum(self):
         return self._datum
 
-    def pick_date_dialog(self):
+    def odaberi_datum(self):
         # self.top = tk.Toplevel(self.root)
 
-        self.cal = Calendar(self.root,
+        self._kalendar = Calendar(self.root,
                             font="Arial 10", background='darkblue',
                             foreground='white', selectmode='day')
 
-        self.cal.grid()
+        self._kalendar.grid()
         ttk.Button(self.root, text="OK", command=self.print_sel).grid()
 
     def print_sel(self):
-        self._datum = self.cal.get_date()
+        self._datum = self._kalendar.get_date()
         # self.top.destroy()
         # self.root.destroy()
 

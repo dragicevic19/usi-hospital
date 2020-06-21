@@ -1,7 +1,5 @@
+from servis.unos_anamneze.unos_anamneze_servis import UnosAnamnezeServis
 from tkinter import ttk
-
-from servisi.korisnik.korisnik_servis import KorisnikServis
-from servisi.unos_anamneze.unos_anamneze_servis import UnosAnamnezeService
 
 
 class PrikazAnamneze:
@@ -28,7 +26,7 @@ class PrikazAnamneze:
     def __popuni_treeview(self):
         index = iid = 0
 
-        lista_anamneza_po_pacijentu = UnosAnamnezeService.dobavi_anamnezu_ulogovanog_pacijenta(self._ulogovan_korisnik)
+        lista_anamneza_po_pacijentu = UnosAnamnezeServis().dobavi_anamnezu_ulogovanog_pacijenta(self._ulogovan_korisnik)
         for unos_anamneze in lista_anamneza_po_pacijentu:
             u = (unos_anamneze.get_lekar(), unos_anamneze.get_opis(),
                  unos_anamneze.get_datum_i_vreme())

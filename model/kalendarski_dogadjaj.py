@@ -1,4 +1,3 @@
-# mm/dd/gg
 import datetime
 
 

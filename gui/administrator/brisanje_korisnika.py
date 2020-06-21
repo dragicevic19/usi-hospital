@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
-from servisi.korisnik.korisnik_servis import KorisnikServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class BrisanjeKorisnika(PrikazKorisnika):
@@ -17,7 +17,7 @@ class BrisanjeKorisnika(PrikazKorisnika):
             odabrani = self.treeview.focus()
             odabrani_korisnik = self.treeview.item(odabrani)['values']
             korisnicko_ime_odabranog = odabrani_korisnik[0]
-            KorisnikServis.obrisi_korisnika(korisnicko_ime_odabranog)
+            KorisnikServis().obrisi_korisnika(korisnicko_ime_odabranog)
             messagebox.showinfo("USPESNO", "Uspesno ste obrisali korisnika!")
             self._root.destroy()
         except IndexError:
@@ -25,7 +25,7 @@ class BrisanjeKorisnika(PrikazKorisnika):
 
 
 def poziv_forme_brisanje_korisnika(root):
-    application = BrisanjeKorisnika(root)
+    BrisanjeKorisnika(root)
     root.mainloop()
 
 

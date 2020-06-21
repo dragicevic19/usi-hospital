@@ -1,10 +1,8 @@
 import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
-
-from model.DTO.dogadjajiDTO.izmena_namene_prostorijeDTO import IzmenaNameneDTO
-from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from model.dto.dogadjajiDTO.izmena_namene_prostorijeDTO import IzmenaNameneDTO
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class IzmenaNamene:
@@ -52,12 +50,10 @@ class IzmenaNamene:
         else:
             prostorijaDTO = IzmenaNameneDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija,
                                             self._namena.get())
-            # prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka,
-            #                                self._prostorija, namena=self._namena.get())
             self.provera_zauzeca(prostorijaDTO)
 
     def provera_zauzeca(self, prostorijaDTO):
-        if ProstorijeServis.izmeni_namenu(prostorijaDTO):
+        if ProstorijeServis().izmeni_namenu(prostorijaDTO):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:
@@ -82,10 +78,9 @@ def izmena_namene(selektovana_prostorija):
     application = IzmenaNamene(root, selektovana_prostorija)
     root.mainloop()
 
-
-if __name__ == '__main__':
-    root = Tk()
-    root.geometry('550x200')
-    prostorija = lista_ucitanih_prostorija[0]
-    application = IzmenaNamene(root, prostorija)
-    root.mainloop()
+# if __name__ == '__main__':
+#     root = Tk()
+#     root.geometry('550x200')
+#     prostorija = lista_ucitanih_prostorija[0]
+#     application = IzmenaNamene(root, prostorija)
+#     root.mainloop()

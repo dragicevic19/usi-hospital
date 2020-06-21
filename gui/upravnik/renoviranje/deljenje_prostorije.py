@@ -1,12 +1,10 @@
 import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
-
 from gui.upravnik.renoviranje.premestanje_opreme import ScrollableFrame
-from model.DTO.broj_i_naziv_opreme_DTO import BrojINazivOpremeDTO
-from model.DTO.dogadjajiDTO.deljenje_prostorije_DTO import DeljenjeProstorijeDTO
-from repozitorijum.prostorije.prostorije_repozitorijum import lista_ucitanih_prostorija
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from model.dto.broj_i_naziv_opreme_dto import BrojINazivOpremeDTO
+from model.dto.dogadjajiDTO.deljenje_prostorije_dto import DeljenjeProstorijeDTO
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class DeljenjeProstorije:
@@ -133,7 +131,7 @@ class DeljenjeProstorije:
     def provera_zauzeca(self, lista_opreme):
         if not lista_opreme:
             messagebox.showerror()
-        if ProstorijeServis.deljenje_prostorije(lista_opreme):
+        if ProstorijeServis().deljenje_prostorije(lista_opreme):
             messagebox.showinfo('USPESNO', 'Uspesno ste zakazali renoviranje prostorije!')
             self._root.destroy()
         else:
@@ -153,10 +151,10 @@ class DeljenjeProstorije:
         return True
 
     def provera_broja_prostorija(self):
-        ProstorijeServis.obrisi_sobe(self._prostorija)
+        ProstorijeServis().obrisi_sobe(self._prostorija)
         sprat = self._prostorija.get_sprat()
-        if ProstorijeServis.slobodan_broj_prostorije(sprat, self._novi_br_prostorije1):
-            if ProstorijeServis.slobodan_broj_prostorije(sprat, self._novi_br_prostorije2):
+        if ProstorijeServis().slobodan_broj_prostorije(sprat, self._novi_br_prostorije1):
+            if ProstorijeServis().slobodan_broj_prostorije(sprat, self._novi_br_prostorije2):
                 return True
             else:
                 messagebox.showerror("GRESKA", "Broj druge prostorije je zauzet!")
@@ -180,13 +178,12 @@ class DeljenjeProstorije:
 def deljenje_prostorije(selektovana_prostorija):
     root = Tk()
     root.geometry('750x650')
-    application = DeljenjeProstorije(root, selektovana_prostorija)
+    DeljenjeProstorije(root, selektovana_prostorija)
     root.mainloop()
 
-
-if __name__ == '__main__':
-    root = Tk()
-    root.geometry('800x650')
-    selektovana_prostorija = lista_ucitanih_prostorija[2]
-    application = DeljenjeProstorije(root, selektovana_prostorija)
-    root.mainloop()
+# if __name__ == '__main__':
+#     root = Tk()
+#     root.geometry('800x650')
+#     selektovana_prostorija = lista_ucitanih_prostorija[2]
+#     application = DeljenjeProstorije(root, selektovana_prostorija)
+#     root.mainloop()

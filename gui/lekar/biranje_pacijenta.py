@@ -1,11 +1,9 @@
 from tkinter import ttk, messagebox
 from tkinter import *
-
 from gui.lekar.zahtev_za_pregled_lop import poziv_forme_zahtev_za_pregled_lop
 from gui.lekar.zakazivanje_opreacije_specijalista import poziv_forme_zakazivanje_operacije
 from gui.prikaz_entiteta.prikaz_pacijenata_po_lekaru import PrikazPacijenata
-
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class BiranjePacijenta(PrikazPacijenata):
@@ -51,5 +49,5 @@ def poziv_forme_biranje_pacijenata_za_operaciju(root, ulogovani_lekar=None):
 
 if __name__ == '__main__':
     root = Tk()
-    lekar = lista_ucitanih_korisnika[6]
-    poziv_forme_biranje_pacijenata_za_operaciju(root, lekar)
+    lekar = KorisnikServis().dobavi_sve_korisnike_u_sistemu()[5]
+    poziv_forme_biranje_pacijenata_za_operaciju(root)

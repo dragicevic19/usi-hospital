@@ -3,17 +3,18 @@ import datetime
 from pathlib import Path
 
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
-from model.konstante.konstante import PATH_TO_NOTIFIKACIJE
+from model.konstante.konstante import PUTANJA_FAJL_NOTIFIKACIJE
 
 lista_dogadjaja = []
 lista_proslih_dogadjaja = []
 
 
+# REFAKTORISATI
 class NotifikacijeRepozitorijum:
 
     @staticmethod
     def ucitaj_dogadjaje():
-        path = Path(PATH_TO_NOTIFIKACIJE)
+        path = Path(PUTANJA_FAJL_NOTIFIKACIJE)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -31,7 +32,7 @@ class NotifikacijeRepozitorijum:
 
     @staticmethod
     def sacuvaj_dogadjaje():
-        path = Path(PATH_TO_NOTIFIKACIJE)
+        path = Path(PUTANJA_FAJL_NOTIFIKACIJE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             for dogadjaj in lista_dogadjaja:

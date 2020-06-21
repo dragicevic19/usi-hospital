@@ -1,5 +1,5 @@
 from gui.upravnik.renoviranje.izmena_namene import *
-from model.DTO.dogadjajiDTO.dogadjajDTO import DogadjajDTO
+from model.dto.dogadjajiDTO.dogadjajDTO import DogadjajDTO
 
 
 class OstaleRenovacije:
@@ -36,7 +36,7 @@ class OstaleRenovacije:
             self.provera_zauzeca(renoviranjeDTO)
 
     def provera_zauzeca(self, renoviranjeDTO):
-        if ProstorijeServis.ostale_renovacije(renoviranjeDTO):
+        if ProstorijeServis().izmeni_namenu(renoviranjeDTO):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:

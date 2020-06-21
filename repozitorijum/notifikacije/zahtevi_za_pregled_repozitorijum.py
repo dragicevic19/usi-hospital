@@ -2,7 +2,7 @@ import csv
 import datetime
 from pathlib import Path
 
-from model.konstante.konstante import PATH_TO_ZAHTEVI_ZA_PREGLED
+from model.konstante.konstante import PUTANJA_FAJL_ZAHTEVI_ZA_PREGLED
 from model.zahtev_za_pregled import ZahtevZaPregled
 
 lista_dogadjaja = []
@@ -17,7 +17,7 @@ class ZahtevZaPregledImpl():
         self.ucitaj_dogadjaje()
 
     def ucitaj_dogadjaje(self):
-        path = Path(PATH_TO_ZAHTEVI_ZA_PREGLED)
+        path = Path(PUTANJA_FAJL_ZAHTEVI_ZA_PREGLED)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
@@ -35,7 +35,7 @@ class ZahtevZaPregledImpl():
             self._lista_zahteva.append(dogadjaj)
 
     def sacuvaj_dogadjaje(self):
-        path = Path(PATH_TO_ZAHTEVI_ZA_PREGLED)
+        path = Path(PUTANJA_FAJL_ZAHTEVI_ZA_PREGLED)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
             for dogadjaj in self._lista_zahteva:

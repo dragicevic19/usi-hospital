@@ -1,15 +1,13 @@
 import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
-
 from gui.prikaz_entiteta.tabela_vremenskih_slotova import poziv_tabele_vremenskih_slotova
-from model.DTO.dogadjajiDTO.zakazivanje_operacija_DTO import ZakazivanjeOperacijeDTO
+from model.dto.dogadjajiDTO.zakazivanje_operacija_DTO import ZakazivanjeOperacijeDTO
 from model.enum.namena_prostorije import NamenaProstorije
 from model.enum.tip_zahvata import TipZahvata
 from model.konstante.konstante import REGEX_VREME
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
-from servisi.kalendar.kalendar_servis import KalendarServis
-from servisi.prostorije.prostorije_servis import ProstorijeServis
+from servis.kalendar.kalendar_servis import KalendarServis
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class ZakazivanjeOperacije:
@@ -19,7 +17,7 @@ class ZakazivanjeOperacije:
         self._root = root
         self._lekar = ulogovani_lekar
         self._pacijent = pacijent
-        self._lista_operacionih_sala = ProstorijeServis.pronadji_prostorije_po_nameni(
+        self._lista_operacionih_sala = ProstorijeServis().pronadji_prostorije_po_nameni(
             NamenaProstorije.OPERACIONA_SALA.value)
         self._datum_pocetka_operacije = ttk.Entry(self._root)
         self._vreme_pocetka = ttk.Entry(self._root)
@@ -96,7 +94,7 @@ class ZakazivanjeOperacije:
                                                self._pacijent,
                                                self._opearciona_sala.get(), self._hitna_operacija.get(),
                                                TipZahvata.OPERACIJA.value)
-        if ProstorijeServis.zakazivanje_operacije(operacijaDTO):
+        if ProstorijeServis().zakazivanje_operacije(operacijaDTO):
             messagebox.showinfo('USPESNO', 'Uspesno ste zakazali operaciju')
             self._root.destroy()
         else:
@@ -107,7 +105,7 @@ class ZakazivanjeOperacije:
             odgovor = messagebox.askyesno("Greska", "Prostorija je zauzeta u tom periodu.\nDa li zelite"
                                                     "da se sekretaru posalje notifikacija o hitnoj operaciji?")
             if odgovor:
-                KalendarServis.posalji_notifikaciju_sekretaru(operacijaDTO)
+                KalendarServis().posalji_notifikaciju_sekretaru(operacijaDTO)
                 self._root.destroy()
         else:
             messagebox.showerror('GRESKA', 'Prostorija je zauzeta u tom periodu')
@@ -118,8 +116,3 @@ def poziv_forme_zakazivanje_operacije(ulogovani_lekar, pacijent):
     root.geometry('750x300')
     application = ZakazivanjeOperacije(root, ulogovani_lekar, pacijent)
     root.mainloop()
-
-
-if __name__ == '__main__':
-    korisnik = lista_ucitanih_korisnika[0]
-    poziv_forme_zakazivanje_operacije(korisnik)
