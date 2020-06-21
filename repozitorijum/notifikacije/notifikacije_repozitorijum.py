@@ -4,46 +4,41 @@ from pathlib import Path
 
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from model.konstante.konstante import PUTANJA_FAJL_NOTIFIKACIJE
-
-lista_dogadjaja = []
-lista_proslih_dogadjaja = []
+from repozitorijum.notifikacije.interfejs_notifikacije_repozitorijum import InterfejsNotifikacijeRepozitorijum
 
 
-# REFAKTORISATI
-class NotifikacijeRepozitorijum:
+class NotifikacijeRepozitorijum(InterfejsNotifikacijeRepozitorijum):
 
-    @staticmethod
-    def ucitaj_dogadjaje():
+    def __init__(self):
+        self._lista_notifikacija = []
+        self._lista_proslih_notifikacija = []
+        self.ucitaj_dogadjaje()
+
+    def ucitaj_dogadjaje(self):
         path = Path(PUTANJA_FAJL_NOTIFIKACIJE)
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
                 dogadjaj = KalendarskiDogadjaj(*red)
-                NotifikacijeRepozitorijum.rasporedi_dogadjaj_po_listama(dogadjaj)
+                self.rasporedi_dogadjaj_po_listama(dogadjaj)
 
-    @staticmethod
-    def rasporedi_dogadjaj_po_listama(dogadjaj):
+    def rasporedi_dogadjaj_po_listama(self, dogadjaj):
         if dogadjaj.datum_vreme >= datetime.datetime.now():
-            lista_dogadjaja.append(dogadjaj)
+            self._lista_notifikacija.append(dogadjaj)
         elif dogadjaj.datum_vreme_zavrsetka < datetime.datetime.now():
-            lista_proslih_dogadjaja.append(dogadjaj)
+            self._lista_proslih_notifikacija.append(dogadjaj)
         else:
-            lista_dogadjaja.append(dogadjaj)
+            self._lista_notifikacija.append(dogadjaj)
 
-    @staticmethod
-    def sacuvaj_dogadjaje():
+    def sacuvaj_dogadjaje(self):
         path = Path(PUTANJA_FAJL_NOTIFIKACIJE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
-            for dogadjaj in lista_dogadjaja:
-                writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
-            for dogadjaj in lista_proslih_dogadjaja:
-                writer.writerow(dogadjaj.vrati_za_upis_u_fajl())
+            for notifikacija in self._lista_notifikacija:
+                writer.writerow(notifikacija.vrati_za_upis_u_fajl())
+            for notifikacija in self._lista_proslih_notifikacija:
+                writer.writerow(notifikacija.vrati_za_upis_u_fajl())
 
-    @staticmethod
-    def posalji_notifikaciju(dogadjaj):
-        lista_dogadjaja.append(dogadjaj)
-        NotifikacijeRepozitorijum.sacuvaj_dogadjaje()
-
-
-NotifikacijeRepozitorijum.ucitaj_dogadjaje()
+    def posalji_notifikaciju(self, dogadjaj):
+        self._lista_notifikacija.append(dogadjaj)
+        self.sacuvaj_dogadjaje()

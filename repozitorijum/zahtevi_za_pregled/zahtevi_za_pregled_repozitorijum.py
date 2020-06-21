@@ -4,12 +4,10 @@ from pathlib import Path
 
 from model.konstante.konstante import PUTANJA_FAJL_ZAHTEVI_ZA_PREGLED
 from model.zahtev_za_pregled import ZahtevZaPregled
-
-lista_dogadjaja = []
-lista_proslih_dogadjaja = []
+from repozitorijum.zahtevi_za_pregled.interfejs_zahtevi_za_pregled_repozitorijum import InterfejsZahteviZaPregledRepozitorijum
 
 
-class ZahtevZaPregledImpl():
+class ZahtevZaPregledRepozitorijumImpl(InterfejsZahteviZaPregledRepozitorijum):
 
     def __init__(self):
         self._lista_zahteva = []

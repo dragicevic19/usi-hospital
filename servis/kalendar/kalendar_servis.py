@@ -1,11 +1,14 @@
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijumImpl
 from repozitorijum.notifikacije.notifikacije_repozitorijum import NotifikacijeRepozitorijum
-from repozitorijum.notifikacije.zahtevi_za_pregled_repozitorijum import ZahtevZaPregledImpl
+from repozitorijum.zahtevi_za_pregled.zahtevi_za_pregled_repozitorijum import ZahtevZaPregledRepozitorijumImpl
 
 
-class KalendarServis():
-    def __init__(self, repo_kalendar=KalendarRepozitorijumImpl(), repo_zahtev_za_pregled=ZahtevZaPregledImpl(), repo_notifikacije=NotifikacijeRepozitorijum()):
+class KalendarServis(object):
+    def __init__(self, repo_kalendar=KalendarRepozitorijumImpl(),
+                 repo_zahtev_za_pregled=ZahtevZaPregledRepozitorijumImpl(),
+                 repo_notifikacije=NotifikacijeRepozitorijum()):
+
         self._repo_kalendar = repo_kalendar
         self._repo_zahtevi = repo_zahtev_za_pregled
         self._repo_notifikacije = repo_notifikacije

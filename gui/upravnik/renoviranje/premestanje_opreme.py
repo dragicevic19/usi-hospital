@@ -1,7 +1,7 @@
 import datetime
 import tkinter as tk
 from tkinter import ttk, messagebox, Label, LEFT, W, INSERT
-from model.dto.dogadjajiDTO.premestanje_opremeDTO import PremestanjeOpremeDTO
+from model.dto.dogadjaji_dto.premestanje_opreme_dto import PremestanjeOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
 from servis.prostorije.prostorije_servis import ProstorijeServis
 

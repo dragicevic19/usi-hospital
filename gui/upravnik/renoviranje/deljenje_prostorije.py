@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 from gui.upravnik.renoviranje.premestanje_opreme import ScrollableFrame
 from model.dto.broj_i_naziv_opreme_dto import BrojINazivOpremeDTO
-from model.dto.dogadjajiDTO.deljenje_prostorije_dto import DeljenjeProstorijeDTO
+from model.dto.dogadjaji_dto.deljenje_prostorije_dto import DeljenjeProstorijeDTO
 from servis.prostorije.prostorije_servis import ProstorijeServis
 
 

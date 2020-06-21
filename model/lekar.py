@@ -35,7 +35,7 @@ class Lekar(Korisnik):
         self._radno_vreme = radno_vreme
 
     def __str__(self):
-        return self._ime + " " + self._prezime + ' | ' + ','.join(self.get_spisak_specijalizacija())
+        return self._korisnicko_ime + ' | ' + ','.join(self.get_spisak_specijalizacija())
 
     def vrati_za_upis_u_fajl(self):
         return self._korisnicko_ime, self._lozinka, self._uloga, self._ime, self._prezime, self._obrisan, \

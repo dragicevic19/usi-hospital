@@ -2,7 +2,7 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 from gui.prikaz_entiteta.tabela_vremenskih_slotova import poziv_tabele_vremenskih_slotova
-from model.dto.dogadjajiDTO.zakazivanje_operacija_DTO import ZakazivanjeOperacijeDTO
+from model.dto.dogadjaji_dto.zakazivanje_operacija_dto import ZakazivanjeOperacijeDTO
 from model.enum.namena_prostorije import NamenaProstorije
 from model.enum.tip_zahvata import TipZahvata
 from model.konstante.konstante import REGEX_VREME

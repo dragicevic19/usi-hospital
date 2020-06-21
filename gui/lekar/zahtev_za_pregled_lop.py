@@ -1,4 +1,4 @@
-from model.dto.dogadjajiDTO.zakazivanje_pregleda_kod_specDTO import ZakazivanjePregledaKodSpecijalisteDTO
+from model.dto.dogadjaji_dto.zakazivanje_pregleda_kod_spec_dto import ZakazivanjePregledaKodSpecijalisteDTO
 from servis.kalendar.kalendar_servis import KalendarServis
 from servis.korisnik.korisnik_servis import KorisnikServis
 from model.enum.tip_lekara import TipLekara

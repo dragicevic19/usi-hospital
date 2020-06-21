@@ -1,4 +1,4 @@
-from model.dto.dogadjajiDTO.dogadjajDTO import DogadjajDTO
+from model.dto.dogadjaji_dto.dogadjaj_dto import DogadjajDTO
 
 
 class SpajanjeProstorijeDTO(DogadjajDTO):

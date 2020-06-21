@@ -1,7 +1,7 @@
 import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
-from model.dto.dogadjajiDTO.izmena_namene_prostorijeDTO import IzmenaNameneDTO
+from model.dto.dogadjaji_dto.izmena_namene_prostorije_dto import IzmenaNameneDTO
 from servis.prostorije.prostorije_servis import ProstorijeServis
 
 

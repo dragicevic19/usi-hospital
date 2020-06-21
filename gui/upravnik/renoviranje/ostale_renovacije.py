@@ -1,5 +1,5 @@
 from gui.upravnik.renoviranje.izmena_namene import *
-from model.dto.dogadjajiDTO.dogadjajDTO import DogadjajDTO
+from model.dto.dogadjaji_dto.dogadjaj_dto import DogadjajDTO
 
 
 class OstaleRenovacije:
