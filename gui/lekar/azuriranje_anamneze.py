@@ -1,7 +1,6 @@
 from gui.lekar.dodavanje_anamneze_pacijentu import DodavanjeAnamnezePacijentu
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from tkinter import Tk
-
 from servis.korisnik.korisnik_servis import KorisnikServis
 
 """ 

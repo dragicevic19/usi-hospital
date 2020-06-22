@@ -48,13 +48,14 @@ class PrikazKorisnika(object):
         for korisnik in lista_korisnika:
             if self._uloga:
                 if self._uloga == korisnik.get_uloga() == Uloga.LEKAR.name:
-                    k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime(),
-                    korisnik.get_radno_vreme(), korisnik.get_spisak_specijalizacija())
+                    k = (
+                        korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime(),
+                        korisnik.get_radno_vreme(), korisnik.get_spisak_specijalizacija())
                     self.treeview.insert("", index, iid, values=k)
                     index = iid = index + 1
                 elif self._uloga == korisnik.get_uloga():
                     k = (
-                    korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
+                        korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
                     self.treeview.insert("", index, iid, values=k)
                     index = iid = index + 1
             else:
@@ -65,5 +66,6 @@ class PrikazKorisnika(object):
 
 if __name__ == '__main__':
     root = Tk()
+    # PrikazKorisnika(root, "PACIJENT")
     PrikazKorisnika(root)
     root.mainloop()

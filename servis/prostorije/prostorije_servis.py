@@ -155,3 +155,13 @@ class ProstorijeServis(object):
     # VRACA FALSE AKO NE POSTOJI!
     def pronadji_prostoriju(self, sprat, broj_sobe):
         return self._repo_prostorije.vrati_prostoriju_po_broju_i_spratu(sprat, broj_sobe)
+
+    def pronadji_prostorije_po_nameni(self, namena_prostorije):
+        return self._repo_prostorije.pronadji_prostorije_po_nameni(namena_prostorije)
+
+    @staticmethod
+    def zakazivanje_operacije(zakazivanje_operacijeDTO):
+        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(zakazivanje_operacijeDTO):
+            return True
+        else:
+            return False

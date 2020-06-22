@@ -1,6 +1,6 @@
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from model.enum.uloga import Uloga
-from model.konstante.konstante import REGEX_VREME
+from model.konstante.konstante import REGEX_VREME_OD_DO
 from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
@@ -71,14 +71,14 @@ class UnosPodataka(IzborLekara):
         if not self._radno_vreme.get() or not self._spisak_specijalizacija.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
             self._root2.destroy()
-        elif not REGEX_VREME.match(self._radno_vreme.get()):
+        elif not REGEX_VREME_OD_DO.match(self._radno_vreme.get()):
             messagebox.showerror("GRESKA", "Neispravan unos radnog vremena.")
         else:
             self.azuriraj_lekara()
 
     def azuriraj_lekara(self):
         KorisnikServis().azuriraj_lekara(self._korisnicko_ime_lekara, self._radno_vreme.get(),
-                                       self._spisak_specijalizacija.get())
+                                         self._spisak_specijalizacija.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali lekara")
         self._root2.destroy()
         self._stari_root.destroy()

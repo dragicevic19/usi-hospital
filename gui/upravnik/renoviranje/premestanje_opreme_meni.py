@@ -3,10 +3,10 @@ from gui.upravnik.renoviranje.uklanjanje_opreme_iz_prostorije import uklanjanje_
 from tkinter import *
 from tkinter import ttk
 
-
 """
 MOZDA ENUM?
 """
+
 tip_premestanja = {
     1: dodavanje_opreme,
     2: uklanjanje_opreme_iz_prostorije
@@ -37,12 +37,3 @@ def premestanje_opreme_meni(selektovana_prostorija):
     root.geometry('300x100')
     application = PremestanjeOpremeMeni(root, selektovana_prostorija)
     root.mainloop()
-
-
-# if __name__ == '__main__':
-#     root = Tk()
-#     root.geometry('300x100')
-#     # ProstorijeRepository.ucitavanje_prostorije()
-#     prostorija = lista_ucitanih_prostorija[0]
-#     application = PremestanjeOpremeMeni(root, prostorija)
-#     root.mainloop()

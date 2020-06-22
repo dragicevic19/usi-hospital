@@ -17,7 +17,7 @@ class KorisnikRepozitorijumImpl(InterfejsKorisnikRepo):
         with path.open('r') as file:
             reader = csv.reader(file)
             for red in reader:
-                korisnik = konstruktor_po_ulozi[red[2]](*red)
+                korisnik = konstruktor_po_ulozi[red[2]](*red)  # INDEX_ULOGE_KORISNIKA?
                 if not korisnik.get_obrisan():
                     self._lista_korisnika.append(korisnik)
                 else:
@@ -60,6 +60,13 @@ class KorisnikRepozitorijumImpl(InterfejsKorisnikRepo):
     def dodaj_id_anamneze_pacijentu(self, pacijent, id_anamneze):
         self.nadji_po_korisnickom_imenu(pacijent.get_korisnicko_ime()).dodaj_anamnezu(id_anamneze)
         self.sacuvaj_korisnike()
+
+    def vrati_sve_korisnike_po_ulozi(self, uloga):
+        pronadjeni_korisnici = []
+        for korisnik in self._lista_korisnika:
+            if korisnik.get_uloga() == uloga:
+                pronadjeni_korisnici.append(korisnik)
+        return pronadjeni_korisnici
 
     def vrati_listu_korisnika(self):
         return self._lista_korisnika

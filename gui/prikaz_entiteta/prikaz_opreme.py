@@ -1,5 +1,4 @@
 from tkinter import ttk
-
 from servis.oprema.oprema_servis import OpremaServis
 
 

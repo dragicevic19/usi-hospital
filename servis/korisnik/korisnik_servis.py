@@ -1,3 +1,4 @@
+from model.enum.tip_lekara import TipLekara
 from model.enum.uloga import Uloga
 from model.pacijent import Pacijent
 from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijumImpl
@@ -63,3 +64,25 @@ class KorisnikServis(object):
     def dobavi_sve_korisnike_u_sistemu(self):
         return self._repo_korisnik.vrati_listu_korisnika()
 
+    def vrati_sve_korisnike_po_ulozi(self, uloga):
+        return self._repo_korisnik.vrati_sve_korisnike_po_ulozi(uloga)
+
+    def pronadji_pacijenta(self, korisnicko_ime):
+        lista_pronadjenih = []
+        lista_svih_pacijenata = self._repo_korisnik.vrati_sve_korisnike_po_ulozi(Uloga.PACIJENT.name)
+        for pacijent in lista_svih_pacijenata:
+            if pacijent.get_korisnicko_ime() == korisnicko_ime:
+                lista_pronadjenih.append(pacijent)
+        return lista_pronadjenih
+
+    def vrati_lekare_specijaliste_ili_lop(self, tip_lekara):
+        pronadjeni_lekari = []
+        svi_lekari = self._repo_korisnik.vrati_sve_korisnike_po_ulozi(Uloga.LEKAR.name)
+        for lekar in svi_lekari:
+            if tip_lekara == TipLekara.SPECIJALISTA:
+                if lekar.get_uloga() != TipLekara.LOP.value:
+                    pronadjeni_lekari.append(lekar)
+            elif lekar.get_uloga() == TipLekara.LOP.value:
+                pronadjeni_lekari.append(lekar)
+
+        return pronadjeni_lekari

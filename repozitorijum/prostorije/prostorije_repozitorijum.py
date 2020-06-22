@@ -79,6 +79,15 @@ class ProstorijeRepozitorijumImpl(InterfejsProstorijeRepo):
     def vrati_listu_prostorija_za_prikaz(self):
         return self._lista_ucitanih_prostorija
 
+    def pronadji_prostorije_po_nameni(self, namena_prostorije):
+        pronadjene_prostorije = []
+        for prostorija in self._lista_ucitanih_prostorija:
+            if prostorija.get_namena_prostorije() == namena_prostorije:
+                sprat = prostorija.get_sprat()
+                broj_prostorije = prostorija.get_broj_prostorije()
+                pronadjene_prostorije.append(sprat + '|' + broj_prostorije)
+        return pronadjene_prostorije
+
 
 if __name__ == '__main__':
     print(ProstorijeRepozitorijumImpl().vrati_listu_prostorija_za_prikaz())

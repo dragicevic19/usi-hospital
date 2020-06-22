@@ -41,19 +41,17 @@ class LogIn:
         ttk.Button(self._root, text="PRIJAVA", command=self.__prijava).grid(row=3, column=2)
 
     def __prijava(self):
-        if self._obelezeno.get() == True:
+        if self._obelezeno.get():
             poziv_forme_neregistrovan()
         else:
 
             korisnik = LoginServis().provera_unosa(self._korisnicko_ime.get(), self._lozinka.get())
-            if (korisnik != None):
+            if korisnik is not None:
                 self.__poziv_forme_za(korisnik)
             else:
                 messagebox.showerror("GRESKA", "Neispravan unos.")
 
     def __poziv_forme_za(self, korisnik):
-        # self._korisnicko_ime.delete(0,"end")
-        # self._lozinka.delete(0, "end")
         self._root.destroy()
 
         uloga = korisnik.get_uloga()

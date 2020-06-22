@@ -69,32 +69,28 @@ class KalendarRepozitorijumImpl(InterfejsKalendarRepozitorijum):
         self._lista_dogadjaja.append(dogadjaj)
         self.sacuvaj_dogadjaj()
 
-    def slobodna_prostorija_za_period(self, renoviranjeDTO):
-        danasnji_datum = datetime.date.today()
+    def slobodna_prostorija_za_period(self, novi_dogadjajDTO):
+        danasnji_datum = datetime.datetime.now()
         for dogadjaj in self._lista_dogadjaja:
-            if dogadjaj.prostorija == renoviranjeDTO.sprat_broj_prostorije:
-                dana_do_renoviranja = (renoviranjeDTO.datum_pocetkaDate - danasnji_datum).days
-                if dana_do_renoviranja < 10:  # proverava samo da li ima operacija ili pregleda za narednih 10ak dana
-                    # koji upadaju u termin renoviranja, za ostale ima vremena da se prebaci npr operacija u drugu prostoriju
-                    if not self.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
+            if dogadjaj.prostorija == novi_dogadjajDTO.sprat_broj_prostorije:
+                dana_do_dogadjaja = (novi_dogadjajDTO.pocetak_vreme_datum - danasnji_datum).days
+                if not self.__proveri_dostupnost_prostorije(dogadjaj, novi_dogadjajDTO):
+                    if dana_do_dogadjaja < 10 or not dogadjaj.zahvat or novi_dogadjajDTO.zahvat:
                         return False
-                else:
-                    if not self.__proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
-                        if not dogadjaj.zahvat:
-                            return False
         return True
 
     @staticmethod
-    def __proveri_dostupnost_prostorije(dogadjaj, renoviranjeDTO):
-        pocetak = dogadjaj.datum_vreme.date()
+    def __proveri_dostupnost_prostorije(dogadjaj, novi_dogadjajDTO):
+        # pocetak = dogadjaj.datum_vreme.date()
+        pocetak = dogadjaj.datum_vreme
         zavrsetak = pocetak + datetime.timedelta(minutes=30 * dogadjaj.broj_termina)
-        datum_pocetka = renoviranjeDTO.datum_pocetkaDate
-        datum_zavrsetka = renoviranjeDTO.datum_zavrsetkaDate
-        if pocetak <= datum_pocetka <= zavrsetak:
+        pocetak_novog = novi_dogadjajDTO.pocetak_vreme_datum
+        zavrsetak_novog = novi_dogadjajDTO.zavrsetak_vreme_datum
+        if pocetak < pocetak_novog < zavrsetak:
             return False
-        if pocetak <= datum_zavrsetka <= zavrsetak:
+        if pocetak < zavrsetak_novog < zavrsetak:
             return False
-        if datum_pocetka <= pocetak and datum_zavrsetka >= zavrsetak:
+        if pocetak_novog < pocetak and zavrsetak_novog > zavrsetak:
             return False
         return True
 

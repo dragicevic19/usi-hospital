@@ -1,7 +1,7 @@
 import datetime
 import tkinter as tk
 from tkinter import ttk, messagebox, Label, LEFT, W, INSERT
-from model.dto.renoviranje_dogadjaja_dto import RenoviranjeDTO
+from model.dto.dogadjaji_dto.premestanje_opreme_dto import PremestanjeOpremeDTO
 from model.enum.renoviranje import TipPremestanjaOpreme
 from servis.prostorije.prostorije_servis import ProstorijeServis
 
@@ -97,8 +97,9 @@ class PremestanjeOpreme:
             for naziv, broj_opreme in self._naziv_broj_odabrane_opreme.items():
                 if int(broj_opreme[0].get()) == 0:
                     continue
-                prostorijaDTO = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija,
-                                               naziv_opreme=naziv, broj_opreme=broj_opreme[0].get())
+
+                prostorijaDTO = PremestanjeOpremeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija,
+                                                     naziv, broj_opreme[0].get())
                 lista_opreme.append(prostorijaDTO)
             self.provera_zauzeca(lista_opreme)
 
