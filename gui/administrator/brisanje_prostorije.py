@@ -14,7 +14,7 @@ class BrisanjeProstorije(PrikazProstorija):
 
     def obrisi_prostoriju(self):
         try:
-            ProstorijeServis.brisanje_prostorije(self.selektovana_prostorija())
+            ProstorijeServis().brisanje_prostorije(self.selektovana_prostorija())
             messagebox.showinfo("USPESNO", "Uspesno ste obrisali prostoriju!")
             self._root.destroy()
         except IndexError:

@@ -1,11 +1,11 @@
 from repozitorijum.oprema.oprema_repozitorijum_impl import OpremaRepozitorijumImpl
 from model.bolnicka_oprema import BolnickaOprema
-from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijum
+from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijumImpl
 
 
 class OpremaServis(object):
 
-    def __init__(self, repo_oprema=OpremaRepozitorijumImpl(), repo_prostorije=ProstorijeRepozitorijum()):
+    def __init__(self, repo_oprema=OpremaRepozitorijumImpl(), repo_prostorije=ProstorijeRepozitorijumImpl()):
         self.repo_oprema = repo_oprema
         self.repo_prostorije = repo_prostorije
 

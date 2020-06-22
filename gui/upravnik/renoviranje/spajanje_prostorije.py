@@ -58,7 +58,7 @@ class SpajanjeProstorije(object):
             self.provera_zauzeca(prostorija_dto_1, prostorija_dto_2)
 
     def provera_zauzeca(self, prostorija_dto_1, prostorija_dto_2):
-        if ProstorijeServis.spajanje_prostorija(prostorija_dto_1, prostorija_dto_2):
+        if ProstorijeServis().spajanje_prostorija(prostorija_dto_1, prostorija_dto_2):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:
@@ -77,8 +77,8 @@ class SpajanjeProstorije(object):
         return True
 
     def provera_broja_prostorije(self):
-        ProstorijeServis.obrisi_sobe(self._prostorija_1, self._prostorija_2)
-        if not ProstorijeServis.slobodan_broj_prostorije(self._prostorija_1.get_sprat(), self._novi_broj.get()):
+        ProstorijeServis().obrisi_sobe(self._prostorija_1, self._prostorija_2)
+        if not ProstorijeServis().slobodan_broj_prostorije(self._prostorija_1.get_sprat(), self._novi_broj.get()):
             return False
         return True
 

@@ -1,12 +1,12 @@
 from tkinter import ttk
 from tkinter import messagebox
-from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijum, lista_ucitanih_prostorija
 from tkinter import Tk
+from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class PrikazProstorija(object):
 
-    def __init__(self, root,lista = lista_ucitanih_prostorija):
+    def __init__(self, root, lista=ProstorijeServis().prikupi_prostorije_za_prikaz()):
         self._root = root
         self._root.title("Prikaz svih prostorija")
         self._lista = lista
@@ -42,7 +42,7 @@ class PrikazProstorija(object):
 
     def __napravi_red(self, prostorija):
         if prostorija.get_spisak_opreme():
-            lista_spiska = ProstorijeRepozitorijum.recnik_u_string(prostorija.get_spisak_opreme()).split('|')
+            lista_spiska = ProstorijeServis().vrati_string_opreme_za_prostoriju(prostorija).split('|')
             spisak_opreme = lista_spiska[0]
         else:
             spisak_opreme = ''
@@ -53,15 +53,15 @@ class PrikazProstorija(object):
     def __prikazi_spisak_opreme(self, event):
         try:
             prostorija = self.selektovana_prostorija()
-            messagebox.showinfo('Prikaz opreme', ProstorijeRepozitorijum.recnik_u_string(prostorija.get_spisak_opreme()))
+            messagebox.showinfo('Prikaz opreme', ProstorijeServis().vrati_string_opreme_za_prostoriju(prostorija))
         except IndexError:
             pass
-`
+
     def selektovana_prostorija(self):
         odabrana = self.treeview.focus()
         odabrana_prostorija = self.treeview.item(odabrana)['values']
         sprat_odabrane, br_prostorije_odabrane = str(odabrana_prostorija[0]), str(odabrana_prostorija[1])
-        prostorija = ProstorijeRepozitorijum.vrati_prostoriju_po_broju_i_spratu(sprat_odabrane, br_prostorije_odabrane)
+        prostorija = ProstorijeServis().pronadji_prostoriju(sprat_odabrane, br_prostorije_odabrane)
         return prostorija
 
     def selektuj_vise_prostorija(self):
@@ -69,10 +69,10 @@ class PrikazProstorija(object):
         if len(odabrane) == 2:
             odabrana_prostorija1 = self.treeview.item(odabrane[0])['values']
             odabrana_prostorija2 = self.treeview.item(odabrane[1])['values']
-            prva_prostorija = ProstorijeRepozitorijum.vrati_prostoriju_po_broju_i_spratu(str(odabrana_prostorija1[0]),
-                                                                                         str(odabrana_prostorija1[1]))
-            druga_prostorija = ProstorijeRepozitorijum.vrati_prostoriju_po_broju_i_spratu(str(odabrana_prostorija2[0]),
-                                                                                          str(odabrana_prostorija2[1]))
+            prva_prostorija = ProstorijeServis().pronadji_prostoriju(str(odabrana_prostorija1[0]),
+                                                                                             str(odabrana_prostorija1[1]))
+            druga_prostorija = ProstorijeServis().pronadji_prostoriju(str(odabrana_prostorija2[0]),
+                                                                                              str(odabrana_prostorija2[1]))
             return prva_prostorija, druga_prostorija
 
         return False

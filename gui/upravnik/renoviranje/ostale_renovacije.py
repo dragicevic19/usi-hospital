@@ -1,10 +1,5 @@
 from gui.upravnik.renoviranje.izmena_namene import *
 
-"""
-    NE RADI NI JEDNA VRSTA RENOVACIJA -> No such file or directory: '..\..\data\prostorije.csv'
-
-"""
-
 
 class OstaleRenovacije:
 
@@ -42,7 +37,7 @@ class OstaleRenovacije:
             self.provera_zauzeca(renoviranjeDTO)
 
     def provera_zauzeca(self, renoviranjeDTO):
-        if ProstorijeServis.izmeni_namenu(renoviranjeDTO):
+        if ProstorijeServis().izmeni_namenu(renoviranjeDTO):
             messagebox.showinfo("USPESNO", "Uspesno ste zakazali renoviranje prostorije")
             self._root.destroy()
         else:

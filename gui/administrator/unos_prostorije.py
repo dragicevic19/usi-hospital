@@ -1,10 +1,8 @@
+from servis.prostorije.prostorije_servis import ProstorijeServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-
 from model.prostorija import Prostorija
-from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijum
-from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class NovaProstorija:
@@ -35,20 +33,20 @@ class NovaProstorija:
     def izaberi_namenu_prostorije(self):
         Label(self._root, text="Namena prostorije:", font="Times 15", justify=LEFT).grid(row=3, column=1, pady=10)
         podrazumevana_vrednost = 'operaciona sala'
-        ttk.OptionMenu(self._root, self._namena_prostorije, podrazumevana_vrednost, *self.moguce_namene_prostorija)\
+        ttk.OptionMenu(self._root, self._namena_prostorije, podrazumevana_vrednost, *self.moguce_namene_prostorija) \
             .grid(row=3, column=2)
 
     def proveri_validnost(self):
         if not self._broj_prostorije.get() or not self._namena_prostorije.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-        elif ProstorijeRepozitorijum.vrati_prostoriju_po_broju_i_spratu(self._sprat.get(), self._broj_prostorije.get()):
+        elif ProstorijeServis().pronadji_prostoriju(self._sprat.get(), self._broj_prostorije.get()):
             messagebox.showerror("GRESKA", "Soba vec postoji")
         else:
             self.__sacuvaj_prostoriju()
 
     def __sacuvaj_prostoriju(self):
         prostorija = Prostorija(self._sprat.get(), self._broj_prostorije.get(), {}, self._namena_prostorije.get())
-        ProstorijeServis.dodavanje_prostorije(prostorija)
+        ProstorijeServis().dodavanje_prostorije(prostorija)
         messagebox.showinfo("USPESNO", "Uspesno ste dodali prostoriju")
         self._root.destroy()
 
