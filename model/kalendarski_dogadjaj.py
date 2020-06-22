@@ -14,7 +14,7 @@ class KalendarskiDogadjaj:
         sat, min = vreme.split(":")
         self._datum_vreme = datetime.datetime(int(g), int(m), int(d), int(sat), int(min))
         self._datum = datum
-        self._vreme = vreme
+        self._vreme_pocetka_str = vreme
         self._zahvat = zahvat
         self._hitno = hitno
 
@@ -31,8 +31,8 @@ class KalendarskiDogadjaj:
         return self._datum
 
     @property
-    def vreme(self):
-        return self._vreme
+    def vreme_pocetka_str(self):
+        return self._vreme_pocetka_str
 
     @property
     def datum_vreme_zavrsetka(self):
