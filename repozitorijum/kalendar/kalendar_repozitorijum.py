@@ -109,3 +109,10 @@ class KalendarRepozitorijumImpl(InterfejsKalendarRepozitorijum):
 
     def vrati_listu_proslih_dogadjaja(self):
         return self._lista_proslih_dogadjaja
+
+    def dobavi_sve_renovacije(self):
+        lista_renovacija = []
+        for dogadjaj in self._lista_dogadjaja:
+            if not dogadjaj.zahvat:
+                lista_renovacija.append(dogadjaj)
+        return lista_renovacija

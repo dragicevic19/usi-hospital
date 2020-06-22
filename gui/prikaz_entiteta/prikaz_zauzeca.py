@@ -31,9 +31,9 @@ class PrikazZauzeca(object):
         lista_dogadjaja = KalendarServis().dobavi_listu_dogadjaja()
         for dogadjaj in lista_dogadjaja:
             if self._korisnicko_ime_lekara in dogadjaj.spisak_doktora:
-                dog = (dogadjaj.datum, dogadjaj.vreme_pocetka_str, str(dogadjaj.trajanje * 30) + " minuta",
+                dog = (dogadjaj.datum, dogadjaj.vreme_pocetka_str, str(dogadjaj.broj_termina * 30) + " minuta",
                        "sprat: " + dogadjaj.sprat + " | soba: " + dogadjaj.broj_prostorije,
-                       dogadjaj.spisak_pacijenata[0])
+                       dogadjaj.pacijent)
                 self.treeview.insert("", index, iid, values=dog)
                 index = iid = index + 1
 

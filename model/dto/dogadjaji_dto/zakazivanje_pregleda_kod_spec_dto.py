@@ -27,5 +27,4 @@ class ZakazivanjePregledaKodSpecijalisteDTO:
         return self._pacijent
 
     def vrati_za_upis_u_fajl(self):
-        return self._pocetni_datum, self._krajnji_datum, self._specijalista, \
-               self._pacijent, TipZahvata.PREGLED.value, ''
+        return self._pocetni_datum, self._krajnji_datum, self._specijalista, self._pacijent, ''

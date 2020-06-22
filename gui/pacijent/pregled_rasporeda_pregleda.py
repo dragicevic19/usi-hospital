@@ -42,7 +42,7 @@ class PrikazPregleda:
         else:
             lista = KalendarServis().dobavi_listu_dogadjaja()
         for dogadjaj in lista:
-            if self._ulogovan_pacijent in dogadjaj.spisak_pacijenata:
+            if self._ulogovan_pacijent == dogadjaj.pacijent:
                 red = (str(dogadjaj.datum), str(dogadjaj.vreme_pocetka_str), dogadjaj.zahvat, ",".join(dogadjaj.spisak_doktora))
                 self.treeview.insert("", index, index, values=red)
                 index = index + 1

@@ -3,18 +3,18 @@ import datetime
 
 class KalendarskiDogadjaj:
 
-    def __init__(self, datum, vreme, prostorija, broj_termina, spisak_doktora='', spisak_pacijenata='', zahvat='',
+    def __init__(self, datum, vreme, prostorija, broj_termina, spisak_doktora='', pacijent='', zahvat='',
                  hitno=''):
         self._prostorija = prostorija
         self._sprat, self._broj_prostorije = prostorija.split('|')
         self._broj_termina = int(broj_termina)
         self._spisak_doktora = spisak_doktora.split('|')
-        self._spisak_pacijenata = spisak_pacijenata.split('|')  # mozda ne treba split nego samo jedan pacijent
+        self._pacijent = pacijent
         d, m, g = datum.split("/")
         sat, min = vreme.split(":")
         self._datum_vreme = datetime.datetime(int(g), int(m), int(d), int(sat), int(min))
         self._datum = datum
-        self._vreme = vreme
+        self._vreme_pocetka_str = vreme
         self._zahvat = zahvat
         self._hitno = hitno
 
@@ -31,8 +31,8 @@ class KalendarskiDogadjaj:
         return self._datum
 
     @property
-    def vreme(self):
-        return self._vreme
+    def vreme_pocetka_str(self):
+        return self._vreme_pocetka_str
 
     @property
     def datum_vreme_zavrsetka(self):
@@ -59,14 +59,19 @@ class KalendarskiDogadjaj:
         return self._zahvat
 
     @property
-    def spisak_pacijenata(self):
-        return self._spisak_pacijenata
+    def pacijent(self):
+        return self._pacijent
 
     @property
     def hitno(self):
         return self._hitno
 
     def vrati_za_upis_u_fajl(self):
-        return self._datum, self._vreme, self._sprat + "|" + self._broj_prostorije, \
-               self._broj_termina, "|".join(self._spisak_doktora), "|".join(self._spisak_pacijenata), \
-               self._zahvat, self._hitno
+        return self._datum, self._vreme_pocetka_str, self._sprat + "|" + self._broj_prostorije, \
+               self._broj_termina, "|".join(self._spisak_doktora), self._pacijent, self._zahvat, self._hitno
+
+    def vrati_za_tabelu_notifikacija(self):
+        n = (
+            self.datum_vreme.date(), self.datum_vreme_zavrsetka.date(), self.datum_vreme.time(),
+            self.datum_vreme_zavrsetka.time(), self.prostorija, self.spisak_doktora, self.pacijent)
+        return n

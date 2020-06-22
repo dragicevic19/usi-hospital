@@ -80,9 +80,9 @@ class KorisnikServis(object):
         svi_lekari = self._repo_korisnik.vrati_sve_korisnike_po_ulozi(Uloga.LEKAR.name)
         for lekar in svi_lekari:
             if tip_lekara == TipLekara.SPECIJALISTA:
-                if lekar.get_uloga() != TipLekara.LOP.value:
+                if lekar.get_spisak_specijalizacija()[0] and lekar.get_spisak_specijalizacija()[0] != TipLekara.LOP.value:
                     pronadjeni_lekari.append(lekar)
-            elif lekar.get_uloga() == TipLekara.LOP.value:
+            elif lekar.get_spisak_specijalizacija() == TipLekara.LOP.value:
                 pronadjeni_lekari.append(lekar)
 
         return pronadjeni_lekari

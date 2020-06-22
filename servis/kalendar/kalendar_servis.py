@@ -1,3 +1,4 @@
+from model.enum.tip_notifikacije import TipNotifikacije
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijumImpl
 from repozitorijum.notifikacije.notifikacije_repozitorijum import NotifikacijeRepozitorijum
@@ -47,5 +48,10 @@ class KalendarServis(object):
     def posalji_zahtev_za_pregled_kod_specijaliste(self, zahtevDTO):
         self._repo_zahtevi.posalji_zahtev_za_pregled(zahtevDTO)
 
-# if __name__ == '__main__':
-#     lista = KalendarServis().vrati_zauzeca_datum_soba("6/1/2020", "3", "301")
+    def prikupi_notifikacije_po_tipu(self, tip_notifikacije):
+        if tip_notifikacije == TipNotifikacije.RENOVIRANJE:
+            return self._repo_kalendar.dobavi_sve_renovacije()
+        elif tip_notifikacije == TipNotifikacije.ZAHTEV_ZA_PREGLED:
+            return self._repo_zahtevi.dobavi_sve_zahteve()
+        else:
+            return self._repo_notifikacije.dobavi_sve_hitne_operacije()

@@ -42,3 +42,10 @@ class NotifikacijeRepozitorijum(InterfejsNotifikacijeRepozitorijum):
     def posalji_notifikaciju(self, dogadjaj):
         self._lista_notifikacija.append(dogadjaj)
         self.sacuvaj_dogadjaje()
+
+    def dobavi_sve_hitne_operacije(self):
+        hitne_operacije = []
+        for notifikacija in self._lista_notifikacija:
+            if notifikacija.hitno:
+                hitne_operacije.append(notifikacija)
+        return hitne_operacije

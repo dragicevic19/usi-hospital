@@ -4,9 +4,9 @@ import datetime
 class ZahtevZaPregled(object):
 
     def __init__(self, pocetni_datum, krajnji_datum, specijalista, pacijent, resen=''):
-        d, m, g = pocetni_datum.split('/')
+        g, m, d = pocetni_datum.split('-')
         self._pocetni_datum = datetime.datetime(int(g), int(m), int(d))
-        d, m, g = krajnji_datum.split('/')
+        g, m, d = krajnji_datum.split('-')
         self._krajnji_datum = datetime.datetime(int(g), int(m), int(d))
         self._specijalista = specijalista
         self._pacijent = pacijent
@@ -34,3 +34,7 @@ class ZahtevZaPregled(object):
 
     def vrati_za_upis_u_fajl(self):
         return self._pocetni_datum, self._krajnji_datum, self._specijalista, self._pacijent, self._resen
+
+    def vrati_za_tabelu_notifikacija(self):
+        n = (self.pocetni_datum.date(), self.krajnji_datum.date(), '', '', '', self.specijalista, self.pacijent)
+        return n

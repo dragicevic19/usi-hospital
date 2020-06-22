@@ -44,3 +44,6 @@ class ZahtevZaPregledRepozitorijumImpl(InterfejsZahteviZaPregledRepozitorijum):
     def posalji_zahtev_za_pregled(self, dogadjaj):
         self._lista_zahteva.append(dogadjaj)
         self.sacuvaj_dogadjaje()
+
+    def dobavi_sve_zahteve(self):
+        return self._lista_zahteva
