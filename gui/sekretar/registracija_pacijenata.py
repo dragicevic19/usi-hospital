@@ -76,7 +76,7 @@ class RegistracijaPacijenta:
                 messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
 
 
-def poziv_forme_registracija_pacijenata(root):
+def poziv_forme_unos_korisnika(root):
     application = RegistracijaPacijenta(root)
     root.mainloop()
 
@@ -84,4 +84,4 @@ def poziv_forme_registracija_pacijenata(root):
 if __name__ == '__main__':
     root = Tk()
     root.geometry('425x425')
-    poziv_forme_registracija_pacijenata(root)
+    poziv_forme_unos_korisnika(root)

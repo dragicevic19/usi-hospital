@@ -1,4 +1,5 @@
 from model.prostorija import Prostorija
+from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijumImpl
 from repozitorijum.oprema.oprema_repozitorijum_impl import OpremaRepozitorijumImpl
 from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijumImpl
 from servis.kalendar.kalendar_servis import KalendarServis
@@ -6,9 +7,10 @@ from servis.kalendar.kalendar_servis import KalendarServis
 
 class ProstorijeServis(object):
 
-    def __init__(self, repo_prostorije=ProstorijeRepozitorijumImpl(), repo_oprema=OpremaRepozitorijumImpl()):
+    def __init__(self, repo_prostorije=ProstorijeRepozitorijumImpl(), repo_oprema=OpremaRepozitorijumImpl(),repo_kalendar = KalendarRepozitorijumImpl()):
         self._repo_prostorije = repo_prostorije
         self._repo_oprema = repo_oprema
+        self._repo_kalendar = repo_kalendar
 
     def dodavanje_prostorije(self, prostorija):
         self._repo_prostorije.dodaj_prostoriju(prostorija)
@@ -165,3 +167,4 @@ class ProstorijeServis(object):
             return True
         else:
             return False
+

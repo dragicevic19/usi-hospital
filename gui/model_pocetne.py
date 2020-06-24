@@ -6,7 +6,7 @@ SIRINA_BIO = 550
 VISINA_ZA_DUGMICE = 120
 ODVAJANJE_RADNOG = 100
 SLIKA_DIMENZIJE = 400
-BOJA = "green"
+BOJA = "#282828"
 
 """
   PROBLEM SA PUTANJAMA No such file or directory: '..\\..\\data\\korisnici.csv'
@@ -33,7 +33,7 @@ class ModelPocetne:
         self.__postava_slike()
         self.__postava_bio()
 
-        self.__oboj_frejmove_sareno(False)
+        self.__oboj_frejmove_sareno(True)
 
     def __oboj_frejmove_sareno(self, jednobojno=True):
         if jednobojno == False:
@@ -57,10 +57,11 @@ class ModelPocetne:
                                   height=VISINA_ZA_DUGMICE)
 
     def kreiranje_frejma_za_izvrsavanje(self):
-        self._okvir_izvrsavanja = Frame(self._root)
+        self._okvir_izvrsavanja = Frame(self._root,bg = "#282828")
         self._okvir_izvrsavanja.place(x=SIRINA_BIO + ODVAJANJE_RADNOG, y=ODVAJANJE_RADNOG,
                                       height=self.visina - (ODVAJANJE_RADNOG + VISINA_ZA_DUGMICE),
                                       width=self.sirina - (SIRINA_BIO + ODVAJANJE_RADNOG))
+
 
     def __postavljanje_log_out_dugmeta(self):
         print(self._frejm_dugmici.winfo_screenwidth())

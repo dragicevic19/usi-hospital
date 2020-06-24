@@ -70,3 +70,4 @@ class KorisnikRepozitorijumImpl(InterfejsKorisnikRepo):
 
     def vrati_listu_korisnika(self):
         return self._lista_korisnika
+

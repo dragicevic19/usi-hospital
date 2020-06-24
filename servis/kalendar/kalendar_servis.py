@@ -21,6 +21,9 @@ class KalendarServis(object):
     def vrati_zauzeca_datum_soba(self, datum, sprat, broj_sobe):
         return self._repo_kalendar.vrati_zauzeca_za_datum_i_sobu(datum, sprat, broj_sobe)
 
+    def vrati_zauzeca_datum_lekar(self, datum, lekar):
+        return self._repo_kalendar.vrati_zauzeca_za_datum_i_lekara(datum, lekar)
+
     def dodaj_dogadjaj_ako_je_slobodna(self, dogadjajDTO):
         if self._repo_kalendar.slobodna_prostorija_za_period(dogadjajDTO):
             dogadjaj = KalendarskiDogadjaj(dogadjajDTO.datum_pocetka_radova, dogadjajDTO.vreme_pocetka_str,
@@ -62,3 +65,13 @@ class KalendarServis(object):
 
     def brisi_selektovane_notifikacije(self, selektovane_notifikacije, tip_notifikacije):
         self._brisanje_notifikacije[tip_notifikacije](selektovane_notifikacije)
+
+    def vrati_slobodne_termine_lekara_za_datum(self, datum, lekar):
+        print(type(lekar))
+        return self._repo_kalendar.vrati_slobodne_termine_lekara_za_datum(datum, lekar)
+
+    def vrati_slotove_od_do(self, od, do):
+        return self._repo_kalendar.vrati_vremenske_slotovo_od_do(od, do)
+
+    def da_li_lekar_radi_u_trazenim_slotovima(self, zeljeni_slotovi, lekar):
+        return self._repo_kalendar.da_li_lekar_radi_u_zeljenim_slotovima(zeljeni_slotovi, lekar)
