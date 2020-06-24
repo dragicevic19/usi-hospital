@@ -89,5 +89,8 @@ class ProstorijeRepozitorijumImpl(InterfejsProstorijeRepo):
         return pronadjene_prostorije
 
 
+
+
+
 if __name__ == '__main__':
     print(ProstorijeRepozitorijumImpl().vrati_listu_prostorija_za_prikaz())

@@ -8,7 +8,6 @@ class PrikazProstorija(object):
 
     def __init__(self, root, lista=ProstorijeServis().prikupi_prostorije_za_prikaz()):
         self._root = root
-        self._root.title("Prikaz svih prostorija")
         self._lista = lista
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
