@@ -26,7 +26,7 @@ class UnosAnamnezeRepozitorijumImpl(InterfejsUnosAnamnezeRepo):
         path = Path(PUTANJA_FAJL_UNOS_ANAMNEZE)
         with path.open('w', newline='') as file:
             writer = csv.writer(file, delimiter=',')
-            for kljuc in self._mapa_ucitanih_unosa_anamneza:
+            for kljuc in self._mapa_ucitanih_unosa_anamneza:    # for kljuc, vrednost in ... .items():
                 unos = self._mapa_ucitanih_unosa_anamneza[kljuc]
                 writer.writerow([unos.get_id(), unos.get_lekar(), unos.get_opis(), unos.get_datum_i_vreme()])
 
@@ -50,3 +50,4 @@ class UnosAnamnezeRepozitorijumImpl(InterfejsUnosAnamnezeRepo):
         anamneza = UnosAnamneze(self._id_sledece_anamneze, unos_anamneze_dto.lekar, unos_anamneze_dto.anamneza, datum)
         self._mapa_ucitanih_unosa_anamneza[str(id)] = anamneza
         KorisnikRepozitorijumImpl().dodaj_id_anamneze_pacijentu(unos_anamneze_dto.pacijent, str(self._id_sledece_anamneze))
+        self.sacuvaj_unos_anamneze()

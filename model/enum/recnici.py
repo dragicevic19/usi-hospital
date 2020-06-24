@@ -1,4 +1,5 @@
 from model.administrator import Administrator
+from model.enum.tip_notifikacije import TipNotifikacije
 from model.lekar import Lekar
 from model.pacijent import Pacijent
 from model.sekretar import Sekretar
