@@ -79,7 +79,7 @@ class RegistracijaPacijenta:
 def poziv_forme_unos_korisnika(root):
 
 
-    application = RegistracijaPacijenta(root)
+    RegistracijaPacijenta(root)
     root.mainloop()
 
 

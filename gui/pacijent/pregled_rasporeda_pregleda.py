@@ -56,7 +56,8 @@ class PrikazPregleda:
 
 
 def poziv_prikaza_pregleda(root, ulogovani_pacijent):  # korisnicko ime ulogovanog
-    PrikazPregleda(root, ulogovani_pacijent)
+    kor_ime = ulogovani_pacijent.get_korisnicko_ime()
+    PrikazPregleda(root, kor_ime)
     root.mainloop()
 
 

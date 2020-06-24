@@ -1,7 +1,6 @@
 from tkinter import *  # UBACITI TRY CATCH ZA NESTANDARDNE BIBLIOTEKE!!!!!!!!!!!
 from tkinter import ttk
 from tkinter import messagebox
-from gui.lekar.lekar import poziv_forme_lekar
 from gui.administrator.administrator import poziv_forme_administrator
 from gui.upravnik.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
@@ -52,6 +51,7 @@ class LogIn:
                 messagebox.showerror("GRESKA", "Neispravan unos.")
 
     def __poziv_forme_za(self, korisnik):
+        from gui.lekar.lekar import poziv_forme_lekar
         self._root.destroy()
         uloga = korisnik.get_uloga()
         recnik_funkcija = {'UPRAVNIK': poziv_forme_upravnik, 'SEKRETAR': poziv_forme_sekretar,

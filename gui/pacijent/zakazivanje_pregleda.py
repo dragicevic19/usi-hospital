@@ -11,7 +11,7 @@ class ZakazivanjePregleda():
 
     def __init__(self, root):
         self._root = root
-        self._root.title("Zakazivanje pregleda")
+
         self._lekar_opste_prakse = StringVar(self._root)
         self._lista_lekara_opste_prakse = KorisnikServis().vrati_lekare_specijaliste_ili_lop(TipLekara.LOP)
         self._lekar_opste_prakse.set(self._lista_lekara_opste_prakse[0])
@@ -93,10 +93,8 @@ class ZakazivanjePregleda():
         return True
 
 
-def poziv_forme_zakazivanje_pregleda():
-    root = Tk()
-    root.geometry('673x280')
-    application = ZakazivanjePregleda(root)
+def poziv_forme_zakazivanje_pregleda(root):
+    ZakazivanjePregleda(root)
     root.mainloop()
 
 

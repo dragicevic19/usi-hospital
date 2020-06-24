@@ -2,7 +2,7 @@
 
 class UnosAnamnezeDTO:
     def __init__(self, lekar, anamneza, pacijent):
-        self._lekar = lekar
+        self._lekar = lekar.get_korisnicko_ime()
         self._anamneza = anamneza
         self._pacijent = pacijent
 
