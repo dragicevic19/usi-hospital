@@ -16,7 +16,6 @@ class LogIn:
     def __init__(self, root):
         self._root = root
         self._root.title("PRIJAVA KORISNIKA")
-
         self.__postava_oko_korisnickog_imena()
         self.__postava_oko_lozinke()
         self.__postavka_check_dugmeta()
