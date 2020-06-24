@@ -1,10 +1,12 @@
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from model.enum.uloga import Uloga
 from model.konstante.konstante import REGEX_VREME_OD_DO
+
 from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+
 
 
 class IzborLekara(PrikazKorisnika):
