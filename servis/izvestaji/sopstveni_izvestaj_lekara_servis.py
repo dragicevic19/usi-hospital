@@ -49,6 +49,10 @@ class SopstveniIzvestajLekaraServis:
                                " sa brojem zdravstvene knjizice:  " + pacijent.get_br_zdravstvene() + "\n"
         return string_za_ispis
 
+def poziv_forme_za_prikaz_izvestaja( korisnik, broj_dana):
+    kor_ime = korisnik.get_korisnicko_ime()
+    SopstveniIzvestajLekaraServis(kor_ime,broj_dana)
+
 
 if __name__ == '__main__':
-    SopstveniIzvestajLekaraServis("horacije442", 350)
+    SopstveniIzvestajLekaraServis("horacije442", 150)

@@ -60,8 +60,9 @@ class PrikazPodataka(PregledZauzeca):
                                                                                                     pady=10, padx=20)
 
 
-def poziv_forme_detaljni_prikaz_pacijenta(root):
-    a = PregledZauzeca(root, "horacije442")
+def poziv_forme_detaljni_prikaz_pacijenta(root,lekar):
+    kor_ime = lekar.get_korisnicko_ime()
+    a = PregledZauzeca(root, kor_ime)
     root.mainloop()
 
 
