@@ -10,6 +10,7 @@ from gui.sekretar.sektretar import poziv_forme_sekretar
 from gui.pacijent.pacijent import poziv_forme_pacijent
 
 
+
 class LogIn:
 
     def __init__(self, root):
@@ -52,7 +53,6 @@ class LogIn:
 
     def __poziv_forme_za(self, korisnik):
         self._root.destroy()
-
         uloga = korisnik.get_uloga()
         recnik_funkcija = {'UPRAVNIK': poziv_forme_upravnik, 'SEKRETAR': poziv_forme_sekretar,
                            'LEKAR': poziv_forme_lekar, 'ADMINISTRATOR': poziv_forme_administrator,
