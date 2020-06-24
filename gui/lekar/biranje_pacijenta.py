@@ -50,4 +50,4 @@ def poziv_forme_biranje_pacijenata_za_operaciju(root, ulogovani_lekar=None):
 if __name__ == '__main__':
     root = Tk()
     lekar = KorisnikServis().dobavi_sve_korisnike_u_sistemu()[5]
-    poziv_forme_biranje_pacijenata_za_operaciju(root)
+    poziv_forme_biranje_pacijenata_za_operaciju(root, lekar)

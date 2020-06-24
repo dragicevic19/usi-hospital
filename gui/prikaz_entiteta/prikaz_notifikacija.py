@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 from gui.prikaz_entiteta.cb_treeview import CbTreeview
+from model.dto.dogadjaji_dto.notifikacija_dto import NotifikacijaDTO
 from model.enum.tip_notifikacije import TipNotifikacije
 from servis.kalendar.kalendar_servis import KalendarServis
 
@@ -10,6 +11,7 @@ class PrikazNotifikacija(object):
 
     def __init__(self, root, tip_notifikacija):
         self._root = root
+
         self._tip_notifikacija = tip_notifikacija
         self._lista_notifikacija = KalendarServis().prikupi_notifikacije_po_tipu(tip_notifikacija)
         self.treeview = CbTreeview(self._root, columns=(
@@ -46,18 +48,23 @@ class PrikazNotifikacija(object):
         for notifikacija in self._lista_notifikacija:
             n = notifikacija.vrati_za_tabelu_notifikacija()
             self.treeview.insert('', 'end', values=n)
-        self.treeview.bind('<Button-1>', self._da_li_je_otkaceno)
+        self.treeview.bind('<Double-1>', self._da_li_je_otkaceno)
 
     def _da_li_je_otkaceno(self, event):
-        red = self.treeview.focus()
-        notifikacija = self.treeview.item(red)['values']
-        if notifikacija in self._lista_selektovanih_notifikacija:
-            self._lista_selektovanih_notifikacija.remove(notifikacija)
-        else:
-            self._lista_selektovanih_notifikacija.append(notifikacija)
+        try:
+            red = self.treeview.focus()
+            notifikacija = self.treeview.item(red)['values']
+            notifikacijaDTO = NotifikacijaDTO(notifikacija[0], notifikacija[1], notifikacija[2], notifikacija[3],
+                                              notifikacija[4], notifikacija[5], notifikacija[6])
+            if notifikacija in self._lista_selektovanih_notifikacija:
+                self._lista_selektovanih_notifikacija.remove(notifikacijaDTO)
+            else:
+                self._lista_selektovanih_notifikacija.append(notifikacijaDTO)
+        except IndexError:
+            pass  # kada se stisne na belu povrsinu treeview-a baci error
 
 
 if __name__ == '__main__':
     root = tk.Tk()
-    PrikazNotifikacija(root, TipNotifikacije.HITNA_OPERACIJA)
+    PrikazNotifikacija(root, TipNotifikacije.RENOVIRANJE)
     root.mainloop()

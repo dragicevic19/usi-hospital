@@ -1,14 +1,8 @@
 from tkinter import ttk
 from tkinter import *
 
-from gui.sekretar.notifikacije_za_hitne_operacije import notifikacije_za_hitne_operacije
-from gui.sekretar.notifikacije_za_renoviranje import notifikacije_za_renoviranje
-from gui.sekretar.notifikacije_za_zahteve_za_pregled import notifikacije_za_zahteve_za_pregled
-
-tip_notifikacije = {0: notifikacije_za_renoviranje,
-                    1: notifikacije_za_zahteve_za_pregled,
-                    2: notifikacije_za_hitne_operacije
-                    }
+from gui.sekretar.prikaz_resavanje_notifikacija import prikaz_notifikacija
+from model.enum.tip_notifikacije import TipNotifikacije
 
 
 class PregledanjeNotifikacijaMeni(object):
@@ -19,10 +13,15 @@ class PregledanjeNotifikacijaMeni(object):
         self.postavi_meni()
 
     def postavi_meni(self):
-        ttk.Button(self._root, text="RENOVIRANJE", command=tip_notifikacije[0]()).pack(ipady=20, ipadx=150, pady=15)
-        ttk.Button(self._root, text="ZAHTEVI ZA PREGLED", command=tip_notifikacije[1]()).pack(ipady=20, ipadx=125,
+        ttk.Button(self._root, text="RENOVIRANJE",
+                   command=lambda: prikaz_notifikacija(TipNotifikacije.RENOVIRANJE)).pack(ipady=20, ipadx=150, pady=15)
+
+        ttk.Button(self._root, text="ZAHTEVI ZA PREGLED",
+                   command=lambda: prikaz_notifikacija(TipNotifikacije.ZAHTEV_ZA_PREGLED)).pack(ipady=20, ipadx=125,
+                                                                                                pady=15)
+        ttk.Button(self._root, text="HITNE OPERACIJE",
+                   command=lambda: prikaz_notifikacija(TipNotifikacije.HITNA_OPERACIJA)).pack(ipady=20, ipadx=140,
                                                                                               pady=15)
-        ttk.Button(self._root, text="HITNE OPERACIJE", command=tip_notifikacije[2]()).pack(ipady=20, ipadx=140, pady=15)
 
 
 def poziv_forme_pregledanje_notifikacija_meni(root):

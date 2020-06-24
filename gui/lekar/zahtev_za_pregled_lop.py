@@ -17,7 +17,6 @@ class ZahtevZaPregledKodSpecijaliste:
         self._specijalista = StringVar(self._root)
         self._lista_specijalista = KorisnikServis().vrati_lekare_specijaliste_ili_lop(TipLekara.SPECIJALISTA)
         self._specijalista.set(self._lista_specijalista[0])
-        print(self._specijalista.get())
         self._pocetni_datum = ttk.Entry(self._root)
         self._krajnji_datum = ttk.Entry(self._root)
 

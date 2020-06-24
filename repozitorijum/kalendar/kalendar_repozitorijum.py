@@ -116,3 +116,13 @@ class KalendarRepozitorijumImpl(InterfejsKalendarRepozitorijum):
             if not dogadjaj.zahvat:
                 lista_renovacija.append(dogadjaj)
         return lista_renovacija
+
+    def brisi_selektovane_notifikacije(self, selektovane):
+        for selektovana in selektovane:
+            for dogadjaj in self._lista_dogadjaja:
+                if selektovana.datum_pocetka == dogadjaj.datum and \
+                        selektovana.vreme_pocetka == dogadjaj.vreme_pocetka_str and\
+                        selektovana.prostorija == dogadjaj.prostorija and \
+                        selektovana.lekar in dogadjaj.spisak_doktora and selektovana.pacijent == dogadjaj.pacijent:
+                    self._lista_dogadjaja.remove(dogadjaj)
+        self.sacuvaj_dogadjaj()

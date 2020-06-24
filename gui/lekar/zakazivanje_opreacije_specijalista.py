@@ -2,7 +2,7 @@ import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
 from gui.prikaz_entiteta.tabela_vremenskih_slotova import poziv_tabele_vremenskih_slotova
-from model.dto.dogadjaji_dto.zakazivanje_operacija_dto import ZakazivanjeOperacijeDTO
+from model.dto.dogadjaji_dto.zakazivanje_operacija_pregled_dto import ZakazivanjeOperacijaPregledDTO
 from model.enum.namena_prostorije import NamenaProstorije
 from model.enum.tip_zahvata import TipZahvata
 from model.konstante.konstante import REGEX_VREME
@@ -61,9 +61,10 @@ class ZakazivanjeOperacije:
 
     def tabela_vremenskih_zauzeca(self):
         if not self.provera_datuma():
-            # greska
-            pass
-        poziv_tabele_vremenskih_slotova(self._datum_pocetka_operacije.get(), *(self._opearciona_sala.get().split('|')))
+            messagebox.showerror('GRESKA', 'Los format datuma!')
+        else:
+            poziv_tabele_vremenskih_slotova(self._datum_pocetka_operacije.get(),
+                                            *(self._opearciona_sala.get().split('|')))
 
     def hitna_operacija(self):
         self._hitno_check = ttk.Checkbutton(self._root, text="HITNA OPERACIJA",
@@ -89,12 +90,12 @@ class ZakazivanjeOperacije:
         return True
 
     def provera_zauzeca(self):
-        operacijaDTO = ZakazivanjeOperacijeDTO(self._datum_pocetka, self._vreme_pocetka.get(),
-                                               self._vreme_zavrsetka.get(), self._lekar.get_korisnicko_ime(),
-                                               self._pacijent,
-                                               self._opearciona_sala.get(), self._hitna_operacija.get(),
-                                               TipZahvata.OPERACIJA.value)
-        if ProstorijeServis().zakazivanje_operacije(operacijaDTO):
+        operacijaDTO = ZakazivanjeOperacijaPregledDTO(self._datum_pocetka, self._vreme_pocetka.get(),
+                                                      self._vreme_zavrsetka.get(), self._lekar.get_korisnicko_ime(),
+                                                      self._pacijent,
+                                                      self._opearciona_sala.get(), self._hitna_operacija.get(),
+                                                      TipZahvata.OPERACIJA.value)
+        if ProstorijeServis().zakazivanje_operacije_i_pregleda(operacijaDTO):
             messagebox.showinfo('USPESNO', 'Uspesno ste zakazali operaciju')
             self._root.destroy()
         else:

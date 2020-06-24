@@ -7,7 +7,7 @@ from model.konstante.konstante import PUTANJA_FAJL_NOTIFIKACIJE
 from repozitorijum.notifikacije.interfejs_notifikacije_repozitorijum import InterfejsNotifikacijeRepozitorijum
 
 
-class NotifikacijeRepozitorijum(InterfejsNotifikacijeRepozitorijum):
+class NotifikacijeRepozitorijumImpl(InterfejsNotifikacijeRepozitorijum):
 
     def __init__(self):
         self._lista_notifikacija = []
@@ -49,3 +49,15 @@ class NotifikacijeRepozitorijum(InterfejsNotifikacijeRepozitorijum):
             if notifikacija.hitno:
                 hitne_operacije.append(notifikacija)
         return hitne_operacije
+
+    def brisi_selektovane_notifikacije(self, selektovane):
+        for selektovana in selektovane:
+            for notifikacija in self._lista_notifikacija:
+                if selektovana.datum_pocetka == notifikacija.datum and \
+                        selektovana.vreme_pocetka == notifikacija.vreme_pocetka_str and \
+                        selektovana.prostorija == notifikacija.prostorija and \
+                        selektovana.lekar in notifikacija.spisak_doktora and \
+                        selektovana.pacijent == notifikacija.pacijent:
+
+                    self._lista_notifikacija.remove(notifikacija)
+        self.sacuvaj_dogadjaje()

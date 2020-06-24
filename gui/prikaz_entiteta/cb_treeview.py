@@ -37,17 +37,17 @@ class CbTreeview(ttk.Treeview):
     def insert(self, parent, index, iid=None, **kw):
         item = ttk.Treeview.insert(self, parent, index, iid, **kw)
         self.tag_add(item, (item, 'unchecked'))
-        self.tag_bind(item, '<ButtonRelease-1>',
+        self.tag_bind(item, '<Double-1>',
                       lambda event: self._on_click(event, item))
 
     def _on_click(self, event, item):
         """Handle click on items."""
         if self.identify_row(event.y) == item:
-            if self.identify_column(event.x) == '#8':  # click in 'Zavrseno' column
-                # toggle checkbox image
-                if self.tag_has('checked', item):
-                    self.tag_remove(item, 'checked')
-                    self.tag_add(item, ('unchecked',))
-                else:
-                    self.tag_remove(item, 'unchecked')
-                    self.tag_add(item, ('checked',))
+            # if self.identify_column(event.x) == '#8':  # click in 'Zavrseno' column
+            # toggle checkbox image
+            if self.tag_has('checked', item):
+                self.tag_remove(item, 'checked')
+                self.tag_add(item, ('unchecked',))
+            else:
+                self.tag_remove(item, 'unchecked')
+                self.tag_add(item, ('checked',))

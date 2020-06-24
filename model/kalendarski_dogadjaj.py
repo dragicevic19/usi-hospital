@@ -72,6 +72,12 @@ class KalendarskiDogadjaj:
 
     def vrati_za_tabelu_notifikacija(self):
         n = (
-            self.datum_vreme.date(), self.datum_vreme_zavrsetka.date(), self.datum_vreme.time(),
-            self.datum_vreme_zavrsetka.time(), self.prostorija, self.spisak_doktora, self.pacijent)
+            self.datum_vreme.date().strftime('%d/%m/%Y'), self.datum_vreme_zavrsetka.date().strftime('%d/%m/%Y'),
+            str(self.datum_vreme.time())[0:5],
+            str(self.datum_vreme_zavrsetka.time())[0:5], self.prostorija, self.spisak_doktora[0], self.pacijent)
         return n
+
+    # def __str__(self):
+    #     return [str(self.datum_vreme.date()) + str(self.datum_vreme_zavrsetka.date()) + str(
+    #         self.datum_vreme.time()) + str(self.datum_vreme_zavrsetka.time()) + self.prostorija + str(
+    #         self.spisak_doktora) + self.pacijent]

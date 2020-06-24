@@ -160,7 +160,7 @@ class ProstorijeServis(object):
         return self._repo_prostorije.pronadji_prostorije_po_nameni(namena_prostorije)
 
     @staticmethod
-    def zakazivanje_operacije(zakazivanje_operacijeDTO):
+    def zakazivanje_operacije_i_pregleda(zakazivanje_operacijeDTO):
         if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(zakazivanje_operacijeDTO):
             return True
         else:

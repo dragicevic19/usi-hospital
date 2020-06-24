@@ -4,7 +4,8 @@ from pathlib import Path
 
 from model.konstante.konstante import PUTANJA_FAJL_ZAHTEVI_ZA_PREGLED
 from model.zahtev_za_pregled import ZahtevZaPregled
-from repozitorijum.zahtevi_za_pregled.interfejs_zahtevi_za_pregled_repozitorijum import InterfejsZahteviZaPregledRepozitorijum
+from repozitorijum.zahtevi_za_pregled.interfejs_zahtevi_za_pregled_repozitorijum import \
+    InterfejsZahteviZaPregledRepozitorijum
 
 
 class ZahtevZaPregledRepozitorijumImpl(InterfejsZahteviZaPregledRepozitorijum):
@@ -47,3 +48,12 @@ class ZahtevZaPregledRepozitorijumImpl(InterfejsZahteviZaPregledRepozitorijum):
 
     def dobavi_sve_zahteve(self):
         return self._lista_zahteva
+
+    def brisi_selektovane_notifikacije(self, selektovane):
+        for selektovana in selektovane:
+            for zahtev in self._lista_zahteva:
+                if selektovana.datum_pocetka == zahtev.pocetni_datum_str and \
+                        selektovana.datum_zavrsetka == zahtev.krajnji_datum_str and \
+                        selektovana.lekar in zahtev.specijalista and selektovana.pacijent == zahtev.pacijent:
+                    self._lista_zahteva.remove(zahtev)
+        self.sacuvaj_dogadjaje()

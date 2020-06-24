@@ -1,18 +1,22 @@
 from model.enum.tip_notifikacije import TipNotifikacije
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
 from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijumImpl
-from repozitorijum.notifikacije.notifikacije_repozitorijum import NotifikacijeRepozitorijum
+from repozitorijum.notifikacije.notifikacije_repozitorijum import NotifikacijeRepozitorijumImpl
 from repozitorijum.zahtevi_za_pregled.zahtevi_za_pregled_repozitorijum import ZahtevZaPregledRepozitorijumImpl
 
 
 class KalendarServis(object):
     def __init__(self, repo_kalendar=KalendarRepozitorijumImpl(),
                  repo_zahtev_za_pregled=ZahtevZaPregledRepozitorijumImpl(),
-                 repo_notifikacije=NotifikacijeRepozitorijum()):
+                 repo_notifikacije=NotifikacijeRepozitorijumImpl()):
 
         self._repo_kalendar = repo_kalendar
         self._repo_zahtevi = repo_zahtev_za_pregled
         self._repo_notifikacije = repo_notifikacije
+
+        self._brisanje_notifikacije = {TipNotifikacije.RENOVIRANJE: self._repo_kalendar.brisi_selektovane_notifikacije,
+                                       TipNotifikacije.ZAHTEV_ZA_PREGLED: self._repo_zahtevi.brisi_selektovane_notifikacije,
+                                       TipNotifikacije.HITNA_OPERACIJA: self._repo_notifikacije.brisi_selektovane_notifikacije}
 
     def vrati_zauzeca_datum_soba(self, datum, sprat, broj_sobe):
         return self._repo_kalendar.vrati_zauzeca_za_datum_i_sobu(datum, sprat, broj_sobe)
@@ -55,3 +59,6 @@ class KalendarServis(object):
             return self._repo_zahtevi.dobavi_sve_zahteve()
         else:
             return self._repo_notifikacije.dobavi_sve_hitne_operacije()
+
+    def brisi_selektovane_notifikacije(self, selektovane_notifikacije, tip_notifikacije):
+        self._brisanje_notifikacije[tip_notifikacije](selektovane_notifikacije)
