@@ -13,5 +13,3 @@ class UnosAnamnezeServis(object):
 
     def dodaj_anamnezu_svuda(self, unos_anamneze_dto):
         self._repo_anamneza.sacuvaj_anamnezu(unos_anamneze_dto)
-        self._repo_anamneza.sacuvaj_unos_anamneze()
-        # self._repo_korisnik.sacuvaj_korisnike()

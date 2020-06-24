@@ -1,9 +1,8 @@
 from tkinter import ttk, messagebox
 from tkinter import *
 from gui.prikaz_entiteta.prikaz_notifikacija import PrikazNotifikacija
-from gui.sekretar.notifikacije_za_zahteve_za_pregled import poziv_forme_za_zakazivanje_pregleda
+from gui.sekretar.zakazivanje_pregleda import poziv_forme_za_zakazivanje_pregleda
 from model.enum.tip_notifikacije import TipNotifikacije
-from servis.kalendar.kalendar_servis import KalendarServis
 
 
 class ZakazivanjePregledaBiranje(PrikazNotifikacija):
@@ -21,7 +20,6 @@ class ZakazivanjePregledaBiranje(PrikazNotifikacija):
         else:
             self._root.destroy()
             poziv_forme_za_zakazivanje_pregleda(self._lista_selektovanih_notifikacija[0])
-
 
 
 def zakazivanje_operacija_i_pregleda(root):
