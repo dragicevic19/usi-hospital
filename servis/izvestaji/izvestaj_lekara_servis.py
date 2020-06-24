@@ -1,6 +1,6 @@
-from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijum
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from repozitorijum.izvestaji.izvestaji_repozitorijum import IzvestajRepozitorijumImpl
 from servis.izvestaji.izvestaji_servis import IzvestajServis
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 """
         IZMESTITI PDF FAJLOVE U POSEBAN FOLDER
@@ -9,9 +9,9 @@ from servis.izvestaji.izvestaji_servis import IzvestajServis
 
 
 class IzvestajLekaraServis(IzvestajServis):
-    def __init__(self, pocetni_datum, krajnji_datum):
-
+    def __init__(self, pocetni_datum, krajnji_datum, repo_izvestaj = IzvestajRepozitorijumImpl()):
         super().__init__("lekare", pocetni_datum, krajnji_datum)
+        self._repo_izvestaj = repo_izvestaj
 
     def pripremi_i_izgenerisi_izvestaj(self):
         self._string_za_pdf = self.generisanje(self._tip_izvestaja)
@@ -20,17 +20,17 @@ class IzvestajLekaraServis(IzvestajServis):
         self._string_za_pdf += self.prosecan_broj_sati_po_lekaru()
         self._string_za_pdf += self.prosecno_i_ukupno_sati_svi_lekari()
 
-        IzvestajRepozitorijum.generisi_izvestaj_upravnik(self._string_za_pdf, False)
+        self._repo_izvestaj.generisi_izvestaj_upravnik(self._string_za_pdf, False)
 
     def ukupan_broj_sati_po_lekaru(self):
         ispis = ""
         for lekar in self._mapa:
-            pronadjeni_lekar = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(lekar)
-            # ime, prezime = pronadjeni_lekar.get_ime(), pronadjeni_lekar.get_prezime()
-            ime, prezime = "Pera", "Peric"
-            ispis += "Ukupno zauzece lekara " + lekar + " pod imenom " + ime + " " + prezime + " je: " + str(
-                int(self._mapa[lekar]) * 30) \
-                     + " minuta \n"
+            if lekar:
+                pronadjeni_lekar = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(lekar)
+                ime, prezime = pronadjeni_lekar.get_ime(), pronadjeni_lekar.get_prezime()
+                ispis += "Ukupno zauzece lekara " + lekar + " pod imenom " + ime + " " + prezime + " je: " + str(
+                    int(self._mapa[lekar]) * 30) \
+                         + " minuta \n"
         return ispis
 
     def prosecan_broj_sati_po_lekaru(self):

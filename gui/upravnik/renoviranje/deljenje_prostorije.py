@@ -1,10 +1,9 @@
 import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
-
 from gui.upravnik.renoviranje.premestanje_opreme import ScrollableFrame
 from model.dto.broj_i_naziv_opreme_dto import BrojINazivOpremeDTO
-from model.dto.deljenje_prostorije_dto import DeljenjeProstorijeDTO
+from model.dto.dogadjaji_dto.deljenje_prostorije_dto import DeljenjeProstorijeDTO
 from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
@@ -181,7 +180,6 @@ def deljenje_prostorije(selektovana_prostorija):
     root.geometry('750x650')
     DeljenjeProstorije(root, selektovana_prostorija)
     root.mainloop()
-
 
 # if __name__ == '__main__':
 #     root = Tk()

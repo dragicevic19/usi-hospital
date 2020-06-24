@@ -48,4 +48,4 @@ class Korisnik(object):
         self._uloga = uloga
 
     def vrati_za_upis_u_fajl(self):
-        return self._korisnicko_ime, self._lozinka,self._uloga,self._ime,self._prezime,self._obrisan
+        return self._korisnicko_ime, self._lozinka, self._uloga, self._ime, self._prezime, self._obrisan

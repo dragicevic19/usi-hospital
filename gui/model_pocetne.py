@@ -1,8 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-from model.korisnik import Korisnik
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum, lista_ucitanih_korisnika
 
+# KONSTANTE
 SIRINA_BIO = 550
 VISINA_ZA_DUGMICE = 120
 ODVAJANJE_RADNOG = 100
@@ -69,8 +68,6 @@ class ModelPocetne:
         log_out.place(x=self.sirina - SIRINA_BIO - 170, y=20, height=80, width=150)
 
     def __akcija_log_out(self):
-        KorisnikRepozitorijum.sacuvaj_korisnike()
-        # KreiranjeObjekata.sacuvaj_entitete()
         self._root.destroy()
 
     def __postava_bio(self):
@@ -119,9 +116,9 @@ class ModelPocetne:
         self._root.attributes("-fullscreen", self.__izlaz_iz_full_screena)
 
 
-if __name__ == '__main__':
-    root = Tk()
-    root.geometry('400x190')
-
-    nes = ModelPocetne(root, lista_ucitanih_korisnika[0])
-    root.mainloop()
+# if __name__ == '__main__':
+#     root = Tk()
+#     root.geometry('400x190')
+#
+#     nes = ModelPocetne(root, lista_ucitanih_korisnika[0])
+#     root.mainloop()

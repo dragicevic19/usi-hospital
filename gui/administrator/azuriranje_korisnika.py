@@ -1,10 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from servis.korisnik.korisnik_servis import KorisnikServis
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
 
 
 class IzborKorisnika(PrikazKorisnika):
@@ -52,7 +50,7 @@ class UnosPodataka(IzborKorisnika):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        korisnik = KorisnikRepozitorijum.nadji_po_korisnickom_imenu(self._selektovano_korisnicko_ime)
+        korisnik = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._selektovano_korisnicko_ime)
         self._podrazumevano_k_ime = korisnik.get_korisnicko_ime()
         self._podrazumevana_lozinka = korisnik.get_lozinka()
         self._podrazumevano_ime = korisnik.get_ime()
@@ -92,7 +90,7 @@ class UnosPodataka(IzborKorisnika):
             messagebox.showerror("GRESKA", "Neispravan unos.")
             self._root2.destroy()
 
-        elif KorisnikRepozitorijum.nadji_po_korisnickom_imenu(self._korisnicko_ime.get()):
+        elif KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime.get()):
             if self._selektovano_korisnicko_ime != self._korisnicko_ime.get():
                 messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
                 self._root2.destroy()
@@ -103,8 +101,8 @@ class UnosPodataka(IzborKorisnika):
             self.azuriraj_korisnika()
 
     def azuriraj_korisnika(self):
-        KorisnikServis.azuriraj_korisnika(self._selektovano_korisnicko_ime, self._korisnicko_ime.get(),
-                                          self._lozinka.get(), self._ime.get(), self._prezime.get())
+        KorisnikServis().azuriraj_korisnika(self._selektovano_korisnicko_ime, self._korisnicko_ime.get(),
+                                            self._lozinka.get(), self._ime.get(), self._prezime.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali korisnika")
         self._root2.destroy()
         self._stari_root.destroy()

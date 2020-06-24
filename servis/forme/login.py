@@ -1,11 +1,12 @@
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
-class LoginServis:
+class LoginServis():
 
     @staticmethod
     def provera_unosa(k_ime, lozinka):
-        for korisnik in lista_ucitanih_korisnika:
+        lista_korisnika = KorisnikServis().dobavi_sve_korisnike_u_sistemu()
+        for korisnik in lista_korisnika:
             if (
                     korisnik.get_korisnicko_ime() == k_ime and korisnik.get_lozinka() == lozinka):
                 return korisnik  # sledecoj formi moraju se proslediti informacije

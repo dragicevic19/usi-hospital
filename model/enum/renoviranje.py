@@ -12,8 +12,3 @@ class TipRenoviranja(Enum):
 class TipPremestanjaOpreme(Enum):
     DODAVANJE_OPREME = 1
     IZBACIVANJE_OPREME = 2
-
-
-class TipZahvata(Enum):
-    OPERACIJA = 1
-    PREGLED = 2

@@ -1,10 +1,9 @@
 MILICASDA,geraz534,UPRAVNIK,Milica,Sapoznicenko,
 pera,pera,ADMINISTRATOR,Jelena,Dafinic,
 dejan21,geag4523,SEKRETAR,Dejan,Tot,
-upravnikpera123,pera123,UPRAVNIK,pera,peric,
 mihajlo29,geazhgreq52,SEKRETAR,Mihajlo,Jovicevic,
-horacije442,guiage54,LEKAR,Horacije,Kljajic,,10:00-12:00,predrag,hirurg;kardiolog
-sebastijan3412,heahgae452,LEKAR,Sebastijan,Mihajlovic,,23:30-13:00,marija;milana,lop
+horacije442,guiage54,LEKAR,Horacije,Kljajic,,10:00-12:00,predrag;milana;pera_pacijent,hirurg;kardiolog
+sebastijan3412,heahgae452,LEKAR,Sebastijan,Mihajlovic,,23:30-13:00,zeljko12;milana,lop
 jovana31,tewqt424,SEKRETAR,Jovana,Malagurski,
 predrag,gangi,PACIJENT,Predrag,Mitrovic,,1301143,muski,1|2
 jovan21,hrazgh432,ADMINISTRATOR,Jovan,Petrovic,
@@ -20,6 +19,9 @@ noviUpravnik,upravnik123,UPRAVNIK,uprav,uasdal,
 leks,asd,LEKAR,asd,asd,,,,
 lekardodat,asd,LEKAR,asd,asd,,23:00-00:30,,endokrinolog
 lekardodatsad,sa,LEKAR,ads,adsa,,,,
-pera_pacijent,1234,PACIJENT,pera,peric,,1234,muski,|10|11|12|12|12|13
+pera_pacijent,1234,PACIJENT,pera,peric,,12344567,muski,|10|11|12|12|12|13|20|21
 zile2,asd,PACIJENT,asd,asd,,123,muski,|8|9|13|13|14
 nikolaNikolic,123,LEKAR,aasd,asd,,,,
+upravnikperaZMAJ,pera123,UPRAVNIK,pera,peric,
+zenaZMIJA,zenaZMIJA,LEKAR,ZENA,ZMIJA,,11:00-21:00,,kardiolog
+MILE_KITIC,SAMPANJAC,PACIJENT,MILE,KITIC,,11111123,muski,

@@ -1,8 +1,7 @@
-from tkinter import ttk, Tk, messagebox
-
 from model.konstante.konstante import INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA
-from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijum, lista_proslih_dogadjaja, lista_dogadjaja
+from servis.kalendar.kalendar_servis import KalendarServis
 from servis.korisnik.korisnik_servis import KorisnikServis
+from tkinter import ttk, Tk, messagebox
 
 
 class PrikazPregleda:
@@ -39,12 +38,12 @@ class PrikazPregleda:
         self.treeview.delete(*self.treeview.get_children())
         index = 0
         if prosli:
-            lista = lista_proslih_dogadjaja
+            lista = KalendarServis().dobavi_listu_proslih_dogadjaja()
         else:
-            lista = lista_dogadjaja
+            lista = KalendarServis().dobavi_listu_dogadjaja()
         for dogadjaj in lista:
             if self._ulogovan_pacijent in dogadjaj.spisak_pacijenata:
-                red = (str(dogadjaj.datum), str(dogadjaj.vreme), dogadjaj.zahvat, ",".join(dogadjaj.spisak_doktora))
+                red = (str(dogadjaj.datum), str(dogadjaj.vreme_pocetka_str), dogadjaj.zahvat, ",".join(dogadjaj.spisak_doktora))
                 self.treeview.insert("", index, index, values=red)
                 index = index + 1
         self.treeview.bind('<Double-1>', self.__prikazi_detalje_lekara)
@@ -52,10 +51,15 @@ class PrikazPregleda:
     def __prikazi_detalje_lekara(self, event):
         odabrana = self.treeview.focus()
         odabrani_doktor = self.treeview.item(odabrana)["values"]
-        ispis = KorisnikServis.vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
+        ispis = KorisnikServis().vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
         messagebox.showinfo("Imena lekara:", ispis)
 
 
-def poziv_prikaza_pregleda(root,ulogovani_pacijent): # korisnicko ime ulogovanog
+def poziv_prikaza_pregleda(root, ulogovani_pacijent):  # korisnicko ime ulogovanog
     PrikazPregleda(root, ulogovani_pacijent)
     root.mainloop()
+
+
+if __name__ == '__main__':
+    root = Tk()
+    poziv_prikaza_pregleda(root, "predrag")

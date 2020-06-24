@@ -3,7 +3,6 @@ from servis.oprema.oprema_servis import OpremaServis
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import *
-
 from servis.prostorije.prostorije_servis import ProstorijeServis
 
 

@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 from gui.model_pocetne import ModelPocetne
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
 from gui.upravnik.dodavanje_opreme import poziv_forme_unos_opreme
 from gui.upravnik.azuriranje_opreme import poziv_forme_azuriranje_opreme
 from gui.upravnik.brisanje_opreme import poziv_forme_brisanje_opreme
@@ -83,5 +82,5 @@ def poziv_forme_upravnik(korisnik):
     root.mainloop()
 
 
-if __name__ == '__main__':
-    poziv_forme_upravnik(lista_ucitanih_korisnika[0])
+# if __name__ == '__main__':
+#     poziv_forme_upravnik(lista_ucitanih_korisnika[0])

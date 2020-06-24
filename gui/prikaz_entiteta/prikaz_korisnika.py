@@ -1,6 +1,6 @@
 from tkinter import ttk, Tk
 from model.enum.uloga import Uloga
-from repozitorijum.korisnik.korisnik_repozitorijum import lista_ucitanih_korisnika
+from servis.korisnik.korisnik_servis import KorisnikServis
 
 
 class PrikazKorisnika(object):
@@ -44,16 +44,18 @@ class PrikazKorisnika(object):
 
     def __popuni_treeview(self):
         index = iid = 0
-        for korisnik in lista_ucitanih_korisnika:
+        lista_korisnika = KorisnikServis().dobavi_sve_korisnike_u_sistemu()
+        for korisnik in lista_korisnika:
             if self._uloga:
                 if self._uloga == korisnik.get_uloga() == Uloga.LEKAR.name:
-                    k = (korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime(),
-                    korisnik.get_radno_vreme(), korisnik.get_spisak_specijalizacija())
+                    k = (
+                        korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime(),
+                        korisnik.get_radno_vreme(), korisnik.get_spisak_specijalizacija())
                     self.treeview.insert("", index, iid, values=k)
                     index = iid = index + 1
                 elif self._uloga == korisnik.get_uloga():
                     k = (
-                    korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
+                        korisnik.get_korisnicko_ime(), korisnik.get_uloga(), korisnik.get_ime(), korisnik.get_prezime())
                     self.treeview.insert("", index, iid, values=k)
                     index = iid = index + 1
             else:
@@ -64,5 +66,6 @@ class PrikazKorisnika(object):
 
 if __name__ == '__main__':
     root = Tk()
-    PrikazKorisnika(root,"UPRAVNIK")
+    # PrikazKorisnika(root, "PACIJENT")
+    PrikazKorisnika(root)
     root.mainloop()

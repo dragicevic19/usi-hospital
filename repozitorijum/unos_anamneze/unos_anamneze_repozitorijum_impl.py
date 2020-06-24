@@ -1,5 +1,5 @@
 from repozitorijum.unos_anamneze.interfejs_unos_anamneze_repozitorijum import InterfejsUnosAnamnezeRepo
-from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijum
+from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijumImpl
 from datetime import datetime
 from pathlib import Path
 from model.konstante.konstante import *
@@ -49,4 +49,4 @@ class UnosAnamnezeRepozitorijumImpl(InterfejsUnosAnamnezeRepo):
         datum = datetime.now().strftime("%d-%m-%Y %H:%M")
         anamneza = UnosAnamneze(self._id_sledece_anamneze, unos_anamneze_dto.lekar, unos_anamneze_dto.anamneza, datum)
         self._mapa_ucitanih_unosa_anamneza[str(id)] = anamneza
-        KorisnikRepozitorijum.dodaj_id_anamneze_pacijentu(unos_anamneze_dto.pacijent, str(self._id_sledece_anamneze))
+        KorisnikRepozitorijumImpl().dodaj_id_anamneze_pacijentu(unos_anamneze_dto.pacijent, str(self._id_sledece_anamneze))

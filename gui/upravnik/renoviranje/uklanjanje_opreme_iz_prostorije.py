@@ -25,11 +25,3 @@ def uklanjanje_opreme_iz_prostorije(selektovana_prostorija):
     root.geometry('800x450')
     application = UklanjenjeOpremeIzProstorije(root, selektovana_prostorija)
     root.mainloop()
-
-
-# if __name__ == '__main__':
-#     root = Tk()
-#     root.geometry('800x500')
-#     prostorija = lista_ucitanih_prostorija[0]
-#     application = UklanjenjeOpremeIzProstorije(root, prostorija)
-#     root.mainloop()

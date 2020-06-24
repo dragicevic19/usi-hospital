@@ -8,7 +8,7 @@ class PrikazProstorija(object):
 
     def __init__(self, root, lista=ProstorijeServis().prikupi_prostorije_za_prikaz()):
         self._root = root
-        self._root.title("Prikaz svih prostorija")
+
         self._lista = lista
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
@@ -70,9 +70,9 @@ class PrikazProstorija(object):
             odabrana_prostorija1 = self.treeview.item(odabrane[0])['values']
             odabrana_prostorija2 = self.treeview.item(odabrane[1])['values']
             prva_prostorija = ProstorijeServis().pronadji_prostoriju(str(odabrana_prostorija1[0]),
-                                                                                             str(odabrana_prostorija1[1]))
+                                                                     str(odabrana_prostorija1[1]))
             druga_prostorija = ProstorijeServis().pronadji_prostoriju(str(odabrana_prostorija2[0]),
-                                                                                              str(odabrana_prostorija2[1]))
+                                                                      str(odabrana_prostorija2[1]))
             return prva_prostorija, druga_prostorija
 
         return False

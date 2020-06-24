@@ -1,8 +1,7 @@
 import datetime
 from tkinter import *
 from tkinter import ttk, messagebox
-
-from model.dto.renoviranje_dogadjaja_dto import RenoviranjeDTO
+from model.dto.dogadjaji_dto.spajanje_prostorije_dto import SpajanjeProstorijeDTO
 from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
@@ -42,7 +41,8 @@ class SpajanjeProstorije(object):
         self._novi_broj.grid(row=4, column=2, columnspan=10)
         Label(self._root, justify=LEFT, text='Nova namena prostorije: ', font="Times 15").grid(row=5, column=1, pady=10)
         podrazumevana_vrednost = self._nova_namena.get()
-        ttk.OptionMenu(self._root, self._nova_namena, podrazumevana_vrednost, *self.namene_prostorija).grid(row=5, column=2)
+        ttk.OptionMenu(self._root, self._nova_namena, podrazumevana_vrednost, *self.namene_prostorija).grid(row=5,
+                                                                                                            column=2)
 
     def provera_unosa(self):
         if not self.provera_datuma():
@@ -50,12 +50,12 @@ class SpajanjeProstorije(object):
         elif not self.provera_broja_prostorije():
             messagebox.showerror("GRESKA", "Broj prostorije je zauzet!")
         else:
-            prostorija_dto_1 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija_1,
-                                              namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
+            prostorijaDTO1 = SpajanjeProstorijeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija_1,
+                                                   self._nova_namena.get(), self._novi_broj.get())
 
-            prostorija_dto_2 = RenoviranjeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija_2,
-                                              namena=self._nova_namena.get(), novi_broj=self._novi_broj.get())
-            self.provera_zauzeca(prostorija_dto_1, prostorija_dto_2)
+            prostorijaDTO2 = SpajanjeProstorijeDTO(self._datum_pocetka, self._datum_zavrsetka, self._prostorija_2,
+                                                   self._nova_namena.get(), self._novi_broj.get())
+            self.provera_zauzeca(prostorijaDTO1, prostorijaDTO2)
 
     def provera_zauzeca(self, prostorija_dto_1, prostorija_dto_2):
         if ProstorijeServis().spajanje_prostorija(prostorija_dto_1, prostorija_dto_2):
