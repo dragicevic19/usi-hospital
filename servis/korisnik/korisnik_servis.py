@@ -82,7 +82,7 @@ class KorisnikServis(object):
             if tip_lekara == TipLekara.SPECIJALISTA:
                 if lekar.get_spisak_specijalizacija()[0] and lekar.get_spisak_specijalizacija()[0] != TipLekara.LOP.value:
                     pronadjeni_lekari.append(lekar)
-            elif lekar.get_spisak_specijalizacija() == TipLekara.LOP.value:
+            elif lekar.get_spisak_specijalizacija()[0] == TipLekara.LOP.value:
                 pronadjeni_lekari.append(lekar)
 
         return pronadjeni_lekari

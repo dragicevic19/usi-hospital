@@ -7,7 +7,7 @@ class ZauzecaProstorijaServis:
     def zauzece_prostorije_od_do(self, dto_prenosa):
         lista_prostorija_za_prikaz = []
         for prostorija in ProstorijeServis().prikupi_prostorije_za_prikaz():
-            if prostorija.sadrzi_opremu(dto_prenosa.spisak_zahtevane_opreme):
+            if prostorija.ima_svu_trazenu_opremu(dto_prenosa.spisak_zahtevane_opreme):
                 if self.da_li_je_slobodna(prostorija, dto_prenosa.pocetno_vreme, dto_prenosa.krajnje_vreme):
                     lista_prostorija_za_prikaz.append(prostorija)
         return lista_prostorija_za_prikaz

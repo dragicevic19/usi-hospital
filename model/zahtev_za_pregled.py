@@ -41,7 +41,7 @@ class ZahtevZaPregled(object):
         return self._resen
 
     def vrati_za_upis_u_fajl(self):
-        return self._pocetni_datum, self._krajnji_datum, self._specijalista, self._pacijent, self._resen
+        return self._pocetni_datum.date(), self._krajnji_datum.date(), self._specijalista, self._pacijent, self._resen
 
     def vrati_za_tabelu_notifikacija(self):
         n = (self.pocetni_datum_str, self.krajnji_datum_str, '', '', '', self.specijalista, self.pacijent)

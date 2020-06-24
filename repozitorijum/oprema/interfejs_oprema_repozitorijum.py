@@ -30,3 +30,4 @@ class InterfejsOpremaRepo(ABC):
     @abstractmethod
     def vrati_nazive_bolnicke_opreme_u_sistemu(self):
         pass
+
