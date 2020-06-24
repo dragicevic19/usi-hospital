@@ -3,13 +3,13 @@ import datetime
 
 class KalendarskiDogadjaj:
 
-    def __init__(self, datum, vreme, prostorija, broj_termina, spisak_doktora='', spisak_pacijenata='', zahvat='',
+    def __init__(self, datum, vreme, prostorija, broj_termina, spisak_doktora='', pacijent='', zahvat='',
                  hitno=''):
         self._prostorija = prostorija
         self._sprat, self._broj_prostorije = prostorija.split('|')
         self._broj_termina = int(broj_termina)
         self._spisak_doktora = spisak_doktora.split('|')
-        self._spisak_pacijenata = spisak_pacijenata.split('|')  # mozda ne treba split nego samo jedan pacijent
+        self._pacijent = pacijent
         d, m, g = datum.split("/")
         sat, min = vreme.split(":")
         self._datum_vreme = datetime.datetime(int(g), int(m), int(d), int(sat), int(min))
@@ -59,14 +59,25 @@ class KalendarskiDogadjaj:
         return self._zahvat
 
     @property
-    def spisak_pacijenata(self):
-        return self._spisak_pacijenata
+    def pacijent(self):
+        return self._pacijent
 
     @property
     def hitno(self):
         return self._hitno
 
     def vrati_za_upis_u_fajl(self):
-        return self._datum, self._vreme, self._sprat + "|" + self._broj_prostorije, \
-               self._broj_termina, "|".join(self._spisak_doktora), "|".join(self._spisak_pacijenata), \
-               self._zahvat, self._hitno
+        return self._datum, self._vreme_pocetka_str, self._sprat + "|" + self._broj_prostorije, \
+               self._broj_termina, "|".join(self._spisak_doktora), self._pacijent, self._zahvat, self._hitno
+
+    def vrati_za_tabelu_notifikacija(self):
+        n = (
+            self.datum_vreme.date().strftime('%d/%m/%Y'), self.datum_vreme_zavrsetka.date().strftime('%d/%m/%Y'),
+            str(self.datum_vreme.time())[0:5],
+            str(self.datum_vreme_zavrsetka.time())[0:5], self.prostorija, self.spisak_doktora[0], self.pacijent)
+        return n
+
+    # def __str__(self):
+    #     return [str(self.datum_vreme.date()) + str(self.datum_vreme_zavrsetka.date()) + str(
+    #         self.datum_vreme.time()) + str(self.datum_vreme_zavrsetka.time()) + self.prostorija + str(
+    #         self.spisak_doktora) + self.pacijent]

@@ -5,6 +5,7 @@ from model.enum.renoviranje import TipRenoviranja
 from tkinter import *
 
 
+
 class RenoviranjeMeni:
     def __init__(self, top=None):
         font = "-family {Segoe UI} -size 15 -weight bold"

@@ -77,8 +77,6 @@ class RegistracijaPacijenta:
 
 
 def poziv_forme_unos_korisnika(root):
-
-
     RegistracijaPacijenta(root)
     root.mainloop()
 

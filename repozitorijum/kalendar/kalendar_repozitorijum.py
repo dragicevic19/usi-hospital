@@ -1,10 +1,6 @@
 from repozitorijum.kalendar.interfejs_kalendar_repozitorijum import InterfejsKalendarRepozitorijum
 from model.kalendarski_dogadjaj import KalendarskiDogadjaj
-from model.konstante.konstante import PUTANJA_FAJL_DOGADJAJI
-from pathlib import Path
 import datetime
-import csv
-
 from repozitorijum.korisnik.korisnik_repozitorijum import *
 
 
@@ -124,13 +120,29 @@ class KalendarRepozitorijumImpl(InterfejsKalendarRepozitorijum):
     def vrati_listu_proslih_dogadjaja(self):
         return self._lista_proslih_dogadjaja
 
-    def vrati_radne_slotove_za_lekara(self,lekar):
+    def dobavi_sve_renovacije(self):
+        lista_renovacija = []
+        for dogadjaj in self._lista_dogadjaja:
+            if not dogadjaj.zahvat:
+                lista_renovacija.append(dogadjaj)
+        return lista_renovacija
+
+    def brisi_selektovane_notifikacije(self, selektovane):
+        for selektovana in selektovane:
+            for dogadjaj in self._lista_dogadjaja:
+                if selektovana.datum_pocetka == dogadjaj.datum and \
+                        selektovana.vreme_pocetka == dogadjaj.vreme_pocetka_str and \
+                        selektovana.prostorija == dogadjaj.prostorija and \
+                        selektovana.lekar in dogadjaj.spisak_doktora and selektovana.pacijent == dogadjaj.pacijent:
+                    self._lista_dogadjaja.remove(dogadjaj)
+        self.sacuvaj_dogadjaj()
+
+    def vrati_radne_slotove_za_lekara(self, lekar):
         radno_vreme = lekar.get_radno_vreme()
-        pocetno,krajnje = radno_vreme.split("-")
-        return self.vrati_vremenske_slotovo_od_do(pocetno,krajnje)
+        pocetno, krajnje = radno_vreme.split("-")
+        return self.vrati_vremenske_slotovo_od_do(pocetno, krajnje)
 
-
-    def vrati_vremenske_slotovo_od_do(self,pocetni,krajnji):
+    def vrati_vremenske_slotovo_od_do(self, pocetni, krajnji):
 
         lista_slotova = []
         dodaj = False
@@ -143,19 +155,18 @@ class KalendarRepozitorijumImpl(InterfejsKalendarRepozitorijum):
                 lista_slotova.append(i)
         return lista_slotova
 
-    def vrati_slobodne_termine_lekara_za_datum(self,datum,lekar):
+    def vrati_slobodne_termine_lekara_za_datum(self, datum, lekar):
         lista_mogucnosti = self.vrati_radne_slotove_za_lekara(lekar)
-        lista_zauzeca = self.vrati_zauzeca_za_datum_i_lekara(datum,lekar.get_korisnicko_ime())
+        lista_zauzeca = self.vrati_zauzeca_za_datum_i_lekara(datum, lekar.get_korisnicko_ime())
         lista_slobodnih_termina = []
         for i in lista_mogucnosti:
             if i not in lista_zauzeca:
                 lista_slobodnih_termina.append(i)
         return lista_slobodnih_termina
 
-    def da_li_lekar_radi_u_zeljenim_slotovima(self,zeljeni_slotovi,lekar):
+    def da_li_lekar_radi_u_zeljenim_slotovima(self, zeljeni_slotovi, lekar):
         radni_slotovi_lekara = self.vrati_radne_slotove_za_lekara(lekar)
         for vreme in radni_slotovi_lekara:
             if vreme in zeljeni_slotovi:
                 return True
         return False
-

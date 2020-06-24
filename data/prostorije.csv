@@ -1,4 +1,4 @@
-3,301,krevet;86|respirator;3|stalak za infuziju;72|elektrokardiograf;3,sala za preglede,
+git 3,301,krevet;86|respirator;3|stalak za infuziju;72|elektrokardiograf;3,sala za preglede,
 4,434,krevet;20|elektrokardiograf;10,sala za preglede,
 1,107,krevet;5|respirator;3|stalak za infuziju;5,soba za lezanje,
 3,304,krevet;10|stalak za infuziju;10,soba za lezanje,
@@ -26,3 +26,4 @@
 1,1osako21jk3kl,krevet;2|stalak za infuziju;0,operaciona sala,
 1,proba_posle_ref,,sala za preglede,
 4,soba4spojena,krevet;1|respirator;1|stalak za infuziju;1|elektrokardiograf;12,operaciona sala,
+1,sobaZaProbu,,operaciona sala,True

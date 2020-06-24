@@ -53,7 +53,7 @@ class PocetnaFormaLekar(ModelPocetne):
         self.priprema_akcije()
         poziv_forme_za_izvestaj_lekara_sopstveni(self._okvir_izvrsavanja,self._korisnik)
 
- 
+
 
 
 
