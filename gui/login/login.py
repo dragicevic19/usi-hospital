@@ -4,10 +4,10 @@ from tkinter import messagebox
 from gui.administrator.administrator import poziv_forme_administrator
 from gui.upravnik.upravnik import poziv_forme_upravnik
 from gui.neregistrovan import poziv_forme_neregistrovan
+from model.enum.uloga import Uloga
 from servis.forme.login import LoginServis
 from gui.sekretar.sektretar import poziv_forme_sekretar
 from gui.pacijent.pacijent import poziv_forme_pacijent
-
 
 
 class LogIn:
@@ -54,9 +54,9 @@ class LogIn:
         from gui.lekar.lekar import poziv_forme_lekar
         self._root.destroy()
         uloga = korisnik.get_uloga()
-        recnik_funkcija = {'UPRAVNIK': poziv_forme_upravnik, 'SEKRETAR': poziv_forme_sekretar,
-                           'LEKAR': poziv_forme_lekar, 'ADMINISTRATOR': poziv_forme_administrator,
-                           'PACIJENT': poziv_forme_pacijent}
+        recnik_funkcija = {Uloga.UPRAVNIK.name: poziv_forme_upravnik, Uloga.SEKRETAR.name: poziv_forme_sekretar,
+                           Uloga.LEKAR.name: poziv_forme_lekar, Uloga.ADMINISTRATOR.name: poziv_forme_administrator,
+                           Uloga.PACIJENT.name: poziv_forme_pacijent}
         recnik_funkcija[uloga](korisnik)
 
 

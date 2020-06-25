@@ -5,13 +5,10 @@ from model.enum.renoviranje import TipRenoviranja
 from tkinter import *
 
 
-
 class RenoviranjeMeni:
     def __init__(self, top=None):
         font = "-family {Segoe UI} -size 15 -weight bold"
         self.style = ttk.Style()
-
-        # top.resizable(0, 0)
         top.configure(background="#d9d9d9", highlightcolor="#646464646464")
 
         self.Label1 = tk.Label(top)

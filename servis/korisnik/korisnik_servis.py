@@ -84,81 +84,52 @@ class KorisnikServis(object):
         svi_lekari = self._repo_korisnik.vrati_sve_korisnike_po_ulozi(Uloga.LEKAR.name)
         for lekar in svi_lekari:
             if tip_lekara == TipLekara.SPECIJALISTA:
-                if lekar.get_spisak_specijalizacija()[0] and lekar.get_spisak_specijalizacija()[0] != TipLekara.LOP.value:
+                if lekar.get_spisak_specijalizacija()[0] and \
+                        lekar.get_spisak_specijalizacija()[0] != TipLekara.LOP.value:
                     pronadjeni_lekari.append(lekar)
             elif lekar.get_spisak_specijalizacija()[0] == TipLekara.LOP.value:
                 pronadjeni_lekari.append(lekar)
         return pronadjeni_lekari
 
-
-    def zakazivanje_pregleda_pacijent(self,paket_za_prenos_zahteva):
-        if paket_za_prenos_zahteva.prioritet == 1:                      #Lekar je prioritet
-            return  self._prioritet_lekar(paket_za_prenos_zahteva)
+    def zakazivanje_pregleda_pacijent(self, paket_za_prenos_zahteva):
+        if paket_za_prenos_zahteva.prioritet == 1:  # Lekar je prioritet
+            return self._prioritet_lekar(paket_za_prenos_zahteva)
         if paket_za_prenos_zahteva.prioritet == 2:
             return self._prioritet_lekar(paket_za_prenos_zahteva)
         if paket_za_prenos_zahteva.prioritet == 3:
             return self._prioritet_lekar(paket_za_prenos_zahteva)
 
-    def _prioritet_lekar(self,paket_za_prenos_zahteva):
-        d,m,g = paket_za_prenos_zahteva.krajnji_datum.split("/")
+    def _prioritet_lekar(self, paket_za_prenos_zahteva):
+        d, m, g = paket_za_prenos_zahteva.krajnji_datum.split("/")
         ime_lekara = paket_za_prenos_zahteva.lekar
 
         lekar = self.pronadji_korisnika_po_korisnickom_imenu(ime_lekara)
 
-
-
-        trenutni_datum = datetime.today()+timedelta(days=1)
+        trenutni_datum = datetime.today() + timedelta(days=1)
         zeljeni_slotovi = KalendarServis().vrati_slotove_od_do(paket_za_prenos_zahteva.pref_vremenski_pocetni,
                                                                paket_za_prenos_zahteva.pref_vremenski_krajnji)
-
-        if KalendarServis().da_li_lekar_radi_u_trazenim_slotovima(zeljeni_slotovi,lekar):
-
-            while True:
-                datum = trenutni_datum.strftime("%d/%m/%Y")
-                slobodni_termini = KalendarServis().vrati_slobodne_termine_lekara_za_datum(datum,lekar)
-
-                for slot in zeljeni_slotovi:
-                    if slot in slobodni_termini:
-
-                        return datum,slot
-
-                trenutni_datum += timedelta(days=1)
+        if KalendarServis().da_li_lekar_radi_u_trazenim_slotovima(zeljeni_slotovi, lekar):
+            return self.nadji_datum_i_slot_ako_radi(lekar, trenutni_datum, zeljeni_slotovi)
         else:
+            return self.nadj_datum_i_slot_ako_ne_radi(lekar, trenutni_datum)
 
-            while True:
-                datum = trenutni_datum.strftime("%d/%m/%Y")
-                print(type(lekar))
-                slobodni_termini = KalendarServis().vrati_slobodne_termine_lekara_za_datum(datum, lekar)
-                if slobodni_termini:
+    @staticmethod
+    def nadj_datum_i_slot_ako_ne_radi(lekar, trenutni_datum):
+        while True:
+            datum = trenutni_datum.strftime("%d/%m/%Y")
+            slobodni_termini = KalendarServis().vrati_slobodne_termine_lekara_za_datum(datum, lekar)
+            if slobodni_termini:
+                return datum, slobodni_termini[0]
+            trenutni_datum += timedelta(days=1)
 
-                    return datum,slobodni_termini[0]
-                trenutni_datum += timedelta(days=1)
-        return False
+    @staticmethod
+    def nadji_datum_i_slot_ako_radi(lekar, trenutni_datum, zeljeni_slotovi):
+        while True:
+            datum = trenutni_datum.strftime("%d/%m/%Y")
+            slobodni_termini = KalendarServis().vrati_slobodne_termine_lekara_za_datum(datum, lekar)
 
+            for slot in zeljeni_slotovi:
+                if slot in slobodni_termini:
+                    return datum, slot
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            trenutni_datum += timedelta(days=1)
