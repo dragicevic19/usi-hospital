@@ -10,9 +10,11 @@ from gui.model_pocetne import ModelPocetne
 
 class PocetnaFormaAdministrator(ModelPocetne):
 
-    def __init__(self, root, korisnik):
+    def __init__(self, root, korisnik,injektor):
         super().__init__(root, korisnik)
+        self._injektor = injektor
         self.postavljanje_dugmica()
+
 
     def postavljanje_dugmica(self):
         b1 = ttk.Button(self._frejm_dugmici, text="Dodavanje korisnika", command=self.akcija)
@@ -37,30 +39,30 @@ class PocetnaFormaAdministrator(ModelPocetne):
     #  IZMENITI NAZIVE METODA AKCIJA
     def akcija(self):
         self.priprema_akcije()
-        poziv_forme_unos_korisnika(self._okvir_izvrsavanja)
+        poziv_forme_unos_korisnika(self._okvir_izvrsavanja,self._injektor.korisnik_servis)
 
     def akcija1(self):
         self.priprema_akcije()
-        poziv_forme_azuriranje_korisnika(self._okvir_izvrsavanja)
+        poziv_forme_azuriranje_korisnika(self._okvir_izvrsavanja,self._injektor.korisnik_servis)
 
     def akcija2(self):
         self.priprema_akcije()
-        poziv_forme_brisanje_korisnika(self._okvir_izvrsavanja)
+        poziv_forme_brisanje_korisnika(self._okvir_izvrsavanja,self._injektor.korisnik_servis)
 
     def akcija3(self):
         self.priprema_akcije()
-        poziv_forme_unos_prostorije(self._okvir_izvrsavanja)
+        poziv_forme_unos_prostorije(self._okvir_izvrsavanja,self._injektor.prostorije_servis)
 
     def akcija4(self):
         self.priprema_akcije()
-        poziv_forme_brisanje_prostorije(self._okvir_izvrsavanja)
+        poziv_forme_brisanje_prostorije(self._okvir_izvrsavanja,self._injektor.prostorije_servis)
 
 
-# PROMENITI NES
-def poziv_forme_administrator(korisnik):
+
+def poziv_forme_administrator(korisnik,injektor):
     root = Tk()
     # root.geometry('400x190')
-    nes = PocetnaFormaAdministrator(root, korisnik)
+    nes = PocetnaFormaAdministrator(root, korisnik,injektor)
     root.mainloop()
 
 

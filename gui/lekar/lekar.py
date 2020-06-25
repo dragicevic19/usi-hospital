@@ -10,16 +10,17 @@ from gui.lekar.generisanje_izvestaja import poziv_forme_za_izvestaj_lekara_sopst
 
 class PocetnaFormaLekar(ModelPocetne):
 
-    def __init__(self, root, korisnik):
+    def __init__(self, root, korisnik, injektor):
         super().__init__(root, korisnik)
+        self._injektor = injektor
         self.postavljanje_dugmica()
-
 
     def postavljanje_dugmica(self):
         b1 = ttk.Button(self._frejm_dugmici, text="Azuriranje anameze", command=self.pokretanje_azuriranja_anamneze)
         b1.place(x=10, y=10, height=60, width=200)
 
-        b2 = ttk.Button(self._frejm_dugmici, text="Pregled zauzeca i pacijenata", command=self.pokretanje_pregleda_zauzeca)
+        b2 = ttk.Button(self._frejm_dugmici, text="Pregled zauzeca i pacijenata",
+                        command=self.pokretanje_pregleda_zauzeca)
         b2.place(x=270, y=10, height=60, width=200)
 
         b3 = ttk.Button(self._frejm_dugmici, text="Zakazivanje", command=self.pokretanje_zakazivanja)
@@ -32,35 +33,33 @@ class PocetnaFormaLekar(ModelPocetne):
         self._okvir_izvrsavanja.destroy()
         super().kreiranje_frejma_za_izvrsavanje()
 
-
     def pokretanje_azuriranja_anamneze(self):
         self.priprema_akcije()
-        poziv_forme_za_dodavanje_anamneze_odredjenom_pacijentu(self._okvir_izvrsavanja,self._korisnik)
-
+        poziv_forme_za_dodavanje_anamneze_odredjenom_pacijentu(self._okvir_izvrsavanja, self._korisnik,
+                                                               self._injektor.korisnik_servis,
+                                                               self._injektor.unos_anamneze_servis)
 
     def pokretanje_pregleda_zauzeca(self):
         self.priprema_akcije()
-        poziv_forme_detaljni_prikaz_pacijenta(self._okvir_izvrsavanja,self._korisnik)
+        poziv_forme_detaljni_prikaz_pacijenta(self._okvir_izvrsavanja, self._korisnik, self._injektor._korisnik_servis,
+                                              self._injektor.kalendar_servis)
 
     def pokretanje_zakazivanja(self):
         self.priprema_akcije()
         if self._korisnik.get_spisak_specijalizacija() and self._korisnik.get_spisak_specijalizacija()[0] != TipLekara.LOP.value:
-            poziv_forme_biranje_pacijenata_za_operaciju(self._okvir_izvrsavanja,self._korisnik)
+            poziv_forme_biranje_pacijenata_za_operaciju(self._okvir_izvrsavanja, self._injektor.korisnik_servis,
+                                                        self._korisnik)
         else:
-            poziv_forme_biranje_pacijenata_za_operaciju(self._okvir_izvrsavanja)
+            poziv_forme_biranje_pacijenata_za_operaciju(self._okvir_izvrsavanja, self._injektor.korisnik_servis)
 
     def pokretanje_forme_za_izvestaje(self):
         self.priprema_akcije()
-        poziv_forme_za_izvestaj_lekara_sopstveni(self._okvir_izvrsavanja,self._korisnik)
+        poziv_forme_za_izvestaj_lekara_sopstveni(self._okvir_izvrsavanja, self._korisnik)
 
 
-
-
-
-
-def poziv_forme_lekar(korisnik):
+def poziv_forme_lekar(korisnik, injektor):
     root = Tk()
-    PocetnaFormaLekar(root, korisnik)
+    PocetnaFormaLekar(root, korisnik, injektor)
 
     root.mainloop()
 

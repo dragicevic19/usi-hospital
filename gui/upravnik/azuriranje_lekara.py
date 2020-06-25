@@ -1,8 +1,6 @@
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
 from model.enum.uloga import Uloga
 from model.konstante.konstante import REGEX_VREME_OD_DO
-
-from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -11,8 +9,10 @@ from tkinter import messagebox
 
 class IzborLekara(PrikazKorisnika):
 
-    def __init__(self, root):
-        super().__init__(root, Uloga.LEKAR.name)
+    def __init__(self, root,korisnik_servis):
+
+        self._korisnik_servis = korisnik_servis
+        super().__init__(root,self._korisnik_servis, Uloga.LEKAR.name)
         azuriraj_dugme = ttk.Button(self._root, text="AZURIRAJ LEKARA", command=self.otvori_formu_za_azuriranje)
         azuriraj_dugme.pack(fill='x')
 
@@ -28,15 +28,16 @@ class IzborLekara(PrikazKorisnika):
     def pokretanje_unosa_podataka(self, selektovani_lekar):
         root2 = Tk()
         root2.geometry('330x260')
-        application = UnosPodataka(root2, selektovani_lekar, self._root)
+        application = UnosPodataka(root2, selektovani_lekar, self._root,self._korisnik_servis)
         root2.mainloop()
 
 
 class UnosPodataka(IzborLekara):
 
-    def __init__(self, root2, selektovani_lekar, root):
+    def __init__(self, root2, selektovani_lekar, root,korisnik_servis):
         self._stari_root = root
         self._root2 = root2
+        self._korisnik_servis = korisnik_servis
         self._korisnicko_ime_lekara = selektovani_lekar
         self._radno_vreme = None
         self._spisak_specijalizacija = None
@@ -50,7 +51,7 @@ class UnosPodataka(IzborLekara):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        lekar = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime_lekara)
+        lekar = self._korisnik_servis.pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime_lekara)
         self._podrazumevano_radno_vreme = lekar.get_radno_vreme()
         self._podrazumevani_spisak_specijalizacija = lekar.get_spisak_specijalizacija()
 
@@ -79,15 +80,15 @@ class UnosPodataka(IzborLekara):
             self.azuriraj_lekara()
 
     def azuriraj_lekara(self):
-        KorisnikServis().azuriraj_lekara(self._korisnicko_ime_lekara, self._radno_vreme.get(),
+        self._korisnik_servis.azuriraj_lekara(self._korisnicko_ime_lekara, self._radno_vreme.get(),
                                          self._spisak_specijalizacija.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali lekara")
         self._root2.destroy()
         self._stari_root.destroy()
 
 
-def poziv_forme_azuriranje_lekara(root):
-    a = IzborLekara(root)
+def poziv_forme_azuriranje_lekara(root,korinik_servis):
+    a = IzborLekara(root,korinik_servis)
     root.mainloop()
 
 

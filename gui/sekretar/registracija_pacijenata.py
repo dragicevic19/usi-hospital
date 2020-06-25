@@ -1,6 +1,5 @@
 from model.dto.registracija_pacijenta_dto import RegistracijaPacijentaDTO
 from model.konstante.konstante import DUZINA_BR_KNJIZICE
-from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -9,8 +8,9 @@ from tkinter import messagebox
 class RegistracijaPacijenta:
     pol = ('muski', 'zenski')
 
-    def __init__(self, root):
+    def __init__(self, root,korisnik_servis):
         self._root = root
+        self._korisnik_servis = korisnik_servis
         self._pol = StringVar(self._root)
         self._pol.set(self.pol[0])
         self._korisnicko_ime = None
@@ -65,19 +65,19 @@ class RegistracijaPacijenta:
         elif len(self._br_zdravstvene.get()) != DUZINA_BR_KNJIZICE or not str(self._br_zdravstvene.get()).isnumeric():
             messagebox.showerror("GRESKA!", "Pogresan unos broja zdravstvene knjizice (8 brojeva)!")
         else:
-            if not KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime.get()):
+            if not self._korisnik_servis.pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime.get()):
                 pacijent = RegistracijaPacijentaDTO(self._korisnicko_ime.get(), self._lozinka.get(), self._ime.get(),
                                                     self._prezime.get(), self._br_zdravstvene.get(),
                                                     self._pol.get())
-                KorisnikServis().registracija_pacijenta(pacijent)
+                self._korisnik_servis.registracija_pacijenta(pacijent)
                 messagebox.showinfo("USPESNO", "Uspesno ste registrovali pacijenta")
                 self._root.destroy()
             else:
                 messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
 
 
-def poziv_forme_unos_korisnika(root):
-    RegistracijaPacijenta(root)
+def poziv_forme_unos_korisnika(root,korisnik_servis):
+    RegistracijaPacijenta(root,korisnik_servis)
     root.mainloop()
 
 

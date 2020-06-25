@@ -1,12 +1,13 @@
 from tkinter import ttk
 from tkinter import *
 from model.enum.uloga import Uloga
-from servis.korisnik.korisnik_servis import KorisnikServis
+
 
 
 class PrikazPacijenata:
-    def __init__(self, root, lekar=None):
+    def __init__(self, root,korisnik_servis, lekar=None):
         self._root = root
+        self._korisnik_servis = korisnik_servis
         self._lekar = lekar
         self._lista_pacijenata = self._vrati_listu_pacijenata()
         self._korisnicko_ime_pretraga = ttk.Entry(self._root)
@@ -19,9 +20,9 @@ class PrikazPacijenata:
 
     def _vrati_listu_pacijenata(self):
         if self._lekar:
-            return KorisnikServis().dobavi_spisak_pacijenata_po_lekaru(self._lekar.get_korisnicko_ime())
+            return self._korisnik_servis.dobavi_spisak_pacijenata_po_lekaru(self._lekar.get_korisnicko_ime())
         else:
-            return KorisnikServis().vrati_sve_korisnike_po_ulozi(Uloga.PACIJENT.name)
+            return self._korisnik_servis.vrati_sve_korisnike_po_ulozi(Uloga.PACIJENT.name)
 
     def napravi_pretragu(self):
         Label(self._root, justify=LEFT, text="Pretraga pacijenta (korisnicko ime):", font="Times 12").pack()
@@ -38,17 +39,17 @@ class PrikazPacijenata:
 
     def pronadji_pacijente_za_specijalistu(self):
         if self._korisnicko_ime_pretraga.get():
-            lista_pronadjenih = KorisnikServis().pronadji_pacijenta(self._korisnicko_ime_pretraga.get())
+            lista_pronadjenih = self._korisnik_servis.pronadji_pacijenta(self._korisnicko_ime_pretraga.get())
             if any(pacijent in lista_pronadjenih for pacijent in self._lista_pacijenata):
                 self._lista_pacijenata = lista_pronadjenih
         else:
-            self._lista_pacijenata = KorisnikServis().dobavi_spisak_pacijenata_po_lekaru(self._lekar.get_korisnicko_ime())
+            self._lista_pacijenata = self._korisnik_servis.dobavi_spisak_pacijenata_po_lekaru(self._lekar.get_korisnicko_ime())
 
     def pronadji_pacijente_za_lop(self):
         if self._korisnicko_ime_pretraga.get():
-            self._lista_pacijenata = KorisnikServis().pronadji_pacijenta(self._korisnicko_ime_pretraga.get())
+            self._lista_pacijenata = self._korisnik_servis.pronadji_pacijenta(self._korisnicko_ime_pretraga.get())
         else:
-            self._lista_pacijenata = KorisnikServis().vrati_sve_korisnike_po_ulozi(Uloga.PACIJENT.name)
+            self._lista_pacijenata = self._korisnik_servis.vrati_sve_korisnike_po_ulozi(Uloga.PACIJENT.name)
 
     def napravi_treeview(self):
         self._napravi_zaglavlja()
@@ -74,8 +75,8 @@ class PrikazPacijenata:
             index = iid = index + 1
 
 
-if __name__ == '__main__':
-    root = Tk()
-    lekar = KorisnikServis().dobavi_sve_korisnike_u_sistemu()[10]
-    a = PrikazPacijenata(root, lekar)
-    root.mainloop()
+# if __name__ == '__main__':
+#     root = Tk()
+#     lekar = KorisnikServis().dobavi_sve_korisnike_u_sistemu()[10]
+#     a = PrikazPacijenata(root, lekar)
+#     root.mainloop()

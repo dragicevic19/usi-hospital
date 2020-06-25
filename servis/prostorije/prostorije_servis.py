@@ -1,16 +1,19 @@
 from model.prostorija import Prostorija
+
+
+
 from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijumImpl
+
 from repozitorijum.oprema.oprema_repozitorijum_impl import OpremaRepozitorijumImpl
 from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozitorijumImpl
-from servis.kalendar.kalendar_servis import KalendarServis
-
 
 class ProstorijeServis(object):
 
-    def __init__(self, repo_prostorije=ProstorijeRepozitorijumImpl(), repo_oprema=OpremaRepozitorijumImpl(),repo_kalendar = KalendarRepozitorijumImpl()):
+    def __init__(self, repo_prostorije=ProstorijeRepozitorijumImpl(), repo_oprema=OpremaRepozitorijumImpl(),repo_kalendar=KalendarRepozitorijumImpl(),kalendar_servis=KalendarRepozitorijumImpl()):
         self._repo_prostorije = repo_prostorije
         self._repo_oprema = repo_oprema
         self._repo_kalendar = repo_kalendar
+        self._kalendar_servis = kalendar_servis
 
     def dodavanje_prostorije(self, prostorija):
         self._repo_prostorije.dodaj_prostoriju(prostorija)
@@ -26,7 +29,7 @@ class ProstorijeServis(object):
         pass
 
     def izmeni_namenu(self, renoviranjeDTO):
-        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
+        if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
             prostorija = renoviranjeDTO.prostorija
             prostorija._namena_prostorije = renoviranjeDTO.nova_namena
             self._repo_prostorije.sacuvaj_prostorije()
@@ -35,7 +38,7 @@ class ProstorijeServis(object):
             return False
 
     def ostale_renovacije(self, renoviranjeDTO):
-        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
+        if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(renoviranjeDTO):
             self._repo_prostorije.sacuvaj_prostorije()
             return True
         else:
@@ -43,7 +46,7 @@ class ProstorijeServis(object):
 
     def dodavanje_slobodne_opreme_u_prostoriju(self, lista_renoviranjaDTO):
 
-        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(lista_renoviranjaDTO[0]):
+        if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(lista_renoviranjaDTO[0]):
             for renoviranjeDTO in lista_renoviranjaDTO:
                 prostorija_za_izmenu = renoviranjeDTO.prostorija
                 self.__dodavanje_opreme(renoviranjeDTO, prostorija_za_izmenu)
@@ -65,7 +68,7 @@ class ProstorijeServis(object):
 
     def izbacivanje_opreme_iz_prostorije(self, lista_renoviranjaDTO):
         # razlikuje se od dodavanje opreme samo u 2 linije,  da li refaktorisati?
-        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(lista_renoviranjaDTO[0]):
+        if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(lista_renoviranjaDTO[0]):
             for renoviranjeDTO in lista_renoviranjaDTO:
                 prostorija_za_izmenu = renoviranjeDTO.prostorija
                 self.__izbacivanje_opreme(renoviranjeDTO, prostorija_za_izmenu)  # 1
@@ -93,9 +96,9 @@ class ProstorijeServis(object):
     def spajanje_prostorija(self, prva_prostorijaDTO, druga_prostorijaDTO):
         prostorija1 = prva_prostorijaDTO.prostorija
         prostorija2 = druga_prostorijaDTO.prostorija
-        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(
+        if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(
                 prva_prostorijaDTO):  # todo: da li da pravim dogadjaj za ove dve stare prostorije koje se brisu ili za novu?
-            if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(druga_prostorijaDTO):
+            if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(druga_prostorijaDTO):
                 spisak_opreme = self.napravi_spisak_opreme(prostorija1, prostorija2)
                 nova = Prostorija(prostorija1.get_sprat(), prva_prostorijaDTO.novi_broj_prostorije,
                                   spisak_opreme, prva_prostorijaDTO.nova_namena)
@@ -118,7 +121,7 @@ class ProstorijeServis(object):
 
     def deljenje_prostorije(self, lista_deljenjeDTO):
         prostorija_za_deljenje = lista_deljenjeDTO[0]
-        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(prostorija_za_deljenje):
+        if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(prostorija_za_deljenje):
             oprema_za_prvu, oprema_za_drugu = self.podeli_opremu_po_prostorijama(lista_deljenjeDTO)
             self.napravi_prostorije(oprema_za_drugu, oprema_za_prvu, prostorija_za_deljenje)
             return True
@@ -163,7 +166,7 @@ class ProstorijeServis(object):
 
     @staticmethod
     def zakazivanje_operacije_i_pregleda(zakazivanje_operacijeDTO):
-        if KalendarServis().dodaj_dogadjaj_ako_je_slobodna(zakazivanje_operacijeDTO):
+        if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(zakazivanje_operacijeDTO):
             return True
         else:
             return False

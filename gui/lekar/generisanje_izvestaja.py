@@ -1,5 +1,4 @@
 from tkinter import ttk
-
 from servis.izvestaji.sopstveni_izvestaj_lekara_servis import poziv_forme_za_prikaz_izvestaja
 
 

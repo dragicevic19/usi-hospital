@@ -4,14 +4,18 @@ from model.dto.prenos_prostorija_dto import PretragaProstorijaDTO
 from tkinter.ttk import Combobox
 from tkinter import messagebox
 from model.konstante.konstante import REGEX_VREME, REGEX_DATUM
-from servis.prostorije.zauzeca_prostorija_servis import ZauzecaProstorijaServis
-from servis.oprema.oprema_servis import OpremaServis
+
+
 
 
 class PretragaProstorija:
 
-    def __init__(self, root):
+    def __init__(self, root,oprema_servis,prostorije_servis,kalendar_servis,zauzece_prostorije_servis):
         self._root = root
+        self._oprema_servis = oprema_servis
+        self._prostorije_servis = prostorije_servis
+        self._kalendar_servis = kalendar_servis
+        self._zauzece_prostorije_servis = zauzece_prostorije_servis
         self.lista_zahtevane_opreme = []
         self.napravi_frejmove()
 
@@ -33,7 +37,7 @@ class PretragaProstorija:
         self.cetvrti_frejm.place(x=100, y=500, width=200, height=500)
 
     def postava(self):
-        v = OpremaServis().vrati_svu_opremu_u_sistemu()
+        v = self._oprema_servis.vrati_svu_opremu_u_sistemu()
         self.combo = Combobox(self.drugi_frejm, state='readonly', values=v, width=14)
         self.combo.grid(row=2, column=2, padx=20, pady=20)
 
@@ -87,9 +91,9 @@ class PretragaProstorija:
         if self.provera_unosa_vremena():
             paket_za_prenos = PretragaProstorijaDTO(self.lista_zahtevane_opreme, self.datumOd.get(), self.vremeOd.get(),
                                                     self.datumDo.get(), self.vremeDo.get(), True)
-            lista = ZauzecaProstorijaServis().zauzece_prostorije_od_do(paket_za_prenos)
+            lista = self._zauzece_prostorije_servis.zauzece_prostorije_od_do(paket_za_prenos)
             novi_root = Tk()
-            PrikazProstorija(novi_root, lista)
+            PrikazProstorija(novi_root,self._prostorije_servis, lista)
 
     def print_vrednost_comba(self):
         vrednost = self.combo.get()
@@ -105,8 +109,8 @@ class PretragaProstorija:
                 messagebox.showinfo("Unos", "Parametar koji ste uneli vec je dodat u listu zahtevanih")
 
 
-def poziv_forma_za_pretragu_prostorija(root):
-    a = PretragaProstorija(root)
+def poziv_forma_za_pretragu_prostorija(root,oprema_servis,prostorije_servis,kalendar_servis,zauzece_servis):
+    a = PretragaProstorija(root,oprema_servis,prostorije_servis,kalendar_servis,zauzece_servis)
     root.mainloop()
 
 

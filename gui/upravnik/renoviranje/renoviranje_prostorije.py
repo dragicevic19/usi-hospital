@@ -18,8 +18,8 @@ metode_renovacija = {TipRenoviranja.IZMENA_NAMENE: izmena_namene,
 
 
 class RenoviranjeProstorije(PrikazProstorija):
-    def __init__(self, root, tip_renoviranja):
-        super().__init__(root)
+    def __init__(self, root, tip_renoviranja,prostorije_servis):
+        super().__init__(root,prostorije_servis,prostorije_servis.prikupi_prostorije_za_prikaz())
         self._tip_renoviranja = tip_renoviranja
         potvrdi_dugme = ttk.Button(self._root, text="ZAKAZI RENOVIRANJE PROSTORIJE", command=self.renoviraj_prostoriju)
         potvrdi_dugme.pack(fill='x')
@@ -47,9 +47,9 @@ class RenoviranjeProstorije(PrikazProstorija):
             messagebox.showerror("GRESKA", "Morate da izaberete dve prostorije!")
 
 
-def poziv_forme_odabir_prostorije(tip_renoviranja):
+def poziv_forme_odabir_prostorije(tip_renoviranja,prostorije_servis):
     root = Tk()
-    application = RenoviranjeProstorije(root, tip_renoviranja)
+    application = RenoviranjeProstorije(root, tip_renoviranja,prostorije_servis)
     root.mainloop()
 
 

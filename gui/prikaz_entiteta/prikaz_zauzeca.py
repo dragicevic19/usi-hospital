@@ -1,12 +1,13 @@
 from tkinter import ttk
 from tkinter import *
-from servis.kalendar.kalendar_servis import KalendarServis
+
 
 
 class PrikazZauzeca(object):
 
-    def __init__(self, root, korisnicko_ime_lekara):
+    def __init__(self, root, korisnicko_ime_lekara,kalendar_servis):
         self._root = root
+        self._kalendar_servis = kalendar_servis
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
         self.scroll.pack(side='right', fill='y')
@@ -28,7 +29,7 @@ class PrikazZauzeca(object):
 
     def __popuni_treeview(self):
         index = iid = 0
-        lista_dogadjaja = KalendarServis().dobavi_listu_dogadjaja()
+        lista_dogadjaja = self._kalendar_servis.dobavi_listu_dogadjaja()
         for dogadjaj in lista_dogadjaja:
             if self._korisnicko_ime_lekara in dogadjaj.spisak_doktora:
                 dog = (dogadjaj.datum, dogadjaj.vreme_pocetka_str, str(dogadjaj.broj_termina * 30) + " minuta",
@@ -37,8 +38,8 @@ class PrikazZauzeca(object):
                 self.treeview.insert("", index, iid, values=dog)
                 index = iid = index + 1
 
-
-if __name__ == '__main__':
-    root = Tk()
-    PrikazZauzeca(root, "goran431")
-    root.mainloop()
+#
+# if __name__ == '__main__':
+#     root = Tk()
+#     PrikazZauzeca(root, "goran431")
+#     root.mainloop()

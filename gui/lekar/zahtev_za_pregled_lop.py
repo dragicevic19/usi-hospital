@@ -1,6 +1,5 @@
 from model.dto.dogadjaji_dto.zakazivanje_pregleda_kod_spec_dto import ZakazivanjePregledaKodSpecijalisteDTO
 from servis.kalendar.kalendar_servis import KalendarServis
-from servis.korisnik.korisnik_servis import KorisnikServis
 from model.enum.tip_lekara import TipLekara
 from tkinter import ttk, messagebox
 from tkinter import *
@@ -9,13 +8,14 @@ import datetime
 
 class ZahtevZaPregledKodSpecijaliste:
 
-    def __init__(self, root, pacijent):
+    def __init__(self, root, pacijent,korisnik_servis):
         self._root = root
+        self._korisnik_servis = korisnik_servis
         self._root.title('Zakazivanje pregleda za ' + pacijent)
         self._pacijent = pacijent
 
         self._specijalista = StringVar(self._root)
-        self._lista_specijalista = KorisnikServis().vrati_lekare_specijaliste_ili_lop(TipLekara.SPECIJALISTA)
+        self._lista_specijalista = self._korisnik_servis.vrati_lekare_specijaliste_ili_lop(TipLekara.SPECIJALISTA)
         self._specijalista.set(self._lista_specijalista[0])
         self._pocetni_datum = ttk.Entry(self._root)
         self._krajnji_datum = ttk.Entry(self._root)
@@ -70,8 +70,8 @@ class ZahtevZaPregledKodSpecijaliste:
         self._root.destroy()
 
 
-def poziv_forme_zahtev_za_pregled_lop(korisnicko_ime_pacijenta):
+def poziv_forme_zahtev_za_pregled_lop(korisnicko_ime_pacijenta,korisnik_servis):
     root = Tk()
     root.geometry('550x240')
-    application = ZahtevZaPregledKodSpecijaliste(root, korisnicko_ime_pacijenta)
+    application = ZahtevZaPregledKodSpecijaliste(root, korisnicko_ime_pacijenta,korisnik_servis)
     root.mainloop()

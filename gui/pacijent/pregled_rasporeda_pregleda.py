@@ -1,14 +1,14 @@
 from model.konstante.konstante import INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA
-from servis.kalendar.kalendar_servis import KalendarServis
-from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import ttk, Tk, messagebox
 
 
 class PrikazPregleda:
 
-    def __init__(self, root, ulogovan_pacijent):
+    def __init__(self, root, ulogovan_pacijent,korisnik_servis,kalendar_servis):
         self._root = root
         self._ulogovan_pacijent = ulogovan_pacijent
+        self._korisnik_servis = korisnik_servis
+        self._kalendar_servis = kalendar_servis
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
         self.scroll.pack(side='right', fill='y')
@@ -38,9 +38,9 @@ class PrikazPregleda:
         self.treeview.delete(*self.treeview.get_children())
         index = 0
         if prosli:
-            lista = KalendarServis().dobavi_listu_proslih_dogadjaja()
+            lista = self._kalendar_servis.dobavi_listu_proslih_dogadjaja()
         else:
-            lista = KalendarServis().dobavi_listu_dogadjaja()
+            lista = self._kalendar_servis.dobavi_listu_dogadjaja()
         for dogadjaj in lista:
             if self._ulogovan_pacijent == dogadjaj.pacijent:
                 red = (str(dogadjaj.datum), str(dogadjaj.vreme_pocetka_str), dogadjaj.zahvat, ",".join(dogadjaj.spisak_doktora))
@@ -51,16 +51,13 @@ class PrikazPregleda:
     def __prikazi_detalje_lekara(self, event):
         odabrana = self.treeview.focus()
         odabrani_doktor = self.treeview.item(odabrana)["values"]
-        ispis = KorisnikServis().vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
+        ispis = self._korisnik_servis.vrati_imena_lekara(odabrani_doktor[INDEX_LEKARA_TREEVIEW_PRIKAZ_PREGLEDA])
         messagebox.showinfo("Imena lekara:", ispis)
 
 
-def poziv_prikaza_pregleda(root, ulogovani_pacijent):  # korisnicko ime ulogovanog
+def poziv_prikaza_pregleda(root, ulogovani_pacijent,korisnik_servis,kalendar_servis):  # korisnicko ime ulogovanog
     kor_ime = ulogovani_pacijent.get_korisnicko_ime()
-    PrikazPregleda(root, kor_ime)
+    PrikazPregleda(root, kor_ime,korisnik_servis,kalendar_servis)
     root.mainloop()
 
 
-if __name__ == '__main__':
-    root = Tk()
-    poziv_prikaza_pregleda(root, "predrag")

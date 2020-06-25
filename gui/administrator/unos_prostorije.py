@@ -1,4 +1,3 @@
-from servis.prostorije.prostorije_servis import ProstorijeServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -9,8 +8,9 @@ class NovaProstorija:
     moguce_namene_prostorija = ('operaciona sala', 'sala za preglede', 'soba za lezanje')
     spratovi = ('1', '2', '3', '4')
 
-    def __init__(self, root):
+    def __init__(self, root,prostorija_servis):
         self._root = root
+        self._prostorije_servis = prostorija_servis
         self._sprat = StringVar(self._root)
         self._broj_prostorije = None
         self._namena_prostorije = StringVar(self._root)
@@ -39,20 +39,20 @@ class NovaProstorija:
     def proveri_validnost(self):
         if not self._broj_prostorije.get() or not self._namena_prostorije.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
-        elif ProstorijeServis().pronadji_prostoriju(self._sprat.get(), self._broj_prostorije.get()):
+        elif self._prostorije_servis.pronadji_prostoriju(self._sprat.get(), self._broj_prostorije.get()):
             messagebox.showerror("GRESKA", "Soba vec postoji")
         else:
             self.__sacuvaj_prostoriju()
 
     def __sacuvaj_prostoriju(self):
         prostorija = Prostorija(self._sprat.get(), self._broj_prostorije.get(), {}, self._namena_prostorije.get())
-        ProstorijeServis().dodavanje_prostorije(prostorija)
+        self._prostorije_servis.dodavanje_prostorije(prostorija)
         messagebox.showinfo("USPESNO", "Uspesno ste dodali prostoriju")
         self._root.destroy()
 
 
-def poziv_forme_unos_prostorije(root):
-    application = NovaProstorija(root)
+def poziv_forme_unos_prostorije(root,prostorije_servis):
+    application = NovaProstorija(root,prostorije_servis)
     root.mainloop()
 
 

@@ -1,12 +1,11 @@
 from tkinter import ttk
-from servis.oprema.oprema_servis import OpremaServis
 
 
 class PrikazOpreme:
 
-    def __init__(self, root):
+    def __init__(self, root,oprema_servis):
         self._root = root
-
+        self._oprema_servis = oprema_servis
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
         self.scroll.pack(side='right', fill='y')
@@ -27,7 +26,7 @@ class PrikazOpreme:
 
     def __popuni_treeview(self):
         index = iid = 0
-        lista_ucitane_bolnicke_opreme = OpremaServis().vrati_svu_opremu_u_sistemu()
+        lista_ucitane_bolnicke_opreme = self._oprema_servis.vrati_svu_opremu_u_sistemu()
         for oprema in lista_ucitane_bolnicke_opreme:
             o = (oprema.get_naziv_opreme(), oprema.get_ukupan_broj_opreme(), oprema.get_slobodna_oprema(),
                  oprema.get_opis())

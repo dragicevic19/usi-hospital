@@ -1,4 +1,3 @@
-from servis.oprema.oprema_servis import OpremaServis
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import *
@@ -6,9 +5,9 @@ from tkinter import *
 
 class NovaOprema:
 
-    def __init__(self, root):
+    def __init__(self, root,oprema_servis):
         self._root = root
-
+        self._oprema_servis = oprema_servis
         self._naziv = None
         self._opis = None
         self._kolicina = None
@@ -36,22 +35,22 @@ class NovaOprema:
 
     def sacuvaj_opremu(self):
 
-        pronadjena_oprema = OpremaServis().pronadji_opremu_po_nazivu(self._naziv.get())
+        pronadjena_oprema = self._oprema_servis.pronadji_opremu_po_nazivu(self._naziv.get())
 
         if not self._naziv.get() or not self._opis.get() or not self._kolicina.get():
             messagebox.showerror("GRESKA", "Neispravan unos.")
         elif pronadjena_oprema:
-            OpremaServis().dodaj_postojecu_opremu(pronadjena_oprema, self._kolicina.get(), self._opis.get())
+            self._oprema_servis.dodaj_postojecu_opremu(pronadjena_oprema, self._kolicina.get(), self._opis.get())
             messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
         else:
-            OpremaServis().dodaj_opremu_nova(self._naziv.get(), self._opis.get(), self._kolicina.get())
+            self._oprema_servis.dodaj_opremu_nova(self._naziv.get(), self._opis.get(), self._kolicina.get())
             messagebox.showinfo("USPESNO", "Uspesno ste dodali opremu")
             self._root.destroy()
 
 
-def poziv_forme_unos_opreme(root):
-    application = NovaOprema(root)
+def poziv_forme_unos_opreme(root,oprema_servis):
+    application = NovaOprema(root,oprema_servis)
     root.mainloop()
 
 

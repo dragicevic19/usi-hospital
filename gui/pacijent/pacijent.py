@@ -8,8 +8,9 @@ from gui.pacijent.zakazivanje_pregleda import poziv_forme_zakazivanje_pregleda
 
 class PocetnaFormaPacijent(ModelPocetne):
 
-    def __init__(self, root, korisnik):
+    def __init__(self, root, korisnik,injektor):
         super().__init__(root, korisnik)
+        self._injektor = injektor
         self.postavljanje_dugmica()
 
     def postavljanje_dugmica(self):
@@ -24,7 +25,8 @@ class PocetnaFormaPacijent(ModelPocetne):
         b3 = ttk.Button(self._frejm_dugmici, text="Pregled anamneze", command=self.pokretanje_pregleda_anamneze)
         b3.place(x=530, y=10, height=60, width=200)
 
-        b4 = ttk.Button(self._frejm_dugmici, text="Pregled rasporeda pregleda", command=self.pokretanje_rasporeda_pregleda)
+        b4 = ttk.Button(self._frejm_dugmici, text="Pregled rasporeda pregleda",
+                        command=self.pokretanje_rasporeda_pregleda)
         b4.place(x=790, y=10, height=60, width=200)
 
     def priprema_akcije(self):
@@ -33,7 +35,7 @@ class PocetnaFormaPacijent(ModelPocetne):
 
     def pokretanje_zakazivanja_pregleda(self):
         self.priprema_akcije()
-        poziv_forme_zakazivanje_pregleda(self._okvir_izvrsavanja)
+        poziv_forme_zakazivanje_pregleda(self._okvir_izvrsavanja,self._injektor.korisnik_servis)
 
 
     def pokretanje_menjanje_termina(self):
@@ -42,17 +44,18 @@ class PocetnaFormaPacijent(ModelPocetne):
 
     def pokretanje_pregleda_anamneze(self):
         self.priprema_akcije()
-        poziv_forme_pregled_anamneze(self._okvir_izvrsavanja,self._korisnik)
+        poziv_forme_pregled_anamneze(self._okvir_izvrsavanja,self._korisnik,self._injektor.unos_anamneze_servis)
 
     def pokretanje_rasporeda_pregleda(self):
         self.priprema_akcije()
-        poziv_prikaza_pregleda(self._okvir_izvrsavanja,self._korisnik)
+        poziv_prikaza_pregleda(self._okvir_izvrsavanja,self._korisnik,self._injektor.korisnik_servis,
+                               self._injektor.kalendar_servis)
 
 
 
-def poziv_forme_pacijent(korisnik):
+def poziv_forme_pacijent(korisnik,injektor):
     root = Tk()
-    PocetnaFormaPacijent(root, korisnik)
+    PocetnaFormaPacijent(root, korisnik,injektor)
     root.mainloop()
 
 

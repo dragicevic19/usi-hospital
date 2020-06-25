@@ -3,9 +3,7 @@ from model.enum.uloga import Uloga
 from model.pacijent import Pacijent
 from repozitorijum.korisnik.korisnik_repozitorijum import KorisnikRepozitorijumImpl
 from datetime import *
-from model.dto.dogadjaji_dto.zakazivanje_dto import *
 from servis.kalendar.kalendar_servis import KalendarServis
-from servis.prostorije.prostorije_servis import *
 
 
 class KorisnikServis(object):

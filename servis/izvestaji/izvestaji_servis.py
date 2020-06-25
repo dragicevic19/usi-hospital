@@ -36,8 +36,8 @@ class IzvestajServis:
     def __razvrstaj_izvestaj_po_tipu(self, dogadjaj):
         if self._tip_izvestaja == "prostorije":
             kljuc = str(dogadjaj.sprat) + "|" + str(dogadjaj.broj_prostorije)
-            self.__odredi(kljuc, dogadjaj.trajanje)
-            self._ukupan_broj_sati_zauzeca_svih += dogadjaj.trajanje
+            self.__odredi(kljuc, dogadjaj.broj_termina)
+            self._ukupan_broj_sati_zauzeca_svih += dogadjaj.broj_termina
         elif self._tip_izvestaja == "lekare":
             for lekar in dogadjaj.spisak_doktora:
                 if len(dogadjaj.spisak_doktora) > 0:

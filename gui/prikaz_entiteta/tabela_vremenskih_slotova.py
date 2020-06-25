@@ -32,8 +32,8 @@ def poziv_tabele_vremenskih_slotova(datum, sprat, soba):
     lista = KalendarServis().vrati_zauzeca_datum_soba(datum, sprat, soba)
     Tabela_vremenskih_slotova(root, lista)
 
-
-if __name__ == '__main__':
-    root1 = Tk()
-    lista1 = KalendarServis().vrati_zauzeca_datum_soba("21/12/2020", "1", "109")
-    Tabela_vremenskih_slotova(root1, lista1)
+#
+# if __name__ == '__main__':
+#     root1 = Tk()
+#     lista1 = KalendarServis().vrati_zauzeca_datum_soba("21/12/2020", "1", "109")
+#     Tabela_vremenskih_slotova(root1, lista1)

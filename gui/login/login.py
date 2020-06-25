@@ -7,13 +7,16 @@ from gui.neregistrovan import poziv_forme_neregistrovan
 from servis.forme.login import LoginServis
 from gui.sekretar.sektretar import poziv_forme_sekretar
 from gui.pacijent.pacijent import poziv_forme_pacijent
+from gui.lekar.lekar import poziv_forme_lekar
+from injektor.injektor import Injegit sktor
 
 
 
 class LogIn:
 
-    def __init__(self, root):
+    def __init__(self, root,injektor):
         self._root = root
+        self._injektor =injektor
         self._root.title("PRIJAVA KORISNIKA")
         self.__postava_oko_korisnickog_imena()
         self.__postava_oko_lozinke()
@@ -44,28 +47,30 @@ class LogIn:
             poziv_forme_neregistrovan()
         else:
 
-            korisnik = LoginServis().provera_unosa(self._korisnicko_ime.get(), self._lozinka.get())
+            korisnik = LoginServis(injektor.korisnik_servis).provera_unosa(self._korisnicko_ime.get(), self._lozinka.get())
             if korisnik is not None:
                 self.__poziv_forme_za(korisnik)
             else:
                 messagebox.showerror("GRESKA", "Neispravan unos.")
 
     def __poziv_forme_za(self, korisnik):
-        from gui.lekar.lekar import poziv_forme_lekar
+
         self._root.destroy()
         uloga = korisnik.get_uloga()
         recnik_funkcija = {'UPRAVNIK': poziv_forme_upravnik, 'SEKRETAR': poziv_forme_sekretar,
                            'LEKAR': poziv_forme_lekar, 'ADMINISTRATOR': poziv_forme_administrator,
                            'PACIJENT': poziv_forme_pacijent}
-        recnik_funkcija[uloga](korisnik)
+
+        recnik_funkcija[uloga](korisnik,injektor)
 
 
-def kreni_login():
+def kreni_login(injektor):
     root = Tk()
     root.geometry('370x150')
-    LogIn(root)
+    LogIn(root,injektor)
     root.mainloop()
 
 
 if __name__ == '__main__':
-    kreni_login()
+    injektor = Injektor()
+    kreni_login(injektor)

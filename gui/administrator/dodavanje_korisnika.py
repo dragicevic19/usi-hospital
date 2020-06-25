@@ -1,5 +1,4 @@
 from model.enum.recnici import *
-from servis.korisnik.korisnik_servis import KorisnikServis
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -8,8 +7,9 @@ from tkinter import messagebox
 class NoviKorisnik:
     uloge = ('LEKAR', 'UPRAVNIK', 'SEKRETAR')
 
-    def __init__(self, root):
+    def __init__(self, root,korisnik_servis):
         self._root = root
+        self._korisnik_servis = korisnik_servis
         self._uloga = StringVar(self._root)
         self._uloga.set(self.uloge[0])
         self._korisnicko_ime = None
@@ -58,17 +58,15 @@ class NoviKorisnik:
             uloga = self._uloga.get()
             korisnik = konstruktor_po_ulozi[uloga](self._korisnicko_ime.get(), self._lozinka.get(), uloga,
                                                    self._ime.get(), self._prezime.get())
-            if KorisnikServis().dodaj_korisnika(korisnik):
+            if self._korisnik_servis.dodaj_korisnika(korisnik):
                 messagebox.showinfo("USPESNO", "Uspesno ste dodali korisnika")
                 self._root.destroy()
             else:
                 messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
 
 
-def poziv_forme_unos_korisnika(root):
-    # da li je neophodno da ovo bude u promenljivoj s obzirom da se ne koristi nigde vise,
-    # jel ti treba za formu?
-    application = NoviKorisnik(root)
+def poziv_forme_unos_korisnika(root,korisnik_servis):
+    NoviKorisnik(root,korisnik_servis)
     root.mainloop()
 
 

@@ -1,19 +1,18 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-
 from gui.prikaz_entiteta.cb_treeview import CbTreeview
 from model.dto.dogadjaji_dto.notifikacija_dto import NotifikacijaDTO
 from model.enum.tip_notifikacije import TipNotifikacije
-from servis.kalendar.kalendar_servis import KalendarServis
+
 
 
 class PrikazNotifikacija(object):
 
-    def __init__(self, root, tip_notifikacija):
+    def __init__(self, root, tip_notifikacija,kalendar_servis):
         self._root = root
-
+        self._kalendar_servis =kalendar_servis
         self._tip_notifikacija = tip_notifikacija
-        self._lista_notifikacija = KalendarServis().prikupi_notifikacije_po_tipu(tip_notifikacija)
+        self._lista_notifikacija = self._kalendar_servis.prikupi_notifikacije_po_tipu(tip_notifikacija)
         self.treeview = CbTreeview(self._root, columns=(
             'datum_od', 'datum_do', 'vreme_od', 'vreme_do', 'prostorija', 'lekar', 'pacijent',
             'zavrseno'), selectmode="extended")
@@ -63,8 +62,8 @@ class PrikazNotifikacija(object):
         except IndexError:
             pass  # kada se stisne na belu povrsinu treeview-a baci error
 
-
-if __name__ == '__main__':
-    root = tk.Tk()
-    PrikazNotifikacija(root, TipNotifikacije.RENOVIRANJE)
-    root.mainloop()
+#
+# if __name__ == '__main__':
+#     root = tk.Tk()
+#     PrikazNotifikacija(root, TipNotifikacije.RENOVIRANJE)
+#     root.mainloop()

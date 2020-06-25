@@ -2,13 +2,14 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikaz_korisnika import PrikazKorisnika
-from servis.korisnik.korisnik_servis import KorisnikServis
+
 
 
 class IzborKorisnika(PrikazKorisnika):
 
-    def __init__(self, root):
-        super().__init__(root)
+    def __init__(self, root,korisnik_servis):
+        self._korisnik_servis = korisnik_servis
+        super().__init__(root,self._korisnik_servis)
         potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ KORISNIKA", command=self.odabir_korisnika)
         potvrdi_dugme.pack(fill='x')
 
@@ -24,15 +25,16 @@ class IzborKorisnika(PrikazKorisnika):
     def pokretanje_forme_unos_podataka(self, selektovan_korisnik):
         root2 = Tk()
         root2.geometry('330x260')
-        application = UnosPodataka(root2, selektovan_korisnik, self._root)
+        application = UnosPodataka(root2, selektovan_korisnik, self._root,self._korisnik_servis)
         root2.mainloop()
 
 
 class UnosPodataka(IzborKorisnika):
 
-    def __init__(self, root2, selektovan_korisnik, root):
+    def __init__(self, root2, selektovan_korisnik, root,korisnik_servis):
         self._stari_root = root
         self._root2 = root2
+        self._korisnik_servis = korisnik_servis
         self._selektovano_korisnicko_ime = selektovan_korisnik
         self._korisnicko_ime = None
         self._lozinka = None
@@ -50,7 +52,7 @@ class UnosPodataka(IzborKorisnika):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        korisnik = KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._selektovano_korisnicko_ime)
+        korisnik = self._korisnik_servis.pronadji_korisnika_po_korisnickom_imenu(self._selektovano_korisnicko_ime)
         self._podrazumevano_k_ime = korisnik.get_korisnicko_ime()
         self._podrazumevana_lozinka = korisnik.get_lozinka()
         self._podrazumevano_ime = korisnik.get_ime()
@@ -90,7 +92,7 @@ class UnosPodataka(IzborKorisnika):
             messagebox.showerror("GRESKA", "Neispravan unos.")
             self._root2.destroy()
 
-        elif KorisnikServis().pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime.get()):
+        elif self._korisnik_servis.pronadji_korisnika_po_korisnickom_imenu(self._korisnicko_ime.get()):
             if self._selektovano_korisnicko_ime != self._korisnicko_ime.get():
                 messagebox.showerror("GRESKA", "Korisnik sa unetim korisnickim imenom vec postoji")
                 self._root2.destroy()
@@ -101,15 +103,15 @@ class UnosPodataka(IzborKorisnika):
             self.azuriraj_korisnika()
 
     def azuriraj_korisnika(self):
-        KorisnikServis().azuriraj_korisnika(self._selektovano_korisnicko_ime, self._korisnicko_ime.get(),
+        self._korisnik_servis.azuriraj_korisnika(self._selektovano_korisnicko_ime, self._korisnicko_ime.get(),
                                             self._lozinka.get(), self._ime.get(), self._prezime.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali korisnika")
         self._root2.destroy()
         self._stari_root.destroy()
 
 
-def poziv_forme_azuriranje_korisnika(root):
-    a = IzborKorisnika(root)
+def poziv_forme_azuriranje_korisnika(root,korisnik_servis):
+    a = IzborKorisnika(root,korisnik_servis)
     root.mainloop()
 
 

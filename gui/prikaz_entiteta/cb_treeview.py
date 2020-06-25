@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 
 
+
+#Klasa skinuta sa interneta
+
 class CbTreeview(ttk.Treeview):
     def __init__(self, master=None, **kw):
         kw.setdefault('style', 'cb.Treeview')

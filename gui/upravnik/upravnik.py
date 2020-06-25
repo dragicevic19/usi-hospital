@@ -15,13 +15,15 @@ DUZINA_DUGMETA = 150
 
 class PocetnaFormaUpravnik(ModelPocetne):
 
-    def __init__(self, root, korisnik):
+    def __init__(self, root, korisnik,injektor):
         super().__init__(root, korisnik)
+        self._injektor = injektor
         self.postavi_gornje_dugmice()
         self.postavi_donje_dugmice()
 
     def postavi_gornje_dugmice(self):
-        b1 = ttk.Button(self._frejm_dugmici, text="Renoviranje prostorije", command=self.pokretanje_renoviranje_prostorije)
+        b1 = ttk.Button(self._frejm_dugmici, text="Renoviranje prostorije",
+                        command=self.pokretanje_renoviranje_prostorije)
         b1.place(x=10, y=10, height=SIRINA_DUGMETA, width=DUZINA_DUGMETA)
 
         b2 = ttk.Button(self._frejm_dugmici, text="Pretraga prostorije", command=self.pokretanje_pretrage_prostorija)
@@ -37,7 +39,8 @@ class PocetnaFormaUpravnik(ModelPocetne):
         b5.place(x=850, y=10, height=SIRINA_DUGMETA, width=DUZINA_DUGMETA)
 
     def postavi_donje_dugmice(self):
-        b4 = ttk.Button(self._frejm_dugmici, text="Azuriranje informacija o lekarima", command=self.pokretanje_azuriranja_lekara)
+        b4 = ttk.Button(self._frejm_dugmici, text="Azuriranje informacija o lekarima",
+                        command=self.pokretanje_azuriranja_lekara)
         b4.place(x=335, y=60, height=SIRINA_DUGMETA, width=DUZINA_DUGMETA)
 
         b5 = ttk.Button(self._frejm_dugmici, text="Generisanje izvestaja", command=self.pokretanje_izvestaja)
@@ -49,36 +52,39 @@ class PocetnaFormaUpravnik(ModelPocetne):
 
     def pokretanje_renoviranje_prostorije(self):
         self.osvezi_okvir_za_izvrsavanje()
-        poziv_forme_za_renovaciju_prostorije(self._okvir_izvrsavanja)
+        poziv_forme_za_renovaciju_prostorije(self._okvir_izvrsavanja,self._injektor.prostorije_servis)
 
     def pokretanje_pretrage_prostorija(self):
         self.osvezi_okvir_za_izvrsavanje()
-        poziv_forma_za_pretragu_prostorija(self._okvir_izvrsavanja)
+        poziv_forma_za_pretragu_prostorija(self._okvir_izvrsavanja,self._injektor.oprema_servis,
+                                           self._injektor.prostorije_servis,self._injektor.kalendar_servis,
+                                           self._injektor.zauzece_prostorjie_servis)
 
     def pokretanje_unos_opreme(self):
         self.osvezi_okvir_za_izvrsavanje()
-        poziv_forme_unos_opreme(self._okvir_izvrsavanja)
+        poziv_forme_unos_opreme(self._okvir_izvrsavanja,self._injektor.oprema_servis)
 
     def pokretanje_azuriranje_opreme(self):
         self.osvezi_okvir_za_izvrsavanje()
-        poziv_forme_azuriranje_opreme(self._okvir_izvrsavanja)
+        poziv_forme_azuriranje_opreme(self._okvir_izvrsavanja,self._injektor.oprema_servis)
 
     def pokretanje_brisanje_opreme(self):
         self.osvezi_okvir_za_izvrsavanje()
-        poziv_forme_brisanje_opreme(self._okvir_izvrsavanja)
+        poziv_forme_brisanje_opreme(self._okvir_izvrsavanja,self._injektor.prostorije_servis,
+                                    self._injektor.oprema_servis)
 
     def pokretanje_azuriranja_lekara(self):
         self.osvezi_okvir_za_izvrsavanje()
-        poziv_forme_azuriranje_lekara(self._okvir_izvrsavanja)
+        poziv_forme_azuriranje_lekara(self._okvir_izvrsavanja,self._injektor.korisnik_servis)
 
     def pokretanje_izvestaja(self):
         self.osvezi_okvir_za_izvrsavanje()
         poziv_forma_za_izvestaje_za_upravnika(self._okvir_izvrsavanja)
 
 
-def poziv_forme_upravnik(korisnik):
+def poziv_forme_upravnik(korisnik,injektor):
     root = Tk()
-    PocetnaFormaUpravnik(root, korisnik)
+    PocetnaFormaUpravnik(root, korisnik,injektor)
     root.mainloop()
 
 

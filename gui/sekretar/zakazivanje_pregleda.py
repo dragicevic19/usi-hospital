@@ -9,15 +9,15 @@ from model.enum.tip_lekara import TipLekara
 from model.enum.tip_notifikacije import TipNotifikacije
 from model.enum.tip_zahvata import TipZahvata
 from model.konstante.konstante import REGEX_VREME
-from servis.kalendar.kalendar_servis import KalendarServis
-from servis.korisnik.korisnik_servis import KorisnikServis
 from servis.prostorije.prostorije_servis import ProstorijeServis
 
 
 class ZakazivanjePregleda(object):
-    def __init__(self, root, selektovana_notifikacija):
+    def __init__(self, root, selektovana_notifikacija,kalendar_servis,korisnik_servis):
         self._root = root
         self._selektovan = selektovana_notifikacija
+        self._kalendar_servis = kalendar_servis
+        self._korisnik_servis = korisnik_servis
         self._lista_dostupnih_prostorija = ProstorijeServis().pronadji_prostorije_po_nameni(
             NamenaProstorije.SALA_ZA_PREGLEDE.value)
         self._prostorija = StringVar()
@@ -26,7 +26,7 @@ class ZakazivanjePregleda(object):
         self._vreme_pocetka = ttk.Entry(self._root)
         self._vreme_zavrsetka = ttk.Entry(self._root)
         self._specijalista = StringVar(self._root)
-        self._lista_specijalista = KorisnikServis().vrati_lekare_specijaliste_ili_lop(TipLekara.SPECIJALISTA)
+        self._lista_specijalista = self._korisnik_servis.vrati_lekare_specijaliste_ili_lop(TipLekara.SPECIJALISTA)
         self._specijalista.set(self._lista_specijalista[0])
         self.izaberi_prostoriju()
         self.postavi_datum()
@@ -101,14 +101,14 @@ class ZakazivanjePregleda(object):
 
         if ProstorijeServis().zakazivanje_operacije_i_pregleda(pregledDTO):
             messagebox.showinfo('USPESNO', 'Uspesno ste zakazali operaciju')
-            KalendarServis().brisi_selektovane_notifikacije([self._selektovan],
+            self._kalendar_servis.brisi_selektovane_notifikacije([self._selektovan],
                                                             TipNotifikacije.ZAHTEV_ZA_PREGLED)
             self._root.destroy()
         else:
             messagebox.showerror('GRESKA', 'Prostorija je zauzeta u tom periodu')
 
 
-def poziv_forme_za_zakazivanje_pregleda(selektovana_notifikacija):
+def poziv_forme_za_zakazivanje_pregleda(selektovana_notifikacija,kalendar_servis,korisnik_servis):
     root = Tk()
-    app = ZakazivanjePregleda(root, selektovana_notifikacija)
+    app = ZakazivanjePregleda(root, selektovana_notifikacija,kalendar_servis,korisnik_servis)
     root.mainloop()

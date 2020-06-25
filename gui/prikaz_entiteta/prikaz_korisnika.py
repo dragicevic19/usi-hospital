@@ -1,12 +1,13 @@
 from tkinter import ttk, Tk
 from model.enum.uloga import Uloga
-from servis.korisnik.korisnik_servis import KorisnikServis
+
 
 
 class PrikazKorisnika(object):
 
-    def __init__(self, root, uloga=None):
+    def __init__(self, root,korisnik_servis, uloga=None):
         self._root = root
+        self._korisnik_servis = korisnik_servis
         self._uloga = uloga
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
@@ -44,7 +45,7 @@ class PrikazKorisnika(object):
 
     def __popuni_treeview(self):
         index = iid = 0
-        lista_korisnika = KorisnikServis().dobavi_sve_korisnike_u_sistemu()
+        lista_korisnika = self._korisnik_servis.dobavi_sve_korisnike_u_sistemu()
         for korisnik in lista_korisnika:
             if self._uloga:
                 if self._uloga == korisnik.get_uloga() == Uloga.LEKAR.name:
@@ -64,8 +65,3 @@ class PrikazKorisnika(object):
                 index = iid = index + 1
 
 
-if __name__ == '__main__':
-    root = Tk()
-    # PrikazKorisnika(root, "PACIJENT")
-    PrikazKorisnika(root)
-    root.mainloop()

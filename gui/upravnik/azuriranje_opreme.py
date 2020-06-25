@@ -2,13 +2,14 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from gui.prikaz_entiteta.prikaz_opreme import PrikazOpreme
-from servis.oprema.oprema_servis import OpremaServis
+
 
 
 class IzborOpreme(PrikazOpreme):
 
-    def __init__(self, root):
-        super().__init__(root)
+    def __init__(self, root,oprema_servis):
+        self._oprema_servis = oprema_servis
+        super().__init__(root,self._oprema_servis)
         potvrdi_dugme = ttk.Button(self._root, text="AZURIRAJ OPREMU", command=self.odaberi_opremu)
         potvrdi_dugme.pack(fill='x')
 
@@ -24,15 +25,16 @@ class IzborOpreme(PrikazOpreme):
     def pokretanje_unosa_podataka(self, selektovana_oprema):
         root2 = Tk()
         root2.geometry('330x260')
-        application = UnosPodataka(root2, selektovana_oprema, self._root)
+        application = UnosPodataka(root2, selektovana_oprema, self._root,self._oprema_servis)
         root2.mainloop()
 
 
 class UnosPodataka(IzborOpreme):
 
-    def __init__(self, root2, selektovana_oprema, root):
+    def __init__(self, root2, selektovana_oprema, root,oprema_servis):
         self._stari_root = root
         self._root2 = root2
+        self._oprema_servis = oprema_servis
         self._selektovan_naziv_opreme = selektovana_oprema
         self._naziv_opreme = None
         self._opis = None
@@ -48,10 +50,11 @@ class UnosPodataka(IzborOpreme):
                    command=self.provera_unetih_podataka).grid(row=6, column=2, pady=10)
 
     def pronadji_podrazumevane_vrednosti(self):
-        oprema = OpremaServis().pronadji_opremu_po_nazivu(self._selektovan_naziv_opreme)
-        self._podrazumevan_naziv = oprema.get_naziv_opreme()
-        self._podrazumevani_opis = oprema.get_opis()
-        self._podrazumevana_kolicina = oprema.get_slobodna_oprema()
+        oprema = self._oprema_servis.pronadji_opremu_po_nazivu(self._selektovan_naziv_opreme)
+        if oprema != False:
+            self._podrazumevan_naziv = oprema.get_naziv_opreme()
+            self._podrazumevani_opis = oprema.get_opis()
+            self._podrazumevana_kolicina = oprema.get_slobodna_oprema()
 
     def unesi_novi_naziv(self):
 
@@ -84,7 +87,7 @@ class UnosPodataka(IzborOpreme):
             messagebox.showerror("GRESKA", "Neispravan unos za kolicinu. Dozvoljeni su samo pozitivni celi brojevi!")
             self._root2.destroy()
 
-        elif OpremaServis().pronadji_opremu_po_nazivu(self._naziv_opreme.get()):
+        elif self._oprema_servis.pronadji_opremu_po_nazivu(self._naziv_opreme.get()):
             if self._selektovan_naziv_opreme != self._naziv_opreme.get():
                 messagebox.showerror("GRESKA", "Oprema sa unetim nazivom opreme vec postoji")
                 self._root2.destroy()
@@ -95,15 +98,15 @@ class UnosPodataka(IzborOpreme):
             self.azuriraj_opremu()
 
     def azuriraj_opremu(self):
-        OpremaServis().azuriraj_opremu(self._selektovan_naziv_opreme, self._naziv_opreme.get(),
+        self._oprema_servis.azuriraj_opremu(self._selektovan_naziv_opreme, self._naziv_opreme.get(),
                                      self._opis.get(), self._kolicina.get())
         messagebox.showinfo("USPESNO", "Uspesno ste azurirali opremu")
         self._root2.destroy()
         self._stari_root.destroy()
 
 
-def poziv_forme_azuriranje_opreme(root):
-    application = IzborOpreme(root)
+def poziv_forme_azuriranje_opreme(root,oprema_servis):
+    IzborOpreme(root,oprema_servis)
     root.mainloop()
 
 

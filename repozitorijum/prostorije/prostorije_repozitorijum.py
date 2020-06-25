@@ -91,6 +91,3 @@ class ProstorijeRepozitorijumImpl(InterfejsProstorijeRepo):
 
 
 
-
-if __name__ == '__main__':
-    print(ProstorijeRepozitorijumImpl().vrati_listu_prostorija_za_prikaz())

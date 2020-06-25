@@ -1,19 +1,18 @@
-from servis.korisnik.korisnik_servis import KorisnikServis
 from model.enum.tip_lekara import TipLekara
 from tkinter import ttk, messagebox
 from tkinter import *
 import datetime
 from model.konstante.konstante import *
 from model.dto.dogadjaji_dto.zakazivanje_dto import *
-from servis.kalendar.kalendar_servis import KalendarServis
+
 
 class ZakazivanjePregleda():
 
-    def __init__(self, root):
+    def __init__(self, root, korisnik_servis):
         self._root = root
-
+        self._korisnik_servis = korisnik_servis
         self._lekar_opste_prakse = StringVar(self._root)
-        self._lista_lekara_opste_prakse = KorisnikServis().vrati_lekare_specijaliste_ili_lop(TipLekara.LOP)
+        self._lista_lekara_opste_prakse = self._korisnik_servis.vrati_lekare_specijaliste_ili_lop(TipLekara.LOP)
         self._lekar_opste_prakse.set(self._lista_lekara_opste_prakse[0])
         self._najkasniji_datum = ttk.Entry(self._root)
         self._radio_parametar = IntVar()
@@ -23,8 +22,7 @@ class ZakazivanjePregleda():
         self.preferirani_slotovi()
         self.izbor_najveceg_prioriteta()
         ttk.Button(self._root, text="POTVRDI", command=self.potvrda, width=20).grid(row=7, column=3, sticky=E,
-                                                                                          padx=10, pady=20)
-
+                                                                                    padx=10, pady=20)
 
     def izaberi_lop(self):
         Label(self._root, justify=LEFT, text="Lekar opste prakse:", font="Console 11").grid(row=0, sticky=W, column=0,
@@ -58,19 +56,16 @@ class ZakazivanjePregleda():
         preferirani_slotovi = Radiobutton(self._root, text="Zeljeni slotovi", variable=self._radio_parametar, value=3)
         preferirani_slotovi.grid(row=5, column=3, padx=10, pady=10)
 
-
-
     def potvrda(self):
         if self.provera_unosa():
-            paket_za_prenos = ZakazivanjeDTO(self._lekar_opste_prakse.get(),self._najkasniji_datum.get(),self.pref_slot_pocetni.get(),self.pref_slot_krajnji.get(),self._radio_parametar.get())
-            datum,vreme = KorisnikServis().zakazivanje_pregleda_pacijent(paket_za_prenos)
+            paket_za_prenos = ZakazivanjeDTO(self._lekar_opste_prakse.get(), self._najkasniji_datum.get(),
+                                             self.pref_slot_pocetni.get(), self.pref_slot_krajnji.get(),
+                                             self._radio_parametar.get())
+            datum, vreme = self._korisnik_servis.zakazivanje_pregleda_pacijent(paket_za_prenos)
             if datum:
-                messagebox.showinfo("Zakazano","Zakazan je pregled "+datum +"dana, u "+vreme)
+                messagebox.showinfo("Zakazano", "Zakazan je pregled " + datum + "dana, u " + vreme)
             else:
-                messagebox.showerror("Greska","Doslo je do greske u sistemu pokusajte kasnije")
-
-
-
+                messagebox.showerror("Greska", "Doslo je do greske u sistemu pokusajte kasnije")
 
     def provera_unosa(self):
         if not self.provera_datuma():
@@ -93,10 +88,6 @@ class ZakazivanjePregleda():
         return True
 
 
-def poziv_forme_zakazivanje_pregleda(root):
-    ZakazivanjePregleda(root)
+def poziv_forme_zakazivanje_pregleda(root, korisnik_servis):
+    ZakazivanjePregleda(root, korisnik_servis)
     root.mainloop()
-
-
-if __name__ == '__main__':
-    poziv_forme_zakazivanje_pregleda()

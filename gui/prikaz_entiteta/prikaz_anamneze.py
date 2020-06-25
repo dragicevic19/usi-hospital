@@ -1,12 +1,12 @@
-from servis.unos_anamneze.unos_anamneze_servis import UnosAnamnezeServis
 from tkinter import ttk
 
 
 class PrikazAnamneze:
 
-    def __init__(self, root, ulogovan_korisnik):
+    def __init__(self, root, ulogovan_korisnik,unos_anamneze_servis):
         self._root = root
         self._ulogovan_korisnik = ulogovan_korisnik
+        self._unos_anamneze_servis = unos_anamneze_servis
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)
         self.scroll.pack(side='right', fill='y')
@@ -26,7 +26,7 @@ class PrikazAnamneze:
     def __popuni_treeview(self):
         index = iid = 0
 
-        lista_anamneza_po_pacijentu = UnosAnamnezeServis().dobavi_anamnezu_ulogovanog_pacijenta(self._ulogovan_korisnik)
+        lista_anamneza_po_pacijentu = self._unos_anamneze_servis.dobavi_anamnezu_ulogovanog_pacijenta(self._ulogovan_korisnik)
         for unos_anamneze in lista_anamneza_po_pacijentu:
             u = (unos_anamneze.get_lekar(), unos_anamneze.get_opis(),
                  unos_anamneze.get_datum_i_vreme())

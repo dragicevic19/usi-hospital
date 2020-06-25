@@ -40,7 +40,7 @@ class FormaZaIzvestaje:
         if not REGEX_DATUM.match(self._datum_od.get()) or not REGEX_DATUM.match(self._datum_do.get()):
             messagebox.showerror("GRESKA", "Neispravan format datuma!")
 
-        # videti da se koriste dto klase za datume
+
         if self._radio_parametar.get() == 1:
             IzvestajProstorijeServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
         else:

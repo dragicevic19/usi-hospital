@@ -5,8 +5,8 @@ from tkinter import messagebox
 
 class PregledAnamneze(PrikazAnamneze):
 
-    def __init__(self, root, ulogovan_pacijent):
-        super().__init__(root, ulogovan_pacijent)
+    def __init__(self, root, ulogovan_pacijent,unos_anamnezeo_servis):
+        super().__init__(root, ulogovan_pacijent,unos_anamnezeo_servis)
         self.treeview.bind('<Double-1>', self._odabir_pacijenta)
 
     def _odabir_pacijenta(self, event):
@@ -25,7 +25,7 @@ class PregledAnamneze(PrikazAnamneze):
         root2.mainloop()
 
 
-class DetaljnijiOpis(PregledAnamneze):
+class DetaljnijiOpis():
 
     def __init__(self, root2, selektovan_unos_anamneze, root):
         self._stari_root = root
@@ -41,9 +41,9 @@ class DetaljnijiOpis(PregledAnamneze):
         text.pack()
 
 
-def poziv_forme_pregled_anamneze(root, ulogovan_pacijent):
+def poziv_forme_pregled_anamneze(root, ulogovan_pacijent,unos_anamnezeo_servis):
     # root = Tk()
-    PregledAnamneze(root, ulogovan_pacijent)
+    PregledAnamneze(root, ulogovan_pacijent,unos_anamnezeo_servis)
     root.mainloop()
 
 #
