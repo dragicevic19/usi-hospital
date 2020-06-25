@@ -8,7 +8,7 @@ from servis.forme.login import LoginServis
 from gui.sekretar.sektretar import poziv_forme_sekretar
 from gui.pacijent.pacijent import poziv_forme_pacijent
 from gui.lekar.lekar import poziv_forme_lekar
-from injektor.injektor import Injegit sktor
+from injektor.injektor import Injektor
 
 
 
