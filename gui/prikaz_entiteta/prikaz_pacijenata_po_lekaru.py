@@ -10,6 +10,7 @@ class PrikazPacijenata:
         self._korisnik_servis = korisnik_servis
         self._lekar = lekar
         self._lista_pacijenata = self._vrati_listu_pacijenata()
+        print(self._lista_pacijenata)
         self._korisnicko_ime_pretraga = ttk.Entry(self._root)
         self.treeview = ttk.Treeview(self._root)
         self.scroll = ttk.Scrollbar(self._root, orient='vertical', command=self.treeview.yview)

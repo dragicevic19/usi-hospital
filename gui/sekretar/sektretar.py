@@ -26,8 +26,8 @@ class PocetnaFormaSekretar(ModelPocetne):
                         command=self.pokretanje_zakazivanja)
         b3.place(x=530, y=10, height=60, width=200)
 
-        b4 = ttk.Button(self._frejm_dugmici, text="Otkazivanje termina", command=self.poziv_otkazivanja_termina)
-        b4.place(x=790, y=10, height=60, width=200)
+        # b4 = ttk.Button(self._frejm_dugmici, text="Otkazivanje termina", command=self.poziv_otkazivanja_termina)
+        # b4.place(x=790, y=10, height=60, width=200)
 
     def priprema_akcije(self):
         self._okvir_izvrsavanja.destroy()
@@ -47,10 +47,10 @@ class PocetnaFormaSekretar(ModelPocetne):
         self.priprema_akcije()
         zakazivanje_operacija_i_pregleda(self._okvir_izvrsavanja,self._injektor.kalendar_servis,
                                          self._injektor.korisnik_servis)
-
-    def poziv_otkazivanja_termina(self):
-        self.priprema_akcije()
-        pass
+    #
+    # def poziv_otkazivanja_termina(self):
+    #     self.priprema_akcije()
+    #     pass
 
 
 

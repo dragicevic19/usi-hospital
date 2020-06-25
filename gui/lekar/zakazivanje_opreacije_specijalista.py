@@ -93,8 +93,7 @@ class ZakazivanjeOperacije:
         operacijaDTO = ZakazivanjeOperacijaPregledDTO(self._datum_pocetka, self._vreme_pocetka.get(),
                                                       self._vreme_zavrsetka.get(), self._lekar.get_korisnicko_ime(),
                                                       self._pacijent,
-                                                      self._opearciona_sala.get(), self._hitna_operacija.get(),
-                                                      TipZahvata.OPERACIJA.value)
+                                                      self._opearciona_sala.get(), TipZahvata.OPERACIJA.value)
         if ProstorijeServis().zakazivanje_operacije_i_pregleda(operacijaDTO):
             messagebox.showinfo('USPESNO', 'Uspesno ste zakazali operaciju')
             self._root.destroy()

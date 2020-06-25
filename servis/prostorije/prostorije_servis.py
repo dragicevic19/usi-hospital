@@ -1,6 +1,6 @@
 from model.prostorija import Prostorija
 
-
+from servis.kalendar.kalendar_servis import KalendarServis
 
 from repozitorijum.kalendar.kalendar_repozitorijum import KalendarRepozitorijumImpl
 
@@ -9,7 +9,7 @@ from repozitorijum.prostorije.prostorije_repozitorijum import ProstorijeRepozito
 
 class ProstorijeServis(object):
 
-    def __init__(self, repo_prostorije=ProstorijeRepozitorijumImpl(), repo_oprema=OpremaRepozitorijumImpl(),repo_kalendar=KalendarRepozitorijumImpl(),kalendar_servis=KalendarRepozitorijumImpl()):
+    def __init__(self, repo_prostorije=ProstorijeRepozitorijumImpl(), repo_oprema=OpremaRepozitorijumImpl(),repo_kalendar=KalendarRepozitorijumImpl(),kalendar_servis=KalendarServis()):
         self._repo_prostorije = repo_prostorije
         self._repo_oprema = repo_oprema
         self._repo_kalendar = repo_kalendar
@@ -164,8 +164,8 @@ class ProstorijeServis(object):
     def pronadji_prostorije_po_nameni(self, namena_prostorije):
         return self._repo_prostorije.pronadji_prostorije_po_nameni(namena_prostorije)
 
-    @staticmethod
-    def zakazivanje_operacije_i_pregleda(zakazivanje_operacijeDTO):
+
+    def zakazivanje_operacije_i_pregleda(self, zakazivanje_operacijeDTO):
         if self._kalendar_servis.dodaj_dogadjaj_ako_je_slobodna(zakazivanje_operacijeDTO):
             return True
         else:
