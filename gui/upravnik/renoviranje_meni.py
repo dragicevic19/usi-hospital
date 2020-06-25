@@ -4,53 +4,13 @@ from gui.upravnik.renoviranje.renoviranje_prostorije import poziv_forme_odabir_p
 from model.enum.renoviranje import TipRenoviranja
 from tkinter import *
 
-""" 
-
-REFAKTORISATI NA KRAJU INIT I VP START GUI
-
-
-"""
-
-
-def init(top, gui):
-    global w, top_level, root
-    w = gui
-    top_level = top
-    root = top
-
-
-def vp_start_gui():
-    '''Kada se pokrece iz main a'''
-    global val, w, root
-    root = tk.Tk()
-    top = RenoviranjeMeni(root)
-    init(root, top)
-    root.mainloop()
-
-
-w = None
-
-
-def poziv_forme_za_renovaciju_prostorije(rt):
-    '''Startuje ovde kad se pokrece iz drugog modula
-      Poziv: 'poziv_forme_za_renovaciju_prostorije(root)'.'''
-    global w, w_win, root
-    # rt = root
-    root = rt
-    w = tk.Toplevel(root)
-    meni = RenoviranjeMeni(w)
-    init(w, meni)
-    return w, meni
-
 
 class RenoviranjeMeni:
     def __init__(self, top=None):
         font = "-family {Segoe UI} -size 12 -weight bold"
         self.style = ttk.Style()
 
-        top.geometry("600x450+718+234")
-        top.resizable(0, 0)
-        top.title("Renoviranje prostorije")
+        # top.resizable(0, 0)
         top.configure(background="#d9d9d9", highlightcolor="#646464646464")
 
         self.Label1 = tk.Label(top)
@@ -84,7 +44,11 @@ class RenoviranjeMeni:
                                 command=lambda: poziv_forme_odabir_prostorije(TipRenoviranja.OSTALE_RENOVACIJE))
 
 
+def poziv_forme_za_renovaciju_prostorije(root):
+    app = RenoviranjeMeni(root)
+    root.mainloop()
+
+
 if __name__ == '__main__':
-    # ProstorijeRepository.ucitavanje_prostorije()
-    # OpremaRepository.ucitavanje_bolnicke_opreme()
-    vp_start_gui()
+    root = Tk()
+    poziv_forme_za_renovaciju_prostorije(root)
