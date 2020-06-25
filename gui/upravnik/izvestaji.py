@@ -46,6 +46,10 @@ class FormaZaIzvestaje:
         else:
             IzvestajLekaraServis(self._datum_od.get(), self._datum_do.get()).pripremi_i_izgenerisi_izvestaj()
 
+def poziv_forma_za_izvestaje_za_upravnika(root):
+    FormaZaIzvestaje(root)
+    root.mainloop()
+
 
 if __name__ == '__main__':
     root = Tk()

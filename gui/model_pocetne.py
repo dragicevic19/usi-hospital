@@ -8,9 +8,6 @@ ODVAJANJE_RADNOG = 100
 SLIKA_DIMENZIJE = 400
 BOJA = "#282828"
 
-"""
-  PROBLEM SA PUTANJAMA No such file or directory: '..\\..\\data\\korisnici.csv'
-"""
 class ModelPocetne:
 
     def __init__(self, root, korisnik):
@@ -33,7 +30,7 @@ class ModelPocetne:
         self.__postava_slike()
         self.__postava_bio()
 
-        self.__oboj_frejmove_sareno(True)
+       # self.__oboj_frejmove_sareno(True)
 
     def __oboj_frejmove_sareno(self, jednobojno=True):
         if jednobojno == False:
@@ -47,7 +44,7 @@ class ModelPocetne:
             self._frejm_dugmici.configure(bg=BOJA)
             self._okvir_izvrsavanja.configure(bg=BOJA)
 
-    def __kreiraj_frejm_za_bio(self):  # kreiraj skroz levi frejm za lizne podatke
+    def __kreiraj_frejm_za_bio(self):  # kreiraj skroz levi frejm za licne podatke
         self._frejm_bio = Frame(self._root)
         self._frejm_bio.place(x=0, y=0, width=SIRINA_BIO, height=self.visina)
 
@@ -57,7 +54,7 @@ class ModelPocetne:
                                   height=VISINA_ZA_DUGMICE)
 
     def kreiranje_frejma_za_izvrsavanje(self):
-        self._okvir_izvrsavanja = Frame(self._root,bg = "#282828")
+        self._okvir_izvrsavanja = Frame(self._root)
         self._okvir_izvrsavanja.place(x=SIRINA_BIO + ODVAJANJE_RADNOG, y=ODVAJANJE_RADNOG,
                                       height=self.visina - (ODVAJANJE_RADNOG + VISINA_ZA_DUGMICE),
                                       width=self.sirina - (SIRINA_BIO + ODVAJANJE_RADNOG))
@@ -100,8 +97,10 @@ class ModelPocetne:
         d_prezime.grid(row=4, column=0, pady=15, padx=15, sticky=E)
 
     def __postava_slike(self):
-        platno = Canvas(self._frejm_bio, width=SLIKA_DIMENZIJE, height=SLIKA_DIMENZIJE, background='red')
+        platno = Frame(self._frejm_bio, width=SLIKA_DIMENZIJE, height=SLIKA_DIMENZIJE, background='red')
+
         platno.grid(row=0, column=0, padx=75, pady=75)
+        # Label(platno,text = "PROSTOR ZA SLIKU",font = "Helvetica 20 bold").grid(row=0, column=0, padx=100, pady=200)
 
     def __promena_punog_ekrana(self):
         self._root.attributes('-fullscreen', True)

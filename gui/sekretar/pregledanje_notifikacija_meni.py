@@ -9,7 +9,6 @@ class PregledanjeNotifikacijaMeni(object):
 
     def __init__(self, root):
         self._root = root
-        self._root.title('Pregledanje notifikacija - MENI')
         self.postavi_meni()
 
     def postavi_meni(self):

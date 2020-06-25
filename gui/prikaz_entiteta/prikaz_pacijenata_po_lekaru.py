@@ -7,7 +7,6 @@ from servis.korisnik.korisnik_servis import KorisnikServis
 class PrikazPacijenata:
     def __init__(self, root, lekar=None):
         self._root = root
-        self._root.title('Prikaz pacijenata')
         self._lekar = lekar
         self._lista_pacijenata = self._vrati_listu_pacijenata()
         self._korisnicko_ime_pretraga = ttk.Entry(self._root)

@@ -113,7 +113,7 @@ class ZakazivanjePregleda(object):
 
 
 def poziv_forme_zakazivanje_pregleda(root, korisnik):
-    application = ZakazivanjePregleda(root, korisnik)
+    ZakazivanjePregleda(root, korisnik)
     root.mainloop()
 
 
